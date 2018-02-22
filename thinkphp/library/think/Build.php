@@ -185,7 +185,7 @@ class Build
     protected static function buildHello($module, $namespace, $suffix = false)
     {
         $filename = APP_PATH . ($module ? $module . DS : '') .
-            'controller' . DS . 'Index' .
+            'controller' . DS . 'BaseController' .
             ($suffix ? 'Controller' : '') . EXT;
 
         if (!is_file($filename)) {
