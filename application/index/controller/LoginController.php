@@ -19,7 +19,7 @@ class LoginController extends Controller
 
         Session::set('user', $info['cardNo']);
 
-        $return = $this->login($info);
+        $return = $this->login();
 
         return apireturn($return['code'], $return['msg'], $return['data'], 200);
 
@@ -43,24 +43,33 @@ class LoginController extends Controller
         $info = json_decode($_POST['user'], true);
         if(!$info || empty($info['cardno'])) exit('授权被拒绝');
 
-        Session::set('user', $info['cardno']);
-
+        Session::set('user.cardno', $info['cardno']);
         $return = $this->login();
 
         return apireturn($return['code'], $return['msg'], $return['data'], 200);
     }
 
-    public function login($info)
+    public function login()
     {
         $user = new Member();
 
-        $member = $user->FindOneUser($info['cardno']);
+        $member = $user->FindOneUser(Session::get('user.cardno'));
         if(is_null($member['data'])) {
             $res = $user->InsertOneUser($info);
+            if ($res['code'] == 0) {
+                $userinfo = $user->FindOneUser(Session::get('user.cardno'));
+                Session::set('user.id', $userinfo['id']);
+            }
             return $res;
         } else {
             $res = $user->UpdateLoginTime($member['data']['id'], $member['data']['login']);
+            Session::set('user.id', $member['id']);
             return $res;
         }
+    }
+
+    public function deleteSession()
+    {
+        Session::delete('user');
     }
 }
