@@ -10,7 +10,7 @@ class Member extends Model
     public function FindOneUser($cardno)
     {
         try {
-            $res = $this->where('cardno', $cardno)->select();
+            $res = $this->where('cardno', $cardno)->find();
 
             if(!is_null($res)) {
                 return ['code' => 0, 'msg' => 'Success!', 'data' => $res];
@@ -75,7 +75,7 @@ class Member extends Model
             if(!is_null($res)) {
                 return ['code' => 0, 'msg' => 'Success!', 'data' => $res];
             } else {
-                return ['code' => 10003, 'msg' => 'Update user login information failed!', 'data' => ''];
+                return ['code' => 1, 'msg' => 'Update user login information failed!', 'data' => ''];
             }
         } catch (PDOException $PDOE) {
             return ['code' => 10001, 'msg' => $PDOE->getMessage(), 'data' => ''];
