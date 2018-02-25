@@ -57,7 +57,25 @@ class Member extends Model
             if($res !== false) {
                 return ['code' => 0, 'msg' => 'Success!', 'data' => ''];
             } else {
-                return ['code' => 10002, 'msg' => $this->getError(), 'data' => ''];
+                return ['code' => 10002, 'msg' => 'New user failed!', 'data' => ''];
+            }
+        } catch (PDOException $PDOE) {
+            return ['code' => 10001, 'msg' => $PDOE->getMessage(), 'data' => ''];
+        }
+    }
+
+    public function UpdateLoginTime($id, $login)
+    {
+        try {
+            $res = $this->save([
+                'last_login_time' => time(),
+                'login' => $login + 1,
+            ],['id' => $id]);
+
+            if(!is_null($res)) {
+                return ['code' => 0, 'msg' => 'Success!', 'data' => $res];
+            } else {
+                return ['code' => 10003, 'msg' => 'Update user login information failed!', 'data' => ''];
             }
         } catch (PDOException $PDOE) {
             return ['code' => 10001, 'msg' => $PDOE->getMessage(), 'data' => ''];
