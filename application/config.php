@@ -15,7 +15,7 @@ return [
     // +----------------------------------------------------------------------
 
     // 应用调试模式
-    'app_debug'              => false,
+    'app_debug'              => true,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -200,8 +200,9 @@ return [
 
     'session'                => [
         'id'             => '',
+        'expire'         => 864000,
         // SESSION_ID的提交变量,解决flash上传跨域
-        'var_session_id' => '',
+        'var_session_id' => 'ses',
         // SESSION 前缀
         'prefix'         => 'think',
         // 驱动方式 支持redis memcache memcached
