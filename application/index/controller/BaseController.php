@@ -13,7 +13,7 @@ class BaseController extends Controller
 
     protected function _initialize()
     {
-        if (!isset($_SESSION['grad_name'])){
+        if (!isset($_SESSION['user'])){
             $this->login();
         }
     }
@@ -25,9 +25,7 @@ class BaseController extends Controller
             $res = $login->msign();
             $this->redirect('http://test.wutnews.net/lsj/bbq/public/index/login/index');
         } else {
-            $url = 'http%3a%2f%2ftest.wutnews.net%2flsj%2fbbq%2fpublic%2findex%2flogin%2fias';
-            $this->redirect('http://ias.sso.wutnews.net/portal.php?posturl='.$url.'&continueurl=' . $url);
+            return apireturn(10010, "User is not logged in.", null, 200);
         }
-
     }
 }

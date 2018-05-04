@@ -1,8 +1,9 @@
 <?php
 namespace app\index\controller;
 
-use app\index\model\Member;
+use app\index\model\User;
 use think\Controller;
+use think\Request;
 use think\Session;
 
 class LoginController extends Controller
@@ -19,24 +20,12 @@ class LoginController extends Controller
 
         Session::set('user', $info['cardNo']);
 
-        $return = $this->login();
+        $return = $this->zlLogin($info);
 
         return apireturn($return['code'], $return['msg'], $return['data'], 200);
 
     }
 
-    private function check($info)
-    {
-        $cardno = $info['cardno'];
-        $appkey = $info['sign']['appKey'];
-        $timestamp = $info['sign']['timestamp'];
-        $nonce = $info['sign']['nonce'];
-        $token = $info['sign']['token'];
-        $openid = md5($appkey.$cardno);
-        if($openid != $token) return false;
-        $check = md5($nonce.$openid.$timestamp);
-        return $check == $info['sign']['check'];
-    }
 
     public function ias()
     {
@@ -49,23 +38,57 @@ class LoginController extends Controller
         return apireturn($return['code'], $return['msg'], $return['data'], 200);
     }
 
-    public function login()
+    public function zlLogin($info)
     {
-        $user = new Member();
+        $user = new User();
 
-        $member = $user->FindOneUser(Session::get('user.cardno'));
-        if(is_null($member['data'])) {
-            $res = $user->InsertOneUser($info);
+        $theUser = $user->findOneUser(Session::get('user.cardno'));
+        if(is_null($theUser['data'])) {
+            $res = $user->insertOneUser($info);
             if ($res['code'] == 0) {
-                $userinfo = $user->FindOneUser(Session::get('user.cardno'));
+                $userinfo = $user->findOneUser(Session::get('user.cardno'));
                 Session::set('user.id', $userinfo['id']);
             }
             return $res;
         } else {
-            $res = $user->UpdateLoginTime($member['data']['id'], $member['data']['login']);
-            Session::set('user.id', $member['id']);
+            $res = $user->updateLoginTime($theUser['data']['id']);
+            Session::set('user.id', $theUser['id']);
             return $res;
         }
+    }
+
+    public function appLogin()
+    {
+        $postData = Request::instance()->post();
+
+        $user = new User();
+
+        $theUser = $user->findOneUser($postData['cardno']);
+        if(is_null($theUser['data'])) {
+            $res = $user->insertOneUser($postData);
+            if ($res['code'] == 0) {
+                $userinfo = $user->findOneUser($postData['cardno']);
+            }
+
+            $this->setSession($userinfo['data']);
+            $userinfo['data']['session_id'] = session_id();
+
+            return apireturn($userinfo['code'], $userinfo['msg'], $userinfo['data'], 200);
+        } else {
+            $res = $user->updateLoginTime($theUser['data']['id']);
+
+            $this->setSession($theUser['data']);
+            $theUser['data']['session_id'] = session_id();
+
+            return apireturn($theUser['code'], $theUser['msg'], $theUser['data'], 200);
+        }
+    }
+
+    public function setSession($data)
+    {
+        Session::set('user.id', $data['id']);
+        Session::set('user.cardno', $data['cardno']);
+        Session::set('user.nickname', $data['nickname']);
     }
 
     public function deleteSession()
