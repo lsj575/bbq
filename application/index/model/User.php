@@ -7,10 +7,26 @@ class User extends Model
 {
     protected $table = 'user';
 
-    public function findOneUser($cardno)
+    public function findOneUserByCardno($cardno)
     {
         try {
             $res = $this->where('cardno', $cardno)->find();
+
+            if(!is_null($res)) {
+                return ['code' => 0, 'msg' => 'Success!', 'data' => $res->toArray()];
+            } else {
+                return ['code' => 1, 'msg' => $this->getError(), 'data' => null];
+            }
+        } catch (PDOException $PDOE) {
+            return ['code' => 10001, 'msg' => $PDOE->getMessage(), 'data' => null];
+        }
+
+    }
+
+    public function findOneUserById($id)
+    {
+        try {
+            $res = $this->where('id', $id)->find();
 
             if(!is_null($res)) {
                 return ['code' => 0, 'msg' => 'Success!', 'data' => $res->toArray()];
@@ -32,6 +48,7 @@ class User extends Model
                 'nickname' => $data['cardno'],
                 'sex'      => $data['sex'],
                 'college'  => $data['college'],
+                'token'    => $data['token'],
                 'reg_time' => time(),
                 'last_login_time' => time(),
             ]);
@@ -48,10 +65,11 @@ class User extends Model
         }
     }
 
-    public function updateLoginTime($id)
+    public function updateLogin($id, $token)
     {
         try {
             $res = $this->save([
+                'token'           => $token,
                 'last_login_time' => time(),
             ],['id' => $id]);
 
