@@ -11,7 +11,7 @@ class BaseController extends Controller
 {
     public function index()
     {
-        return 1;
+        var_dump(Session::get('a'));
     }
 
     public function checkToken()
@@ -34,14 +34,14 @@ class BaseController extends Controller
                 } elseif ($res['data']['token'] != $postData) {
                     return 10012;
                 } else {
-                    return 0;
+                    return $data[0];
                 }
             } elseif ($_SERVER['HTTP_BSIGN'] == 'WEB') {
-                $postData = Request::instance()->post('token');
-                $token = base64_decode($postData);
-                $data = explode("|", $token);
-
-                Session::set('user.id', $data[0]);
+                if (is_null(Session::get('user.id'))) {
+                    return 10010;
+                } else {
+                    return Session::get('user.id');
+                }
             }
         } else {
             return 10010;
