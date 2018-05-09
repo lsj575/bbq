@@ -30,15 +30,15 @@ class BaseController extends Controller
                 $res = $user->findOneUserById($data[0]);
 
                 if ($data[2] + 8640000 < time()) {
-                    return 10011;
+                    return 10101;
                 } elseif ($res['data']['token'] != $postData) {
-                    return 10012;
+                    return 10102;
                 } else {
                     return $data[0];
                 }
             } elseif ($_SERVER['HTTP_BSIGN'] == 'WEB') {
                 if (is_null(Session::get('user.id'))) {
-                    return 10010;
+                    return 10100;
                 } else {
                     return Session::get('user.id');
                 }
