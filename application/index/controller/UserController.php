@@ -7,8 +7,10 @@ use app\index\model\User;
 
 class UserController extends BaseController
 {
-    private $avatarURL = 'http://127.0.0.1/gitlab/bbq/uploads/user_avatar/';
-    private $homeImgURL = 'http://127.0.0.1/gitlab/bbq/uploads/home_img/';
+//    private $avatarURL = 'http://127.0.0.1/gitlab/bbq/public/static/uploads/user_avatar/';
+//    private $homeImgURL = 'http://127.0.0.1/gitlab/bbq/public/static/uploads/home_img/';
+    private $avatarURL = 'http://bbq.wutnews.net/bbq/public/static/uploads/user_avatar/';
+    private $homeImgURL = 'http://bbq.wutnews.net/bbq/public/static/uploads/home_img/';
 
     public function getUserInfo()
     {
@@ -98,7 +100,7 @@ class UserController extends BaseController
         $file = request()->file('avatar');
         if ($file){
             // 移动到框架应用根目录/public/uploads/ 目录下
-            $info = $file->move(ROOT_PATH . DS  . 'uploads'. DS . 'user_avatar', true, false);
+            $info = $file->move(ROOT_PATH . DS . 'public' . DS . 'static' . DS  . 'uploads'. DS . 'user_avatar', true, false);
             if($info){
                 $savaName = $info->getSaveName();
 
@@ -126,7 +128,7 @@ class UserController extends BaseController
 
         $file = request()->file('home_img');
         if ($file){
-            $info = $file->move(ROOT_PATH . DS . 'uploads'. DS . 'home_img', true, false);
+            $info = $file->move(ROOT_PATH . DS . 'public' . DS . 'static' . DS . 'uploads'. DS . 'home_img', true, false);
             if($info){
                 $savaName = $info->getSaveName();
 
