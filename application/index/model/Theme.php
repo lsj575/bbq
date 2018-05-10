@@ -10,6 +10,11 @@ class Theme extends Model
     public function addTheme($data)
     {
         try {
+            $theme = $this->findThemeByThemeName($data['themename']);
+            if ($theme['code'] == 0) {
+                return ['code' => 20004, 'msg' => 'The topic already exists.', 'data' => null];
+            }
+
             $this->data([
                 'user_id' => $data['userID'],
                 'theme_name' => $data['themename'],
@@ -42,7 +47,40 @@ class Theme extends Model
             if(!is_null($res)) {
                 return ['code' => 0, 'msg' => 'Success!', 'data' => $res->toArray()];
             } else {
-                return ['code' => 20003, 'msg' => $this->getError(), 'data' => null];
+                return ['code' => 20003, 'msg' => "No corresponding topic found.", 'data' => null];
+            }
+        } catch (PDOException $PDOE) {
+            return ['code' => 10001, 'msg' => $PDOE->getMessage(), 'data' => null];
+        }
+    }
+
+    public function findThemeByThemeName($themeName)
+    {
+        try {
+            $res = $this->where([
+                'user_id' => $themeName,
+                'status' => 1
+            ])->find();
+
+            if(!is_null($res)) {
+                return ['code' => 0, 'msg' => 'Success!', 'data' => $res->toArray()];
+            } else {
+                return ['code' => 20003, 'msg' => "No corresponding topic found.", 'data' => null];
+            }
+        } catch (PDOException $PDOE) {
+            return ['code' => 10001, 'msg' => $PDOE->getMessage(), 'data' => null];
+        }
+    }
+
+    public function findAllTheme()
+    {
+        try {
+            $res = $this->where([])->select();
+
+            if(!is_null($res)) {
+                return ['code' => 0, 'msg' => 'Success!', 'data' => $res];
+            } else {
+                return ['code' => 20005, 'msg' => "No topic.", 'data' => null];
             }
         } catch (PDOException $PDOE) {
             return ['code' => 10001, 'msg' => $PDOE->getMessage(), 'data' => null];
