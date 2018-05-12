@@ -27,7 +27,7 @@ class ThemeController extends BaseController
         $file = Request::instance()->file('themeimg');
         if ($file) {
             // 移动到框架应用根目录/public/uploads/ 目录下
-            $info = $file->move(ROOT_PATH . DS . 'public' . DS . 'static' . DS . 'uploads' . DS . 'theme_img', true, false);
+            $info = $file->validate(['size'=>8388608,'ext'=>'jpg,png,gif'])->move(ROOT_PATH . DS . 'public' . DS . 'static' . DS . 'uploads' . DS . 'theme_img', true, false);
             if ($info) {
                 $postData['userID'] = $code;
                 $postData['path'] = $info->getSaveName();

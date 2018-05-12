@@ -27,7 +27,7 @@ class UserController extends BaseController
         $postData = Request::instance()->post();
 
         $user = new User();
-        $res = $user->findOneUserById($code);
+        $res = $user->getUserInfoById($code);
 
         if (is_null($res['data'])) {
             return apireturn($res['code'], $res['msg'], null, 200);
@@ -100,7 +100,7 @@ class UserController extends BaseController
         $file = request()->file('avatar');
         if ($file){
             // 移动到框架应用根目录/public/uploads/ 目录下
-            $info = $file->move(ROOT_PATH . DS . 'public' . DS . 'static' . DS  . 'uploads'. DS . 'user_avatar', true, false);
+            $info = $file->validate(['size'=>8388608,'ext'=>'jpg,png,gif'])->move(ROOT_PATH . DS . 'public' . DS . 'static' . DS  . 'uploads'. DS . 'user_avatar', true, false);
             if($info){
                 $savaName = $info->getSaveName();
 
@@ -128,7 +128,7 @@ class UserController extends BaseController
 
         $file = request()->file('home_img');
         if ($file){
-            $info = $file->move(ROOT_PATH . DS . 'public' . DS . 'static' . DS . 'uploads'. DS . 'home_img', true, false);
+            $info = $file->validate(['size'=>8388608,'ext'=>'jpg,png,gif'])->move(ROOT_PATH . DS . 'public' . DS . 'static' . DS . 'uploads'. DS . 'home_img', true, false);
             if($info){
                 $savaName = $info->getSaveName();
 
