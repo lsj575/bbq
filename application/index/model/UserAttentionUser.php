@@ -1,7 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: 76871
- * Date: 2018/5/12
- * Time: 13:45
- */
+namespace app\index\model;
+
+use think\Model;
+
+class UserAttentionUser extends Model
+{
+    protected $table = 'user_attention_user';
+}
