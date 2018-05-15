@@ -1,7 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: 76871
- * Date: 2018/5/15
- * Time: 10:10
- */
+namespace app\index\model;
+
+use think\Model;
+
+class UserCollection extends Model
+{
+    protected $table = 'user_collection';
+}

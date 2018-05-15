@@ -1,7 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: 76871
- * Date: 2018/5/15
- * Time: 10:58
- */
+namespace app\index\model;
+
+use think\Model;
+
+class Article extends Model
+{
+    protected $table = 'article';
+}
