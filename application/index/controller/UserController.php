@@ -141,4 +141,26 @@ class UserController extends BaseController
             }
         }
     }
+
+    public function getUserFriends()
+    {
+        $code = parent::checkToken();
+
+        if ($code == 10100) {
+            return apireturn(10100, "User is not logged in.", null, 200);
+        } elseif ($code == 10101) {
+            return apireturn(10101, "Landing expired.", null, 200);
+        } elseif ($code == 10102) {
+            return apireturn(10102, "Invalid login token.", null, 200);
+        }
+
+        $user = new User();
+        $res = $user->getAllFriendsById($code);
+        if (!is_null($res['data'])) {
+            $res['data']['avatar'] = str_replace('\\', '/', $res['data']['avatar']);
+            $res['data']['avatar'] = $this->avatarURL . $res['data']['avatar'];
+        }
+
+        return apireturn($res['code'], $res['msg'], $res['data'], 200);
+    }
 }
