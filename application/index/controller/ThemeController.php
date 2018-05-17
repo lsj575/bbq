@@ -65,6 +65,7 @@ class ThemeController extends BaseController
         }
     }
 
+    //TODO 后期可能查询所有主题只需要theme_id,theme_name,theme_img等少量信息
     public function getAllTheme()
     {
         $code = parent::checkToken();
