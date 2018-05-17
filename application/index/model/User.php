@@ -33,16 +33,21 @@ class User extends Model
     }
 
 
-    //TODO 将user表中的关注数等数量字段取消，换成每次查询对应表求数量
+
     public function getUserInfoById($id)
     {
         try {
             $info = $this->findOneUserById($id);
 
-            if(!is_null($info)) {
+            if(!is_null($info['data'])) {
                 $user = $this->get($info['data']['id']);
-                $fans_num = $user->hasWhere('userAttentionUser', ['type' => '2to1'])->count();
-                $follows_num = $user->hasWhere('userAttentionUser', ['type' => '1to2'])->count();
+                $fans_num = $this->alias('u')
+                    ->join('user_attention_user uau', 'u.id = uau.user1_id')
+                    ->where(['u.id' => $id])->count();
+                $follows_num = $this->alias('u')
+                    ->join('user_attention_user uau', 'u.id = uau.user2_id')
+                    ->where(['u.id' => $id])
+                    ->count();
                 $article_likes_num = $user->hasWhere('article', ['status' => 1])->count('likes');
                 $comment_likes_num = $user->hasWhere('articleComments', ['status' => 1])->count('likes');
 //                $themes_num = $user->hasWhere('userAttentionUser')->count();
@@ -55,7 +60,7 @@ class User extends Model
 //                $info['data']['collection'] = $collection_num;
                 return ['code' => 0, 'msg' => 'Success!', 'data' => $info['data']];
             } else {
-                return ['code' => 10003, 'msg' => $this->getError(), 'data' => null];
+                return ['code' => 10003, 'msg' => 'User does not exist', 'data' => null];
             }
         } catch (PDOException $PDOE) {
             return ['code' => 10001, 'msg' => $PDOE->getMessage(), 'data' => null];
@@ -232,4 +237,23 @@ class User extends Model
         }
     }
 
+    public function getAllFriendsById($id)
+    {
+        try {
+            $friends = $this->alias('u')
+                ->join('user_attention_user uau', 'u.id = uau.user1_id')
+                ->field('u.id,u.nickname,u.avatar,u.introduction')
+                ->where(['u.id' => $id])
+                ->find();
+
+            if (!is_null($friends)) {
+                return ['code' => 0, 'msg' => 'Success!', 'data' => $friends->toArray()];
+            } else {
+                return ['code' => 10009, 'msg' => 'User is not following any other user', 'data' => null];
+            }
+
+        } catch (PDOException $PDOE) {
+            return ['code' => 10001, 'msg' => $PDOE->getMessage(), 'data' => null];
+        }
+    }
 }
