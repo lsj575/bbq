@@ -1,7 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: 76871
- * Date: 2018/5/17
- * Time: 11:33
- */
+namespace app\index\model;
+
+use think\Model;
+
+class ArticleMentionuser extends Model
+{
+    protected $table = 'article_mentionuser';
+}
