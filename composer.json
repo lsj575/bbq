@@ -1,4 +1,5 @@
 {
+	"minimum-stability": "dev",
     "name": "topthink/think",
     "description": "the new thinkphp framework",
     "type": "project",
@@ -17,7 +18,8 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "topthink/framework": "5.0.*"
+        "topthink/framework": "5.0.*",
+		"topthink/think-captcha": "dev-master"
     },
     "autoload": {
         "psr-4": {
