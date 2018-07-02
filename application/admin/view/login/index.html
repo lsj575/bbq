@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+{include file="public/_meta" /}
+  <![endif]-->
+  <title>后台登录 </title>
+</head>
+<body>
+<input type="hidden" id="TenantId" name="TenantId" value="" />
+
+<div class="loginWraper">
+  <div id="loginform" class="loginBox">
+    <form class="form form-horizontal" action="{:url('login/check')}" method="post">
+      <div class="row cl">
+        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+        <div class="formControls col-xs-8">
+          <input id="" name="username" type="text" placeholder="用户名" AUTOCOMPLETE="OFF" class="input-text size-L">
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+        <div class="formControls col-xs-8">
+          <input id="" name="password" type="password" placeholder="密码" AUTOCOMPLETE="OFF" class="input-text size-L">
+        </div>
+      </div>
+      <div class="row cl">
+        <div class="formControls col-xs-8 col-xs-offset-3">
+          <input class="input-text size-L" type="text" placeholder="验证码"  name="code" value="" style="width:150px;">
+          <img src="{:captcha_src()}" alt="captcha" onclick="reloadcode(this)"/>
+          </div>
+      </div>
+      <div class="row cl">
+        <div class="formControls col-xs-8 col-xs-offset-3">
+
+        </div>
+      </div>
+      <div class="row cl">
+        <div class="formControls col-xs-8 col-xs-offset-3">
+          <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+          <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="footer">token-bbq-admin</div>
+<script type="text/javascript" src="__STATIC__/hadmin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/hadmin/static/h-ui/js/H-ui.min.js"></script>
+<script>
+  //刷新验证码
+  function reloadcode(obj) {
+      obj.src="{:captcha_src()}"
+  }
+</script>
+</body>
+</html>
