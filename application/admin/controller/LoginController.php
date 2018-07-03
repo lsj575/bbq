@@ -4,10 +4,22 @@ namespace app\admin\controller;
 use think\Controller;
 use app\common\lib\IAuth;
 
-class LoginController extends Controller
+class LoginController extends BaseController
 {
+    public function _initialize()
+    {
+
+    }
+
     public function index()
     {
+        //如果后台用户已经登录则跳转到后台首页
+        $isLogin = $this->isLogin();
+        if ($isLogin) {
+            return $this->redirect('index/index');
+        }else {
+            return $this->fetch();
+        }
         return $this->fetch();
     }
 
@@ -62,7 +74,16 @@ class LoginController extends Controller
         }else {
             $this->error('请求不合法');
         }
+    }
 
-
+    /**
+     * 退出登录
+     * 1 清空session
+     * 2 跳转到登录
+     */
+    public function logout()
+    {
+        session(null, config('admin.session_user_scope'));
+        $this->redirect('login/index');
     }
 }
