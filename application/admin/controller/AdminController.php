@@ -2,6 +2,7 @@
 namespace app\admin\controller;
 
 use think\Controller;
+use app\common\lib\IAuth;
 
 class AdminController extends  Controller
 {
@@ -17,7 +18,7 @@ class AdminController extends  Controller
             }
 
             //加密、加盐
-            $data['password'] = md5($data['password'].'_#token_bbq');
+            $data['password'] = IAuth::setPassword($data['password']);
             $data['status'] = 1;
 
             try {
