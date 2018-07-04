@@ -1,3 +1,32 @@
 @charset "utf-8";
 /* 你自己的样式 */
-
+body{
+  background: #e5e5e5;
+  overflow: hidden;
+}
+h2{
+  width: 100%;
+  text-align: center;
+}
+.logo{
+  width: 50px;
+  margin: 0 auto;
+}
+.loginWraper{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+}
+.footer{
+  width: 100%;
+  position: absolute;
+  bottom: 5px;
+}
+@media screen and ( min-width: 992px) {
+  .loginWraper{
+    width: 60vw;
+    margin-left: 20vw;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+}

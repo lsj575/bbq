@@ -6,35 +6,38 @@
 </head>
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
-
+<!-- <img class="logo" src="__STATIC__/admin/img/logo.png"/> -->
+<!-- <div class="row c1">
+  <div class="logoWraper col-xs-12"><img class="logo" src="__STATIC__/admin/img/logo.png"/></div>
+</div> -->
 <div class="loginWraper">
+  <h2>BBQ后台管理</h2>
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="{:url('login/check')}" method="post">
       <div class="row cl">
-        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
-        <div class="formControls col-xs-8">
+        <label class="form-label col-xs-1 col-xs-offset-2"><i class="Hui-iconfont">&#xe60d;</i></label>
+        <div class="formControls col-xs-7">
           <input id="" name="username" type="text" placeholder="用户名" AUTOCOMPLETE="OFF" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
-        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
-        <div class="formControls col-xs-8">
+        <label class="form-label col-xs-1 col-xs-offset-2"><i class="Hui-iconfont">&#xe60e;</i></label>
+        <div class="formControls col-xs-7">
           <input id="" name="password" type="password" placeholder="密码" AUTOCOMPLETE="OFF" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
-        <div class="formControls col-xs-8 col-xs-offset-3">
+        <div class="formControls col-lg-offset-4 col-sm-6 col-sm-offset-4 col-xs-8 col-xs-offset-2">
           <input class="input-text size-L" type="text" placeholder="验证码"  name="code" value="" style="width:150px;">
           <img src="{:captcha_src()}" alt="captcha" onclick="reloadcode(this)"/>
           </div>
       </div>
-      <div class="row cl">
+      <!-- <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-
         </div>
-      </div>
+      </div> -->
       <div class="row cl">
-        <div class="formControls col-xs-8 col-xs-offset-3">
+        <div class="formControls col-lg-offset-4 col-sm-6 col-sm-offset-4 col-xs-8 col-xs-offset-3">
           <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
         </div>
@@ -42,7 +45,7 @@
     </form>
   </div>
 </div>
-<div class="footer">token-bbq-admin</div>
+<div class="footer"><img class="logo" src="__STATIC__/admin/img/logo.png"/><br/>token-bbq-admin</div>
 <script type="text/javascript" src="__STATIC__/hadmin/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="__STATIC__/hadmin/static/h-ui/js/H-ui.min.js"></script>
 <script>
