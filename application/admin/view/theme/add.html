@@ -1,5 +1,9 @@
 <!--header-->
 {include file="public/_meta" /}
+<script>
+    swf = '__STATIC__/admin/uploadify/uploadify.swf';
+    image_upload_url = "{:url('image/upload')}";
+</script>
 <article class="page-container">
   <form class="form form-horizontal" id="form-singwaapp" url="">
     <div class="row cl">
@@ -61,9 +65,8 @@
 <script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 <script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
-<script type="text/javascript" src="__STATIC__/hadmin/lib/ueditor/1.4.3/ueditor.config.js"></script>
-<script type="text/javascript" src="__STATIC__/hadmin/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
-<script type="text/javascript" src="__STATIC__/hadmin/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/js/image.js"></script>
 <script type="text/javascript">
   $(function(){
     $('.skin-minimal input').iCheck({
@@ -87,7 +90,6 @@
         }
     });
 
-    var ue = UE.getEditor('editor');
 
   });
 
