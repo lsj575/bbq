@@ -31,9 +31,10 @@ class LoginController extends BaseController
         if (request()->isPost()) {
             $data = input('post.');
 
-            if (!captcha_check($data['code'])) {
-                $this->error('验证码不正确');
-            }
+            //暂时取消验证码
+//            if (!captcha_check($data['code'])) {
+//                $this->error('验证码不正确');
+//            }
             //判定 username password
             //validate
             $validate = validate('AdminUser');
