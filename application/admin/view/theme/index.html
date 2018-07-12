@@ -29,7 +29,6 @@
         <th width="25"><input type="checkbox" name="" value=""></th>
         <th width="80">ID</th>
         <th>标题</th>
-        <th width="80">分类</th>
         <th width="80">缩图</th>
         <th width="120">更新时间</th>
         <th width="40">是否推荐</th>
@@ -38,24 +37,23 @@
       </tr>
       </thead>
       <tbody>
-
+      {volist name = "theme" id = "vo"}
       <tr class="text-c">
         <td><input type="checkbox" value="" name=""></td>
-        <td></td>
-        <td class="text-l"><u style="cursor:pointer" class="text-primary"  title="查看"></u></td>
-        <td></td>
-        <td><img width="60" height="60" class="picture-thumb" src=""></td>
-        <td></td>
-        <td></td>
-        <td class="td-status"></td>
+        <td>{$vo.id}</td>
+        <td class="text-l"><u style="cursor:pointer" class="text-primary"  title="查看">{$vo.theme_name}</u></td>
+        <td><img width="60" height="60" class="picture-thumb" src="{$vo.img}"></td>
+        <td>{$vo.update_time}</td>
+        <td>{$vo.is_position|isPosition}</td>
+        <td class="td-status">{$vo.status|getStatusName}</td>
         <td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="" href="javascript:;" title="删除" del_url=""><i class="Hui-iconfont">&#xe6e2;</i></a></td>
       </tr>
-
+      {/volist}
       </tbody>
     </table>
     <div id="laypage"></div>
   </div>
-
+  {:pagination($theme)}
 </div>
 <!--header-->
 {include file="public/_footer" /}
@@ -68,7 +66,7 @@
 
 </script>
 <style>
-  .imooc-app .pagination li{display:inline; padding-left:10px;}
+  .bbq-app .pagination li{display:inline; padding-left:10px;}
   .pagination .active{color:red}
   .pagination .disabled{color:#888888}
 </style>
