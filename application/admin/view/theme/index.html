@@ -4,17 +4,10 @@
 <div class="page-container">
   <div class="text-c">
     <form action="" method="get">
-   <span class="select-box inline">
-    <select name="catid" class="select">
-          <option value="0">全部分类</option>
-
-          <option value="" ></option>
-
-        </select>
-    </span> 日期范围：
-      <input type="text" name="start_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="" style="width:120px;" >
+    日期范围：
+      <input type="text" name="start_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="{$start_time}" style="width:120px;" >
       -
-      <input type="text" name="end_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value=""  style="width:120px;">
+      <input type="text" name="end_time" class="input-text" id="countTimeend" onfocus="selecttime(2)" value="{$end_time}"  style="width:120px;">
 
       <input type="text" name="title" id="" value="" placeholder=" 主题名称" style="width:250px" class="input-text">
       <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜主题</button>
@@ -60,6 +53,7 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="__STATIC__/hadmin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="__STATIC__/hadmin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/js/common.js"></script>
 <script type="text/javascript">
 
 
