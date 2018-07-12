@@ -8,11 +8,27 @@ class ThemeController extends BaseController
 {
     public function index()
     {
+        $data = input('param.');
+
+        $whereData = [];
+        //转换查询条件
+        if (!empty($data['start_time']) && !empty($data['end_time'])) {
+            $whereData['create_time'] = [
+                ['egt', strtotime($data['start_time'])],
+                ['elt', strtotime($data['end_time'])],
+            ];
+        }
+        //halt(strtotime($data['start_time']));
+        if (!empty($data['title'])) {
+            $whereData['theme_name'] = ['like', '%'.$data['title'].'%'];
+        }
         // 获取数据
-        $theme = model('Theme')->getTheme();
+        $theme = model('Theme')->getTheme($whereData);
         //var_dump($theme);
         return $this->fetch('', [
-            'theme' => $theme,
+            'theme'      => $theme,
+            'start_time' => empty($data['start_time']) ? '' : $data['start_time'],
+            'end_time'   => empty($data['end_time']) ? '' : $data['end_time'],
         ]);
     }
 
