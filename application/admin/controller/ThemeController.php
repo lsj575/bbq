@@ -8,7 +8,12 @@ class ThemeController extends BaseController
 {
     public function index()
     {
-        return $this->fetch();
+        // 获取数据
+        $theme = model('Theme')->getTheme();
+        //var_dump($theme);
+        return $this->fetch('', [
+            'theme' => $theme,
+        ]);
     }
 
     public function add()
