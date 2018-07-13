@@ -5,7 +5,7 @@
     image_upload_url = "{:url('image/upload')}";
 </script>
 <article class="page-container">
-  <form class="form form-horizontal" id="form-singwaapp" url="">
+  <form class="form form-horizontal" id="form-bbq" url="{:url('theme/add')}">
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主题标题：</label>
       <div class="formControls col-xs-8 col-sm-9">
@@ -25,7 +25,7 @@
       <label class="form-label col-xs-4 col-sm-2">是否推荐到首页头图：</label>
       <div class="formControls col-xs-8 col-sm-9 skin-minimal">
         <div class="check-box">
-          <input type="checkbox" id="is_head_figure" name="is_head_figure" value="">
+          <input type="checkbox" id="is_head_figure" name="is_head_figure" value="1">
           <label for="checkbox-pinglun">&nbsp;</label>
         </div>
       </div>
@@ -34,7 +34,7 @@
       <label class="form-label col-xs-4 col-sm-2">是否推荐：</label>
       <div class="formControls col-xs-8 col-sm-9 skin-minimal">
         <div class="check-box">
-          <input type="checkbox" id="is_position" name="is_position" value="">
+          <input type="checkbox" id="is_position" name="is_position" value="1">
           <label for="checkbox-pinglun">&nbsp;</label>
         </div>
       </div>
@@ -67,6 +67,7 @@
 <script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript" src="__STATIC__/admin/uploadify/jquery.uploadify.min.js"></script>
 <script type="text/javascript" src="__STATIC__/admin/js/image.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/js/common.js"></script>
 <script type="text/javascript">
   $(function(){
     $('.skin-minimal input').iCheck({
@@ -76,17 +77,20 @@
     });
 
     //表单验证
-    $("#form-singwaapp").validate({
+    $("#form-bbq").validate({
         rules:{
             title:{
                 required:true,
             },
+            description: {
+                required:true,
+            }
         },
         onkeyup:false,
         focusCleanup:true,
         success:"valid",
         submitHandler:function(form){
-            singwaapp_save(form);// 需要小伙伴自定义一个singwaapp_save方法 用来处理抛送请求的哦
+            bbq_save(form);
         }
     });
 
