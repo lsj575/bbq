@@ -8,6 +8,7 @@ class ThemeController extends BaseController
 {
     public function index()
     {
+        $this->model = 'Theme';
         $data = input('param.');
 
         $whereData = [];
@@ -57,7 +58,7 @@ class ThemeController extends BaseController
                 'is_position'         => $data['is_position'],
                 'is_head_figure'      => $data['is_head_figure'],
             );
-            var_dump($data);
+            // var_dump($data);
             //入库操作
             try {
                 $id = model('Theme')->add($data);
@@ -74,6 +75,5 @@ class ThemeController extends BaseController
         }else {
             return $this->fetch();
         }
-
     }
 }
