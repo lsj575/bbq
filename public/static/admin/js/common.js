@@ -17,3 +17,52 @@ function bbq_save(form) {
         }
     }, 'JSON');
 }
+/**
+ * 时间插件适配
+ * @param flag
+ */
+function selecttime(flag) {
+    if(flag==1){
+        var endTime = $("#countTimeend").val();
+        if(endTime != ''){
+            WdatePicker({dataFmt:'yyyy-MM-dd HH:mm',maxDate:endTime})
+        }else{
+            WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})
+        }
+    }else{
+        var startTime = $("#countTimestart").val();
+        if(startTime != ''){
+            WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',minDate:startTime})
+        }else{
+            WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})
+        }
+    }
+}
+/**
+ * 通用化删除
+ * @param obj
+ * @param id
+ */
+function app_del(obj) {
+    //获取模板当中的url地址
+    url = $(obj).attr('del url');
+    layer.confirm('确认要删除吗?', function(index) {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            success: function(data) {
+                if(data.code == 1){
+                    self.location = data.data.jump_url;
+                }else if(data.code ==0){
+                    layer.msg('已删除!',{icon:2,time:2000});
+                }
+                $(obj).parents("tr").remove();
+                layer.msg('已删除!',{icon:1,time:1500});
+            },
+            error: function(data) {
+                console.log(data.msg);
+            }
+        });
+    });
+}
