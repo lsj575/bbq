@@ -41,11 +41,10 @@ function selecttime(flag) {
 /**
  * 通用化删除
  * @param obj
- * @param id
  */
 function app_del(obj) {
     //获取模板当中的url地址
-    url = $(obj).attr('del url');
+    url = $(obj).attr('del_url');
     layer.confirm('确认要删除吗?', function(index) {
         $.ajax({
             type: 'POST',
@@ -54,11 +53,36 @@ function app_del(obj) {
             success: function(data) {
                 if(data.code == 1){
                     self.location = data.data.jump_url;
-                }else if(data.code ==0){
-                    layer.msg('已删除!',{icon:2,time:2000});
+                }else if(data.code == 0){
+                    layer.msg(data.msg, {icon:2, time:2000});
+
                 }
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!',{icon:1,time:1500});
+            },
+            error: function(data) {
+                console.log(data.msg);
+            }
+        });
+    });
+}
+
+/**
+ * 通用化修改状态
+ * @param obj
+ */
+function app_status(obj) {
+    //获取模板当中的url地址
+    url = $(obj).attr('status_url');
+    layer.confirm('确认要修改吗?', function(index) {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            success: function(data) {
+                if(data.code == 1){
+                    self.location = data.data.jump_url;
+                }else if(data.code == 0){
+                    layer.msg(data.msg, {icon:2,time:2000});
+                }
             },
             error: function(data) {
                 console.log(data.msg);
