@@ -39,7 +39,6 @@ class BaseController extends Controller
         }
         return false;
     }
-    
     public function delete($id = 0)
     {
         if(!intval($id)) {
@@ -53,7 +52,7 @@ class BaseController extends Controller
         }
     
         if($res) {
-            return $this->result(['jump_url' => $_SERVER['HTTP REFERER']], config('code.SUCCESS'), 'OK');
+            return $this->result(['jump_url' => $_SERVER['HTTP_REFERER']], config('code.SUCCESS'), 'OK');
         }else {
             return $this->result('', config('code.FAILURE'), '删除失败!');
         }
