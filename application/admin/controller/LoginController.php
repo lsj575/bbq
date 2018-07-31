@@ -44,7 +44,9 @@ class LoginController extends BaseController
 
             try {
                 //通过username查询用户
-                $user = model('AdminUser')->get(['username' => $data['username']]);
+                $user = model('AdminUser')->get([
+                    'username'    => $data['username'],
+                ]);
             }catch (\Exception $e) {
                 $this->error($e->getMessage());
             }
