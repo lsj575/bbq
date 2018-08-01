@@ -31,10 +31,10 @@
         <td class="text-l">{$vo.nickname}</td>
         <td class="text-l">{$vo.introduction}</td>
         <td><img width="60" height="60" class="picture-thumb" src="{$vo.avatar}"></td>
+        <!-- 此处调用app/common.php中的方法 -->
         <td>{$vo.is_position|isPosition}</td>
-        <td class="td-status">{$vo.status|status=$vo.id, ###}</td>
-        <!-- <td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="" href="javascript:;" title="删除" del_url=""><i class="Hui-iconfont">&#xe6e2;</i></a></td> -->
-        <td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" onClick="article_edit('用户编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="app_del(this)" href="javascript:;" title="删除" del_url="{:url('theme/delete', ['id'=>$vo.id])}"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+        <td class="td-status">{$vo.status|user_status=$vo.id, ###}</td>
+        <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onClick="app_del(this)" href="javascript:;" title="删除" del_url="{:url('theme/delete', ['id'=>$vo.id])}"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
       </tr>
       {/volist}
       </tbody>
