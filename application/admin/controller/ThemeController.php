@@ -76,4 +76,61 @@ class ThemeController extends BaseController
             return $this->fetch();
         }
     }
+
+    public function edit($id = 0)
+    {
+        $this->model = 'Theme';
+        if (request()->isPost()) {
+            $data = input('post.');
+
+            // 数据需要做校验
+            $validate = validate('Theme');
+            if (!$validate->check($data)) {
+                $this->error($validate->getError());
+            }
+
+            //若表单未对推荐进行勾选，is_position， is_head_figure未被set，需要主动赋值
+            (!isset($data['is_position'])) ? $data['is_position'] = 0 : $data['is_position'] = 1;
+            (!isset($data['is_head_figure']))? $data['is_head_figure'] = 0 : $data['is_head_figure'] = 1;
+            $data = array(
+                'theme_name'          => $data['title'],
+                'img'                 => $data['image'],
+                'theme_introduction'  => $data['description'],
+                'is_position'         => $data['is_position'],
+                'is_head_figure'      => $data['is_head_figure'],
+            );
+            //入库操作
+            try {
+                $id = model('Theme')->save($data, ['id' => $id]);
+            }catch (\Exception $e) {
+                return $this->result('', config('code.FAILURE'), '编辑失败');
+            }
+
+            if ($id) {
+                return $this->result(['jump_url' => url('theme/index')], config('code.SUCCESS'), 'OK');
+            }else {
+                return $this->result('', config('code.FAILURE'), '编辑失败');
+            }
+        } else {
+            if (!intval($id)) {
+                return $this->error('ID不合法');
+            }
+
+            try {
+                //通过id查询记录是否存在
+                $res = model('Theme')->get($id);
+                if (!$res) {
+                    return $this->error('没有此条记录');
+                }else {
+                    return $this->fetch('', [
+                        'theme' => $res,
+                    ]);
+                }
+            }catch(\Exception $e){
+                return $this->error($e->getMessage());
+            }
+        }
+
+    }
+
 }
