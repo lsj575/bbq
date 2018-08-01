@@ -12,7 +12,7 @@ class User extends Base
     public function getUser($data = [])
     {
         $data['status'] = [
-            'neq', config('code.status_delete')
+            'neq', config('code.user_delete')
         ];
 
         $order = ['id' => 'desc'];
