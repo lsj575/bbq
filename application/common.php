@@ -31,7 +31,7 @@ function getStatusName($status)
     return $status ? '<span> 已发布</span>' : '<span > 待审核</span>';
 }
 
-function status($id, $status)
+function theme_status($id, $status)
 {
     $controller = request()->controller();
     $sta = $status == 1 ? 0 : 1;
@@ -41,6 +41,21 @@ function status($id, $status)
         $str = "<a href='javascript:;' title='修改状态' status_url='".$url."' onclick='app_status(this)'><span class='label label-success radius'>已发布</span></a>";
     }elseif ($status == 0) {
         $str = "<a href='javascript:;' title='修改状态' status_url='".$url."' onclick='app_status(this)'><span class='label label-danger radius'>待审核</span></a>";
+    }
+
+    return $str;
+}
+
+function user_status($id, $status)
+{
+    $controller = request()->controller();
+    $sta = $status == 1 ? 0 : 1;
+    $url = url($controller.'/status', ['id' => $id, 'status' => $sta]);
+
+    if ($status == 1) {
+        $str = "<a href='javascript:;' title='修改状态' status_url='".$url."' onclick='app_status(this)'><span class='label label-success radius'>正常</span></a>";
+    }elseif ($status == 0) {
+        $str = "<a href='javascript:;' title='修改状态' status_url='".$url."' onclick='app_status(this)'><span class='label label-danger radius'>被禁止</span></a>";
     }
 
     return $str;
