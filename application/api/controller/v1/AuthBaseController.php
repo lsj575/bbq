@@ -4,6 +4,7 @@ namespace app\api\controller\v1;
 use app\api\controller\CommonController;
 use app\common\lib\Aes;
 use app\common\lib\exception\ApiException;
+use app\common\lib\IAuth;
 use app\common\model\User;
 
 /**
@@ -36,7 +37,6 @@ class AuthBaseController extends CommonController
 
     /**
      * 判断是否登录
-     * TODO 客户端工程师对token进行解密再进行加密后上传【客户端加密算法待商榷,可仿照sign】
      * @return bool
      */
     public function isLogin()
@@ -47,14 +47,12 @@ class AuthBaseController extends CommonController
 
         $obj = new Aes();
         $access_user_token = $obj->decrypt($this->headers['access_user_token']);
-        if (empty($access_user_token)) {
+
+        $bool = IAuth::checkAccessUserTokenPass($access_user_token);
+        if (!$bool) {
             return false;
         }
 
-        //如果没有两个|| ，则也不成立
-        if (!preg_match('/||/', $access_user_token)) {
-            return false;
-        }
         list($token, $id) = explode("||", $access_user_token);
         $user = User::get(['token' => $token]);
 
