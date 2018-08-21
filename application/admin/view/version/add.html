@@ -1,64 +1,63 @@
 <!--header-->
 {include file="public/_meta" /}
-<script>
-    swf = '__STATIC__/admin/uploadify/uploadify.swf';
-    image_upload_url = "{:url('image/upload')}";
-</script>
 <article class="page-container">
-    <form class="form form-horizontal" id="form-bbq" url="{:url('theme/add')}">  
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主题标题：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="" placeholder="" id="title" name="title">
-      </div>
-    </div>
-
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主题简介：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <textarea name="description" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" ></textarea>
-        <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
-      </div>
-    </div>
-
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">是否推荐到首页头图：</label>
-      <div class="formControls col-xs-8 col-sm-9 skin-minimal">
-        <div class="check-box">
-          <!-- <input type="checkbox" id="is_head_figure" name="is_head_figure" value=""> -->
-          <input type="checkbox" id="is_head_figure" name="is_head_figure" value="1">
-          <label for="checkbox-pinglun">&nbsp;</label>
+    <form class="form form-horizontal" id="form-bbq" url="{:url('version/add')}">
+        <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>内部版本号：</label>
+          <div class="formControls col-xs-8 col-sm-9">
+            <input type="text" class="input-text" placeholder="如：7" value="" placeholder="" id="version" name="version">
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">是否推荐：</label>
-      <div class="formControls col-xs-8 col-sm-9 skin-minimal">
-        <div class="check-box">
-          <!-- <input type="checkbox" id="is_position" name="is_position" value=""> -->
-          <input type="checkbox" id="is_position" name="is_position" value="1">
-          <label for="checkbox-pinglun">&nbsp;</label>
+
+        <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>外部版本号：</label>
+          <div class="formControls col-xs-8 col-sm-9">
+              <input type="text" class="input-text" placeholder="如：1.2.2" value="" placeholder="" id="version_code" name="version_code">
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主题背景图：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <div id="file_upload" class="dropzone"></div>
-        <!-- <input id="file_upload" name="file" type="file" multiple="true" > -->
-        <img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
-        <input id="file_upload_image" name="image" type="hidden" multiple="true" value="">
-      </div>
-    </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>版本更新信息：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <textarea name="upgrade_point" cols="" rows="" class="textarea"  placeholder="请按条陈述" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" ></textarea>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+            </div>
+        </div>
 
-    <div class="row cl">
-      <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-        <button  class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
-        <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
-      </div>
-    </div>
-  </form>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>新版本下载链接：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="apk_url" name="apk_url">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>APP类型：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <select class="select" size="1" name="app_type">
+                    <option value="Android">Android</option>
+                    <option value="iOS">iOS</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2">是否强制更新：</label>
+          <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+            <div class="check-box">
+              <input type="checkbox" id="is_force" name="is_force" value="1">
+              <label for="checkbox-pinglun">&nbsp;</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row cl">
+          <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+            <button  class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+            <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+          </div>
+        </div>
+    </form>
 </article>
 
 <!--header-->

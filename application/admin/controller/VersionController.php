@@ -44,37 +44,35 @@ class VersionController extends BaseController
     {
         if (request()->isPost()) {
             $data = input('post.');
-
             // 数据需要做校验
-            $validate = validate('Theme');
-            if (!$validate->check($data)) {
+            $validate = validate('Version');
+            if (!$validate->check($data, [], 'Version.add')) {
                 $this->error($validate->getError());
             }
 
             // 获取session
             $user = session(config('admin.session_user'), '', config('admin.session_user_scope'));
             // form表单key名转换
-            (!isset($data['is_position'])) ? $data['is_position'] = 0 : $data['is_position'] = 1;
-            (!isset($data['is_head_figure']))? $data['is_head_figure'] = 0 : $data['is_head_figure'] = 1;
-            //TODO 将图片路径改为http：//的格式
+            (!isset($data['is_force'])) ? $data['is_force'] = 0 : $data['is_force'] = 1;
             $data = array(
-                'user_id'             => $user->id,
-                'theme_name'          => $data['title'],
-                'img'                 => $data['image'],
-                'theme_introduction'  => $data['description'],
-                'is_position'         => $data['is_position'],
-                'is_head_figure'      => $data['is_head_figure'],
+                'creator_id'    => $user->id,
+                'app_type'      => $data['app_type'],
+                'version'       => $data['version'],
+                'version_code'  => $data['version_code'],
+                'is_force'      => $data['is_force'],
+                'upgrade_point' => $data['upgrade_point'],
+                'apk_url'       => $data['apk_url'],
             );
 
             //入库操作
             try {
-                $id = model('Theme')->add($data);
+                $id = model('Version')->add($data);
             }catch (\Exception $e) {
                 return $this->result('', config('code.FAILURE'), '新增失败');
             }
 
             if ($id) {
-                return $this->result(['jump_url' => url('theme/index')], config('code.SUCCESS'), 'OK');
+                return $this->result(['jump_url' => url('version/index')], config('code.SUCCESS'), 'OK');
             }else {
                 return $this->result('', config('code.FAILURE'), '新增失败');
             }
