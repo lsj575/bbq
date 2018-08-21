@@ -9,6 +9,27 @@ namespace app\common\model;
 class Version extends Base
 {
     /**
+     * 查询版本 后台自动分页
+     * @param array $data
+     * @return \think\Paginator
+     */
+    public function getVersion($data = [])
+    {
+        $data['status'] = [
+            'neq', config('code.status_delete')
+        ];
+
+        $order = ['id' => 'desc'];
+
+        // 查询
+        $result = $this->where($data)
+            ->order($order)
+            ->paginate();
+
+        return $result;
+    }
+
+    /**
      * 通过app_type获取最后一条状态正常的版本内容
      * @param string $appType
      * @return false|\PDOStatement|string|\think\Collection
