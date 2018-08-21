@@ -1,11 +1,18 @@
 <?php
 namespace app\admin\controller;
 
-use think\Controller;
-use Think\Exception;
-
+/**
+ * 主题控制器
+ * Class ThemeController
+ * @package app\admin\controller
+ */
 class ThemeController extends BaseController
 {
+    /**
+     * 获取主题列表
+     * 可根据时间和主题名来查询对应主题
+     * @return mixed
+     */
     public function index()
     {
         $this->model = 'Theme';
@@ -18,8 +25,8 @@ class ThemeController extends BaseController
                 ['egt', strtotime($data['start_time'])],
                 ['elt', strtotime($data['end_time'])],
             ];
+            //halt($data['start_time']);
         }
-        //halt(strtotime($data['start_time']));
         if (!empty($data['title'])) {
             $whereData['theme_name'] = ['like', '%'.$data['title'].'%'];
         }
@@ -33,6 +40,10 @@ class ThemeController extends BaseController
         ]);
     }
 
+    /**
+     * 添加主题
+     * @return mixed|void
+     */
     public function add()
     {
         if (request()->isPost()) {
@@ -77,6 +88,11 @@ class ThemeController extends BaseController
         }
     }
 
+    /**
+     * 主题编辑
+     * @param int $id
+     * @return mixed|void
+     */
     public function edit($id = 0)
     {
         $this->model = 'Theme';
