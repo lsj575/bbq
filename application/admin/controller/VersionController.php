@@ -82,6 +82,11 @@ class VersionController extends BaseController
         }
     }
 
+    /**
+     * 编辑版本
+     * @param int $id
+     * @return mixed|void
+     */
     public function edit($id = 0)
     {
         $this->model = 'Version';
@@ -94,25 +99,26 @@ class VersionController extends BaseController
                 $this->error($validate->getError());
             }
 
-            //若表单未对推荐进行勾选，is_position， is_head_figure未被set，需要主动赋值
-            (!isset($data['is_position'])) ? $data['is_position'] = 0 : $data['is_position'] = 1;
-            (!isset($data['is_head_figure']))? $data['is_head_figure'] = 0 : $data['is_head_figure'] = 1;
+            //若表单未对推荐进行勾选，is_force未被set，需要主动赋值
+            (!isset($data['is_force'])) ? $data['is_force'] = 0 : $data['is_force'] = 1;
             $data = array(
-                'theme_name'          => $data['title'],
-                'img'                 => $data['image'],
-                'theme_introduction'  => $data['description'],
-                'is_position'         => $data['is_position'],
-                'is_head_figure'      => $data['is_head_figure'],
+                'app_type'      => $data['app_type'],
+                'version'       => $data['version'],
+                'version_code'  => $data['version_code'],
+                'is_force'      => $data['is_force'],
+                'upgrade_point' => $data['upgrade_point'],
+                'apk_url'       => $data['apk_url'],
             );
+
             //入库操作
             try {
-                $id = model('Theme')->save($data, ['id' => $id]);
+                $id = model('Version')->save($data, ['id' => $id]);
             }catch (\Exception $e) {
                 return $this->result('', config('code.FAILURE'), '编辑失败');
             }
 
             if ($id) {
-                return $this->result(['jump_url' => url('theme/index')], config('code.SUCCESS'), 'OK');
+                return $this->result(['jump_url' => url('Version/index')], config('code.SUCCESS'), 'OK');
             }else {
                 return $this->result('', config('code.FAILURE'), '编辑失败');
             }
@@ -123,12 +129,12 @@ class VersionController extends BaseController
 
             try {
                 //通过id查询记录是否存在
-                $res = model('Theme')->get($id);
+                $res = model('Version')->get($id);
                 if (!$res) {
                     return $this->error('没有此条记录');
                 }else {
                     return $this->fetch('', [
-                        'theme' => $res,
+                        'version' => $res,
                     ]);
                 }
             }catch(\Exception $e){
