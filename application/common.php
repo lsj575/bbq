@@ -21,7 +21,14 @@ function pagination($obj)
     return '<div class="bbq-app">'.$obj->appends($params)->render().'</div>';
 }
 
+// 推荐字段数字到文字转换
 function isPosition($str)
+{
+    return $str ? '<span style="color:red"> 是</span>' : '<span> 否</span>';
+}
+
+// 强制更新字段数字到文字转换
+function isForce($str)
 {
     return $str ? '<span style="color:red"> 是</span>' : '<span> 否</span>';
 }
@@ -31,7 +38,13 @@ function getStatusName($status)
     return $status ? '<span> 已发布</span>' : '<span > 待审核</span>';
 }
 
-function theme_status($id, $status)
+/**
+ * 通用化修改状态
+ * @param $id
+ * @param $status
+ * @return string
+ */
+function changeStatus($id, $status)
 {
     $controller = request()->controller();
     $sta = $status == 1 ? 0 : 1;
