@@ -50,4 +50,10 @@ Route::get('api/:ver/user/nickname/:id', 'api/:ver.user/checkUserNicknamePass');
  */
 //图片上传路由
 Route::post('api/:ver/image', 'api/:ver.image/save');
+Route::get('api/:ver/accesstoken','api/:ver.image/getAccessToken');
+
+/**
+ * app版本相关路由
+ */
+Route::get('api/:ver/init', 'api/:ver.index/init');
 
