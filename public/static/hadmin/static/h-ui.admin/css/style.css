@@ -33,3 +33,9 @@ h2{
     border-bottom-left-radius: 10px;
   }
 }
+#file_upload{
+  border: 2px dashed #0087F7 !important;
+}
+#is_head_figure{
+  border: 2px solid #0087F7 !important;
+}
