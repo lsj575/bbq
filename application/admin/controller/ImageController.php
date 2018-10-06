@@ -73,7 +73,14 @@ class ImageController extends BaseController
             }
 
             if ($id) {
-                return json(['data' => ['acesstoken' => $accessToken], 'code' => config('code.SUCCESS'), 'msg' => 'OK']);
+                return json([
+                    'data' => [
+                        'acesstoken' => $accessToken,
+                        'nonce'      => $nonce,
+                    ],
+                    'code' => config('code.SUCCESS'),
+                    'msg' => 'OK'
+                ]);
             }else {
                 return json(['data' => '', 'code' => config('code.FAILURE'), 'msg' => '获取数据失败，请重试或联系技术人员']);
             }
