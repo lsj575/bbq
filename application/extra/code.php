@@ -3,6 +3,7 @@
 /**
  * 和状态码相关的文案配置
  */
+// TODO 将配置文件改为大写
 return [
     'status_delete'         => -1,
     'status_normal'         => 1,
@@ -19,5 +20,5 @@ return [
     'user_normal'           => 1,  //用户正常
     'user_delete'           => -1,  //用户被删除
     'user_ban'              => 0,  //用户被禁止
-
+    'APP_CODE'              => 'Yf6u0XI8yVOx5OxSM7iyfXckGmtYNfuxI8CxmcE1ghHOcyGMrp5SCdouoQmV51qq', //静态资源文件的bbq专属code
 ];
