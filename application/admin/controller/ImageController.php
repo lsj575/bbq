@@ -83,7 +83,7 @@ class ImageController extends BaseController
                 ]);
             }else {
                 return json(['data' => '', 'code' => config('code.FAILURE'), 'msg' => '获取数据失败，请重试或联系技术人员']);
-            }c
+            }
         }
     }
 
