@@ -25,6 +25,40 @@ h2{
   position: absolute;
   bottom: 5px;
 }
+
+#user-photo {
+  width:300px;
+  height:300px;
+  margin-top: 10px;
+}
+#photo {
+  max-width:100%;
+  max-height:350px;
+}
+.img-preview-box {
+  text-align: center;
+}
+.img-preview-box > div {
+  display: inline-block;;
+  margin-right: 10px;
+}
+.img-preview {
+  overflow: hidden;
+}
+.img-preview-box .img-preview-lg {
+  width: 150px;
+  height: 150px;
+}
+.img-preview-box .img-preview-md {
+  width: 100px;
+  height: 100px;
+}
+.img-preview-box .img-preview-sm {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
 @media screen and ( min-width: 992px) {
   .loginWraper{
     width: 60vw;
@@ -33,9 +67,9 @@ h2{
     border-bottom-left-radius: 10px;
   }
 }
-#file_upload{
+/* #file_upload{
   border: 2px dashed #0087F7 !important;
-}
+} */
 #is_head_figure{
   border: 2px solid #0087F7 !important;
 }

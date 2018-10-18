@@ -2,10 +2,10 @@
 {include file="public/_meta" /}
 <script>
     swf = '__STATIC__/admin/uploadify/uploadify.swf';
-    image_upload_url = "{:url('image/upload')}";
+    image_accesstoken_url = "{:url('image/getAccessToken')}";
 </script>
 <article class="page-container">
-    <form class="form form-horizontal" id="form-bbq" url="{:url('theme/add')}">  
+  <form class="form form-horizontal" id="form-bbq" url="{:url('theme/add')}">  
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主题标题：</label>
       <div class="formControls col-xs-8 col-sm-9">
@@ -45,16 +45,62 @@
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主题背景图：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <div id="file_upload" class="dropzone"></div>
-        <!-- <input id="file_upload" name="file" type="file" multiple="true" > -->
+        <div class="file_upload_box">
+            <button class="btn btn-primary" data-target="#changeModal" data-toggle="modal">打开</button><br/>
+            <div class="user-photo-box">
+              <img id="user-photo" src="">
+            </div>
+            <div class="modal fade" id="changeModal" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title text-primary">
+                    <i class="fa fa-pencil"></i>
+                                上传图片
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <p class="tip-info text-center">
+                        未选择图片
+                    </p>
+                    <div class="img-container hidden">
+                        <img src="" alt="" id="photo">
+                    </div>
+                    <div class="img-preview-box hidden">
+                      <hr>
+                      <span>150*150:</span>
+                      <div class="img-preview img-preview-lg"></div>
+                      <span>100*100:</span>
+                      <div class="img-preview img-preview-md"></div>
+                      <span>30*30:</span>
+                      <div class="img-preview img-preview-sm"></div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <!-- <form enctype="multipart/form-data" action="https://static-img.wutnews.net/upload/f98bb115429de3bedf9377ced73bd08d-vzkpgtahsdfcdpbn.png" method="post"> -->
+                      <label class="btn btn-danger pull-left" for="photoInput">
+                      <input type="file" class="sr-only" id="photoInput" accept="image/*" name="image">
+                      <span>打开图片</span>
+                      </label>
+                      <button class="btn btn-primary disabled" disabled="true" onclick="sendPhoto();" >提交</button>
+                      <button class="btn btn-close" aria-hidden="true" data-dismiss="modal">取消</button>
+                    <!-- </form> -->
+                  </div>  
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- <div id="file_upload" class="dropzone"></div> -->
+        <!-- <input id="file_upload" name="file" type="file" /> -->
         <img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
-        <input id="file_upload_image" name="image" type="hidden" multiple="true" value="">
+        <input id="file_upload_image" name="image" type="hidden" multiple="true" value="" />
       </div>
     </div>
 
     <div class="row cl">
       <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-        <button  class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+        <button class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
         <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
       </div>
     </div>
@@ -68,8 +114,10 @@
 <script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 <script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
-<!-- <script type="text/javascript" src="__STATIC__/admin/uploadify/jquery.uploadify.min.js"></script> -->
-<script type="text/javascript" src="__STATIC__/admin/js/dropzone.js"></script>
+<!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> -->
+<!-- <script src="https://cdn.bootcss.com/cropper/3.1.3/cropper.min.js"></script> -->
+<script src="__STATIC__/admin/js/cropper.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="__STATIC__/admin/js/image.js"></script>
 <script type="text/javascript" src="__STATIC__/admin/js/common.js"></script>
 <script type="text/javascript">
