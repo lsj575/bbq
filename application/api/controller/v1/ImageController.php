@@ -13,9 +13,15 @@ use app\common\lib\exception\ApiException;
 use think\Cache;
 use think\Controller;
 
+/**
+ * Class ImageController
+ * 图片上传控制器，只负责接口所需的参数获取，例如access_token
+ * 图片存储交由团队统一静态资源文件接口处理，URL：https://github.com/TokenTeam/Token-Static-Center/blob/master/README.md
+ * @package app\api\controller\v1
+ */
 class ImageController extends AuthBaseController
 {
-    
+
     /**
      * accessToken缓存过期时间
      * @var int 3分钟
