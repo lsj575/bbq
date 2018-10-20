@@ -15,22 +15,18 @@ use think\Controller;
 
 class ImageController extends AuthBaseController
 {
-    /**
-     * BBQ项目专属appcode，由64位小写字母组成
-     * @var string
-     */
-    private $appCode = 'rjktdkjwgvkexmoujqaegficgcetscofgucldvqzwpxwwdfsxndpovuuvqethbwx';
-
+    
     /**
      * accessToken缓存过期时间
      * @var int 3分钟
      */
-    private $accessTokenCacheTimeOut = 150;
+    private $accessTokenCacheTimeOut = 180;
 
     /**
      * 生成上传图片所需的accessToken
      * 由AppCode前32位数+时间戳去掉最后四位数+AppCode后32位数+随机Nonce+token123组成
-     * @return string
+     * @return \json|\think\response\Json
+     * @throws ApiException
      */
     public function getAccessToken()
     {
@@ -60,7 +56,7 @@ class ImageController extends AuthBaseController
         // 开始生成accessToken
         $nonce = $this->createNonce(16);
         $time = time() % 10000;
-        $appCodeArray = str_split($this->appCode, 32);
+        $appCodeArray = str_split(config('code.APP_CODE'), 32);
         $accessToken = md5($appCodeArray[0] . $time . $appCodeArray[1] . $nonce . 'token123');
 
         $data = [
@@ -73,7 +69,7 @@ class ImageController extends AuthBaseController
         try {
             $id =  model('AccesstokenLog')->add($data);
         }catch (\Exception $e) {
-            return apiReturn(config('code.app_show_error'), '请求过于频繁，请三分钟后重试', '', 403);
+            throw new ApiException($e->getMessage(), 500);
         }
 
         if ($id) {
