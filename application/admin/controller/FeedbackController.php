@@ -20,7 +20,7 @@ class FeedbackController extends BaseController
         $data = input('param.');
 
         $whereData = [];
-        //转换查询条件
+        // 转换查询条件
         if (!empty($data['start_time']) && !empty($data['end_time'])) {
             $whereData['create_time'] = [
                 ['egt', strtotime($data['start_time'])],
@@ -37,7 +37,7 @@ class FeedbackController extends BaseController
         }
         // 获取数据
         $feedback = model('Feedback')->getFeedback($whereData);
-        //var_dump($theme);
+
         return $this->fetch('', [
             'feedback'      => $feedback,
             'start_time' => empty($data['start_time']) ? '' : $data['start_time'],
@@ -63,9 +63,51 @@ class FeedbackController extends BaseController
         }
         // 获取数据
         $feedback_type = model('FeedbackType')->getFeedbackType($whereData);
-        //var_dump($theme);
+
         return $this->fetch('type_index', [
             'feedback_type'      => $feedback_type,
         ]);
+    }
+
+    /**
+     * 添加反馈类型方法
+     * @return mixed
+     */
+    public function addType()
+    {
+        if (request()->isPost()) {
+            $data = input('post.');
+
+            // 数据需要做校验
+            $validate = validate('Feedback')->scene('addType');
+            if (!$validate->check($data)) {
+                $this->error($validate->getError());
+            }
+
+            // 获取session
+            $user = session(config('admin.session_user'), '', config('admin.session_user_scope'));
+
+            //TODO 将图片路径改为http：//的格式
+            $data = array(
+                'type_name'         => $data['title'],
+                // 'status'            => 0,         status字段数据库默认值为0，表示未启用
+            );
+
+            // 入库操作
+            try {
+                $id = model('Feedback')->add($data);
+            }catch (\Exception $e) {
+                return $this->result('', config('code.FAILURE'), '新增失败');
+            }
+
+            if ($id) {
+                return $this->result(['jump_url' => url('theme/index')], config('code.SUCCESS'), 'OK');
+            }else {
+                return $this->result('', config('code.FAILURE'), '新增失败');
+            }
+
+        }else {
+            return $this->fetch('index');
+        }
     }
 }
