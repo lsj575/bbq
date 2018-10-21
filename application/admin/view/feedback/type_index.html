@@ -3,8 +3,8 @@
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 反馈类型管理 <span class="c-gray en">&gt;</span> 反馈类型列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
   <div class="text-c">
-    <form action="{:url('theme/index')}" method="get">
-      <input type="text" name="title" id="" value="" placeholder=" 反馈类型名称" style="width:250px" class="input-text">
+    <form action="{:url('feedback/typeIndex')}" method="get">
+      <input type="text" name="type_name" id="" value="" placeholder=" 反馈类型名称" style="width:250px" class="input-text">
       <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜反馈类型</button>
     </form>
   </div>
@@ -13,7 +13,7 @@
     <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive" >
       <thead>
       <tr class="text-c">
-        <th>标题反馈类型名称</th>
+        <th width="200">标题反馈类型名称</th>
         <th width="120">创建时间</th>
         <th width="120">更新时间</th>
         <th width="60">状态</th>
@@ -36,7 +36,7 @@
     </table>
     <div id="laypage"></div>
   </div>
-  {:pagination($theme)}
+  {:pagination($feedback_type)}
 </div>
 <!--header-->
 {include file="public/_footer" /}

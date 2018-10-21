@@ -1,16 +1,16 @@
 <!--header-->
-{include file="public/_meta" title="主题列表"/}
+{include file="public/_meta" title="反馈列表"/}
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 主题管理 <span class="c-gray en">&gt;</span> 主题列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
   <div class="text-c">
-    <form action="{:url('theme/index')}" method="get">
+    <form action="{:url('feedback/index')}" method="get">
     日期范围：
       <input type="text" name="start_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="{$start_time}" style="width:140px;" >
       -
       <input type="text" name="end_time" class="input-text" id="countTimeend" onfocus="selecttime(2)" value="{$end_time}"  style="width:140px;">
 
-      <input type="text" name="title" id="" value="" placeholder=" 主题名称" style="width:250px" class="input-text">
-      <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜主题</button>
+      <input type="text" name="nickname" id="" value="" placeholder=" 用户昵称" style="width:250px" class="input-text">
+      <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜反馈</button>
     </form>
   </div>
 
@@ -18,21 +18,18 @@
     <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive" >
       <thead>
       <tr class="text-c">
-        <th width="25"><input type="checkbox" name="" value=""></th>
-        <th width="80">ID</th>
-        <th>标题</th>
-        <th width="80">缩图</th>
+        <th>用户</th>
+        <th width="80">反馈类型</th>
+        <th width="300">反馈内容</th>
         <th width="120">创建时间</th>
         <th width="120">更新时间</th>
-        <th width="40">是否推荐</th>
-        <th width="60">发布状态</th>
+        <th width="60">状态</th>
         <th width="120">操作</th>
       </tr>
       </thead>
       <tbody>
       {volist name = "theme" id = "vo"}
       <tr class="text-c">
-        <td><input type="checkbox" value="" name=""></td>
         <td>{$vo.id}</td>
         <td class="text-l"><u style="cursor:pointer" class="text-primary"  title="查看">{$vo.theme_name}</u></td>
         <td><img width="60" height="60" class="picture-thumb" src="https://static-img.wutnews.net/image/{$vo.img}-60-100.webp"></td>
