@@ -12,11 +12,11 @@ class ImageController extends BaseController
      * accessToken缓存过期时间
      * @var int 3分钟
      */
-    private $accessTokenCacheTimeOut = 150;
+    private $accessTokenCacheTimeOut = 180;
 
     /**
      * 生成上传图片所需的accessToken
-     * 由AppCode前32位数+时间戳去掉最后四位数+AppCode后32位数+随机Nonce+token123组成
+     * 由AppCode前32位数+时间戳去掉最后四位数+AppCode后32位数+随机Nonce+fuck_jwc组成
      * @return string
      */
     public function getAccessToken()
@@ -57,7 +57,7 @@ class ImageController extends BaseController
             $nonce = $this->createNonce(16);
             $time = time() % 10000;
             $appCodeArray = str_split(config('code.APP_CODE'), 32);
-            $accessToken = md5($appCodeArray[0] . $time . $appCodeArray[1] . $nonce . 'token123');
+            $accessToken = md5($appCodeArray[0] . $time . $appCodeArray[1] . $nonce . 'fuck_jwc');
 
             $data = [
                 'user_id'     => $user->id,
