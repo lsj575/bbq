@@ -30,7 +30,7 @@
         <td>{$vo.id}</td>
         <td class="text-l">{$vo.nickname}</td>
         <td class="text-l">{$vo.signature}</td>
-        <td><img width="60" height="60" class="picture-thumb" src="{$vo.avatar}"></td>
+        <td><img width="60" height="60" class="picture-thumb" src="https://static-img.wutnews.net/image/{$vo.avatar}-60-100.webp"></td>
         <!-- 此处调用app/common.php中的方法 -->
         <td>{$vo.is_position|isPosition}</td>
         <td class="td-status">{$vo.status|user_status=$vo.id, ###}</td>
