@@ -57,6 +57,11 @@ class FeedbackTypeController extends BaseController
 
             // 入库操作
             try {
+                // 先检查类型是否已经存在
+                $bool = model('FeedbackType')->checkTypeNameIsExit($data);
+                if ($bool) {
+                    return json(['data' => '', 'code' => config('code.FAILURE'), 'msg' => '类型名已经存在']);
+                }
                 $id = model('FeedbackType')->add($data);
             }catch (\Exception $e) {
                 return json(['data' => '', 'code' => config('code.FAILURE'), 'msg' => $e->getMessage()]);
