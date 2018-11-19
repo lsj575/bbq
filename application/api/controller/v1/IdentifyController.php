@@ -1,34 +1,30 @@
 <?php
 namespace app\api\controller\v1;
 
+use app\common\lib\Alidayu;
 use app\common\lib\exception\ApiException;
 use app\api\controller\CommonController;
 
-class ThemeController extends CommonController
+class IdentifyController extends CommonController
 {
-    /**
-     * 主题接口
-     */
-    public function getAllTheme()
+    public function save()
     {
-        $data['status'] = [
-            'eq', config('code.status_normal')
-        ];
-        try {
-            $themes = model('Theme')->where($data)->select();
-        }catch (\Exception $e) {
-            throw new ApiException($e->getMessage(), 500);
+        if (!request()->isPost()) {
+            return apiReturn(config('code.app_show_error'), '您提交的数据不合法', [], 403);
         }
 
-        $result = [];
-        foreach ($themes as $key => $theme) {
-            $result[] = [
-                'theme_id'   => $theme['id'],
-                'theme_name' => $theme['theme_name'],
-                'img_url'    => $theme['img'],
-            ];
+        // 校验数据
+        $validate = validate('Identify');
+        if (!$validate->check(input('post.'))) {
+            return apiReturn(config('code.app_show_error'), $validate->getError(), [], 403);
         }
 
-        return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
+        //
+        $id = input('param.id');
+        if (Alidayu::getInstance()->setSmsIdentify($id)) {
+            return apiReturn(config('code.app_show_success'), 'OK', [], 201);
+        } else {
+            return apiReturn(config('code.app_show_error'), '发送短信失败', [], 500);
+        }
     }
 }
