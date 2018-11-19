@@ -32,4 +32,25 @@ class FeedbackType extends Base
 
         return $result;
     }
+
+    /**
+     * 查询typename是否已经存在
+     * @param array $data
+     * @return int|string
+     */
+    public function checkTypeNameIsExit($data = [])
+    {
+        $data['status'] = [
+            'neq', config('code.status_delete')
+        ];
+
+        $count = $this->where($data)
+            ->count();
+
+        if ($count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
