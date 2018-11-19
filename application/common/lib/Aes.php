@@ -3,7 +3,6 @@ namespace app\common\lib;
 
 /**
  * aes 加密 解密类库
- * @by singwa
  * Class Aes
  * @package app\common\lib
  */
