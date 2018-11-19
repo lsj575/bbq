@@ -20,7 +20,8 @@
         <th width="80">ID</th>
         <th>内部版本号</th>
         <th>外部版本号</th>
-        <th width="180">APP类型（iOS or Android）</th>
+        <th width="100">APP类型（iOS or Android）</th>
+        <th width="100">更新信息</th>
         <th width="120">创建时间</th>
         <th width="120">更新时间</th>
         <th width="80">是否强制更新</th>
@@ -35,7 +36,8 @@
         <td>{$vo.id}</td>
         <td class="text-l">{$vo.version}</td>
         <td class="text-l">{$vo.version_code}</td>
-        <td>{$vo.version_code}</td>
+        <td>{$vo.app_type}</td>
+        <td class="text-l">{$vo.upgrade_point}</td>
         <td>{$vo.create_time}</td>
         <td>{$vo.update_time}</td>
         <td>{$vo.is_force|isForce}</td>
