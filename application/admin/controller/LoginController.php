@@ -1,7 +1,6 @@
 <?php
 namespace app\admin\controller;
 
-use think\Controller;
 use app\common\lib\IAuth;
 
 class LoginController extends BaseController

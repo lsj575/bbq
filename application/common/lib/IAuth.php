@@ -50,11 +50,12 @@ class IAuth
         parse_str($str, $arr);
         //检查设备号did
         if (!is_array($arr) || empty($arr['did'])
-            || $arr['did' != $data['did']]) {
+            || $arr['did'] != $data['did']) {
             return false;
         }
 
         if (!config('app_debug')) {
+            //Java or JavaScript的时间戳位数为13位，PHP为10位，所以需要做转换
             if ((time() - ceil($arr['time'] / 1000)) > config('app.sign_time')) {
                 return false;
             }
