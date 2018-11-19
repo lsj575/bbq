@@ -86,21 +86,53 @@ www  WEB部署目录（或者子目录）
 
 ### 登录
 
+### 主题
+
+#### 获取主题
+
+> GET:www.example.com/api/version/theme
+
+```php+HTML
+HEAD:
+sign: 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节）
+app_type: andorid/ios
+did: 当前手机的序列号
+```
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": [
+          {
+              "theme_id": 1,
+              "theme_name": "BBQ开发交流",
+              "img_url": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg"
+          }
+      ]
+  }
+  ```
+
+
 ### 图片
 
-- 获取accessToken
+#### 获取accessToken
 
-  > GET: www.example.com/api/version/accesstoen
+> GET: www.example.com/api/version/accesstoen
 
-  - version为bbq版本，例如v1
+- version为bbq版本，例如v1
 
-  - 返回数据
+- 返回数据
 
-    ```json
+  ```json
 
-    ```
+  ```
 
-    ​
+  ​
 
 
 ## 后台
@@ -124,3 +156,38 @@ www  WEB部署目录（或者子目录）
     ```
 
     ​
+
+### 加密
+
+#### 通用AES加密
+
+- 第一步
+
+  > 将数据用字符\0进行填充，使字符串长度为16的倍数
+
+- 第二步
+
+  > AES加密，采用AES-128-CBC
+  >
+  > key: bbq_aes
+  >
+  > iv: token1234BBQ4321
+  >
+  > option: openssl_raw_data | openssl_zero_padding
+
+- 第三步
+
+  > 将ASCII 字符的字符串转换为十六进制值
+
+#### sign加密
+
+- 第一步
+
+  > 将手机设备号（did）、手机型号（app_type）和当前时间（time）进行字符串拼接成形如：
+  >
+  > 'did=v1&app_type=v2&time=v3'的格式
+
+- 第二步
+
+  > 用通用AES加密方法，将第一步中的字符串进行加密
+
