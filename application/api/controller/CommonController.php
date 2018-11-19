@@ -47,7 +47,7 @@ class CommonController extends Controller
             throw new ApiException('app type 不合法', 400);
         }
 
-        if (IAuth::checkSignPass($headers)) {
+        if (!IAuth::checkSignPass($headers)) {
             throw new ApiException('授权码sign失败', 401);
         }
 
