@@ -57,3 +57,11 @@ Route::get('api/:ver/accesstoken','api/:ver.image/getAccessToken');
  */
 Route::get('api/:ver/init', 'api/:ver.index/init');
 
+/**
+ * 短信验证码相关
+ */
+Route::resource('api/:ver/identify', 'api/:ver.identify');
+/**
+ * 测试相关
+ */
+Route::get('api/test/sms', 'api/test/testSend');
