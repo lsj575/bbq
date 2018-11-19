@@ -9,6 +9,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\CommonController;
 use app\common\lib\Aes;
+use app\common\lib\Alidayu;
 use app\common\lib\IAuth;
 use app\common\model\User;
 use think\Exception;
@@ -28,37 +29,35 @@ class LoginController extends CommonController
         $param = input('param.');
         // validate
         $validate = validate('Login');
-        if (!$validate->check($param, 'Login.save')) {
+        if (!$validate->check($param, [], 'Login.save')) {
             return apiReturn(config('code.app_show_error'), $validate->getError(), '', 400);
         }
 
-        $bool = $this->checkLoginVerify($param['verify'], $param['sno'], $param['cardno']);
-        if (false == $bool) {
-            return apiReturn(config('code.app_show_error'), '非法请求', '', 400);
+        // 获取缓存中的验证码
+        $code = Alidayu::getInstance()->checkSmsIdentify($param['phone']);
+        if ($code != $param['code']) {
+            return apiReturn(config('code.app_show_error'), '验证码错误', '', 400);
         }
 
         //获得token
-        $token = IAuth::setAppLoginToken($param['cardno']);
+        $token = IAuth::setAppLoginToken($param['phone']);
         //查询数据库cardno是否存在
-        $user = User::get(['cardno' => $param['cardno']]);
+        $user = User::get(['phone' => $param['phone']]);
         if (!$user) {
             //第一次登录，注册信息
             $data = [
-                'token' => $token,
-                'time_out' => strtotime("+" . config('app.login_time_out_day') . " days"),
-                'nickname' => '小Q'.$param['cardno'],
-                'realname' => $param['realname'],
-                'sex' => $param['sex'],
-                'college' => $param['college'],
-                'last_login_time' => time(),
-                'status' => 1,
+                'token'             => $token,
+                'time_out'          => strtotime("+" . config('app.login_time_out_day') . " days"),
+                'nickname'          => config('app.default_nickname') . $param['phone'],
+                'last_login_time'   => time(),
+                'status'            => 1,
+                'phone'             => $param['phone'],
             ];
             try {
                 $id = model('User')->add($data);
             } catch (\Exception $e) {
                 return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
             }
-
         } else {
             //非第一次登录，更新过期时间和token
             $data = [
