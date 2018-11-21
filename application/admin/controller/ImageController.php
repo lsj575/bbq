@@ -57,7 +57,7 @@ class ImageController extends BaseController
             $nonce = $this->createNonce(16);
             $time = time() % 10000;
             $appCodeArray = str_split(config('code.APP_CODE'), 32);
-            $accessToken = md5($appCodeArray[0] . $time . $appCodeArray[1] . $nonce . 'fuck_jwc');
+            $accessToken = md5($appCodeArray[0] . $time . $appCodeArray[1] . $nonce . 'fuckjwc_token123');
 
             $data = [
                 'user_id'     => $user->id,
