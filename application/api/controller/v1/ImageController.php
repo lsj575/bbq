@@ -61,9 +61,9 @@ class ImageController extends AuthBaseController
 
         // 开始生成accessToken
         $nonce = $this->createNonce(16);
-        $time = time() % 10000;
+        $time = time() / 10000;
         $appCodeArray = str_split(config('code.APP_CODE'), 32);
-        $accessToken = md5($appCodeArray[0] . $time . $appCodeArray[1] . $nonce . 'token123');
+        $accessToken = md5($appCodeArray[0] . $time . $appCodeArray[1] . $nonce . 'fuckjwc_token123');
 
         $data = [
             'user_id'     => $this->user->id,
