@@ -198,7 +198,7 @@ www  WEB部署目录（或者子目录）
 
   > AES加密，采用AES-128-CBC
   >
-  > key: bbq_aes
+  > key: token_bbq_123789
   >
   > iv: token1234BBQ4321
   >
