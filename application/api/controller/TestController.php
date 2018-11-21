@@ -15,7 +15,7 @@ class TestController extends Controller
     public function encrypt()
     {
         $aes = new Aes();
-        $encrypt = $aes->encrypt(input('str'));
+        $encrypt = $aes->encrypt(input('post.str'));
         echo $encrypt;
     }
 
