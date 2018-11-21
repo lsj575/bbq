@@ -75,7 +75,7 @@ class ImageController extends BaseController
             if ($id) {
                 return json([
                     'data' => [
-                        'acesstoken' => $accessToken,
+                        'accesstoken' => $accessToken,
                         'nonce'      => $nonce,
                     ],
                     'code' => config('code.SUCCESS'),
