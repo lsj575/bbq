@@ -61,7 +61,14 @@ Route::get('api/:ver/init', 'api/:ver.index/init');
  * 短信验证码相关
  */
 Route::resource('api/:ver/identify', 'api/:ver.identify');
+
+/**
+ * 解析 zhlgd 的相关操作
+ */
+Route::get('api/:ver/zhlgdindex', 'api/:ver.parsezhlgd/parseIndex');
 /**
  * 测试相关
  */
 Route::get('api/test/sms', 'api/test/testSend');
+Route::post('api/test/encrypt', 'api/test/encrypt');
+Route::post('api/test/decrypt', 'api/test/decrypt');

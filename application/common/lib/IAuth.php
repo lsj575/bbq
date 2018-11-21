@@ -49,11 +49,11 @@ class IAuth
 
         parse_str($str, $arr);
         //检查设备号did
-        if (!is_array($arr) || empty($arr['did'])
-            || $arr['did'] != $data['did']) {
+        if (!is_array($arr) || empty($arr['did']) || $arr['did'] != $data['did']) {
             return false;
         }
 
+        // 如果打开debug模式，则不对时间做校验
         if (!config('app_debug')) {
             //Java or JavaScript的时间戳位数为13位，PHP为10位，所以需要做转换
             if ((time() - ceil($arr['time'] / 1000)) > config('app.sign_time')) {
@@ -63,8 +63,6 @@ class IAuth
             // 唯一性判断
             if (Cache::get($data['sign'])) {
                 return false;
-            } else {
-                Cache::set($data['sign']);
             }
         }
 
@@ -102,6 +100,7 @@ class IAuth
 
         //如果开了调试模式则不验证access_user_token的时间
         if (!config('app_debug')) {
+            //Java or JavaScript的时间戳位数为13位，PHP为10位，所以需要做转换
             if ((time() - ceil($time / 1000)) > config('app.access_user_token_time')) {
                 return false;
             }

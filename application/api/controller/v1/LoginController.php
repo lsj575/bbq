@@ -17,8 +17,9 @@ use think\Exception;
 class LoginController extends CommonController
 {
     /**
-     * 登录
-     * @return \json|\think\response\Json
+     * 登陆
+     * @return \json
+     * @throws \think\exception\DbException
      */
     public function save()
     {

@@ -26,6 +26,7 @@ class AuthBaseController extends CommonController
     /**
      * 初始化
      * @throws ApiException
+     * @throws \think\exception\DbException
      */
     public function _initialize()
     {
@@ -38,6 +39,7 @@ class AuthBaseController extends CommonController
     /**
      * 判断是否登录
      * @return bool
+     * @throws \think\exception\DbException
      */
     public function isLogin()
     {

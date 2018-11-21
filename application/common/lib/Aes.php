@@ -3,7 +3,6 @@ namespace app\common\lib;
 
 /**
  * aes 加密 解密类库
- * @by singwa
  * Class Aes
  * @package app\common\lib
  */
@@ -26,8 +25,8 @@ class Aes {
      * @return string
      */
     public function encrypt($str = '') {
-        $str = $str.str_repeat("\0", 16 - strlen($str) % 16);
-        $encrypt = openssl_encrypt($str, 'AES-128-CBC', $this->key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $this->iv);
+        $str = $str.str_repeat(" ", 16 - strlen($str) % 16);
+        $encrypt = openssl_encrypt($str, 'AES-128-CBC', $this->key, OPENSSL_RAW_DATA, $this->iv);
 
         return bin2hex($encrypt);
     }
@@ -48,9 +47,9 @@ class Aes {
      * @return string
      */
     public function decrypt($sStr) {
-        $decrypted = openssl_decrypt(hex2bin($sStr), 'AES-128-CBC', $this->key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $this->iv);
+        $decrypted = openssl_decrypt(hex2bin($sStr), 'AES-128-CBC', $this->key, OPENSSL_RAW_DATA, $this->iv);
 
-        return rtrim($decrypted, "\0");
+        return rtrim($decrypted, " ");
     }
 
 }
