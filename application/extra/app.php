@@ -3,7 +3,7 @@
 return [
     'default_nickname'          => '小Q',
     'password_pre_halt'         => '_#token_bbq',  //密码加密盐
-    'aes_key'                   => 'bbq_aes',      //aes加密密钥
+    'aes_key'                   => 'token_bbq_123789',      //aes加密密钥
     'aes_vi'                    => 'token1234BBQ4321',
     'app_types'                 => [
         'ios',
