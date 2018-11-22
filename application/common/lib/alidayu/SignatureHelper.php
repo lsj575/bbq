@@ -1,13 +1,14 @@
 <?php
+namespace app\common\lib\alidayu;
 
-namespace Aliyun\DySDKLite;
+use think\Controller;
 
 /**
  * 签名助手 2017/11/19
  *
  * Class SignatureHelper
  */
-class SignatureHelper {
+class SignatureHelper extends Controller {
 
     /**
      * 生成签名并发起请求
