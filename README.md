@@ -196,6 +196,38 @@ www  WEB部署目录（或者子目录）
   |      |      |
   |      |      |
 
+### 用户信息
+
+#### 获取用户信息
+
+> GET:www.example.com/bbq/public/api/version/user/read
+
+- HEADER
+
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "ok",
+      "data": "0d3caa223cc70ad3e901f75e76243844cce59ec4e66ea8d7a11c8716ef70ed18780e25e5f02d05d0e53decd06cab0537201329665bae2c1dcdb1fe938d0e5d4cc70e7fee91e673e57fdf8ef900243de33b31d9850c482d3b6772358c11a424c7ad8ff687c831c9429af9a73692b28d1b868a0f1b44c8317d4fc09ccf3246387c3a668c646dbd0c89b2333d3006da63c46fe822d307edc36f6271a1e18a06b4bcceb76f1b99ae59f93afba4b310a547db6a7b37e99204006861f07e18b030f65707394a2b011ac8e74f52ee9a34af11876c861763d17d06882c577710610a0b24bdb4dd3f16ba182b94db313e67911c946e770d1ede3341fe292d864f3e22d53ebd33fa0d999345ab5e81026201f4c5bffb2e868d77548b949a731014e20b400ae62919806fabb603a14b110cbd22bf20efc89b451152894bb073c24e014193e0d418c4befb552a08e6ee7cb9eced15fcef6b9b48e15928caaf083c628fec821c76a25ac169e96426b6bc2284fde92180a3b7215535d451d327a9c0f00e3e1cae057626e8ea29ae2a2981333483fb11e2"
+  }
+  ```
+
+  - data是用通用加密方法加密过后的用户信息，用相应方式解密即可得到json字符串
+
+    ```
+    {"id":2,"nickname":"小Q17396177273","password":null,"sno":null,"phone":"17396177273","avatar":null,"realname":null,"sex":2,"home_img":null,"signature":null,"college":null,"token":"2e7696f8e0426fc5d901f7557b67862a6addf298","time_out":1558403830,"is_position":0,"create_time":"2018-11-22 09:57:10","update_time":"2018-11-22 09:57:10","last_login_time":1542851830,"type":0,"status":1}
+    ```
 
 
 
