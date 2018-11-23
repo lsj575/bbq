@@ -65,7 +65,13 @@ Route::resource('api/:ver/identify', 'api/:ver.identify');
 /**
  * 解析 zhlgd 的相关操作
  */
-Route::get('api/:ver/zhlgdindex', 'api/:ver.parsezhlgd/parseIndex');
+Route::get('api/:ver/lgdindex', 'api/:ver.parsezhlgd/parseIndex');
+Route::post('api/:ver/lgdlogin', 'api/:ver.parsezhlgd/zhlgdLogin');
+/**
+ * 点赞相关路由
+ */
+Route::post('api/:ver/upvote', 'api/:ver.upvote/save');
+
 /**
  * 测试相关
  */

@@ -78,19 +78,17 @@ var sendPhoto = function() {
         type: 'GET',
         dataType: 'json',
         success: function(data) {
-            console.log(data);
-            accesstoken = data.data.acesstoken;
+            accesstoken = data.data.accesstoken;
             nonce = data.data.nonce;
-    // 得到PNG格式的dataURL
-    var photo = $('#photo').cropper('getCroppedCanvas', {
-        width: 300,
-        height: 300
-    }).toDataURL('image/png');
-    var img = $('#photoInput')[0];
-    console.log(img.files[0]);
-    var formData = new FormData();
-    formData.append('image', img.files[0]);
-    var targetURL = 'https://static-img.wutnews.net/upload/' + accesstoken + '-' + nonce + '.png';
+            // 得到PNG格式的dataURL
+            var photo = $('#photo').cropper('getCroppedCanvas', {
+                width: 300,
+                height: 300
+            }).toDataURL('image/png');
+            var img = $('#photoInput')[0];
+            var formData = new FormData();
+            formData.append('image', img.files[0]);
+            var targetURL = 'https://static-img.wutnews.net/upload/' + accesstoken + '-' + nonce + '.png';
 
     $.ajax({
         url: targetURL,                                                                                                                                                                                                                                                  // 要上传的地址
@@ -103,7 +101,8 @@ var sendPhoto = function() {
             console.log(data);
             if (data.error_code == 0) {
                 // 将上传的头像的地址填入，为保证不载入缓存加个随机数
-                $('.user-photo').attr('src', '头像地址?t=' + Math.random());
+                // $('#user-photo').attr('src', '地址?t=' + Math.random());
+                $('#user-photo').attr('src', 'https://static-img.wutnews.net/image/' + data.message + '-100-100.webp');
                 $('#changeModal').modal('hide');
                 $('#file_upload_image').val(data.message);
             } else {

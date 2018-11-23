@@ -6,7 +6,7 @@
  * Time: 22:30
  */
 namespace app\common\lib;
-use ali\SignatureHelper;
+use app\common\lib\alidayu\SignatureHelper;
 use think\Cache;
 use think\Exception;
 use think\Log;

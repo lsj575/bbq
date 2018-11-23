@@ -30,7 +30,7 @@ class LoginController extends CommonController
         $param = input('param.');
         // validate
         $validate = validate('Login');
-        if (!$validate->check($param, [], 'Login.save')) {
+        if (!$validate->check($param, [], 'save')) {
             return apiReturn(config('code.app_show_error'), $validate->getError(), '', 400);
         }
 
