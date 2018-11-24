@@ -34,9 +34,9 @@ class ArticleController extends CommonController
             $result = [];
             foreach ($articles as $key => $article) {
                 $result[] = [
-                    'theme_id'   => $['id'],
-                    'theme_name' => $['theme_name'],
-                    'img_url'    => $['img'],
+                    'theme_id'   => $article['id'],
+                    'theme_name' => $article['theme_name'],
+                    'img_url'    => $article['img'],
                 ];
             }
 
