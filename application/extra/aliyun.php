@@ -11,5 +11,5 @@ return [
     'accessKeySecret'   => 'FhZjdIRzcY5liSFHhuY7pIixbjUkSh',
     'signName'          => 'BBQ',
     'templateCode'      => 'SMS_150182871',
-    'identify_time'     => 120,
+    'identify_time'     => 300,
 ];
