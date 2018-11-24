@@ -68,12 +68,16 @@ class ArticleController extends CommonController
                 $data = [
                     'theme_id'          => $param['theme_id'],
                     'user_id'           => $auth->user->id,
-                    'content'           => is_null($param['content']) ? '' : $param['content'],
-                    'img'               => is_null($param['img']) ? '' : implode($param['img'], ','),
-                    'allow_watermark'   => $param['img_watermark'],
+                    'content'           => empty($param['content']) ? '' : $param['content'],
+                    'img'               => empty($param['img']) ? '' : implode($param['img'], ','),
+                    'allow_watermark'   => $param['allow_watermark'],
                     'allow_comment'     => $param['allow_comment'],
                 ];
+            } else {
+                return apiReturn(config('code.app_show_error'), '内容和图片不能全为空', '', 403);
             }
+
+            // 入库
             try {
                 $id = model('article')->add($data);
             } catch (\Exception $e) {
