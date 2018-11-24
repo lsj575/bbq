@@ -7,6 +7,10 @@ use app\api\controller\CommonController;
 
 class IdentifyController extends CommonController
 {
+    /**
+     * 手机登陆验证码
+     * @return \json
+     */
     public function save()
     {
         if (!request()->isPost()) {
