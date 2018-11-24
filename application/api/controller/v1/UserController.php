@@ -29,27 +29,26 @@ class UserController extends AuthBaseController
      */
     public function update()
     {
-        $postData = input('param.');
+        $putData = input('param.');
 
         // validate
         $validate = validate('User');
-        if (!$validate->check($postData, [], 'User.update')) {
+        if (!$validate->check($putData, [], 'User.update')) {
             return apiReturn(config('code.app_show_error'), $validate->getError(), '', 400);
         }
-
         //严格判断要插入的数据
         $data = [];
-        if (!empty($postData['avatar'])) {
-            $data['avatar'] = $postData['avatar'];
+        if (!empty($putData['avatar'])) {
+            $data['avatar'] = $putData['avatar'];
         }
-        if (!empty($postData['nickname'])) {
-            $data['nickname'] = $postData['nickname'];
+        if (!empty($putData['nickname'])) {
+            $data['nickname'] = $putData['nickname'];
         }
-        if (!empty($postData['signature'])) {
-            $data['signature'] = $postData['signature'];
+        if (!empty($putData['signature'])) {
+            $data['signature'] = $putData['signature'];
         }
-        if (!empty($postData['home_img'])) {
-            $data['home_img'] = $postData['home_img'];
+        if (!empty($putData['g'])) {
+            $data['home_img'] = $putData['home_img'];
         }
 
         if (empty($data)) {
@@ -57,12 +56,18 @@ class UserController extends AuthBaseController
         }
 
         try {
-            $id = model('User')->save($data, ['id' => $this->user->id]);
-            if ($id) {
-                return apiReturn(config('code.app_show_success'), 'ok', [], 202);
+            $user = model('User')->get(['nickname' => $data['nickname']]);
+            if ($user['id'] == $user->id) {
+                $id = model('User')->save($data, ['id' => $this->user->id]);
+                if ($id) {
+                    return apiReturn(config('code.app_show_success'), 'ok', [], 202);
+                } else {
+                    return apiReturn(config('code.app_show_error'), '更新失败', [], 401);
+                }
             } else {
-                return apiReturn(config('code.app_show_error'), '更新失败', [], 401);
+                return apiReturn(config('code.app_show_error'), '用户名已存在', [], 403);
             }
+
         } catch (\Exception $e) {
             return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
         }
