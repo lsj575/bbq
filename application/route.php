@@ -16,9 +16,11 @@ Route::get('api/:ver/theme', 'api/:ver.theme/getAllTheme');
 Route::get('api/:ver/index', 'api/:ver.article/getIndexHeadNormalNews');
 
 /**
- * 文章相关
+ * 动态相关
  */
-//文章评论
+// 动态资源路由
+Route::resource('api/:ver/article', 'api/:ver.article');
+//动态评论
 Route::post('api/:ver/comment', 'api/:ver.comment/save');
 Route::get('api/:ver/comment/:id', 'api/:ver.comment/read');
 
