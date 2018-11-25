@@ -88,7 +88,7 @@ var sendPhoto = function() {
             var img = $('#photoInput')[0];
             var formData = new FormData();
             formData.append('image', img.files[0]);
-            var targetURL = 'https://static-img.wutnews.net/upload/' + accesstoken + '-' + nonce + '.png';
+            var targetURL = 'https://static-img-bbq.wutnews.net/upload/' + accesstoken + '-' + nonce + '.png';
 
     $.ajax({
         url: targetURL,                                                                                                                                                                                                                                                  // 要上传的地址
@@ -102,7 +102,7 @@ var sendPhoto = function() {
             if (data.error_code == 0) {
                 // 将上传的头像的地址填入，为保证不载入缓存加个随机数
                 // $('#user-photo').attr('src', '地址?t=' + Math.random());
-                $('#user-photo').attr('src', 'https://static-img.wutnews.net/image/' + data.message + '-100-100.webp');
+                $('#user-photo').attr('src', 'https://static-img-bbq.wutnews.net/image/' + data.message + '-100-100.webp');
                 $('#changeModal').modal('hide');
                 $('#file_upload_image').val(data.message);
             } else {
