@@ -65,6 +65,7 @@ class ArticleController extends CommonController
 
             // 文字内容和图片不能全为空
             if ($param['img'] || $param['content']) {
+                // 整理入库数据
                 $data = [
                     'theme_id'          => $param['theme_id'],
                     'user_id'           => $auth->user->id,
@@ -89,6 +90,60 @@ class ArticleController extends CommonController
             } else {
                 return apiReturn(config('code.app_show_error'), '发布动态失败', '', 500);
             }
+        }
+    }
+
+    /**
+     * 更新动态
+     * @return \json
+     */
+    public function update()
+    {
+        // 提升权限要求
+        $auth = new AuthBaseController();
+
+        $putData = input('param.');
+        // validate
+        $validate = validate('Article');
+        if (!$validate->check($putData, [], 'Article.update')) {
+            return apiReturn(config('code.app_show_error'), $validate->getError(), '', 400);
+        }
+        //严格判断要插入的数据
+        $data = [];
+        if (!empty($putData['content'])) {
+            $data['content'] = $putData['content'];
+        }
+        if (!empty($putData['img'])) {
+            $data['img'] = implode($putData['img'], ',');
+        }
+        if (!empty($putData['allow_comment'])) {
+            $data['allow_comment'] = $putData['allow_comment'];
+        }
+        if (!empty($putData['allow_watermark'])) {
+            $data['allow_watermark'] = $putData['allow_watermark'];
+        }
+
+        // 数据不能为空或者图片和内容不能同时为空
+        if (empty($data) || (empty($data['img']) && empty($data['content']))) {
+            return apiReturn(config('code.app_show_error'), '数据不合法', [], 404);
+        }
+
+        try {
+            $article = model('Article')->get(['id' => $putData['id']]);
+            // 该id文章存在且属于该用户
+            if ($article && $auth->user->id == $article->user_id) {
+                $id = model('Article')->save($data, ['id' => $article->id]);
+                if ($id) {
+                    return apiReturn(config('code.app_show_success'), 'ok', [], 202);
+                } else {
+                    return apiReturn(config('code.app_show_error'), '更新失败', [], 401);
+                }
+            } else {
+                return apiReturn(config('code.app_show_error'), '动态不存在', [], 403);
+            }
+
+        } catch (\Exception $e) {
+            return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
         }
     }
 
