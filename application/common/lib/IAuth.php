@@ -71,13 +71,13 @@ class IAuth
 
     /**
      * 设置登录的token - 唯一
-     * @param string $cardno
+     * @param string $phone
      * @return string
      */
-    public static function setAppLoginToken($cardno = '')
+    public static function setAppLoginToken($phone = '')
     {
         $str = md5(uniqid(md5(microtime(true)), true));
-        $str = sha1($str.$cardno);
+        $str = sha1($str.$phone);
         return $str;
     }
 
