@@ -236,7 +236,7 @@ www  WEB部署目录（或者子目录）
 
   - data是用通用加密方法加密过后的用户信息，用相应方式解密即可得到json字符串
 
-    ```
+    ```json
     {"id":2,"nickname":"小Q17396177273","password":null,"sno":null,"phone":"17396177273","avatar":null,"realname":null,"sex":2,"home_img":null,"signature":null,"college":null,"token":"2e7696f8e0426fc5d901f7557b67862a6addf298","time_out":1558403830,"is_position":0,"create_time":"2018-11-22 09:57:10","update_time":"2018-11-22 09:57:10","last_login_time":1542851830,"type":0,"status":1}
     ```
 
@@ -251,6 +251,12 @@ www  WEB部署目录（或者子目录）
   | app_type          | andorid or ios                                               |
   | did               | 当前手机的序列号                                             |
   | access_user_token | 手机登陆后获取的token                                        |
+
+- put参数（raw data）
+
+  ```
+  nickname=BBQ首席烧烤师
+  ```
 
 - version为bbq版本，例如v1
 
@@ -324,6 +330,35 @@ www  WEB部署目录（或者子目录）
   | allow_comment   | 是否允许评论             |
 
   - content和img不能同时为空
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```
+  {
+      "status": 1,
+      "message": "ok",
+      "data": []
+  }
+  ```
+#### 更新动态
+
+> PUT:www.example.com/bbq/public/api/v1/article/:id
+
+- HEADER
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- put参数（raw data）
+
+  ```
+  content=更新动态测试&allow_comment=1&allow_watermark=1&img=&user_id=2&theme_id=1
+  ```
 
 - version为bbq版本，例如v1
 
