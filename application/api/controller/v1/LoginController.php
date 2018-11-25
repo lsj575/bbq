@@ -79,9 +79,8 @@ class LoginController extends CommonController
         if ($id || $info) {
             $result = [
                 //token加密后传输给客户端
-                'token' => $obj->encrypt($token . "||" . $id . "||" . time()),
+                'token' => $obj->encrypt($token . "||" . $user['id'] . "||" . time()),
             ];
-
             return apiReturn(config('code.app_show_success'), '登录成功', $result, 200);
         } else {
             return apiReturn(config('code.app_show_error'), '登录失败', '', 500);
