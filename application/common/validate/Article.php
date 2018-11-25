@@ -9,18 +9,21 @@ namespace app\common\validate;
 
 use think\Validate;
 
-class Feedback extends Validate
+class Article extends Validate
 {
     //提交规则，|号之间不能加多余符号，包括空格
     protected $rule = [
-        'type_name'         => 'require|max:30',
-        'content'           => 'max:300',
-        'feedback_type_id'  => 'require|max:20',
+        'id'                => 'require|number',
+        'user_id'           => 'require|number',
+        'theme_id'          => 'require|number',
+        'allow_comment'     => 'require|number',
+        'allow_watermark'   => 'require|number',
     ];
 
     //应用场景
     protected $scene = [
-        'submitFeedback'    => ['content', 'feedback_type_id'],
-        'addType'           => ['type_name'],
+        'getOne'    => ['id'],
+        'save'      => ['user_id', 'theme_id', 'allow_comment', 'allow_watermark'],
+        'update'    => ['id', 'content', 'img', 'allow_comment', 'allow_watermark'],
     ];
 }
