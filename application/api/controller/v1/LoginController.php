@@ -42,8 +42,10 @@ class LoginController extends CommonController
 
         //获得token
         $token = IAuth::setAppLoginToken($param['phone']);
-        //查询数据库cardno是否存在
+        //查询数据库phone是否存在
         $user = User::get(['phone' => $param['phone']]);
+        $id = 0;
+        $info = [];
         if (!$user) {
             //第一次登录，注册信息
             $data = [
