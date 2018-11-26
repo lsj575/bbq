@@ -374,6 +374,42 @@ www  WEB部署目录（或者子目录）
   }
   ```
 
+##### 获取某主题下的所有动态
+
+> GET:www.example.com/bbq/public/api/v1/articles/theme?theme_id=1
+
+- HEADER:
+
+  | 参数     | 值                                                           |
+  | -------- | ------------------------------------------------------------ |
+  | sign     | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type | andorid or ios                                               |
+  | did      | 当前手机的序列号                                               |
+
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": [
+          {
+              "article_id": 2,
+              "content": "更新动态测试",
+              "img": "",
+              "likes": 0,
+              "user_nickname": "BBQ首席烧烤师",
+              "user_avatar": null,
+              "create_time": "2018-11-22 09:57:10"
+          }
+      ]
+  }
+  ```
+
+
 ### 图片
 
 #### 获取accessToken
