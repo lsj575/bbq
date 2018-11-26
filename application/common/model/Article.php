@@ -3,6 +3,7 @@ namespace app\common\model;
 
 class Article extends Base
 {
+    protected $table = 'article';
     /**
      * 获取首页头图文章
      * @param int $num
@@ -76,7 +77,32 @@ class Article extends Base
             ->select();
     }
 
+    /**
+     * 获取某主题下的所有动态
+     * @param $data
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getArticleOfTheme($data)
+    {
+        $whereData = [
+            'a.status'  => config('code.status_normal'),
+            'u.status'  => config('code.status_normal'),
+            'theme_id'  => $data['theme_id'],
+        ];
 
+        $order = [
+            'a.create_time' => 'desc',
+        ];
+        return $this->table($this->table)
+            ->alias('a')
+            ->join('user u', 'u.id = a.user_id')
+            ->where($whereData)
+            ->order($order)
+            ->select();
+    }
     /**
      * 通用化获取参数的数据字段
      * @return array
@@ -91,5 +117,18 @@ class Article extends Base
             'likes',
             'read_count',
         ];
+    }
+
+    /**
+     * 获取正常状态的文章数量
+     * @param $data
+     * @return int|string
+     */
+    public function getNormalArticleCount($data)
+    {
+        $data['status'] = config('code.status_normal');
+
+        return $this->where($data)
+            ->count();
     }
 }
