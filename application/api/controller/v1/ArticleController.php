@@ -12,34 +12,47 @@ use app\common\lib\exception\ApiException;
 
 class ArticleController extends CommonController
 {
-    public function getOneArticle()
+    /**
+     * 获取某主题下的所有动态
+     * @return \json
+     * @throws ApiException
+     */
+    public function getArticlesOfTheme()
     {
         if (request()->isGet()) {
-            $data = input('get');
+            $getData = input('get.');
 
+            // validate
             $validate = validate('Article');
-            if (!$validate->check($data, [], 'Article.getOne')) {
+            if (!$validate->check($getData, [], 'getArticlesOfTheme')) {
                 return apiReturn(config('code.app_show_error'), $validate->getError(), '', 400);
             }
 
-            $data['status'] = [
-                'eq', config('code.status_normal')
+            // 整理数据
+            $data = [
+                'theme_id'  => $getData['theme_id'],
             ];
+
+            // 查库
             try {
-                $articles = model('Article')->where($data)->select();
+                $articles = model('Article')->getArticleOfTheme($data);
             }catch (\Exception $e) {
                 throw new ApiException($e->getMessage(), 500);
             }
 
+            // 整理返回值
             $result = [];
             foreach ($articles as $key => $article) {
                 $result[] = [
-                    'theme_id'   => $article['id'],
-                    'theme_name' => $article['theme_name'],
-                    'img_url'    => $article['img'],
+                    'article_id'    => $article['id'],
+                    'content'       => $article['content'],
+                    'img'           => $article['img'],
+                    'likes'         => $article['likes'],
+                    'user_nickname' => $article['nickname'],
+                    'user_avatar'   => $article['avatar'],
+                    'create_time'   => $article['create_time'],
                 ];
             }
-
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
         }
     }
