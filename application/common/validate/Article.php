@@ -22,8 +22,8 @@ class Article extends Validate
 
     //应用场景
     protected $scene = [
-        'getOne'    => ['id'],
-        'save'      => ['user_id', 'theme_id', 'allow_comment', 'allow_watermark'],
-        'update'    => ['id', 'content', 'img', 'allow_comment', 'allow_watermark'],
+        'getArticlesOfTheme'    => ['theme_id'],
+        'save'                  => ['user_id', 'theme_id', 'allow_comment', 'allow_watermark'],
+        'update'                => ['id', 'content', 'img', 'allow_comment', 'allow_watermark'],
     ];
 }
