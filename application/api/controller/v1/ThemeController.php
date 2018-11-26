@@ -7,7 +7,9 @@ use app\api\controller\CommonController;
 class ThemeController extends CommonController
 {
     /**
-     * 主题接口
+     * 获取所有主题接口
+     * @return \json
+     * @throws ApiException
      */
     public function getAllTheme()
     {
