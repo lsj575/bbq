@@ -12,7 +12,7 @@ use think\Model;
 /**
  * 用户点赞模型
  */
-class UserArticle extends Base
+class UserArticles extends Base
 {
 
 }
