@@ -421,10 +421,52 @@ www  WEB部署目录（或者子目录）
 - 返回数据
 
   ```json
-
+  
   ```
 
-  ​
+
+### 点赞相关
+
+#### 点赞
+> POST:www.example.com/bbq/public/api/v1/upvote
+
+- HEADER
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- post参数
+
+  | 参数 | 值     |
+  | ---- | ------ |
+  | id   | 动态id |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  - 成功
+
+    ```json
+    {
+        "status": 1,
+        "message": "ok",
+        "data": []
+    }
+    ```
+  - 失败
+
+    ```json
+    {
+        "status": 0,
+        "message": "已点赞,请勿重复点赞",
+        "data": []
+    }
+    ```
+
 
 
 ## 后台
