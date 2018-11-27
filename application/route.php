@@ -76,6 +76,7 @@ Route::post('api/:ver/lgdlogin', 'api/:ver.parsezhlgd/zhlgdLogin');
  */
 Route::post('api/:ver/upvote', 'api/:ver.upvote/save');
 Route::delete('api/:ver/upvote', 'api/:ver.upvote/delete');
+Route::get('api/:ver/upvote/:id', 'api/:ver.upvote/read');
 /**
  * 测试相关
  */
