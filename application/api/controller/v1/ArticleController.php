@@ -46,7 +46,7 @@ class ArticleController extends CommonController
                 $result[] = [
                     'article_id'    => $article['id'],
                     'content'       => $article['content'],
-                    'img'           => $article['img'],
+                    'img'           => $article['img'] == "" ? "" : explode($article['img'], ','),
                     'likes'         => $article['likes'],
                     'user_nickname' => $article['nickname'],
                     'user_avatar'   => $article['avatar'],
