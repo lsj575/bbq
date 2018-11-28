@@ -7,12 +7,10 @@
  */
 namespace app\common\model;
 
-use think\Model;
-
 /**
- * 用户点赞模型
+ * 用户关注主题模型
  */
-class UserArticles extends Base
+class UserAttentionTheme extends Base
 {
 
 }
