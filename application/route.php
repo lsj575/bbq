@@ -74,9 +74,21 @@ Route::post('api/:ver/lgdlogin', 'api/:ver.parsezhlgd/zhlgdLogin');
 /**
  * 点赞相关路由
  */
+// 点赞
 Route::post('api/:ver/upvote', 'api/:ver.upvote/save');
+// 取消点赞
 Route::delete('api/:ver/upvote', 'api/:ver.upvote/delete');
+// 获取某动态是否被用户点赞
 Route::get('api/:ver/upvote/:id', 'api/:ver.upvote/read');
+/**
+ * 关注相关路由
+ */
+// 关注主题
+Route::post('api/:ver/attention/theme', 'api/:ver.attention/attentionTheme');
+// 取消关注主题
+Route::delete('api/:ver/attention/theme', 'api/:ver.attention/deleteAttentionTheme');
+// 获取某主题是否被用户点赞
+Route::get('api/:ver/attention/theme/:id', 'api/:ver.attention/readAttentionTheme');
 /**
  * 测试相关
  */
