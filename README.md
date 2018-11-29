@@ -374,7 +374,7 @@ www  WEB部署目录（或者子目录）
   }
   ```
 
-##### 获取某主题下的所有动态
+#### 获取某主题下的所有动态
 
 > GET:www.example.com/bbq/public/api/v1/articles/theme?theme_id=1
 
@@ -408,7 +408,80 @@ www  WEB部署目录（或者子目录）
       ]
   }
   ```
+####获取推荐动态
+> GET:www.example.com/bbq/public/api/v1/articles/recommend
 
+- HEADER:
+
+  | 参数     | 值                                                           |
+  | -------- | ------------------------------------------------------------ |
+  | sign     | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type | andorid or ios                                               |
+  | did      | 当前手机的序列号                                               |
+
+
+- param
+
+  | 参数   | 值     |
+  | ------ | ------ |
+  | offset | 偏移值 |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": {
+          "admin_recommend": [
+              {
+                  "img": "",
+                  "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
+                  "id": 2,
+                  "user_id": 2,
+                  "theme_id": 1,
+                  "content": "bbq发布动态测试1",
+                  "avatar": null,
+                  "nickname": "BBQ首席烧烤师",
+                  "likes": 0,
+                  "comments": 0,
+                  "theme_name": "BBQ开发交流",
+                  "is_position": 1
+              }
+          ],
+          "most_like": [
+              {
+                  "user_id": 2,
+                  "article_id": 1,
+                  "theme_id": 1,
+                  "theme_name": "BBQ开发交流",
+                  "content": "更新动态测试",
+                  "img": "",
+                  "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
+                  "likes": 0,
+                  "user_nickname": "BBQ首席烧烤师",
+                  "user_avatar": null,
+                  "create_time": "1970-01-01 08:00:00"
+              },
+              {
+                  "user_id": 2,
+                  "article_id": 3,
+                  "theme_id": 1,
+                  "theme_name": "BBQ开发交流",
+                  "content": "bbq发布动态测试2",
+                  "img": "",
+                  "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
+                  "likes": 0,
+                  "user_nickname": "BBQ首席烧烤师",
+                  "user_avatar": null,
+                  "create_time": "1970-01-01 08:00:00"
+              }
+          ]
+      }
+  }
+  ```
 
 ### 图片
 
