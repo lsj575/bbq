@@ -22,6 +22,8 @@ Route::get('api/:ver/index', 'api/:ver.article/getIndexHeadNormalNews');
 Route::resource('api/:ver/article', 'api/:ver.article');
 // 获取某主题下的所有动态
 Route::get('api/:ver/articles/theme', 'api/:ver.article/getArticlesOfTheme');
+// 获取获赞最多的动态
+Route::get('api/:ver/articles/recommend', 'api/:ver.article/getRecommendArticles');
 //动态评论
 Route::post('api/:ver/comment', 'api/:ver.comment/save');
 Route::get('api/:ver/comment/:id', 'api/:ver.comment/read');
