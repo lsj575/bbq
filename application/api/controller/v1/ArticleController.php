@@ -58,6 +58,54 @@ class ArticleController extends CommonController
     }
 
     /**
+     * 获取推荐动态
+     * @return \json
+     * @throws ApiException
+     */
+    public function getRecommendArticles()
+    {
+        if (request()->isGet()) {
+            $offset = input('param.offset', 0, 'intval');
+            // 查库
+            try {
+                // 推荐的动态分为点赞数最多和被管理员推荐的两部分
+                $mostLikeArticles = model('Article')->getMostLikeArticles($offset);
+                // 如果偏移量为0，也就是说用户第一次请求该接口，获取管理员推荐动态
+                if (!$offset) {
+                    $adminRecommendArticles = model('Article')->getAdminRecommendArticles();
+                } else {
+                    $adminRecommendArticles = null;
+                }
+            }catch (\Exception $e) {
+                throw new ApiException($e->getMessage(), 500);
+            }
+
+            // 整理返回值
+            $result = [];
+            $result['admin_recommend'] = $adminRecommendArticles;
+            foreach ($mostLikeArticles as $key => $article) {
+                if ($article['is_position'] == 0) {
+                    $result['most_like'][] = [
+                        'user_id'       => $article['user_id'],
+                        'article_id'    => $article['id'],
+                        'theme_id'      => $article['theme_id'],
+                        'theme_name'    => $article['theme_name'],
+                        'content'       => $article['content'],
+                        'img'           => $article['img'] == "" ? "" : explode($article['img'], ','),
+                        'theme_img'     => $article['theme_img'],
+                        'likes'         => $article['likes'],
+                        'user_nickname' => $article['nickname'],
+                        'user_avatar'   => $article['avatar'],
+                        'create_time'   => $article['create_time'],
+                    ];
+                }
+
+            }
+            return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
+        }
+    }
+
+    /**
      * 发布动态，需要提升权限要求到登录用户权限
      * @return \json
      * @throws ApiException
