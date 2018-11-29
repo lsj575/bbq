@@ -103,6 +103,67 @@ class Article extends Base
             ->order($order)
             ->select();
     }
+
+    /**
+     * 获取5天内获赞数最多的动态
+     * @param $offset
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getMostLikeArticles($offset)
+    {
+        $whereData = [
+            'a.status'  => config('code.status_normal'),
+            'u.status'  => config('code.status_normal'),
+            't.status'  => config('code.status_normal'),
+        ];
+
+        // 五天前的时间戳
+        $time = time() - 432000;
+
+        return $this->table($this->table)
+            ->alias('a')
+            ->field('a.img as img, t.img as theme_img, a.id as id, u.id as user_id, t.id as theme_id, content, avatar, nickname, likes, comments, theme_name, a.is_position as is_position')
+            ->join('user u', 'u.id = a.user_id')
+            ->join('theme t', 't.id = a.theme_id')
+            ->where($whereData)
+            ->where('a.create_time', '>', time() - $time)
+            ->order('a.likes desc, a.comments desc')
+            ->limit($offset, $offset + 30)
+            ->select();
+    }
+
+    /**
+     * 获取后台管理员推荐动态
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getAdminRecommendArticles()
+    {
+        $whereData = [
+            'a.status'      => config('code.status_normal'),
+            'u.status'      => config('code.status_normal'),
+            't.status'      => config('code.status_normal'),
+            'a.is_position' => config('code.is_position'),
+        ];
+
+        // 五天前的时间戳
+        $time = time() - 432000;
+
+        return $this->table($this->table)
+            ->alias('a')
+            ->field('a.img as img, t.img as theme_img, a.id as id, u.id as user_id, t.id as theme_id, content, avatar, nickname, likes, comments, theme_name, a.is_position as is_position')
+            ->join('user u', 'u.id = a.user_id')
+            ->join('theme t', 't.id = a.theme_id')
+            ->where($whereData)
+            ->where('a.create_time', '>', time() - $time)
+            ->order('a.likes desc, a.comments desc')
+            ->select();
+    }
     /**
      * 通用化获取参数的数据字段
      * @return array
