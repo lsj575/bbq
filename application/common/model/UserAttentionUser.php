@@ -10,7 +10,7 @@ namespace app\common\model;
 /**
  * 用户关注主题模型
  */
-class UserAttentionTheme extends Base
+class UserAttentionUser extends Base
 {
 
 }
