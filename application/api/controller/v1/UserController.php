@@ -58,7 +58,7 @@ class UserController extends AuthBaseController
         try {
             // 判断是否已存在该昵称的用户
             $user = model('User')->get(['nickname' => $data['nickname']]);
-            if ($user && $user['id'] == $user->id) {
+            if (!$user || $user['id'] == $this->user->id) {
                 $id = model('User')->save($data, ['id' => $this->user->id]);
                 if ($id) {
                     return apiReturn(config('code.app_show_success'), 'ok', [], 202);
