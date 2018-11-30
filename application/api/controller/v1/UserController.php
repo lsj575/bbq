@@ -75,6 +75,44 @@ class UserController extends AuthBaseController
     }
 
     /**
+     * 获取用户关注其他用户的数量
+     * @return \json
+     */
+    public function getUserAttentionUserCount()
+    {
+        if (request()->isGet()) {
+            try {
+                $count = model('UserAttentionUser')->where(['attention_user_id' => $this->user->id])
+                    ->count();
+            } catch (\Exception $e) {
+                return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
+            }
+            return apiReturn(config('code.app_show_success'), 'OK', ['count' => $count], 200);
+        } else {
+            return apiReturn(config('code.app_show_error'), 'error', [], 403);
+        }
+    }
+
+    /**
+     * 获取用户被其他用户关注的数量
+     * @return \json
+     */
+    public function getUserBeAttentionCount()
+    {
+        if (request()->isGet()) {
+            try {
+                $count = model('UserAttentionUser')->where(['be_attention_user_id' => $this->user->id])
+                    ->count();
+            } catch (\Exception $e) {
+                return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
+            }
+            return apiReturn(config('code.app_show_success'), 'OK', ['count' => $count], 200);
+        } else {
+            return apiReturn(config('code.app_show_error'), 'error', [], 403);
+        }
+    }
+
+    /**
      * 检查昵称是否合法
      * 在用户选择保存对应数据前，若有填写昵称则访问此接口提前检查昵称合法性
      * @return \json|\think\response\Json
