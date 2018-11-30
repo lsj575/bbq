@@ -46,11 +46,14 @@ Route::post('api/:ver/login', 'api/:ver.login/save');
 /**
  * 用户信息相关
  */
-//获取用户数据 【资源路由】
+// 获取用户数据 【资源路由】
 Route::resource('api/:ver/user', 'api/:ver.user');
-//检查用户昵称是否唯一
+// 检查用户昵称是否唯一
 Route::get('api/:ver/user/nickname/:id', 'api/:ver.user/checkUserNicknamePass');
-
+// 获取用户关注其他用户的数量
+Route::get('api/:ver/user/attention/count', 'api/:ver.user/getUserAttentionUserCount');
+// 获取用户被其他关注用户关注的数量
+Route::get('api/:ver/user/beattention/count', 'api/:ver.user/getUserBeAttentionCount');
 
 /**
  * 图片相关路由
