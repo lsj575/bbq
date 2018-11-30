@@ -1,5 +1,16 @@
 <?php
 use think\Route;
+/**
+ * 资源路由参考表
+ * 标识	  请求类型	生成路由规则	     对应操作方法（默认）
+ * index    GET	       blog	            index
+ * create   GET	       blog/create	    create
+ * save	    POST	   blog	            save
+ * read	    GET	       blog/:id	        read
+ * edit	    GET	       blog/:id/edit	edit
+ * update	PUT	       blog/:id	        update
+ * delete	DELETE	   blog/:id	        delete
+ */
 
 
 /**
@@ -36,16 +47,6 @@ Route::post('api/:ver/login', 'api/:ver.login/save');
  * 用户信息相关
  */
 //获取用户数据 【资源路由】
-/**
- * 标识	  请求类型	生成路由规则	     对应操作方法（默认）
- * index    GET	       blog	            index
- * create   GET	       blog/create	    create
- * save	    POST	   blog	            save
- * read	    GET	       blog/:id	        read
- * edit	    GET	       blog/:id/edit	edit
- * update	PUT	       blog/:id	        update
- * delete	DELETE	   blog/:id	        delete
- */
 Route::resource('api/:ver/user', 'api/:ver.user');
 //检查用户昵称是否唯一
 Route::get('api/:ver/user/nickname/:id', 'api/:ver.user/checkUserNicknamePass');
@@ -89,8 +90,17 @@ Route::get('api/:ver/upvote/:id', 'api/:ver.upvote/read');
 Route::post('api/:ver/attention/theme', 'api/:ver.attention/attentionTheme');
 // 取消关注主题
 Route::delete('api/:ver/attention/theme', 'api/:ver.attention/deleteAttentionTheme');
-// 获取某主题是否被用户点赞
+// 获取某主题是否被用户关注
 Route::get('api/:ver/attention/theme/:id', 'api/:ver.attention/readAttentionTheme');
+// 关注用户
+Route::post('api/:ver/attention/user', 'api/:ver.attention/attentionUser');
+// 取消关注用户
+Route::delete('api/:ver/attention/user', 'api/:ver.attention/deleteAttentionUser');
+// 获取某用户是否被用户关注
+Route::get('api/:ver/attention/user/:id', 'api/:ver.attention/readAttentionUser');
+
+
+
 /**
  * 测试相关
  */
