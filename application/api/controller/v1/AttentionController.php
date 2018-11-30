@@ -88,7 +88,7 @@ class AttentionController extends AuthBaseController
             ];
 
             try {
-                // 查询数据库中是否存在点赞
+                // 查询数据库中是否存在关注
                 $userAttentionTheme = model('UserAttentionTheme')->get($data);
                 if (empty($userAttentionTheme)) {
                     return apiReturn(config('code.app_show_error'), '没有被关注过，无法取消', [], 401);
@@ -134,7 +134,7 @@ class AttentionController extends AuthBaseController
             ];
 
             try {
-                // 查询数据库中是否存在点赞
+                // 查询数据库中是否存在关注
                 $userAttentionTheme = model('UserAttentionTheme')->get($data);
                 if ($userAttentionTheme) {
                     return apiReturn(config('code.app_show_success'), 'OK', ['isAttention' => 1], 200);
@@ -146,6 +146,136 @@ class AttentionController extends AuthBaseController
             }
         } else {
             return apiReturn(config('code.app_show_error'), '不存在该主题', [], 403);
+        }
+    }
+
+    /**
+     * 用户关注用户
+     * @return \json
+     * @throws ApiException
+     */
+    public function attentionUser()
+    {
+        $id = input('post.id', 0, 'intval');
+        if (!$id) {
+            return apiReturn(config('code.app_show_error'), 'id不存在', [], 404);
+        }
+        // 判断此id的用户是否存在，且状态是否正常
+        try {
+            $User = model('User')->get(['id' => $id, 'status' => config('code.status_normal')]);
+        } catch (\Exception $e) {
+            throw new ApiException($e->getMessage(), 500);
+        }
+
+        if ($User) {
+            $data = [
+                'attention_user_id'     => $this->user->id,
+                'be_attention_user_id'  => $id,
+            ];
+
+            try {
+                // 查询数据库中是否存在该关注
+                $userAttentionUser = model('UserAttentionUser')->get($data);
+                if ($userAttentionUser) {
+                    return apiReturn(config('code.app_show_error'), '已关注,请勿重复关注', [], 401);
+                }
+                // 未被关注
+                $userAttentionUserId = model('UserAttentionUser')->add($data);
+                if ($userAttentionUserId) {
+                    return apiReturn(config('code.app_show_success'), 'OK', [], 202);
+                } else {
+                    return apiReturn(config('code.app_show_error'), '内部错误，关注失败', [], 500);
+                }
+            } catch (\Exception $e) {
+                return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
+            }
+        } else {
+            return apiReturn(config('code.app_show_error'), '不存在该用户', [], 403);
+        }
+    }
+
+    /**
+     * 取消关注用户
+     * @return \json
+     * @throws ApiException
+     */
+    public function deleteAttentionUser()
+    {
+        $id = input('delete.id', 0, 'intval');
+        if (!$id) {
+            return apiReturn(config('code.app_show_error'), 'id不存在', [], 404);
+        }
+
+        // 判断此id的用户是否存在，且状态是否正常
+        try {
+            $User = model('User')->get(['id' => $id, 'status' => config('code.status_normal')]);
+        } catch (\Exception $e) {
+            throw new ApiException($e->getMessage(), 500);
+        }
+
+        if ($User) {
+            $data = [
+                'attention_user_id'     => $this->user->id,
+                'be_attention_user_id'  => $id,
+            ];
+
+            try {
+                // 查询数据库中是否存在关注
+                $userAttentionUser = model('UserAttentionUser')->get($data);
+                if (empty($userAttentionUser)) {
+                    return apiReturn(config('code.app_show_error'), '没有被关注过，无法取消', [], 401);
+                }
+                $userAttentionUserId = model('UserAttentionUser')->where($data)->delete();
+                if ($userAttentionUserId) {
+                    return apiReturn(config('code.app_show_success'), 'OK', [], 202);
+                } else {
+                    return apiReturn(config('code.app_show_error'), '内部错误，取消关注失败', [], 500);
+                }
+            } catch (\Exception $e) {
+                return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
+            }
+        } else {
+            return apiReturn(config('code.app_show_error'), '不存在该用户', [], 403);
+        }
+    }
+
+    /**
+     * 获取用户是否被某用户关注
+     * @return \json
+     * @throws ApiException
+     */
+    public function readAttentionUser()
+    {
+        $id = input('param.id', 0, 'intval');
+        if (!$id) {
+            return apiReturn(config('code.app_show_error'), 'id不存在', [], 404);
+        }
+        // 判断此id的用户是否存在，且状态是否正常
+        try {
+            $User = model('User')->get(['id' => $id, 'status' => config('code.status_normal')]);
+        } catch (\Exception $e) {
+            throw new ApiException($e->getMessage(), 500);
+        }
+
+        if ($User) {
+            $data = [
+                'attention_user_id'     => $this->user->id,
+                'be_attention_user_id'  => $id,
+            ];
+
+            try {
+                // 查询数据库中是否存在关注
+                $userAttentionUser = model('UserAttentionUser')->get($data);
+                if ($userAttentionUser) {
+                    return apiReturn(config('code.app_show_success'), 'OK', ['isAttention' => 1], 200);
+                } else {
+                    return apiReturn(config('code.app_show_success'), 'OK', ['isAttention' => 0], 200);
+                }
+            } catch (\Exception $e) {
+                return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
+            }
+        } else {
+            return apiReturn(config('code.app_show_error'), '不存在该用户', [], 403);
         }
     }
 }
