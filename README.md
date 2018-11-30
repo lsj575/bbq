@@ -660,7 +660,7 @@ www  WEB部署目录（或者子目录）
     }
     ```
 
-#### 取消点赞
+#### 取消关注主题
 > DELETE:www.example.com/bbq/public/api/v1/attention/theme
 
 - HEADER
@@ -700,8 +700,127 @@ www  WEB部署目录（或者子目录）
     }
     ```
 
-#### 获取是否被点赞
+#### 获取主题是否被某用户关注
 > GET:www.example.com/bbq/public/api/v1/attention/theme/:id 
+
+- HEADER
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  - 被关注
+
+    ```json
+    {
+        "status": 1,
+        "message": "OK",
+        "data": {
+            "isAttention": 1
+        }
+    }
+    ```
+  - 未被关注
+
+    ```json
+    {
+        "status": 1,
+        "message": "OK",
+        "data": {
+            "isAttention": 0
+        }
+    }
+    ```
+    
+
+#### 关注用户
+> POST:www.example.com/bbq/public/api/v1/attention/user
+
+- HEADER
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- post参数
+
+  | 参数 | 值           |
+  | ---- | ------------ |
+  | id   | 被关注用户id |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  - 成功
+
+    ```json
+    {
+        "status": 1,
+        "message": "ok",
+        "data": []
+    }
+    ```
+  - 失败
+
+    ```json
+    {
+        "status": 0,
+        "message": "已关注,请勿重复关注",
+        "data": []
+    }
+    ```
+
+#### 取消关注用户
+> DELETE:www.example.com/bbq/public/api/v1/attention/user
+
+- HEADER
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- delete参数（x-www-form-urlecode）
+
+  | 参数 | 值           |
+  | ---- | ------------ |
+  | id   | 被关注用户id |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  - 成功
+
+    ```json
+    {
+        "status": 1,
+        "message": "ok",
+        "data": []
+    }
+    ```
+  - 失败
+
+    ```json
+    {
+        "status": 0,
+        "message": "没有被关注过，无法取消",
+        "data": []
+    }
+    ```
+
+#### 获取用户是否被某用户关注
+> GET:www.example.com/bbq/public/api/v1/attention/user/:id 
 
 - HEADER
   | 参数              | 值                                                           |
