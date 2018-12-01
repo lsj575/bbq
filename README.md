@@ -559,7 +559,7 @@ www  WEB部署目录（或者子目录）
               {
                   "img": "",
                   "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-                  "id": 2,
+                  "article_id": 2,
                   "user_id": 2,
                   "theme_id": 1,
                   "content": "bbq发布动态测试1",
