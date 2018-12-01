@@ -38,7 +38,8 @@ Route::get('api/:ver/articles/recommend', 'api/:ver.article/getRecommendArticles
 //动态评论
 Route::post('api/:ver/comment', 'api/:ver.comment/save');
 Route::get('api/:ver/comment/:id', 'api/:ver.comment/read');
-
+// 获取某用户的动态
+Route::get('api/:ver/articles/user', 'api/:ver.article/getArticleOfUser');
 
 //登录路由
 Route::post('api/:ver/login', 'api/:ver.login/save');
