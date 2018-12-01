@@ -910,6 +910,123 @@ www  WEB部署目录（或者子目录）
     }
     ```
 
+### 搜索
+
+#### 全局搜索（同时搜索用户、主题、动态）
+
+> GET:www.example.com/bbq/public/api/v1/search?search_str=
+
+- HEADER:
+
+  | 参数     | 值                                                           |
+  | -------- | ------------------------------------------------------------ |
+  | sign     | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type | andorid or ios                                               |
+  | did      | 当前手机的序列号                                             |
+
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": {
+          "users": [
+              {
+                  "id": 2,
+                  "nickname": "BBQ首席烧烤师",
+                  "password": null,
+                  "sno": null,
+                  "phone": "17396177273",
+                  "avatar": null,
+                  "realname": null,
+                  "sex": 2,
+                  "home_img": null,
+                  "signature": "123",
+                  "college": null,
+                  "token": "2e7696f8e0426fc5d901f7557b67862a6addf298",
+                  "time_out": 1558403830,
+                  "is_position": 0,
+                  "create_time": "2018-11-22 09:57:10",
+                  "update_time": "2018-11-30 10:19:11",
+                  "last_login_time": 1542851830,
+                  "type": 0,
+                  "status": 1
+              }
+          ],
+          "themes": [
+              {
+                  "id": 1,
+                  "user_id": 1,
+                  "theme_name": "BBQ开发交流",
+                  "img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
+                  "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
+                  "is_position": 0,
+                  "listorder": null,
+                  "attention": 0,
+                  "source_type": 0,
+                  "status": 1,
+                  "create_time": "2018-05-09 11:27:20",
+                  "update_time": "2018-05-09 11:27:20"
+              },
+              {
+                  "id": 2,
+                  "user_id": 1,
+                  "theme_name": "Test",
+                  "img": "20180510\\6593fae5a61a7c96eb6283fb7ffdf167.jpg",
+                  "theme_introduction": "本主题专门用来进行BBQ测试",
+                  "is_position": 1,
+                  "listorder": null,
+                  "attention": 0,
+                  "source_type": 0,
+                  "status": -1,
+                  "create_time": "2018-05-10 16:45:50",
+                  "update_time": "2018-08-21 10:17:21"
+              }
+          ],
+          "articles": [
+              {
+                  "id": 2,
+                  "user_id": 2,
+                  "theme_id": 1,
+                  "content": "bbq发布动态测试1",
+                  "img": "",
+                  "allow_watermark": 0,
+                  "read_count": 0,
+                  "comments": 0,
+                  "likes": 0,
+                  "is_position": 1,
+                  "create_time": "2018-11-29 10:21:44",
+                  "update_time": "2018-11-29 10:21:44",
+                  "type": 0,
+                  "allow_comment": 0,
+                  "status": 1
+              },
+              {
+                  "id": 3,
+                  "user_id": 2,
+                  "theme_id": 1,
+                  "content": "bbq发布动态测试2",
+                  "img": "",
+                  "allow_watermark": 0,
+                  "read_count": 0,
+                  "comments": 0,
+                  "likes": 0,
+                  "is_position": 0,
+                  "create_time": "2018-11-29 10:21:49",
+                  "update_time": "2018-11-29 10:21:49",
+                  "type": 0,
+                  "allow_comment": 0,
+                  "status": 1
+              }
+          ]
+      }
+  }
+  ```
+
 ## 后台
 
 ### 图片
