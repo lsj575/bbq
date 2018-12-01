@@ -102,7 +102,11 @@ Route::delete('api/:ver/attention/user', 'api/:ver.attention/deleteAttentionUser
 // 获取某用户是否被用户关注
 Route::get('api/:ver/attention/user/:id', 'api/:ver.attention/readAttentionUser');
 
-
+/**
+ * 搜索相关
+ */
+// 搜索
+Route::get('api/:ver/search', 'api/:ver.search/read');
 
 /**
  * 测试相关
