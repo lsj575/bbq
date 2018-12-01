@@ -125,7 +125,7 @@ class Article extends Base
 
         return $this->table($this->table)
             ->alias('a')
-            ->field('a.img as img, t.img as theme_img, a.id as id, u.id as user_id, t.id as theme_id, content, avatar, nickname, likes, comments, theme_name, a.is_position as is_position')
+            ->field('a.img as img, t.img as theme_img, a.id as id, u.id as user_id, t.id as theme_id, content, avatar, nickname, likes, comments, theme_name, a.create_time, a.is_position as is_position')
             ->join('user u', 'u.id = a.user_id')
             ->join('theme t', 't.id = a.theme_id')
             ->where($whereData)
@@ -156,7 +156,7 @@ class Article extends Base
 
         return $this->table($this->table)
             ->alias('a')
-            ->field('a.img as img, t.img as theme_img, a.id as article_id, u.id as user_id, t.id as theme_id, content, avatar, nickname, likes, comments, theme_name, a.is_position as is_position')
+            ->field('a.img as img, t.img as theme_img, a.id as article_id, u.id as user_id, t.id as theme_id, content, u.avatar as user_avatar, u.nickname as user_nickname, likes, comments, theme_name, a.is_position as is_position, a.create_time')
             ->join('user u', 'u.id = a.user_id')
             ->join('theme t', 't.id = a.theme_id')
             ->where($whereData)
@@ -183,7 +183,7 @@ class Article extends Base
 
         return $this->table($this->table)
             ->alias('a')
-            ->field('a.img as img, t.img as theme_img, a.id as id, u.id as user_id, t.id as theme_id, content, avatar, nickname, likes, comments, theme_name, a.is_position as is_position')
+            ->field('a.img as img, t.img as theme_img, a.id as id, u.id as user_id, t.id as theme_id, content, u.avatar as user_avatar, u.nickname as user_nickname, likes, comments, theme_name, a.create_time, a.is_position as is_position')
             ->join('user u', 'u.id = a.user_id')
             ->join('theme t', 't.id = a.theme_id')
             ->where($whereData)

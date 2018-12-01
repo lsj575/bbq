@@ -94,8 +94,10 @@ class ArticleController extends CommonController
                         'img'           => $article['img'] == "" ? "" : explode($article['img'], ','),
                         'theme_img'     => $article['theme_img'],
                         'likes'         => $article['likes'],
+                        'comments'      => $article['comments'],
                         'user_nickname' => $article['nickname'],
                         'user_avatar'   => $article['avatar'],
+                        'is_position'   => $article['is_position'],
                         'create_time'   => $article['create_time'],
                     ];
                 }
@@ -234,8 +236,10 @@ class ArticleController extends CommonController
                     'img'           => $article['img'] == "" ? "" : explode($article['img'], ','),
                     'theme_img'     => $article['theme_img'],
                     'likes'         => $article['likes'],
+                    'comments'      => $article['comments'],
                     'user_nickname' => $article['nickname'],
                     'user_avatar'   => $article['avatar'],
+                    'is_position'   => $article['is_position'],
                     'create_time'   => $article['create_time'],
                 ];
             }
