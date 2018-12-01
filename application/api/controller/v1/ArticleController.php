@@ -99,7 +99,6 @@ class ArticleController extends CommonController
                         'create_time'   => $article['create_time'],
                     ];
                 }
-
             }
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
         }
@@ -205,6 +204,42 @@ class ArticleController extends CommonController
 
         } catch (\Exception $e) {
             return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
+        }
+    }
+
+    /**
+     * 获取用户的动态
+     * @return \json
+     */
+    public function getArticleOfUser()
+    {
+        if (request()->isGet()) {
+            // 提升权限要求
+            $auth = new AuthBaseController();
+
+            try {
+                $articles = model('Article')->getArticleOfUser($auth->user->id);
+            } catch (\Exception $e) {
+                return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
+            }
+
+            $result = [];
+            foreach ($articles as $key => $article) {
+                $result[] = [
+                    'user_id'       => $article['user_id'],
+                    'article_id'    => $article['id'],
+                    'theme_id'      => $article['theme_id'],
+                    'theme_name'    => $article['theme_name'],
+                    'content'       => $article['content'],
+                    'img'           => $article['img'] == "" ? "" : explode($article['img'], ','),
+                    'theme_img'     => $article['theme_img'],
+                    'likes'         => $article['likes'],
+                    'user_nickname' => $article['nickname'],
+                    'user_avatar'   => $article['avatar'],
+                    'create_time'   => $article['create_time'],
+                ];
+            }
+            return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
         }
     }
 
