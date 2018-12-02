@@ -95,8 +95,8 @@ class ArticleController extends CommonController
                         'theme_img'     => $article['theme_img'],
                         'likes'         => $article['likes'],
                         'comments'      => $article['comments'],
-                        'user_nickname' => $article['nickname'],
-                        'user_avatar'   => $article['avatar'],
+                        'user_nickname' => $article['user_nickname'],
+                        'user_avatar'   => $article['user_avatar'],
                         'is_position'   => $article['is_position'],
                         'create_time'   => $article['create_time'],
                     ];
@@ -137,7 +137,8 @@ class ArticleController extends CommonController
                     'allow_comment'     => $param['allow_comment'],
                 ];
             } else {
-                return apiReturn(config('code.app_show_error'), '内容和图片不能全为空', '', 403);
+                return apiReturn(config('code.app_show_error'),
+                    '内容和图片不能全为空', '', 403);
             }
 
             // 入库
@@ -237,12 +238,54 @@ class ArticleController extends CommonController
                     'theme_img'     => $article['theme_img'],
                     'likes'         => $article['likes'],
                     'comments'      => $article['comments'],
-                    'user_nickname' => $article['nickname'],
-                    'user_avatar'   => $article['avatar'],
+                    'user_nickname' => $article['user_nickname'],
+                    'user_avatar'   => $article['user_avatar'],
                     'is_position'   => $article['is_position'],
                     'create_time'   => $article['create_time'],
                 ];
             }
+            return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
+        }
+    }
+
+    /**
+     * 获取用户关注的主题下的所有动态
+     * @return \json
+     * @throws ApiException
+     */
+    public function getArticlesOfUserAttention()
+    {
+        if (request()->isGet()) {
+            // 提升权限为手机登陆用户权限
+            $auth = new AuthBaseController();
+
+            // 查库
+            try {
+                $articles = model('Article')->getArticlesOfUserAttention($auth->user->id);
+            }catch (\Exception $e) {
+                throw new ApiException($e->getMessage(), 500);
+            }
+
+            // 整理返回值
+            $result = [];
+            foreach ($articles as $key => $article) {
+                $result[] = [
+                    'user_id'       => $article['user_id'],
+                    'article_id'    => $article['id'],
+                    'theme_id'      => $article['theme_id'],
+                    'theme_name'    => $article['theme_name'],
+                    'content'       => $article['content'],
+                    'img'           => $article['img'] == "" ? "" : explode($article['img'], ','),
+                    'theme_img'     => $article['theme_img'],
+                    'likes'         => $article['likes'],
+                    'comments'      => $article['comments'],
+                    'user_nickname' => $article['user_nickname'],
+                    'user_avatar'   => $article['user_avatar'],
+                    'is_position'   => $article['is_position'],
+                    'create_time'   => $article['create_time'],
+                ];
+            }
+
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
         }
     }
