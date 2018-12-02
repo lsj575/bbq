@@ -33,4 +33,33 @@ class ThemeController extends CommonController
 
         return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
     }
+
+    /**
+     * 获取用户关注的主题
+     * @return \json
+     */
+    public function getThemeOfUserAttention()
+    {
+        if (request()->isGet()) {
+            $auth = new AuthBaseController();
+            try {
+                $themes = model('UserAttentionTheme')->getThemeOfUserAttention($auth->user->id);
+            } catch (\Exception $e) {
+                return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
+            }
+
+            // 整理数据
+            $result = [];
+            foreach ($themes as $key => $theme) {
+                $result = [
+                    'theme_id'      => $theme['id'],
+                    'theme_img'     => $theme['img'],
+                    'theme_name'    => $theme['theme_name'],
+                ];
+            }
+            return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
+        } else {
+            return apiReturn(config('code.app_show_error'), 'error', [], 403);
+        }
+    }
 }
