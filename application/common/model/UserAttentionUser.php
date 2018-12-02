@@ -12,5 +12,28 @@ namespace app\common\model;
  */
 class UserAttentionUser extends Base
 {
+    protected $table = 'user_attention_user';
 
+    /**
+     * 获取用户关注的用户
+     * @param $id
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getUserOfUserAttention($id)
+    {
+        $whereData = [
+            'uau.attention_user_id' => $id,
+            'u.status'              => config('code.status_normal'),
+        ];
+
+        return $this->table($this->table)
+            ->alias('uau')
+            ->join('user u', 'uau.be_attention_user_id = u.id')
+            ->where($whereData)
+            ->order('uau.create_time desc')
+            ->select();
+    }
 }

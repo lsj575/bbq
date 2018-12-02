@@ -113,6 +113,35 @@ class UserController extends AuthBaseController
     }
 
     /**
+     * 获取用户关注的用户
+     * @return \json
+     */
+    public function getUserOfUserAttention()
+    {
+        if (request()->isGet()) {
+            try {
+                $users = model('UserAttentionUser')->getUserOfUserAttention($this->user->id);
+            } catch (\Exception $e) {
+                return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
+            }
+
+            // 整理数据
+            $result = [];
+            foreach ($users as $key => $user) {
+                $result = [
+                    'user_id'           => $user['id'],
+                    'user_avatar'       => $user['avatar'],
+                    'user_nickname'     => $user['nickname'],
+                    'user_signature'    => $user['signature'],
+                ];
+            }
+            return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
+        } else {
+            return apiReturn(config('code.app_show_error'), 'error', [], 403);
+        }
+    }
+
+    /**
      * 检查昵称是否合法
      * 在用户选择保存对应数据前，若有填写昵称则访问此接口提前检查昵称合法性
      * @return \json|\think\response\Json
