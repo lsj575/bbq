@@ -4,10 +4,12 @@ namespace app\common\model;
 use think\Model;
 class User extends Base
 {
+    protected $table = 'user';
     /**
-     * 查询用户 后台自动分页
+     * 查询用户后台自动分页
      * @param array $data
      * @return \think\Paginator
+     * @throws \think\exception\DbException
      */
     public function getUser($data = [])
     {
