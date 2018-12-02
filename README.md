@@ -196,7 +196,7 @@ www  WEB部署目录（或者子目录）
   |      |      |
   |      |      |
 
-### 用户信息
+### 用户相关
 
 #### 获取用户信息
 
@@ -326,11 +326,42 @@ www  WEB部署目录（或者子目录）
   }
   ```
 
+
+####获取用户关注的用户
+
+> GET:www.example.com/bbq/public/api/v1/user/attention/user
+
+- HEADER
+
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": {
+          "user_id": 3,
+          "user_avatar": null,
+          "user_nickname": "小Q15717515314",
+          "user_signature": null
+      }
+  }
+  ```
+
 ### 主题
 
 #### 获取主题
 
-> GET:www.example.com/api/version/theme
+> GET:www.example.com/api/version/theme/all
 
 - HEADER:
 
@@ -359,6 +390,34 @@ www  WEB部署目录（或者子目录）
   }
   ```
 
+####获取用户关注的用户
+
+> GET:www.example.com/bbq/public/api/v1/theme/attention/user
+
+- HEADER
+
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": {
+          "theme_id": 1,
+          "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
+          "theme_name": "BBQ开发交流"
+      }
+  }
+  ```
 ### 动态
 
 #### 发布动态
