@@ -259,9 +259,11 @@ class ArticleController extends CommonController
             // 提升权限为手机登陆用户权限
             $auth = new AuthBaseController();
 
+            $offset = input('param.offset', 0, 'intval');
+
             // 查库
             try {
-                $articles = model('Article')->getArticlesOfUserAttention($auth->user->id);
+                $articles = model('Article')->getArticlesOfUserAttention($auth->user->id, $offset);
             }catch (\Exception $e) {
                 throw new ApiException($e->getMessage(), 500);
             }

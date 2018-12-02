@@ -199,7 +199,7 @@ class Article extends Base
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function getArticlesOfUserAttention($id)
+    public function getArticlesOfUserAttention($id, $offset)
     {
         $whereData = [
             'u.id'      => $id,
@@ -215,6 +215,7 @@ class Article extends Base
             ->join('article a', 'a.user_id = uau.be_attention_user_id or a.theme_id = uat.theme_id')
             ->join('theme t', 't.id = a.theme_id')
             ->where($whereData)
+            ->limit($offset, $offset+30)
             ->order('a.create_time desc')
             ->select();
     }
