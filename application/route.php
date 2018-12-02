@@ -18,7 +18,9 @@ use think\Route;
  */
 
 //获取所有主题
-Route::get('api/:ver/theme', 'api/:ver.theme/getAllTheme');
+Route::get('api/:ver/theme/all', 'api/:ver.theme/getAllTheme');
+// 获取用户关注的主题
+Route::get('api/:ver/theme/attention/user', 'api/:ver.theme/getThemeOfUserAttention');
 
 
 /**
@@ -40,6 +42,8 @@ Route::post('api/:ver/comment', 'api/:ver.comment/save');
 Route::get('api/:ver/comment/:id', 'api/:ver.comment/read');
 // 获取某用户的动态
 Route::get('api/:ver/articles/user', 'api/:ver.article/getArticleOfUser');
+// 获取某用户关注的主题和用户的动态
+Route::get('api/:ver/articles/attention', 'api/:ver.article/getArticlesOfUserAttention');
 
 //登录路由
 Route::post('api/:ver/login', 'api/:ver.login/save');
@@ -55,7 +59,8 @@ Route::get('api/:ver/user/nickname/:id', 'api/:ver.user/checkUserNicknamePass');
 Route::get('api/:ver/user/attention/count', 'api/:ver.user/getUserAttentionUserCount');
 // 获取用户被其他关注用户关注的数量
 Route::get('api/:ver/user/beattention/count', 'api/:ver.user/getUserBeAttentionCount');
-
+// 获取用户关注的用户
+Route::get('api/:ver/user/attention/user', 'api/:ver.user/getUserOfUserAttention');
 /**
  * 图片相关路由
  */
