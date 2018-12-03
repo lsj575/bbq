@@ -166,11 +166,10 @@ class UserController extends AuthBaseController
             return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
         }
 
-
-        if ($count) {
+        if (!$count) {
             return apiReturn(config('code.app_show_success'), '昵称符合要求', [], 202);
         } else {
-            return apiReturn(config('code.app_show_error'), '昵称已存在', [], 401);
+            return apiReturn(config('code.app_show_error'), '昵称已存在', [], 200);
         }
 
     }
