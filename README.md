@@ -397,7 +397,7 @@ www  WEB部署目录（或者子目录）
 
 ### 主题
 
-#### 获取主题
+#### 获取所有主题
 
 > GET:www.example.com/api/version/theme/all
 
@@ -428,7 +428,7 @@ www  WEB部署目录（或者子目录）
   }
   ```
 
-####获取用户关注的用户
+####获取用户关注的主题
 
 > GET:www.example.com/bbq/public/api/v1/theme/attention/user
 
@@ -799,7 +799,8 @@ www  WEB部署目录（或者子目录）
       "status": 1,
       "message": "ok",
       "data": {
-          "access_token": "5772f1c023daefcb7848f39874c72b4a"
+          "access_token": "88f20a4ee93c097b13d8824328b68456",
+          "nonce": "yyatcwkgaabfmdau"
       }
   }
   ```
