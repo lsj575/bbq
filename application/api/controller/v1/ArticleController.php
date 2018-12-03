@@ -86,19 +86,20 @@ class ArticleController extends CommonController
             foreach ($mostLikeArticles as $key => $article) {
                 if ($article['is_position'] == 0) {
                     $result['most_like'][] = [
-                        'user_id'       => $article['user_id'],
-                        'article_id'    => $article['id'],
-                        'theme_id'      => $article['theme_id'],
-                        'theme_name'    => $article['theme_name'],
-                        'content'       => $article['content'],
-                        'img'           => $article['img'] == "" ? "" : explode($article['img'], ','),
-                        'theme_img'     => $article['theme_img'],
-                        'likes'         => $article['likes'],
-                        'comments'      => $article['comments'],
-                        'user_nickname' => $article['user_nickname'],
-                        'user_avatar'   => $article['user_avatar'],
-                        'is_position'   => $article['is_position'],
-                        'create_time'   => $article['create_time'],
+                        'user_id'               => $article['user_id'],
+                        'article_id'            => $article['id'],
+                        'theme_id'              => $article['theme_id'],
+                        'theme_name'            => $article['theme_name'],
+                        'theme_introduction'    => $article['theme_introduction'],
+                        'content'               => $article['content'],
+                        'img'                   => $article['img'] == "" ? "" : explode($article['img'], ','),
+                        'theme_img'             => $article['theme_img'],
+                        'likes'                 => $article['likes'],
+                        'comments'              => $article['comments'],
+                        'user_nickname'         => $article['user_nickname'],
+                        'user_avatar'           => $article['user_avatar'],
+                        'is_position'           => $article['is_position'],
+                        'create_time'           => $article['create_time'],
                     ];
                 }
             }
@@ -229,19 +230,20 @@ class ArticleController extends CommonController
             $result = [];
             foreach ($articles as $key => $article) {
                 $result[] = [
-                    'user_id'       => $article['user_id'],
-                    'article_id'    => $article['id'],
-                    'theme_id'      => $article['theme_id'],
-                    'theme_name'    => $article['theme_name'],
-                    'content'       => $article['content'],
-                    'img'           => $article['img'] == "" ? "" : explode($article['img'], ','),
-                    'theme_img'     => $article['theme_img'],
-                    'likes'         => $article['likes'],
-                    'comments'      => $article['comments'],
-                    'user_nickname' => $article['user_nickname'],
-                    'user_avatar'   => $article['user_avatar'],
-                    'is_position'   => $article['is_position'],
-                    'create_time'   => $article['create_time'],
+                    'user_id'               => $article['user_id'],
+                    'article_id'            => $article['id'],
+                    'theme_id'              => $article['theme_id'],
+                    'theme_name'            => $article['theme_name'],
+                    'theme_introduction'    => $article['theme_introduction'],
+                    'content'               => $article['content'],
+                    'img'                   => $article['img'] == "" ? "" : explode($article['img'], ','),
+                    'theme_img'             => $article['theme_img'],
+                    'likes'                 => $article['likes'],
+                    'comments'              => $article['comments'],
+                    'user_nickname'         => $article['user_nickname'],
+                    'user_avatar'           => $article['user_avatar'],
+                    'is_position'           => $article['is_position'],
+                    'create_time'           => $article['create_time'],
                 ];
             }
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
@@ -272,19 +274,20 @@ class ArticleController extends CommonController
             $result = [];
             foreach ($articles as $key => $article) {
                 $result[] = [
-                    'user_id'       => $article['user_id'],
-                    'article_id'    => $article['id'],
-                    'theme_id'      => $article['theme_id'],
-                    'theme_name'    => $article['theme_name'],
-                    'content'       => $article['content'],
-                    'img'           => $article['img'] == "" ? "" : explode($article['img'], ','),
-                    'theme_img'     => $article['theme_img'],
-                    'likes'         => $article['likes'],
-                    'comments'      => $article['comments'],
-                    'user_nickname' => $article['user_nickname'],
-                    'user_avatar'   => $article['user_avatar'],
-                    'is_position'   => $article['is_position'],
-                    'create_time'   => $article['create_time'],
+                    'user_id'               => $article['user_id'],
+                    'article_id'            => $article['id'],
+                    'theme_id'              => $article['theme_id'],
+                    'theme_name'            => $article['theme_name'],
+                    'theme_introduction'    => $article['theme_introduction'],
+                    'content'               => $article['content'],
+                    'img'                   => $article['img'] == "" ? "" : explode($article['img'], ','),
+                    'theme_img'             => $article['theme_img'],
+                    'likes'                 => $article['likes'],
+                    'comments'              => $article['comments'],
+                    'user_nickname'         => $article['user_nickname'],
+                    'user_avatar'           => $article['user_avatar'],
+                    'is_position'           => $article['is_position'],
+                    'create_time'           => $article['create_time'],
                 ];
             }
 

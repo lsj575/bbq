@@ -61,12 +61,13 @@ Route::get('api/:ver/user/attention/count', 'api/:ver.user/getUserAttentionUserC
 Route::get('api/:ver/user/beattention/count', 'api/:ver.user/getUserBeAttentionCount');
 // 获取用户关注的用户
 Route::get('api/:ver/user/attention/user', 'api/:ver.user/getUserOfUserAttention');
+// 检查用户昵称是否合法
+Route::get('api/:ver/user/checknickname/:id', 'api/:ver.user/checkUserNicknamePass');
 /**
  * 图片相关路由
  */
 //图片上传路由
-Route::post('api/:ver/image', 'api/:ver.image/save');
-Route::get('api/:ver/accesstoken','api/:ver.image/getAccessToken');
+Route::get('api/:ver/image/accesstoken','api/:ver.image/getAccessToken');
 
 /**
  * app版本相关路由

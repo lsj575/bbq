@@ -236,6 +236,7 @@ class Article extends Base
             'u.avatar as user_avatar',
             'u.nickname as user_nickname',
             'a.create_time',
+            'theme_introduction',
             'likes',
             'comments',
             'theme_name',

@@ -356,6 +356,44 @@ www  WEB部署目录（或者子目录）
       }
   }
   ```
+####检查用户昵称是否已经被占用
+
+> GET:www.example.com/bbq/public/api/v1/user/checknickname/:id?nickname=小Q15717515314
+
+- HEADER
+
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  - 已经存在
+
+    ```json
+    {
+        "status": 0,
+        "message": "昵称已存在",
+        "data": []
+    }
+    ```
+
+  - 不存在
+
+    ```json
+    {
+        "status": 1,
+        "message": "昵称符合要求",
+        "data": []
+    }
+    ```
+
+
 
 ### 主题
 
@@ -750,14 +788,20 @@ www  WEB部署目录（或者子目录）
 
 #### 获取accessToken
 
-> GET: www.example.com/api/version/accesstoen
+> GET: www.example.com/api/version/image/accesstoken
 
 - version为bbq版本，例如v1
 
 - 返回数据
 
   ```json
-  
+  {
+      "status": 1,
+      "message": "ok",
+      "data": {
+          "access_token": "5772f1c023daefcb7848f39874c72b4a"
+      }
+  }
   ```
 
 
