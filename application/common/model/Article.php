@@ -88,9 +88,9 @@ class Article extends Base
     public function getArticleOfTheme($data)
     {
         $whereData = [
-            'a.status'  => config('code.status_normal'),
-            'u.status'  => config('code.status_normal'),
-            'theme_id'  => $data['theme_id'],
+            'a.status'      => config('code.status_normal'),
+            'u.status'      => config('code.status_normal'),
+            'a.theme_id'    => $data['theme_id'],
         ];
 
         $order = [
@@ -98,7 +98,8 @@ class Article extends Base
         ];
         return $this->table($this->table)
             ->alias('a')
-            ->join('user u', 'u.id = a.user_id')
+            ->join('user u', 'a.user_id = u.id')
+            ->field('a.*, u.nickname, u.avatar')
             ->where($whereData)
             ->order($order)
             ->select();
