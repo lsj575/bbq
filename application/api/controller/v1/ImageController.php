@@ -45,11 +45,9 @@ class ImageController extends AuthBaseController
         }
         // 查询数据库中的该用户请求次数
         try {
-            $logCount = model('AccesstokenLog')->where('user_id', $this->user->id)
-                ->where('create_time', ['>', time()-60])
-                ->count();
+            $logCount = model('AccesstokenLog')->getRequestTime($this->user->id);
         } catch (\Exception $e) {
-            return apiReturn(config('code.app_show_error'), '数据库查询错误', '', 500);
+            return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
         }
         // 若一分钟之内超过十次则提醒其等三分钟
         if ($logCount >= 10)
@@ -80,7 +78,7 @@ class ImageController extends AuthBaseController
         }
 
         if ($id) {
-            return apiReturn(config('code.app_show_success'), 'ok', $accessToken, 200);
+            return apiReturn(config('code.app_show_success'), 'ok', ['access_token' => $accessToken], 200);
         }else {
             return apiReturn(config('code.app_show_error'), '获取失败', '', 500);
         }
