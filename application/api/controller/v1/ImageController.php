@@ -78,7 +78,12 @@ class ImageController extends AuthBaseController
         }
 
         if ($id) {
-            return apiReturn(config('code.app_show_success'), 'ok', ['access_token' => $accessToken], 200);
+            return apiReturn(config('code.app_show_success'), 'ok',
+                [
+                    'access_token' => $accessToken,
+                    'nonce' => $nonce,
+                ],
+                200);
         }else {
             return apiReturn(config('code.app_show_error'), '获取失败', '', 500);
         }
