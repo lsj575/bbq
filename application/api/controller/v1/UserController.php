@@ -1,7 +1,10 @@
 <?php
 namespace app\api\controller\v1;
 
-use app\common\lib\Aes;;
+use app\common\lib\Aes;
+use app\common\model\User;
+
+;
 
 /**
  * 用户类，获取修改用户信息等功能
@@ -47,7 +50,7 @@ class UserController extends AuthBaseController
         if (!empty($putData['signature'])) {
             $data['signature'] = $putData['signature'];
         }
-        if (!empty($putData['g'])) {
+        if (!empty($putData['home_img'])) {
             $data['home_img'] = $putData['home_img'];
         }
 
@@ -55,21 +58,26 @@ class UserController extends AuthBaseController
             return apiReturn(config('code.app_show_error'), '数据不合法', [], 404);
         }
 
+        $userModel = new User();
+        $userModel->startTrans();
         try {
             // 判断是否已存在该昵称的用户
-            $user = model('User')->get(['nickname' => $data['nickname']]);
+            $user = $userModel->lock(true)->where(['nickname' => $data['nickname']])->find();
             if (!$user || $user['id'] == $this->user->id) {
-                $id = model('User')->save($data, ['id' => $this->user->id]);
+                $id = $userModel->save($data, ['id' => $this->user->id]);
+                $userModel->commit();
                 if ($id) {
                     return apiReturn(config('code.app_show_success'), 'ok', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '更新失败', [], 401);
                 }
             } else {
+                $userModel->commit();
                 return apiReturn(config('code.app_show_error'), '用户名已存在', [], 403);
             }
 
         } catch (\Exception $e) {
+            $userModel->rollback();
             return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
         }
     }
