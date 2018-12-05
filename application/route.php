@@ -116,6 +116,14 @@ Route::get('api/:ver/attention/user/:id', 'api/:ver.attention/readAttentionUser'
 Route::get('api/:ver/search', 'api/:ver.search/read');
 
 /**
+ * 反馈相关
+ */
+// 获取反馈类型
+Route::get('api/:ver/feedback/type', 'api/:ver.feedback/getFeedbackType');
+// 提交反馈
+Route::post('api/:ver/feedback/submit', 'api/:ver.feedback/submitFeedback');
+
+/**
  * 测试相关
  */
 Route::get('api/test/sms', 'api/test/testSend');
