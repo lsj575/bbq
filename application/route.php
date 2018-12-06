@@ -21,7 +21,8 @@ use think\Route;
 Route::get('api/:ver/theme/all', 'api/:ver.theme/getAllTheme');
 // 获取用户关注的主题
 Route::get('api/:ver/theme/attention/user', 'api/:ver.theme/getThemeOfUserAttention');
-
+// 获取某主题的用户关注数量
+Route::get('api/:ver/theme/beattention/count', 'api/:ver.theme/getUserNumOfAttentionTheme');
 
 /**
  * 推荐页相关
