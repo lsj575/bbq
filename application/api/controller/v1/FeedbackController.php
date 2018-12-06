@@ -33,7 +33,7 @@ class FeedbackController extends AuthBaseController
 
         // validate
         $validate = validate('Feedback');
-        if (!$validate->check($param, [], 'Feedback.submitFeedback')) {
+        if (!$validate->check($param, [], 'submitFeedback')) {
             return apiReturn(config('code.app_show_error'), $validate->getError(), '', 400);
         }
 
