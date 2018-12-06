@@ -456,6 +456,37 @@ www  WEB部署目录（或者子目录）
       }
   }
   ```
+#### 获取主题被关注的数量
+> GET:www.example.com/bbq/public/api/v1/theme/beattention/count?id=1
+
+- HEADER
+
+  | 参数     | 值                                                           |
+  | -------- | ------------------------------------------------------------ |
+  | sign     | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type | andorid or ios                                               |
+  | did      | 当前手机的序列号                                             |
+
+- get参数
+
+  | 参数 | 值     |
+  | ---- | ------ |
+  | id   | 主题id |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": {
+          "count": 1
+      }
+  }
+  ```
+
 ### 动态
 
 #### 发布动态
