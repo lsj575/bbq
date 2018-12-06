@@ -21,8 +21,8 @@ class FeedbackTypeController extends BaseController
 
         $whereData = [];
 
-        if (!empty($data['title'])) {
-            $whereData['feedback_type_name'] = ['like', '%'.$data['type_name'].'%'];
+        if (!empty($data['type_name'])) {
+            $whereData['type_name'] = ['like', '%'.$data['type_name'].'%'];
         }
         // 获取数据
         $feedback_type = model('FeedbackType')->getFeedbackType($whereData);
