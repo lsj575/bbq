@@ -96,4 +96,26 @@ class ThemeController extends CommonController
             return apiReturn(config('code.app_show_error'), '请求不合法', [], 403);
         }
     }
+
+    /**
+     * 获取某主题关注的用户数量
+     * @return \json
+     * @throws ApiException
+     */
+    public function getUserNumOfAttentionTheme()
+    {
+        if (request()->isGet()) {
+            // 主题id
+            $id = input('get.id', 0, 'intval');
+
+            try {
+                $count = model('UserAttentionTheme')->where(['theme_id' => $id])->count();
+            } catch (\Exception $e) {
+                throw new ApiException($e->getMessage(), 500);
+            }
+            return apiReturn(config('code.app_show_success'), 'OK', ['count' => $count], 200);
+        } else {
+            return apiReturn(config('code.app_show_error'), '非法请求', [], 403);
+        }
+    }
 }
