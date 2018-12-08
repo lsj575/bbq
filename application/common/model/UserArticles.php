@@ -14,5 +14,17 @@ use think\Model;
  */
 class UserArticles extends Base
 {
-
+    /**
+     * 获取动态是否被点赞
+     * @param array $article_id
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getBoolOfArticleUpvote($article_id = [])
+    {
+        return $this->where('id', 'in', $article_id)
+            ->select();
+    }
 }

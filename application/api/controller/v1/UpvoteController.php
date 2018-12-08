@@ -115,36 +115,28 @@ class UpvoteController extends AuthBaseController
      */
     public function read()
     {
-        $id = input('param.id', 0, 'intval');
-        if (!$id) {
+        // 接收数组参数，/a为必加，去掉会报错
+        $article_id = input('param.id/a', []);
+
+        if (!$article_id) {
             return apiReturn(config('code.app_show_error'), 'id不存在', [], 404);
         }
-        // 判断此id的文章是否存在，且状态是否正常
+
         try {
-            $article = model('Article')->get(['id' => $id, 'status' => config('code.status_normal')]);
-        } catch (\Exception $e) {
-            throw new ApiException($e->getMessage(), 500);
-        }
-
-        if ($article) {
-            $data = [
-                'user_id' => $this->user->id,
-                'article_id' => $id,
-            ];
-
-            try {
-                // 查询数据库中是否存在点赞
-                $userArticle = model('UserArticles')->get($data);
-                if ($userArticle) {
-                    return apiReturn(config('code.app_show_success'), 'OK', ['isUpvote' => 1], 200);
-                } else {
-                    return apiReturn(config('code.app_show_success'), 'OK', ['isUpvote' => 0], 200);
+            // 查询数据库中是否存在点赞
+            $userArticles = model('UserArticles')->getBoolOfArticleUpvote($article_id);
+            if ($userArticles) {
+                // 整理返回的数据
+                $result = [];
+                foreach ($userArticles as $key => $userArticle) {
+                    $result[] = $userArticle['id'];
                 }
-            } catch (\Exception $e) {
-                return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
+                return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
+            } else {
+                return apiReturn(config('code.app_show_success'), 'OK', [], 200);
             }
-        } else {
-            return apiReturn(config('code.app_show_error'), '不存在该文章', [], 403);
+        } catch (\Exception $e) {
+            return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
         }
     }
 }
