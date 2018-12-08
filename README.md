@@ -920,7 +920,7 @@ www  WEB部署目录（或者子目录）
     ```
 
 #### 获取是否被点赞
-> GET:www.example.com/bbq/public/api/v1/upvote/:id 
+> GET:www.example.com/bbq/public/api/v1/upvote
 
 - HEADER
   | 参数              | 值                                                           |
@@ -930,30 +930,35 @@ www  WEB部署目录（或者子目录）
   | did               | 当前手机的序列号                                             |
   | access_user_token | 手机登陆后获取的token                                        |
 
+- get参数
+
+  | 参数 | 值           |
+  | ---- | ------------ |
+  | id[] | 动态id的数组 |
+
 - version为bbq版本，例如v1
 
 - 返回数据
 
-  - 被点赞
+  - 存在被点赞的动态
 
     ```json
     {
         "status": 1,
         "message": "OK",
-        "data": {
-            "isUpvote": 1
-        }
+        "data": [
+            1,
+            3
+        ]
     }
     ```
-  - 未被点赞
+  - 不存在被点赞的动态
 
     ```json
     {
         "status": 1,
         "message": "OK",
-        "data": {
-            "isUpvote": 0
-        }
+        "data": []
     }
     ```
 
