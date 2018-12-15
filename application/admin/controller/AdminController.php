@@ -4,7 +4,7 @@ namespace app\admin\controller;
 use think\Controller;
 use app\common\lib\IAuth;
 
-class AdminController extends  Controller
+class AdminController extends  BaseController
 {
     public function add()
     {
