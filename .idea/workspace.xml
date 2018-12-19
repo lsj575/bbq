@@ -9,7 +9,6 @@
       <change beforePath="$PROJECT_DIR$/application/admin/controller/FeedbackController.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/controller/FeedbackController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/admin/view/feedback/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/view/feedback/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/common/model/Feedback.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/common/model/Feedback.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/database.php" afterDir="false" />
     </list>
 >>>>>>> lou_feedback_list
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,6 +36,7 @@
           <entry key="php" value="20" />
 =======
           <entry key="html" value="1" />
+          <entry key="md" value="1" />
           <entry key="php" value="21" />
 >>>>>>> lou_feedback_list
           <entry key="sql" value="1" />
@@ -51,27 +51,28 @@
       </usages-collector>
 =======
           <entry key="HTML" value="1" />
+          <entry key="Markdown" value="1" />
           <entry key="PHP" value="21" />
           <entry key="SQL" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="3" />
-          <entry key="php" value="192" />
+          <entry key="html" value="18" />
+          <entry key="php" value="211" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="3" />
-          <entry key="PHP" value="192" />
+          <entry key="HTML" value="18" />
+          <entry key="PHP" value="211" />
         </counts>
       </usages-collector>
 >>>>>>> lou_feedback_list
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
 <<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/application/common/model/User.php">
@@ -81,13 +82,19 @@
 =======
         <entry file="file://$PROJECT_DIR$/application/admin/controller/FeedbackController.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="322">
               <caret line="32" column="40" lean-forward="true" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
+>>>>>>> lou_feedback_list
+=======
+            <state relative-caret-position="230">
+              <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
 >>>>>>> lou_feedback_list
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
 <<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/application/admin/controller/AdminController.php">
@@ -148,6 +155,13 @@
             <state relative-caret-position="239">
               <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
 >>>>>>> lou_feedback_list
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/common/model/Feedback.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+>>>>>>> lou_feedback_list
             </state>
           </provider>
         </entry>
@@ -162,10 +176,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/admin/controller/FeedbackController.php" />
-        <option value="$PROJECT_DIR$/application/common/model/Feedback.php" />
-        <option value="$PROJECT_DIR$/application/admin/view/feedback/index.html" />
         <option value="$PROJECT_DIR$/application/database.php" />
+        <option value="$PROJECT_DIR$/application/admin/view/feedback/index.html" />
+        <option value="$PROJECT_DIR$/application/common/model/Feedback.php" />
+        <option value="$PROJECT_DIR$/application/admin/controller/FeedbackController.php" />
       </list>
     </option>
   </component>
@@ -195,7 +209,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -250,10 +263,18 @@
 =======
 >>>>>>> lou_feedback_list
             </path>
+            <path>
+              <item name="bbq" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bbq" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -292,9 +313,13 @@
   </component>
   <component name="TimeTrackingManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="4212000" />
 =======
     <option name="totallyTimeSpent" value="4994000" />
+>>>>>>> lou_feedback_list
+=======
+    <option name="totallyTimeSpent" value="6548000" />
 >>>>>>> lou_feedback_list
   </component>
   <component name="ToolWindowManager">
@@ -302,9 +327,13 @@
     <editor active="true" />
     <layout>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25670242" />
 =======
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26675603" />
+>>>>>>> lou_feedback_list
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
 >>>>>>> lou_feedback_list
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -429,9 +458,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="538">
           <caret line="31" column="19" lean-forward="true" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
-          <folding>
-            <element signature="e#39#60#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -462,42 +488,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/FeedbackController.php">
+    <entry file="file://$PROJECT_DIR$/application/database.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="32" column="40" lean-forward="true" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
+        <state relative-caret-position="239">
+          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/common/model/Feedback.php">
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/FeedbackController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="41" column="13" lean-forward="true" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+        <state relative-caret-position="230">
+          <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="155">
+            <caret line="1368" column="35" lean-forward="true" selection-start-line="1368" selection-start-column="35" selection-end-line="1368" selection-end-column="35" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/view/feedback/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
-          <folding>
-            <element signature="e#146#150#1" expanded="true" />
-            <element signature="e#187#191#1" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#nav#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#1;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#2;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#2;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="138">
+          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/database.php">
+    <entry file="file://$PROJECT_DIR$/application/common/model/Feedback.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="239">
           <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+>>>>>>> lou_feedback_list
+=======
+        <state relative-caret-position="322">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
 >>>>>>> lou_feedback_list
         </state>
       </provider>

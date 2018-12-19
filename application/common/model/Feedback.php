@@ -27,11 +27,6 @@ class Feedback extends Base
             unset($data['create_time']);
         }
 
-        if (isset($data['feedback_type_id'])) {
-            $data['fdt.id'] = $data['feedback_type_id'];
-            unset($data['feedback_type_id']);
-        }
-
         if (isset($data['nickname'])) {
             $data['u.nickname'] = $data['nickname'];
             unset($data['nickname']);

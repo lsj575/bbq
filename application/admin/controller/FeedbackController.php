@@ -35,13 +35,7 @@ class FeedbackController extends BaseController
         } else {
             unset($whereData['nickname']);
         }
-        // 获取昵称
-        if (!empty($data['feedback_type'])) {
-            $whereData['feedback_type'] = $data['feedback_type'];
-        } else {
-            unset($whereData['feedback_type']);
-        }
-        //获取类型
+        // 获取数据
         $feedback = model('Feedback')->getFeedback($whereData);
 
         return $this->fetch('', [
