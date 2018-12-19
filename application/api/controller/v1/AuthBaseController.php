@@ -56,6 +56,7 @@ class AuthBaseController extends CommonController
         }
 
         list($token, $id) = explode("||", $access_user_token);
+        // TODO 将用户数据存入Redis缓存，减少MySQL的访问频率
         $user = User::get(['token' => $token]);
 
         if (!$user || config('code.user_normal') != $user->status) {
