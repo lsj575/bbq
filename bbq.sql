@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 14, 2018 at 07:51 PM
+-- Generation Time: Dec 19, 2018 at 08:54 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.1.20
 
@@ -145,7 +145,7 @@ INSERT INTO `admin_user` (`id`, `username`, `password`, `last_login_ip`, `last_l
 --
 
 CREATE TABLE `app_active` (
-  `id` bigint(64) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
   `version` int(8) UNSIGNED NOT NULL DEFAULT '0' COMMENT '版本号',
   `app_type` varchar(20) DEFAULT NULL COMMENT 'app类型',
   `version_code` varchar(10) DEFAULT NULL,
@@ -208,19 +208,6 @@ CREATE TABLE `article_comment` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article_mentionuser`
---
-
-CREATE TABLE `article_mentionuser` (
-  `id` bigint(20) NOT NULL,
-  `article_id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `create_time` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `feedback`
 --
 
@@ -266,26 +253,12 @@ INSERT INTO `feedback_type` (`id`, `type_name`, `status`, `create_time`, `update
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reply_img`
---
-
-CREATE TABLE `reply_img` (
-  `id` bigint(64) NOT NULL,
-  `reply_id` bigint(64) DEFAULT NULL,
-  `path` varchar(200) DEFAULT NULL,
-  `status` smallint(6) DEFAULT NULL,
-  `created_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `theme`
 --
 
 CREATE TABLE `theme` (
-  `id` bigint(64) NOT NULL,
-  `user_id` bigint(64) DEFAULT NULL,
+  `id` int(10) NOT NULL,
+  `user_id` int(10) DEFAULT NULL,
   `theme_name` varchar(50) DEFAULT NULL,
   `img` varchar(255) DEFAULT NULL,
   `theme_introduction` varchar(200) DEFAULT NULL,
@@ -314,7 +287,7 @@ INSERT INTO `theme` (`id`, `user_id`, `theme_name`, `img`, `theme_introduction`,
 --
 
 CREATE TABLE `user` (
-  `id` bigint(64) NOT NULL,
+  `id` int(10) NOT NULL,
   `nickname` varchar(30) NOT NULL DEFAULT '',
   `password` char(32) DEFAULT NULL,
   `sno` varchar(20) DEFAULT NULL,
@@ -342,21 +315,6 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `nickname`, `password`, `sno`, `phone`, `avatar`, `realname`, `sex`, `home_img`, `signature`, `college`, `token`, `time_out`, `is_position`, `create_time`, `update_time`, `last_login_time`, `type`, `status`) VALUES
 (2, 'BBQ首席烧烤师', NULL, NULL, '17396177273', NULL, NULL, 2, NULL, '123', NULL, '2e7696f8e0426fc5d901f7557b67862a6addf298', 1558403830, 0, 1542851830, 1543910660, 1542851830, 0, 1),
 (3, '小Q15717515314', NULL, NULL, '15717515314', NULL, NULL, 2, NULL, NULL, NULL, '0fcff34ffc1edf911a59d93d9d6a56f9472b1685', 1559097471, 0, 1543545471, 1543545471, 1543545471, 0, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_advice`
---
-
-CREATE TABLE `user_advice` (
-  `id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `type` varchar(50) NOT NULL COMMENT '通知来源',
-  `status` tinyint(2) NOT NULL DEFAULT '0',
-  `create_time` int(11) NOT NULL,
-  `update_time` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -440,12 +398,12 @@ CREATE TABLE `user_collection` (
 --
 
 CREATE TABLE `user_forward_article` (
-  `id` bigint(64) NOT NULL,
-  `article_id` bigint(64) DEFAULT NULL,
-  `user_id` bigint(64) DEFAULT NULL,
+  `id` int(10) NOT NULL,
+  `article_id` int(10) DEFAULT NULL,
+  `user_id` int(10) DEFAULT NULL,
   `content` text,
   `status` smallint(6) DEFAULT NULL,
-  `created_time` int(11) DEFAULT NULL
+  `create_time` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -526,12 +484,6 @@ ALTER TABLE `article_comment`
   ADD KEY `article_id_2` (`article_id`);
 
 --
--- Indexes for table `article_mentionuser`
---
-ALTER TABLE `article_mentionuser`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `feedback`
 --
 ALTER TABLE `feedback`
@@ -542,13 +494,6 @@ ALTER TABLE `feedback`
 --
 ALTER TABLE `feedback_type`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `reply_img`
---
-ALTER TABLE `reply_img`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `reply_id` (`reply_id`);
 
 --
 -- Indexes for table `theme`
@@ -570,12 +515,6 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `cardno` (`sno`) USING BTREE,
   ADD KEY `phone` (`phone`),
   ADD KEY `phone_2` (`phone`);
-
---
--- Indexes for table `user_advice`
---
-ALTER TABLE `user_advice`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user_articles`
@@ -646,7 +585,7 @@ ALTER TABLE `admin_user`
 -- AUTO_INCREMENT for table `app_active`
 --
 ALTER TABLE `app_active`
-  MODIFY `id` bigint(64) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `article`
@@ -661,12 +600,6 @@ ALTER TABLE `article_comment`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `article_mentionuser`
---
-ALTER TABLE `article_mentionuser`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
@@ -679,28 +612,16 @@ ALTER TABLE `feedback_type`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `reply_img`
---
-ALTER TABLE `reply_img`
-  MODIFY `id` bigint(64) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `theme`
 --
 ALTER TABLE `theme`
-  MODIFY `id` bigint(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `user_advice`
---
-ALTER TABLE `user_advice`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_articles`
@@ -730,7 +651,7 @@ ALTER TABLE `user_collection`
 -- AUTO_INCREMENT for table `user_forward_article`
 --
 ALTER TABLE `user_forward_article`
-  MODIFY `id` bigint(64) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `version`
