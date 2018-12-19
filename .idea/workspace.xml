@@ -83,8 +83,13 @@
         <entry file="file://$PROJECT_DIR$/application/admin/controller/FeedbackController.php">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <state relative-caret-position="322">
               <caret line="32" column="40" lean-forward="true" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
+>>>>>>> lou_feedback_list
+=======
+            <state relative-caret-position="230">
+              <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
 >>>>>>> lou_feedback_list
 =======
             <state relative-caret-position="230">
@@ -94,6 +99,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
 <<<<<<< HEAD
@@ -154,6 +160,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="239">
               <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+>>>>>>> lou_feedback_list
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/common/model/Feedback.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
 >>>>>>> lou_feedback_list
 =======
       <file pinned="false" current-in-tab="true">
@@ -270,6 +283,13 @@
               <item name="common" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="bbq" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bbq" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -314,9 +334,13 @@
   <component name="TimeTrackingManager">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="4212000" />
 =======
     <option name="totallyTimeSpent" value="4994000" />
+>>>>>>> lou_feedback_list
+=======
+    <option name="totallyTimeSpent" value="6548000" />
 >>>>>>> lou_feedback_list
 =======
     <option name="totallyTimeSpent" value="6548000" />
@@ -328,9 +352,13 @@
     <layout>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25670242" />
 =======
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26675603" />
+>>>>>>> lou_feedback_list
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
 >>>>>>> lou_feedback_list
 =======
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -522,8 +550,13 @@
     <entry file="file://$PROJECT_DIR$/application/common/model/Feedback.php">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <state relative-caret-position="239">
           <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+>>>>>>> lou_feedback_list
+=======
+        <state relative-caret-position="322">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
 >>>>>>> lou_feedback_list
 =======
         <state relative-caret-position="322">
