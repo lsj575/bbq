@@ -30,9 +30,13 @@ class CommentController extends BaseController
                 foreach($users as $user){
                   $comments = $comments + model("ArticleComment")->where("user_id","=",$user->id)->select();
                 }
+
+                $size  = count($comments);
                 $start = empty($data["start"])? 0:$data["start"];
                 $comments = array_slice($comments,$start,5);
-                $this->assign("len",count($comments));
+
+                $ini_infor=["now_i"=>$start,"size"=>$size,"thetext"=>$data["thetext"],"condition"=>$data["condition"]];
+                $this->assign("ini_infor",$ini_infor);
               }
               else{//按被评论者
                 $users = model("User")->where("nickname","like","%".$data["thetext"]."%")->select();
@@ -40,9 +44,13 @@ class CommentController extends BaseController
                 foreach($users as $user){
                   $comments = $comments + model("ArticleComment")->where("to_user_id","=",$user->id)->select();
                 }
+                $size = count($comments);
                 $start = empty($data["start"])? 0:$data["start"];
                 $comments = array_slice($comments,$start,5);
-                $this->assign("len",count($comments));
+                
+                $ini_infor=["now_i"=>$start,"size"=>$size,"thetext"=>$data["thetext"],"condition"=>$data["condition"]];
+                $this->assign("ini_infor",$ini_infor);
+
               }
             }
             else{

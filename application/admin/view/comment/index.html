@@ -52,7 +52,22 @@
       {/volist}
       </tbody>
       {empty name="page"}
-      这里是分页的导航栏。后端已经传过来了总页数参数。
+      <ul class="ma_pages">
+        <li> <a href="{:url("admin/comment/index",["start"=>$ini_infor['now_i'] - 5,"thetext"=>$ini_infor["thetext"],"condition"=>$ini_infor["condition"]])}"> << </a></li>
+      {for start="0" end="$ini_infor['size']/5"}
+      <li> <a
+        href="{:url("admin/comment/index",["start"=>$i*5,"thetext"=>$ini_infor["thetext"],"condition"=>$ini_infor["condition"]])}">{$i+1}</a></li>
+      {/for}
+       <li> <a href="{:url("admin/comment/index",["start"=>$ini_infor['now_i'] +
+           5,"thetext"=>$ini_infor["thetext"],"condition"=>$ini_infor["condition"]])}">
+           >></a></li>
+
+      </ul>
+<style>
+.ma_pages > li{
+  float :left;
+}
+</style>
       {else /}
         {$page}
         <style>
