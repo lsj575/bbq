@@ -15,7 +15,6 @@ class CommentController extends BaseController
 {
   public $model="ArticleComment";
   public function index(){
-    $this->_initialize();
     if(request()->isGet()){
       $data = input('get.');
 
