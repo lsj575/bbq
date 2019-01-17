@@ -51,31 +51,19 @@
       </tr>
       {/volist}
       </tbody>
-      {empty name="page"}
-      <ul class="ma_pages">
-        <li> <a href="{:url("admin/comment/index",["start"=>$ini_infor['now_i'] - 5,"thetext"=>$ini_infor["thetext"],"condition"=>$ini_infor["condition"]])}"> << </a></li>
-      {for start="0" end="$ini_infor['size']/5"}
-      <li> <a
-        href="{:url("admin/comment/index",["start"=>$i*5,"thetext"=>$ini_infor["thetext"],"condition"=>$ini_infor["condition"]])}">{$i+1}</a></li>
-      {/for}
-       <li> <a href="{:url("admin/comment/index",["start"=>$ini_infor['now_i'] +
-           5,"thetext"=>$ini_infor["thetext"],"condition"=>$ini_infor["condition"]])}">
-           >></a></li>
 
-      </ul>
-<style>
-.ma_pages > li{
-  float :left;
-}
-</style>
-      {else /}
-        {$page}
-        <style>
+
+
+    {$page}
+    <style>
         .pagination li{
-          float:left;
+            float:left;
         }
-        </style>
-      {/empty}
+    </style>
+
+
+
+
     </table>
     <div id="laypage"></div>
   </div>
