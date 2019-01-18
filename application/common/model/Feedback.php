@@ -29,7 +29,7 @@ class Feedback extends Base
         }
 
         if (isset($data['nickname'])) {
-            $data['u.nickname'] = ['like', '%' . $data['nickname'] . '%'];
+            $data['u.nickname'] = $data['nickname'];
             unset($data['nickname']);
         }
 
@@ -43,7 +43,7 @@ class Feedback extends Base
             ->where($data)
             ->order($order)
             ->paginate();
-
+        
         return $result;
     }
 }
