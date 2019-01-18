@@ -13,6 +13,8 @@ use think\Controller;
 use app\common\lib\IAuth;
 class CommentController extends BaseController
 {
+    public $model = 'ArticleComment';
+
     public function index(){
         if(request()->isGet()){
             $this->model = 'ArticleComment';

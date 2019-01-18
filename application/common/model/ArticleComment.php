@@ -13,6 +13,9 @@ class ArticleComment extends Base
      */
     protected $table = 'article_comment';
     public function getComment($data=[],$identity){
+        $data['m.status'] = [
+            'neq',config('code.status_delete')
+        ];
         if(isset($data['content'])){
             $data['m.content'] = $data['content'];
             unset($data['content']);
