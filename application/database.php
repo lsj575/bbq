@@ -17,9 +17,9 @@ return [
     // 数据库名
     'database'        => 'bbq',
     // 用户名
-    'username'        => 'lxh001',
+    'username'        => 'root',
     // 密码
-    'password'        => '19991107',
+    'password'        => 'token123',
     // 端口
     'hostport'        => '',
     // 连接dsn
