@@ -89,119 +89,30 @@ var sendPhoto = function() {
             var formData = new FormData();
             formData.append('image', img.files[0]);
             var targetURL = 'https://static-img-bbq.wutnews.net/upload/' + accesstoken + '-' + nonce + '.png';
-
-    $.ajax({
-        url: targetURL,                                                                                                                                                                                                                                                  // 要上传的地址
-        type: 'POST',
-        processData: false,
-        contentType: false,
-        data: formData,
-        dataType: 'json',
-        success: function (data) {
-            console.log(data);
-            if (data.error_code == 0) {
-                // 将上传的头像的地址填入，为保证不载入缓存加个随机数
-                // $('#user-photo').attr('src', '地址?t=' + Math.random());
-                $('#user-photo').attr('src', 'https://static-img-bbq.wutnews.net/image/' + data.message + '-100-100.webp');
-                $('#changeModal').modal('hide');
-                $('#file_upload_image').val(data.message);
-            } else {
-                alert('上传失败！');
-            }
-        },
-        complete: function() {
-            console.log('completed');
-        }
-    });
+            $.ajax({
+                url: targetURL,                                                                                                                                                                                                                                                  // 要上传的地址
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                data: formData,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.error_code == 0) {
+                        // 将上传的头像的地址填入，为保证不载入缓存加个随机数
+                        // $('#user-photo').attr('src', '地址?t=' + Math.random());
+                        //$('#user-photo').attr('src', 'https://static-img-bbq.wutnews.net/image/' + data.message + '-100-100.webp');
+                        $('.user-photo-box').html('<img id="user-photo" src="https://static-img-bbq.wutnews.net/image/' + data.message + '-100-100.webp" />');
+                        $('#changeModal').modal('hide');
+                        $('#file_upload_image').val(data.message);
+                    } else {
+                        alert('上传失败！');
+                    }
+                }
+            });
         }
     })
-    // $('#photo').cropper('getCroppedCanvas',{
-    //     width:300,
-    //     height:300
-    // }).toBlob(function(blob){
-    //     // 转化为blob后更改src属性，隐藏模态框
-    //     $('#user-photo').attr('src',URL.createObjectURL(blob));
-    //     $('#changeModal').modal('hide');
-    // });
 }
 
 $(function(){
     initCropperInModal($('#photo'),$('#photoInput'),$('#changeModal'));
 });
-
-// Dropzone.autoDiscover = false;
-// var accesstoken = '';
-// var nonce = '';
-// var fileFormat = '';
-// var errcode = 0;
-// $("#file_upload").dropzone({
-//     url: image_accesstoken_url,
-//     maxFilesize: 2,
-//     maxFiles: 1,
-//     init: function() {
-//         this.on("addedfile", function(file) {
-//             console.log(file);
-//             console.log(file.height);
-//             console.log(file.width);
-//             console.log(file.name);
-//             console.log(file.type);
-//             for(i in file) {
-//                 console.log(i);
-//             }
-//             console.log(file.__proto__);
-//             console.log(this.getAcceptedFiles());
-//             var index = file.type.lastIndexOf('/');
-//             fileFormat = file.type.substring(index + 1, file.type.length);
-//             console.log(fileFormat);
-//             $.ajax({
-//                 url: image_accesstoken_url,
-//                 type: 'GET',
-//                 dataType: 'json',
-//                 success: function(data) {
-//                     accesstoken = data.data.accesstoken;
-//                     nonce = data.data.nonce;
-//                 }
-//             })
-//         });
-//     },
-//     sending: function(res, xhr, formData) {
-//         console.log(xhr.responseURL);
-//         xhr.responseURL = 'http://static-img.wutnews.net/upload/' + accesstoken + '-' + nonce + '.' + formData;
-//         console.log(xhr)
-//     },
-//     accept: function(file, done) {
-//         console.log(this.getQueuedFiles());
-//         if (file.name == "index.png") {
-//             done("Naha, you don't.");
-//         }
-//         else { 
-//             // console.log(this.files[0]);console.log(this.files[0].width);
-//             done();
-//         }
-//     },
-//     success: function(res, data) {
-//         console.log(res);
-//         console.log(data);
-//         // var obj = JSON.parse(data);
-//         // console.log(obj.data);
-//         // $("#file_upload_image").attr("value", obj.data);
-//         $('.dz-progress').css('opacity', 0);
-//         $('.dz-preview').addClass('dz-success');
-//     },
-//     error: function() {
-//         if(errcode === 1)
-//         {
-//             alert("请上传正方形图片!");
-//             errcode = 0;
-//         }
-//         else
-//         {
-//             alert('上传失败!');
-//         }
-//         $('.dz-progress').css('opacity', 0);
-//         $('.dz-preview').addClass('dz-error');
-//     },
-//     complete: function(res) {
-//         console.log(res);
-//     }
-// });
