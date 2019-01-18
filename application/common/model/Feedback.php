@@ -15,6 +15,7 @@ class Feedback extends Base
      * 查询反馈类型 后台自动分页
      * @param array $data
      * @return \think\Paginator
+     * @throws \think\exception\DbException
      */
     public function getFeedback($data = [])
     {
@@ -28,7 +29,7 @@ class Feedback extends Base
         }
 
         if (isset($data['nickname'])) {
-            $data['u.nickname'] = $data['nickname'];
+            $data['u.nickname'] = ['like', '%' . $data['nickname'] . '%'];
             unset($data['nickname']);
         }
 
