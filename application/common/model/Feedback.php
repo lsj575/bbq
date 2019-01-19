@@ -43,7 +43,6 @@ class Feedback extends Base
             ->where($data)
             ->order($order)
             ->paginate();
-        
         return $result;
     }
 }
