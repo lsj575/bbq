@@ -21,10 +21,10 @@ class FeedbackController extends BaseController
 
         $whereData = [];
         // 转换查询条件
-        if (!empty($data['start_time']) && !empty($data['end_time'])) {
+        if (!empty($data['start_time']) || !empty($data['end_time'])) {
             $whereData['create_time'] = [
-                ['egt', strtotime($data['start_time'])],
-                ['elt', strtotime($data['end_time'])],
+                ['egt', empty($data['start_time']) ? 946699200 : strtotime($data['start_time'])],
+                ['elt', empty($data['end_time']  ) ? strtotime('now') : strtotime($data['end_time'])],
             ];
         } else {
             unset($whereData['create_time']);
