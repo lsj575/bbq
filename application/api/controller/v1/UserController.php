@@ -28,7 +28,8 @@ class UserController extends AuthBaseController
 
     /**
      * 更新用户信息
-     * @return \json|\think\response\Json
+     * @return \json
+     * @throws \think\exception\PDOException
      */
     public function update()
     {
