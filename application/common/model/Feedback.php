@@ -41,9 +41,10 @@ class Feedback extends Base
             ->join('user u', 'u.id = fd.user_id')
             ->join('feedback_type fdt', 'fd.feedback_type_id = fdt.id')
             ->where($data)
+            ->field('fdt.*,u.*,fd.*,fd.id as id') //防止feedback表的id字段被覆盖
             ->order($order)
             ->paginate();
-        
+         
         return $result;
     }
 }
