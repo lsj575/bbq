@@ -29,9 +29,9 @@ class FeedbackController extends BaseController
         } else {
             unset($whereData['create_time']);
         }
-
+        
         if (!empty($data['nickname'])) {
-            $whereData['nickname'] = $data['nickname'];
+            $whereData['nickname'] = ['like', '%'.$data['nickname'].'%'];
         } else {
             unset($whereData['nickname']);
         }
@@ -40,8 +40,8 @@ class FeedbackController extends BaseController
 
         return $this->fetch('', [
             'feedback'      => $feedback,
-            'start_time' => empty($data['start_time']) ? '' : $data['start_time'],
-            'end_time'   => empty($data['end_time']) ? '' : $data['end_time'],
+            'start_time'    => empty($data['start_time']) ? '' : $data['start_time'],
+            'end_time'      => empty($data['end_time']) ? '' : $data['end_time'],
         ]);
     }
 

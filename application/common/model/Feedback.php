@@ -15,6 +15,7 @@ class Feedback extends Base
      * 查询反馈类型 后台自动分页
      * @param array $data
      * @return \think\Paginator
+     * @throws \think\exception\DbException
      */
     public function getFeedback($data = [])
     {
@@ -42,7 +43,7 @@ class Feedback extends Base
             ->where($data)
             ->order($order)
             ->paginate();
-
+        
         return $result;
     }
 }
