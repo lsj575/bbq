@@ -31,7 +31,7 @@ class CommentController extends BaseController
             //当什么都不搜索时，也就是直接加载评论管理首页时，也就是加载所有评论时
             if(empty($data['identity'])) $data['identity']='commentator';
             
-            $comments = model('ArticleComment')->getComment($whereData,$data['identity']);
+            $comments = model('ArticleComment')->getComment($data['identity'], $whereData);
             return $this->fetch('',['comments'=>$comments,'page'=>$comments->render()]); 
         }
     }
