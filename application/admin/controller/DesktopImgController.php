@@ -7,10 +7,15 @@ use think\controller;
 
 class DesktopImgController extends BaseController
 {
+    /**
+     * 获取图片列表
+     * 可根据时间和图片描述来查询对应图片
+     * @return mixed
+     */
     public function index()
     {
-        $this->model = 'DesktopImg';
-        $data = input('.param');
+        $this->model = 'desktop_img';
+        $data = input('param.');
 
         $whereData = [];
         if (!empty($data['start_time']) && !empty($data['end_time'])) {
@@ -25,7 +30,7 @@ class DesktopImgController extends BaseController
         }
         // 获取数据
         $desktop_img = model('DesktopImg')->getImg($whereData);
-        //var_dump($theme);
+        //var_dump($desktop_img);
         return $this->fetch('', [
             'desktop_img'      => $desktop_img,
             'start_time' => empty($data['start_time']) ? '' : $data['start_time'],
@@ -38,7 +43,7 @@ class DesktopImgController extends BaseController
         if (request()->isPost()) {
             $data = input('post.');
             //校验数据
-            $validate = validate('DesktopImage');
+            $validate = validate('DesktopImg');
             if (!$validate->check($data)) {
                 $this->error($validate->getError());
             }

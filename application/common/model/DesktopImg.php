@@ -4,7 +4,7 @@ namespace app\common\model;
 class DesktopImg extends Base
 {
     protected $table = "desktop_img";
-    public function getImg()
+    public function getImg($data)
     {
         $data['status'] = [
             'neq', config('code.status_delete')
