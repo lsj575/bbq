@@ -193,9 +193,10 @@ class Article extends Base
     }
 
     /**
-     * 获取用户关注的主题和用户的动态
+     * 获取用户关注的主题，用户关注的用户的动态
      * @param $id
-     * @return false|\PDOStatement|string|\think\Collection
+     * @param $offset
+     * @return array
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
@@ -208,17 +209,34 @@ class Article extends Base
             'u.status'  => config('code.status_normal'),
         ];
 
-        return $this->table('user')
+        // 关注的用户的动态
+        $user_article = $this->table('user')
             ->alias('u')
             ->field($this->_getListField())
             ->join('user_attention_user uau', 'uau.attention_user_id = u.id')
-            ->join('user_attention_theme uat', 'uat.user_id = u.id')
-            ->join('article a', 'a.user_id = uau.be_attention_user_id or a.theme_id = uat.theme_id')
+            ->join('article a', 'a.user_id = uau.be_attention_user_id')
             ->join('theme t', 't.id = a.theme_id')
             ->where($whereData)
             ->limit($offset, $offset+30)
             ->order('a.create_time desc')
             ->select();
+
+        // 关注的主题的动态
+        $theme_article = $this->table('user')
+            ->alias('u')
+            ->field($this->_getListField())
+            ->join('user_attention_theme uat', 'uat.user_id = u.id')
+            ->join('article a', 'a.theme_id = uat.theme_id')
+            ->join('theme t', 't.id = a.theme_id')
+            ->where($whereData)
+            ->limit($offset, $offset+30)
+            ->order('a.create_time desc')
+            ->select();
+
+        return $ans = [
+            'user'  => $user_article,
+            'theme' => $theme_article
+        ];
     }
     /**
      * 通用化获取参数的数据字段
