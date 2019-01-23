@@ -272,8 +272,11 @@ class ArticleController extends CommonController
 
             // 整理返回值
             $result = [];
-            foreach ($articles as $key => $article) {
+            foreach ($articles as $key => $unknownType_article) {
+                foreach ($unknownType_article as $article)
                 $result[] = [
+                    // type标识来自于关注的用户还是关注的主题
+                    'type'                  => $key,
                     'user_id'               => $article['user_id'],
                     'article_id'            => $article['id'],
                     'theme_id'              => $article['theme_id'],

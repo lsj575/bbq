@@ -38,7 +38,7 @@ class LoginController extends BaseController
             //validate
             $validate = validate('AdminUser');
             if (!$validate->check($data)) {
-                $this->error($validate->getError());
+                return view('index',['tip'=>$validate->getError()]);
             }
 
             try {
@@ -47,16 +47,16 @@ class LoginController extends BaseController
                     'username'    => $data['username'],
                 ]);
             }catch (\Exception $e) {
-                $this->error($e->getMessage());
+                return view('index',['tip'=>$e->getMessage()]);
             }
 
             if (!$user || $user->status != config('code.status_normal')) {
-                $this->error('该用户不存在');
+                return view('index',['tip'=>'The user does not exist!']);
             }
 
             //再对密码进行校验
             if (IAuth::setPassword($data['password']) != $user['password']) {
-                $this->error('密码不正确');
+                return view('index',['tip'=>'Incorrect password!']);
             }
             //更新数据库 登录时间 登陆ip
             $udata = [
@@ -67,14 +67,14 @@ class LoginController extends BaseController
             try {
                 model('AdminUser')->save($udata, ['id' => $user->id]);
             }catch (\Exception $e) {
-                $this->error($e->getMessage());
+                return view('index',['tip'=>$e->getMessage()]);
             }
 
             //session
             session(config('admin.session_user'), $user, config('admin.session_user_scope'));
-            $this->success('登录成功', 'index/index');
+            $this->redirect('admin/index/index');
         }else {
-            $this->error('请求不合法');
+            return view('index',['tip'=>'Illegal request!']);
         }
     }
 
