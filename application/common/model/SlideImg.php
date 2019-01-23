@@ -1,9 +1,9 @@
 <?php
 namespace app\common\model;
 
-class DesktopImg extends Base
+class SlideImg extends Base
 {
-    protected $table = "desktop_img";
+    protected $table = "slide_img";
     public function getImg($data)
     {
         $data['status'] = [

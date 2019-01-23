@@ -5,7 +5,7 @@
 namespace app\admin\controller;
 use think\controller;
 
-class DesktopImgController extends BaseController
+class SlideImgController extends BaseController
 {
     /**
      * 获取图片列表
@@ -14,7 +14,7 @@ class DesktopImgController extends BaseController
      */
     public function index()
     {
-        $this->model = 'desktop_img';
+        $this->model = 'slide_img';
         $data = input('param.');
 
         $whereData = [];
@@ -29,21 +29,24 @@ class DesktopImgController extends BaseController
             $whereData['description'] = ['like', '%'.$data['description'].'%'];
         }
         // 获取数据
-        $desktop_img = model('DesktopImg')->getImg($whereData);
-        //var_dump($desktop_img);
+        $slide_img = model('SlideImg')->getImg($whereData);
+        //var_dump($slide_img);
         return $this->fetch('', [
-            'desktop_img'      => $desktop_img,
+            'slide_img'      => $slide_img,
             'start_time' => empty($data['start_time']) ? '' : $data['start_time'],
             'end_time'   => empty($data['end_time']) ? '' : $data['end_time'],
         ]);
     }
-
+    /**
+     * 添加图片
+     * @return mixed
+     */
     public function add()
     {
         if (request()->isPost()) {
             $data = input('post.');
             //校验数据
-            $validate = validate('DesktopImg');
+            $validate = validate('SlideImg');
             if (!$validate->check($data)) {
                 $this->error($validate->getError());
             }
@@ -58,13 +61,13 @@ class DesktopImgController extends BaseController
             );
             //入库
             try {
-                $id = model('desktop_img')->add($data);
+                $id = model('slide_img')->add($data);
             } catch (\Exception $e) {
                 return $this->result('',config('code.FAILURE'),'新增失败');
             }
 
             if ($id) {
-                return $this->result(['jump_url' => url('desktop_img/index')], config('code.SUCCESS'), 'OK');
+                return $this->result(['jump_url' => url('slide_img/index')], config('code.SUCCESS'), 'OK');
             } else {
                 return  $this->result('',config('code.FAILURE'),'新增失败');
             }

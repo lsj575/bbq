@@ -69,7 +69,11 @@ Route::get('api/:ver/user/checknickname/:id', 'api/:ver.user/checkUserNicknamePa
  */
 //图片上传路由
 Route::get('api/:ver/image/accesstoken','api/:ver.image/getAccessToken');
-
+/**
+ * 轮播图相关路由
+ */
+//获取所有轮播图路由
+Route::get('api/:ver/slideimg/getimgs','api/:ver.slideimg/getImages');
 /**
  * app版本相关路由
  */

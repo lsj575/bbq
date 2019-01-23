@@ -3,7 +3,7 @@
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户管理 <span class="c-gray en">&gt;</span> 主题列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
     <div class="text-c">
-        <form action="{:url('desktop_img/index')}" method="get">
+        <form action="{:url('slide_img/index')}" method="get">
             日期范围：
             <input type="text" name="start_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="{$start_time}" style="width:140px;" >
             -
@@ -28,12 +28,12 @@
             </tr>
             </thead>
             <tbody>
-            {volist name = "desktop_img" id = "vo"}
+            {volist name = "slide_img" id = "vo"}
             <tr class="text-c">
                 <td><input type="checkbox" value="" name=""></td>
                 <td>{$vo.id}</td>
                 <td class="text-l">{$vo.description}</td>
-                <td><img width="60" height="60" class="picture-thumb" src="https://static-img.wutnews.net/image/{$vo.img}"></td>
+                <td><img width="60" height="60" class="picture-thumb" src="https://static-img-bbq.wutnews.net/image/{$vo.img}-60-100.webp"></td>
                 <td class="text-l">{$vo.img_type==0?'主题':$vo.img_type==1?'动态':'用户'}</td>
                 <td>{$vo.create_time}</td>
                 <!-- 此处调用app/common.php中的方法 -->
@@ -45,7 +45,7 @@
         </table>
         <div id="laypage"></div>
     </div>
-    {:pagination($desktop_img)}
+    {:pagination($slide_img)}
 </div>
 <!--header-->
 {include file="public/_footer" /}
