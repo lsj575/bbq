@@ -76,4 +76,55 @@ class SlideImgController extends BaseController
             return $this->fetch();
         }
     }
+    public function edit($id = 0)
+    {
+        if (request()->isPost()) {
+            $data = input('post.');
+            $id = $data['id'];
+            //校验数据
+            $validate = validate('SlideImg');
+            if (!$validate->check($data)) {
+                $this->error($validate->getError());
+            }
+            //获取session
+            $user = session(config('admin.session_user'), '', config('admin.session_user_scope'));
+
+            $data = array(
+                'user_id'        => $user->id,
+                'description'    => $data['description'],
+                'img'            => $data['img'],
+                'img_type'       => $data['img_type'],
+            );
+            //入库
+            try {
+                $id = model('slide_img')->save($data, ["id" => $id]);
+            } catch (\Exception $e) {
+                return $this->result('',config('code.FAILURE'),'编辑失败');
+            }
+            if ($id) {
+                return $this->result(['jump_url' => url('slide_img/index')], config('code.SUCCESS'), 'OK');
+            } else {
+                return  $this->result('',config('code.FAILURE'),'编辑失败');
+            }
+
+        } else {
+            if (!intval($id)) {
+                return $this->error('ID不合法');
+            }
+            try {
+                //通过id查询记录是否存在
+                $res = model('slide_img')->get($id);
+                if (!$res) {
+                    return $this->error('没有此条记录');
+                }else {
+                    return $this->fetch('', [
+                        'slide_img' => $res,
+                    ]);
+                }
+            }catch(\Exception $e){
+                return $this->error($e->getMessage());
+            }
+        }
+
+    }
 }
