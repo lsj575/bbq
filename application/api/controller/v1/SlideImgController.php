@@ -28,8 +28,8 @@ class SlideImgController extends CommonController
         $result = [];
         foreach ($images as $key => $image) {
             $result[] = [
-                'image_id'              => $image['id'],
-                'image_description'     => $image['description'],
+                'img_id'              => $image['id'],
+                'img_description'     => $image['description'],
                 'img_url'               => $image['img'],
                 'img_type'              => $image['img_type']
             ];
