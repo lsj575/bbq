@@ -6,17 +6,17 @@ SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP DATABASE IF EXISTS `bbq`;
-CREATE DATABASE `bbq` /*!40100 DEFAULT CHARACTER SET utf32 */;
+CREATE DATABASE `bbq` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `bbq`;
 
 DROP TABLE IF EXISTS `accesstoken_log`;
 CREATE TABLE `accesstoken_log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
-  `source` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '鏉ユ簮 0-鐢ㄦ埛1-绠＄悊鍛',
+  `source` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '来源 0-用户1-管理员',
   `accesstoken` char(64) NOT NULL,
-  `create_time` int(11) unsigned NOT NULL COMMENT '鍒涘缓鏃堕棿',
-  `update_time` int(11) unsigned NOT NULL COMMENT '鏇存柊鏃堕棿',
+  `create_time` int(11) unsigned NOT NULL COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -96,30 +96,13 @@ INSERT INTO `accesstoken_log` (`id`, `user_id`, `source`, `accesstoken`, `create
 (72,	2,	0,	'62498b6b462d6ebc4f912e548ebd69c8',	1543805752,	1543805752),
 (73,	2,	0,	'5772f1c023daefcb7848f39874c72b4a',	1543805792,	1543805792),
 (74,	2,	0,	'feb6369c55b70723a61bdc2169829678',	1543846080,	1543846080),
-(75,	2,	0,	'88f20a4ee93c097b13d8824328b68456',	1543846221,	1543846221),
-(76,	2,	0,	'8597757fdb740c240eb0db0fe8ed5fd9',	1547974692,	1547974692),
-(77,	2,	0,	'45667a09868bc2322e6577377a8f43fd',	1547974711,	1547974711),
-(78,	2,	0,	'5cfdd8b77f0698b9cbded9379396f6af',	1547974877,	1547974877),
-(79,	2,	0,	'3fb3924b9d8662e35f84c90d43b3b2a8',	1547974884,	1547974884),
-(80,	2,	0,	'82b2f829a7358e2b4012bfed445e988f',	1547974912,	1547974912),
-(81,	2,	0,	'89f8fd9f7440ee7c5839f5eb4ac6bcbf',	1548244479,	1548244479),
-(82,	2,	0,	'302a72f27169d0b5200b3d4bce2ba0da',	1548244483,	1548244483),
-(83,	2,	0,	'2f463deec7ad6de1a88fe141a6b8151d',	1548244814,	1548244814),
-(84,	2,	0,	'484817abe239b5179b17ee16fe24bc5c',	1548244829,	1548244829),
-(85,	2,	0,	'8722a610ce27448f6f2d17c33f391f2f',	1548244830,	1548244830),
-(86,	2,	0,	'985c8c08cfc3139980a26bc5827e8b51',	1548244837,	1548244837),
-(87,	2,	0,	'ff553b064afecf6008322a60143d9d3c',	1548244860,	1548244860),
-(88,	2,	0,	'4f7000383a29b16e0266375866cea074',	1548244862,	1548244862),
-(89,	2,	0,	'0b68b34237118f66dff1a0ca6a48c076',	1548245006,	1548245006),
-(90,	2,	0,	'e4af5b1f763af29b84a6aaf94c611fb9',	1548245066,	1548245066),
-(91,	2,	0,	'3f3515c26cec13fe0dbe145438bd0d31',	1548245277,	1548245277),
-(92,	2,	0,	'1aaf3e484a4ef36aab9c21e9d54ff8ed',	1548245376,	1548245376);
+(75,	2,	0,	'88f20a4ee93c097b13d8824328b68456',	1543846221,	1543846221);
 
 DROP TABLE IF EXISTS `admin_user`;
 CREATE TABLE `admin_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) DEFAULT NULL COMMENT '鐢ㄦ埛鍚',
-  `password` char(32) DEFAULT NULL COMMENT '瀵嗙爜',
+  `username` varchar(50) DEFAULT NULL COMMENT '用户名',
+  `password` char(32) DEFAULT NULL COMMENT '密码',
   `last_login_ip` varchar(30) DEFAULT NULL,
   `last_login_time` int(10) unsigned NOT NULL DEFAULT '0',
   `listorder` int(8) unsigned DEFAULT '0',
@@ -134,22 +117,22 @@ CREATE TABLE `admin_user` (
 
 INSERT INTO `admin_user` (`id`, `username`, `password`, `last_login_ip`, `last_login_time`, `listorder`, `status`, `create_time`, `update_time`) VALUES
 (1,	'lsj575',	'c9d8fd152b782446b5c2da0896bea713',	NULL,	0,	0,	1,	0,	0),
-(2,	'admin',	'b90167b6bf42bb9b749f7b7e4227491d',	'0.0.0.0',	1547802998,	0,	1,	1530271838,	1547802998),
-(4,	'zcf',	'1695eb1808c7dbad715605b7af54f42d',	NULL,	0,	0,	1,	1531316571,	1531316571),
-(6,	'lxh001',	'def78593dde7cf19a65acb3abe5cfb1b',	'127.0.0.1',	1547977299,	0,	1,	1547803023,	1547977299);
+(2,	'admin',	'b90167b6bf42bb9b749f7b7e4227491d',	NULL,	0,	0,	1,	1530271838,	1530271838),
+(3,	'root',	'71165577e60e7d4c491d9bfe0e1d3517',	'0.0.0.0',	1544787143,	0,	1,	1530271923,	1544787143),
+(4,	'zcf',	'1695eb1808c7dbad715605b7af54f42d',	NULL,	0,	0,	1,	1531316571,	1531316571);
 
 DROP TABLE IF EXISTS `app_active`;
 CREATE TABLE `app_active` (
-  `id` bigint(64) unsigned NOT NULL AUTO_INCREMENT,
-  `version` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '鐗堟湰鍙',
-  `app_type` varchar(20) DEFAULT NULL COMMENT 'app绫诲瀷',
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `version` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '版本号',
+  `app_type` varchar(20) DEFAULT NULL COMMENT 'app类型',
   `version_code` varchar(10) DEFAULT NULL,
-  `did` varchar(100) DEFAULT NULL COMMENT '璁惧?鍙',
-  `model` varchar(20) DEFAULT NULL COMMENT '鏈哄瀷',
+  `did` varchar(100) DEFAULT NULL COMMENT '设备号',
+  `model` varchar(20) DEFAULT NULL COMMENT '机型',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='璁板綍鐢ㄦ埛鐧诲綍鏁版嵁琛';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='记录用户登录数据表';
 
 
 DROP TABLE IF EXISTS `article`;
@@ -158,16 +141,16 @@ CREATE TABLE `article` (
   `user_id` int(10) NOT NULL,
   `theme_id` int(10) unsigned NOT NULL,
   `content` text,
-  `img` text COMMENT '瀛樻斁鍥剧墖锛屽?鍥剧敤,鍙峰垎鍓',
-  `allow_watermark` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '鏄?惁娣诲姞姘村嵃0-鍚?-鏄',
-  `read_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '闃呰?鏁',
-  `comments` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '璇勮?鏁',
-  `likes` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '鐐硅禐鏁伴噺',
+  `img` text COMMENT '存放图片，多图用,号分割',
+  `allow_watermark` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否添加水印0-否1-是',
+  `read_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '阅读数',
+  `comments` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '评论数',
+  `likes` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点赞数量',
   `is_position` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
-  `type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '绫诲瀷锛屽師鍒涙垨杞?彂绛',
-  `allow_comment` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '鏄?惁鍏佽?璇勮?1-鍏佽?0-涓嶅厑璁',
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '类型，原创或转发等',
+  `allow_comment` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否允许评论1-允许0-不允许',
   `status` smallint(6) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
@@ -175,9 +158,9 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `article` (`id`, `user_id`, `theme_id`, `content`, `img`, `allow_watermark`, `read_count`, `comments`, `likes`, `is_position`, `create_time`, `update_time`, `type`, `allow_comment`, `status`) VALUES
-(1,	2,	1,	'鏇存柊鍔ㄦ?娴嬭瘯',	'',	1,	0,	0,	1,	0,	1543062598,	1543670073,	0,	1,	1),
-(2,	2,	1,	'bbq鍙戝竷鍔ㄦ?娴嬭瘯1',	'',	0,	0,	0,	1,	1,	1543458104,	1543458104,	0,	0,	1),
-(3,	3,	1,	'bbq鍙戝竷鍔ㄦ?娴嬭瘯2',	'',	0,	0,	0,	1,	0,	1543458109,	1543458109,	0,	0,	1);
+(1,	2,	1,	'更新动态测试',	'',	1,	0,	0,	1,	0,	1543062598,	1543670073,	0,	1,	1),
+(2,	2,	1,	'bbq发布动态测试1',	'',	0,	0,	0,	1,	1,	1543458104,	1543458104,	0,	0,	1),
+(3,	3,	1,	'bbq发布动态测试2',	'',	0,	0,	0,	1,	0,	1543458109,	1543458109,	0,	0,	1);
 
 SET NAMES utf8mb4;
 
@@ -186,8 +169,8 @@ CREATE TABLE `article_comment` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned DEFAULT '0',
   `article_id` int(10) unsigned DEFAULT '0',
-  `to_user_id` int(10) unsigned DEFAULT '0' COMMENT '璇勮?鐩?爣鐢ㄦ埛',
-  `parent_id` int(10) unsigned DEFAULT '0' COMMENT '鐖剁被id',
+  `to_user_id` int(10) unsigned DEFAULT '0' COMMENT '评论目标用户',
+  `parent_id` int(10) unsigned DEFAULT '0' COMMENT '父类id',
   `content` varchar(300) CHARACTER SET utf8mb4 DEFAULT NULL,
   `status` tinyint(1) DEFAULT '1',
   `create_time` int(10) unsigned DEFAULT '0',
@@ -213,33 +196,31 @@ CREATE TABLE `article_mentionuser` (
 DROP TABLE IF EXISTS `feedback`;
 CREATE TABLE `feedback` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(64) NOT NULL COMMENT '鍙嶉?鐢ㄦ埛',
-  `content` text CHARACTER SET utf8mb4 COMMENT '鍙嶉?鍐呭?',
-  `feedback_type_id` int(10) unsigned NOT NULL COMMENT '鍙嶉?绫诲瀷鐨刬d',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-寰呭?1-宸插?鐞',
+  `user_id` int(10) unsigned NOT NULL COMMENT '反馈用户',
+  `content` text CHARACTER SET utf8mb4 COMMENT '反馈内容',
+  `feedback_type_id` int(10) unsigned NOT NULL COMMENT '反馈类型的id',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-待审1-已处理',
   `create_time` int(11) unsigned NOT NULL,
   `update_time` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='鐢ㄦ埛鍙嶉?琛';
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户反馈表';
 
 INSERT INTO `feedback` (`id`, `user_id`, `content`, `feedback_type_id`, `status`, `create_time`, `update_time`) VALUES
-(1,	2,	'鎴愰攱铔囩毊',	1,	0,	1544011712,	1544011712);
+(1,	2,	'成锋蛇皮',	1,	0,	1544011712,	1544011712);
 
 DROP TABLE IF EXISTS `feedback_type`;
 CREATE TABLE `feedback_type` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type_name` varchar(30) NOT NULL COMMENT '鍙嶉?绫诲瀷鍚',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-1-鍒犻櫎0-鏈?惎鐢?-鍚?敤',
+  `type_name` varchar(30) NOT NULL COMMENT '反馈类型名',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-1-删除0-未启用1-启用',
   `create_time` int(11) unsigned NOT NULL,
   `update_time` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO `feedback_type` (`id`, `type_name`, `status`, `create_time`, `update_time`) VALUES
-(1,	'杞?欢BUG',	1,	1540731603,	1540732377),
-(2,	'鍔熻兘鏀硅繘',	0,	1540732460,	1540732460);
+(1,	'软件BUG',	1,	1540731603,	1540732377),
+(2,	'功能改进',	0,	1540732460,	1540732460);
 
 DROP TABLE IF EXISTS `reply_img`;
 CREATE TABLE `reply_img` (
@@ -257,30 +238,27 @@ DROP TABLE IF EXISTS `slide_img`;
 CREATE TABLE `slide_img` (
   `id` bigint(64) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(64) DEFAULT NULL COMMENT '管理员id',
-  `description` varchar(200) CHARACTER SET utf32 DEFAULT NULL,
-  `img` varchar(200) CHARACTER SET utf32 DEFAULT NULL COMMENT '存放图片地址',
-  `img_type` varchar(200) CHARACTER SET utf32 DEFAULT NULL COMMENT '0：主题   1：动态   2：用户',
+  `description` varchar(200) DEFAULT NULL,
+  `img` varchar(200) DEFAULT NULL COMMENT '存放图片地址',
+  `img_type` varchar(200) DEFAULT NULL COMMENT '0：主题   1：动态   2：用户',
   `status` tinyint(1) DEFAULT '1' COMMENT '1：未发布   -1：已发布',
   `create_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `slide_img` (`id`, `user_id`, `description`, `img`, `img_type`, `status`, `create_time`) VALUES
-(5,	2,	'qasdfasdf',	'e44378ac-0237-4331-aaf2-63b8818e5c34-300-80.jpg',	'1',	1,	1548051791),
-(10,	2,	'aaaaaaaaaa1',	'6a0dec74-dc25-47a6-9326-ce1e93825b37',	'1',	1,	1548245379);
 
 DROP TABLE IF EXISTS `theme`;
 CREATE TABLE `theme` (
-  `id` bigint(64) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(64) DEFAULT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) DEFAULT NULL,
   `theme_name` varchar(50) DEFAULT NULL,
   `img` varchar(255) DEFAULT NULL,
   `theme_introduction` varchar(200) DEFAULT NULL,
-  `is_position` tinyint(1) NOT NULL DEFAULT '0' COMMENT '鏄?惁鎺ㄨ崘',
+  `is_position` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否推荐',
   `listorder` int(8) DEFAULT NULL,
-  `attention` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '鍏虫敞鏁',
-  `source_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '鏉ユ簮',
+  `attention` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '关注数',
+  `source_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '来源',
   `status` tinyint(1) DEFAULT '1',
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
@@ -293,34 +271,31 @@ CREATE TABLE `theme` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `theme` (`id`, `user_id`, `theme_name`, `img`, `theme_introduction`, `is_position`, `listorder`, `attention`, `source_type`, `status`, `create_time`, `update_time`) VALUES
-(1,	1,	'BBQ寮?彂浜ゆ祦',	'20180509\\dc425e3b159797af24bf97a6a247cb51.jpg',	'鏈?富棰樹笓娉ㄤ簬瀵笲BQ鐨勫缓璁?彁渚涳紝娆㈣繋鍜孊BQ寮?彂浜哄憳浜ゆ祦',	0,	NULL,	1,	0,	1,	1525836440,	1525836440),
-(2,	1,	'Test',	'20180510\\6593fae5a61a7c96eb6283fb7ffdf167.jpg',	'鏈?富棰樹笓闂ㄧ敤鏉ヨ繘琛孊BQ娴嬭瘯',	1,	NULL,	0,	0,	-1,	1525941950,	1534817841),
-(13,	3,	'test3',	'20180713\\503a6560989c81c0996b89b08c9be559.PNG',	'123',	0,	NULL,	0,	0,	-1,	1531448601,	1531562555),
-(23,	2,	'klajsadsf',	'41aac534-9fc8-445e-8603-87b739619c6f',	'asdfsadfsadf',	1,	NULL,	0,	0,	1,	1547974916,	1547974916),
-(26,	2,	'klajsadsf22',	'41aac534-9fc8-445e-8603-87b739619c6f',	'asdfsadfsadf',	1,	NULL,	0,	0,	1,	1547974984,	1547974984),
-(27,	2,	'asdasdasdasdfasf',	'856c3e64-d10b-4ca0-8a10-ef26f0dc52f2',	'sdgdfgdsfgdsfg',	0,	NULL,	0,	0,	1,	1548245071,	1548245071);
+(1,	1,	'BBQ开发交流',	'20180509\\dc425e3b159797af24bf97a6a247cb51.jpg',	'本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流',	0,	NULL,	1,	0,	1,	1525836440,	1525836440),
+(2,	1,	'Test',	'20180510\\6593fae5a61a7c96eb6283fb7ffdf167.jpg',	'本主题专门用来进行BBQ测试',	1,	NULL,	0,	0,	-1,	1525941950,	1534817841),
+(13,	3,	'test3',	'20180713\\503a6560989c81c0996b89b08c9be559.PNG',	'123',	0,	NULL,	0,	0,	-1,	1531448601,	1531562555);
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` bigint(64) NOT NULL AUTO_INCREMENT,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `nickname` varchar(30) NOT NULL DEFAULT '',
   `password` char(32) DEFAULT NULL,
   `sno` varchar(20) DEFAULT NULL,
   `phone` varchar(11) NOT NULL DEFAULT '',
   `avatar` varchar(255) DEFAULT NULL,
   `realname` varchar(32) DEFAULT NULL,
-  `sex` tinyint(1) unsigned DEFAULT '2' COMMENT '0鐢?濂?鏈?煡',
+  `sex` tinyint(1) unsigned DEFAULT '2' COMMENT '0男1女2未知',
   `home_img` varchar(255) DEFAULT NULL,
-  `signature` varchar(200) DEFAULT NULL COMMENT '涓??绛惧悕',
+  `signature` varchar(200) DEFAULT NULL COMMENT '个性签名',
   `college` varchar(32) DEFAULT NULL,
   `token` varchar(100) NOT NULL,
-  `time_out` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'token澶辨晥鏃堕棿',
+  `time_out` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'token失效时间',
   `is_position` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `create_time` int(10) unsigned DEFAULT '0',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0',
   `last_login_time` int(11) DEFAULT NULL,
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '0-鏅??鐢ㄦ埛1-鏈烘瀯鍙?-token瀹樻柟鍙',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '鐘舵?0寰呭?1姝ｅ父-1鍒犻櫎',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '0-普通用户1-机构号2-token官方号',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态0待审1正常-1删除',
   PRIMARY KEY (`id`),
   UNIQUE KEY `nickname` (`nickname`),
   UNIQUE KEY `cardno` (`sno`) USING BTREE,
@@ -329,16 +304,16 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `user` (`id`, `nickname`, `password`, `sno`, `phone`, `avatar`, `realname`, `sex`, `home_img`, `signature`, `college`, `token`, `time_out`, `is_position`, `create_time`, `update_time`, `last_login_time`, `type`, `status`) VALUES
-(2,	'BBQ棣栧腑鐑х儰甯',	NULL,	NULL,	'17396177273',	NULL,	NULL,	2,	NULL,	'123',	NULL,	'2e7696f8e0426fc5d901f7557b67862a6addf298',	1558403830,	0,	1542851830,	1543910660,	1542851830,	0,	1),
-(3,	'灏廞15717515314',	NULL,	NULL,	'15717515314',	NULL,	NULL,	2,	NULL,	NULL,	NULL,	'0fcff34ffc1edf911a59d93d9d6a56f9472b1685',	1559097471,	0,	1543545471,	1543545471,	1543545471,	0,	1);
+(2,	'BBQ首席烧烤师',	NULL,	NULL,	'17396177273',	NULL,	NULL,	2,	NULL,	'123',	NULL,	'2e7696f8e0426fc5d901f7557b67862a6addf298',	1558403830,	0,	1542851830,	1543910660,	1542851830,	0,	1),
+(3,	'小Q15717515314',	NULL,	NULL,	'15717515314',	NULL,	NULL,	2,	NULL,	NULL,	NULL,	'0fcff34ffc1edf911a59d93d9d6a56f9472b1685',	1559097471,	0,	1543545471,	1543545471,	1543545471,	0,	1);
 
 DROP TABLE IF EXISTS `user_advice`;
 CREATE TABLE `user_advice` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
-  `type` varchar(50) NOT NULL COMMENT '閫氱煡鏉ユ簮',
+  `type` varchar(50) NOT NULL,
   `status` tinyint(2) NOT NULL DEFAULT '0',
-  `create_time` int(11) NOT NULL,
+  `created_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -353,7 +328,7 @@ CREATE TABLE `user_articles` (
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='鐢ㄦ埛鐐硅禐琛';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户点赞表';
 
 INSERT INTO `user_articles` (`id`, `user_id`, `article_id`, `create_time`) VALUES
 (1,	2,	1,	1544232480),
@@ -379,8 +354,8 @@ INSERT INTO `user_attention_theme` (`id`, `user_id`, `theme_id`, `create_time`) 
 DROP TABLE IF EXISTS `user_attention_user`;
 CREATE TABLE `user_attention_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `attention_user_id` int(10) unsigned DEFAULT NULL COMMENT '鍏虫敞鐢ㄦ埛id',
-  `be_attention_user_id` int(10) unsigned DEFAULT NULL COMMENT '琚?叧娉ㄧ敤鎴穒d',
+  `attention_user_id` int(10) unsigned DEFAULT NULL COMMENT '关注用户id',
+  `be_attention_user_id` int(10) unsigned DEFAULT NULL COMMENT '被关注用户id',
   `create_time` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `attention_user_id` (`attention_user_id`),
@@ -404,12 +379,12 @@ CREATE TABLE `user_collection` (
 
 DROP TABLE IF EXISTS `user_forward_article`;
 CREATE TABLE `user_forward_article` (
-  `id` bigint(64) NOT NULL AUTO_INCREMENT,
-  `article_id` bigint(64) DEFAULT NULL,
-  `user_id` bigint(64) DEFAULT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `article_id` int(10) DEFAULT NULL,
+  `user_id` int(10) DEFAULT NULL,
   `content` text,
   `status` smallint(6) DEFAULT NULL,
-  `created_time` int(11) DEFAULT NULL,
+  `create_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`),
   KEY `user_id` (`user_id`)
@@ -419,26 +394,26 @@ CREATE TABLE `user_forward_article` (
 DROP TABLE IF EXISTS `version`;
 CREATE TABLE `version` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `creator_id` int(10) unsigned NOT NULL COMMENT '鍒涘缓鑰卛d',
-  `app_type` varchar(20) DEFAULT NULL COMMENT 'app绫诲瀷 ios Android',
-  `version` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '鍐呴儴鐗堟湰鍙',
-  `version_code` varchar(20) DEFAULT NULL COMMENT '澶栭儴鐗堟湰鍙?濡?.2.2',
-  `is_force` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '鏄?惁寮哄埗鏇存柊 0鍚?鏄',
-  `apk_url` varchar(255) DEFAULT NULL COMMENT 'apk鐨勫湴鍧',
-  `upgrade_point` varchar(500) DEFAULT NULL COMMENT '鍗囩骇鎻愮ず',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '鐘舵?',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '鍒涘缓鏃堕棿',
-  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '鏇存柊鏃堕棿',
+  `creator_id` int(10) unsigned NOT NULL COMMENT '创建者id',
+  `app_type` varchar(20) DEFAULT NULL COMMENT 'app类型 ios Android',
+  `version` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '内部版本号',
+  `version_code` varchar(20) DEFAULT NULL COMMENT '外部版本号 如1.2.2',
+  `is_force` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否强制更新 0否1是',
+  `apk_url` varchar(255) DEFAULT NULL COMMENT 'apk的地址',
+  `upgrade_point` varchar(500) DEFAULT NULL COMMENT '升级提示',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`),
   KEY `creator_id` (`creator_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='鐗堟湰琛';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='版本表';
 
 INSERT INTO `version` (`id`, `creator_id`, `app_type`, `version`, `version_code`, `is_force`, `apk_url`, `upgrade_point`, `status`, `create_time`, `update_time`) VALUES
-(1,	0,	'android',	2,	'1.2',	0,	'xxx.com/1/3.html',	'1銆佷紭鍖栦簡缃戠粶鏁版嵁\r\n2銆佸?鍔犱簡鏂伴椈鍐呭?',	1,	0,	1534817595),
+(1,	0,	'android',	2,	'1.2',	0,	'xxx.com/1/3.html',	'1、优化了网络数据\r\n2、增加了新闻内容',	1,	0,	1534817595),
 (2,	3,	'iOS',	2,	'1.2.3',	0,	'www.baidu.com',	'123',	0,	1534839374,	1534839374),
 (3,	3,	'iOS',	2,	'1.2.4',	0,	'www.baidu.com2',	'345',	0,	1534839473,	1534903118),
 (4,	3,	'iOS',	2,	'1.2.4',	1,	'www.baidu.com',	'345',	-1,	1534902994,	1534903076),
 (5,	3,	'iOS',	2,	'1.2.4',	1,	'www.baidu.com',	'345',	-1,	1534903081,	1534903104),
 (6,	3,	'Android',	1,	'1.2.15',	0,	'www.baidu.com',	'123123',	0,	1538834184,	1538834184);
 
--- 2019-01-23 12:26:45
+-- 2019-01-24 14:41:19
