@@ -93,7 +93,7 @@ Route::post('api/:ver/upvote', 'api/:ver.upvote/save');
 // 取消点赞
 Route::delete('api/:ver/upvote', 'api/:ver.upvote/delete');
 // 获取某动态是否被用户点赞
-Route::get('api/:ver/upvote/:id', 'api/:ver.upvote/read');
+Route::get('api/:ver/upvote', 'api/:ver.upvote/read');
 /**
  * 关注相关路由
  */
@@ -124,15 +124,21 @@ Route::get('api/:ver/feedback/type', 'api/:ver.feedback/getFeedbackType');
 // 提交反馈
 Route::post('api/:ver/feedback/submit', 'api/:ver.feedback/submitFeedback');
 
-/**
+/**********************
  * 收藏相关
- */
+ **********************/
 // 用户收藏动态
 Route::post('api/:ver/collection/article', 'api/:ver.collection/collectionArticle');
 // 用户取消收藏动态
 Route::delete('api/:ver/collection/article', 'api/:ver.collection/deleteCollection');
 // 获取用户是否收藏某主题
 Route::get('api/:ver/collection/article', 'api/:ver.collection/getBoolOfCollection');
+
+/***************
+ * 评论相关
+ ***************/
+//评论
+Route::post('api/:ver/comment', 'api/:ver.comment/save');
 /**
  * 测试相关
  */
