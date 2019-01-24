@@ -24,7 +24,7 @@ class UserArticles extends Base
      */
     public function getBoolOfArticleUpvote($article_id = [])
     {
-        return $this->where('id', 'in', $article_id)
+        return $this->where('article_id', 'in', $article_id)
             ->select();
     }
 }
