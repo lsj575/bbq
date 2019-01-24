@@ -129,7 +129,7 @@ class UpvoteController extends AuthBaseController
                 // 整理返回的数据
                 $result = [];
                 foreach ($userArticles as $key => $userArticle) {
-                    $result[] = $userArticle['id'];
+                    $result[] = $userArticle['article_id'];
                 }
                 return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
             } else {
