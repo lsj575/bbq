@@ -52,7 +52,7 @@ class ThemeController extends CommonController
             // 整理数据
             $result = [];
             foreach ($themes as $key => $theme) {
-                $result = [
+                $result[] = [
                     'theme_id'              => $theme['id'],
                     'theme_img'             => $theme['img'],
                     'theme_name'            => $theme['theme_name'],
