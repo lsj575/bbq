@@ -8,6 +8,7 @@
 namespace app\api\controller\v1;
 
 use app\common\lib\exception\ApiException;
+use think\Db;
 
 /**
  * 点赞相关
@@ -40,18 +41,22 @@ class AttentionController extends AuthBaseController
                 'theme_id' => $id,
             ];
 
+            // 开启事务，防止插入数据时异常导致的脏数据
+            Db::startTrans();
             try {
                 // 查询数据库中是否存在该关注
-                $userAttentionTheme = model('UserAttentionTheme')->get($data);
+                $userAttentionTheme = Db::table('user_attention_theme')->get($data);
                 if ($userAttentionTheme) {
                     return apiReturn(config('code.app_show_error'), '已关注,请勿重复关注', [], 401);
                 }
                 // 未被关注
-                $userAttentionThemeId = model('UserAttentionTheme')->add($data);
+                $userAttentionThemeId = Db::table('user_attention_theme')->add($data);
                 if ($userAttentionThemeId) {
-                    model('Theme')->where(['id' => $id])->setInc('attention');
+                    Db::table('theme')->where(['id' => $id])->setInc('attention');
+                    Db::commit();
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
+                    Db::rollback();
                     return apiReturn(config('code.app_show_error'), '内部错误，关注失败', [], 500);
                 }
             } catch (\Exception $e) {
@@ -87,20 +92,23 @@ class AttentionController extends AuthBaseController
                 'theme_id' => $id,
             ];
 
+            Db::startTrans();
             try {
                 // 查询数据库中是否存在关注
-                $userAttentionTheme = model('UserAttentionTheme')->get($data);
+                $userAttentionTheme = Db::table('user_attention_theme')->get($data);
                 if (empty($userAttentionTheme)) {
                     return apiReturn(config('code.app_show_error'), '没有被关注过，无法取消', [], 401);
                 }
-                $userAttentionThemeId = model('UserAttentionTheme')->where($data)->delete();
+                $userAttentionThemeId = Db::table('user_attention_theme')->where($data)->delete();
                 if ($userAttentionThemeId) {
-                    model('Theme')->where(['id' => $id])->setDec('attention');
+                    Db::table('theme')->where(['id' => $id])->setDec('attention');
+                    Db::commit();
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '内部错误，取消关注失败', [], 500);
                 }
             } catch (\Exception $e) {
+                Db::rollback();
                 return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
             }
         } else {
