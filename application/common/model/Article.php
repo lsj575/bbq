@@ -4,35 +4,14 @@ namespace app\common\model;
 class Article extends Base
 {
     protected $table = 'article';
-    /**
-     * 获取首页头图文章
-     * @param int $num
-     * @return false|\PDOStatement|string|\think\Collection
-     */
-    public function getIndexHeadNormalArticle($num = 4)
-    {
-        $data = [
-            'status'         => 1,
-            'is_head_figure' => 1,
-        ];
-
-        //按更新时间排序
-        $order = [
-            'update_time' =>  'desc',
-        ];
-
-        return $this->where($data)
-            ->field($this->_getListField())
-            ->order($order)
-            ->limit($num)
-            ->select();
-    }
-
 
     /**
      * 获取被推荐的文章
      * @param int $num
      * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function getPositionNormalArticle($num = 15)
     {
@@ -58,6 +37,9 @@ class Article extends Base
      * 获取高赞文章
      * @param int $num
      * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function getLikesNormalArticle($num = 15)
     {
@@ -238,6 +220,27 @@ class Article extends Base
             'theme' => $theme_article
         ];
     }
+
+    /**
+     * 按动态内容搜索动态
+     * @param $str
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function searchArticleByContent($str)
+    {
+        return $this->table($this->table)
+            ->alias('a')
+            ->field($this->_getListField())
+            ->join("theme t", 'a.theme_id = t.id')
+            ->join('user u', 'a.user_id = u.id')
+            ->where('content', 'like', '%' . $str . '%')
+            ->limit(3)
+            ->select();
+    }
+
     /**
      * 通用化获取参数的数据字段
      * @return array
