@@ -1542,7 +1542,23 @@ www  WEB部署目录（或者子目录）
         "msg": "OK"
     }
     ```
-
+### 轮播图
+- 获取所有slide_img
+  > GET: www.example.com/admin/slideimg/getimgs
+  - 返回样例
+  
+    ```json  
+    {
+        "data": {
+            "img_id": 1,
+            "img_description": "test",
+            "img_url": "022c009d-2956-4c67-9c77-dc9e353c865e",
+            "img_type": 0
+        }
+        "message": "OK",
+        "status": 1
+    }
+    ```
     ​
 
 ##加密
