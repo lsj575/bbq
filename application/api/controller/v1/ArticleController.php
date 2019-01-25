@@ -82,25 +82,13 @@ class ArticleController extends CommonController
 
             // 整理返回值
             $result = [];
-            $result['admin_recommend'] = $adminRecommendArticles;
+            foreach ($adminRecommendArticles as $key => $article) {
+                $result['admin_recommend'][] = $this->organizeDataOfArticle($article);
+            }
             foreach ($mostLikeArticles as $key => $article) {
+                // 排除掉在admin_recommend中的数据
                 if ($article['is_position'] == 0) {
-                    $result['most_like'][] = [
-                        'user_id'               => $article['user_id'],
-                        'article_id'            => $article['id'],
-                        'theme_id'              => $article['theme_id'],
-                        'theme_name'            => $article['theme_name'],
-                        'theme_introduction'    => $article['theme_introduction'],
-                        'content'               => $article['content'],
-                        'img'                   => $article['img'] == "" ? "" : explode($article['img'], ','),
-                        'theme_img'             => $article['theme_img'],
-                        'likes'                 => $article['likes'],
-                        'comments'              => $article['comments'],
-                        'user_nickname'         => $article['user_nickname'],
-                        'user_avatar'           => $article['user_avatar'],
-                        'is_position'           => $article['is_position'],
-                        'create_time'           => $article['create_time'],
-                    ];
+                    $result['most_like'][] = $this->organizeDataOfArticle($article);
                 }
             }
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
@@ -229,29 +217,15 @@ class ArticleController extends CommonController
 
             $result = [];
             foreach ($articles as $key => $article) {
-                $result[] = [
-                    'user_id'               => $article['user_id'],
-                    'article_id'            => $article['id'],
-                    'theme_id'              => $article['theme_id'],
-                    'theme_name'            => $article['theme_name'],
-                    'theme_introduction'    => $article['theme_introduction'],
-                    'content'               => $article['content'],
-                    'img'                   => $article['img'] == "" ? "" : explode($article['img'], ','),
-                    'theme_img'             => $article['theme_img'],
-                    'likes'                 => $article['likes'],
-                    'comments'              => $article['comments'],
-                    'user_nickname'         => $article['user_nickname'],
-                    'user_avatar'           => $article['user_avatar'],
-                    'is_position'           => $article['is_position'],
-                    'create_time'           => $article['create_time'],
-                ];
+                $result[] = $this->organizeDataOfArticle($article);
+
             }
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
         }
     }
 
     /**
-     * 获取用户关注的主题下的所有动态
+     * 获取用户关注的所有动态
      * @return \json
      * @throws ApiException
      */
@@ -317,6 +291,31 @@ class ArticleController extends CommonController
         } else {
             return false;
         }
+    }
+
+    /**
+     * 整理动态数据
+     * @param $article
+     * @return array
+     */
+    private function organizeDataOfArticle($article)
+    {
+        return [
+            'user_id'               => $article['user_id'],
+            'article_id'            => $article['id'],
+            'theme_id'              => $article['theme_id'],
+            'theme_name'            => $article['theme_name'],
+            'theme_introduction'    => $article['theme_introduction'],
+            'content'               => $article['content'],
+            'img'                   => $article['img'] == "" ? "" : explode($article['img'], ','),
+            'theme_img'             => $article['theme_img'],
+            'likes'                 => $article['likes'],
+            'comments'              => $article['comments'],
+            'user_nickname'         => $article['user_nickname'],
+            'user_avatar'           => $article['user_avatar'],
+            'is_position'           => $article['is_position'],
+            'create_time'           => $article['create_time'],
+        ];
     }
 
 }
