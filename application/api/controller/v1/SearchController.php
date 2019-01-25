@@ -36,10 +36,7 @@ class SearchController extends CommonController
                     ->where('theme_introduction', 'like', '%' . $getData['search_str'] . '%')
                     ->limit(3)
                     ->select();
-                $articles = model('Article')
-                    ->where('content', 'like', '%' . $getData['search_str'] . '%')
-                    ->limit(3)
-                    ->select();
+                $articles = model('Article')->searchArticleByContent($getData['search_str']);
 
                 // 整理数据
                 $data = [
