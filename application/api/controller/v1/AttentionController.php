@@ -45,12 +45,12 @@ class AttentionController extends AuthBaseController
             Db::startTrans();
             try {
                 // 查询数据库中是否存在该关注
-                $userAttentionTheme = Db::table('user_attention_theme')->get($data);
+                $userAttentionTheme = Db::table('user_attention_theme')->find($data);
                 if ($userAttentionTheme) {
                     return apiReturn(config('code.app_show_error'), '已关注,请勿重复关注', [], 401);
                 }
                 // 未被关注
-                $userAttentionThemeId = Db::table('user_attention_theme')->add($data);
+                $userAttentionThemeId = Db::table('user_attention_theme')->insert($data);
                 if ($userAttentionThemeId) {
                     Db::table('theme')->where(['id' => $id])->setInc('attention');
                     Db::commit();
@@ -95,7 +95,7 @@ class AttentionController extends AuthBaseController
             Db::startTrans();
             try {
                 // 查询数据库中是否存在关注
-                $userAttentionTheme = Db::table('user_attention_theme')->get($data);
+                $userAttentionTheme = Db::table('user_attention_theme')->find($data);
                 if (empty($userAttentionTheme)) {
                     return apiReturn(config('code.app_show_error'), '没有被关注过，无法取消', [], 401);
                 }
