@@ -39,7 +39,6 @@ class AttentionController extends AuthBaseController
             $data = [
                 'user_id'       => $this->user->id,
                 'theme_id'      => $id,
-                'create_time'   => time()   // 由于未使用模型方法进行插入数据，故自动写入时间戳失效
             ];
 
             // 开启事务，防止插入数据时异常导致的脏数据
@@ -51,6 +50,7 @@ class AttentionController extends AuthBaseController
                     return apiReturn(config('code.app_show_error'), '已关注,请勿重复关注', [], 401);
                 }
                 // 未被关注
+                $data['create_time'] = time();   // 由于未使用模型方法进行插入数据，故自动写入时间戳失效,需手动加入
                 $userAttentionThemeId = Db::table('user_attention_theme')->insert($data);
                 if ($userAttentionThemeId) {
                     Db::table('theme')->where(['id' => $id])->setInc('attention');
