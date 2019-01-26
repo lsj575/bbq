@@ -37,8 +37,8 @@ class AttentionController extends AuthBaseController
 
         if ($theme) {
             $data = [
-                'user_id' => $this->user->id,
-                'theme_id' => $id,
+                'user_id'   => $this->user->id,
+                'theme_id'  => $id,
             ];
 
             // 开启事务，防止插入数据时异常导致的脏数据
@@ -96,7 +96,7 @@ class AttentionController extends AuthBaseController
             try {
                 // 查询数据库中是否存在关注
                 $userAttentionTheme = Db::table('user_attention_theme')->find($data);
-                if (empty($userAttentionTheme)) {
+                if ($userAttentionTheme) {
                     return apiReturn(config('code.app_show_error'), '没有被关注过，无法取消', [], 401);
                 }
                 $userAttentionThemeId = Db::table('user_attention_theme')->where($data)->delete();
@@ -137,8 +137,8 @@ class AttentionController extends AuthBaseController
 
         if ($theme) {
             $data = [
-                'user_id' => $this->user->id,
-                'theme_id' => $id,
+                'user_id'   => $this->user->id,
+                'theme_id'  => $id,
             ];
 
             try {
@@ -230,7 +230,7 @@ class AttentionController extends AuthBaseController
             try {
                 // 查询数据库中是否存在关注
                 $userAttentionUser = model('UserAttentionUser')->get($data);
-                if (empty($userAttentionUser)) {
+                if ($userAttentionUser) {
                     return apiReturn(config('code.app_show_error'), '没有被关注过，无法取消', [], 401);
                 }
                 $userAttentionUserId = model('UserAttentionUser')->where($data)->delete();
