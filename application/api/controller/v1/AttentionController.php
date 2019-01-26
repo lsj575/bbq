@@ -11,7 +11,7 @@ use app\common\lib\exception\ApiException;
 use think\Db;
 
 /**
- * 点赞相关
+ * 关注相关
  * Class UpvoteController
  * @package app\api\controller\v1
  */
@@ -37,15 +37,16 @@ class AttentionController extends AuthBaseController
 
         if ($theme) {
             $data = [
-                'user_id'   => $this->user->id,
-                'theme_id'  => $id,
+                'user_id'       => $this->user->id,
+                'theme_id'      => $id,
+                'create_time'   => time()   // 由于未使用模型方法进行插入数据，故自动写入时间戳失效
             ];
 
             // 开启事务，防止插入数据时异常导致的脏数据
             Db::startTrans();
             try {
                 // 查询数据库中是否存在该关注
-                $userAttentionTheme = Db::table('user_attention_theme')->find($data);
+                $userAttentionTheme = Db::table('user_attention_theme')->where($data)->find();
                 if ($userAttentionTheme) {
                     return apiReturn(config('code.app_show_error'), '已关注,请勿重复关注', [], 401);
                 }
@@ -95,8 +96,8 @@ class AttentionController extends AuthBaseController
             Db::startTrans();
             try {
                 // 查询数据库中是否存在关注
-                $userAttentionTheme = Db::table('user_attention_theme')->find($data);
-                if ($userAttentionTheme) {
+                $userAttentionTheme = Db::table('user_attention_theme')->where($data)->find();
+                if (!$userAttentionTheme) {
                     return apiReturn(config('code.app_show_error'), '没有被关注过，无法取消', [], 401);
                 }
                 $userAttentionThemeId = Db::table('user_attention_theme')->where($data)->delete();
