@@ -89,7 +89,7 @@ class UpvoteController extends AuthBaseController
             try {
                 // 查询数据库中是否存在点赞
                 $userArticle = model('UserArticles')->get($data);
-                if (empty($userArticle)) {
+                if (!$userArticle) {
                     return apiReturn(config('code.app_show_error'), '没有被点赞过，无法取消', [], 401);
                 }
                 $userArticleId = model('UserArticles')->where($data)->delete();
