@@ -16,15 +16,16 @@ class UserArticles extends Base
 {
     /**
      * 获取动态是否被点赞
-     * @param array $article_id
+     * @param $data
      * @return false|\PDOStatement|string|\think\Collection
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function getBoolOfArticleUpvote($article_id = [])
+    public function getBoolOfArticleUpvote($data)
     {
-        return $this->where('article_id', 'in', $article_id)
+        return $this->where('article_id', 'in', $data['article_id'])
+            ->where('user_id', '=', $data['user_id'])
             ->select();
     }
 }

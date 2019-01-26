@@ -54,7 +54,7 @@ class UpvoteController extends AuthBaseController
                     return apiReturn(config('code.app_show_error'), '内部错误，点赞失败', [], 500);
                 }
             } catch (\Exception $e) {
-                return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
+                throw new ApiException($e->getMessage(), 500);
             }
         } else {
             return apiReturn(config('code.app_show_error'), '不存在该文章', [], 403);
@@ -100,13 +100,12 @@ class UpvoteController extends AuthBaseController
                     return apiReturn(config('code.app_show_error'), '内部错误，取消点赞失败', [], 500);
                 }
             } catch (\Exception $e) {
-                return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
+                throw new ApiException($e->getMessage(), 500);
             }
         } else {
             return apiReturn(config('code.app_show_error'), '不存在该文章', [], 403);
         }
     }
-
 
     /**
      * 获取动态是否被点赞
@@ -122,9 +121,13 @@ class UpvoteController extends AuthBaseController
             return apiReturn(config('code.app_show_error'), 'id不存在', [], 404);
         }
 
+        $whereData = [
+            'article_id'    => $article_id,
+            'user_id'       => $this->user->id
+        ];
         try {
             // 查询数据库中是否存在点赞
-            $userArticles = model('UserArticles')->getBoolOfArticleUpvote($article_id);
+            $userArticles = model('UserArticles')->getBoolOfArticleUpvote($whereData);
             if ($userArticles) {
                 // 整理返回的数据
                 $result = [];
@@ -136,7 +139,7 @@ class UpvoteController extends AuthBaseController
                 return apiReturn(config('code.app_show_success'), 'OK', [], 200);
             }
         } catch (\Exception $e) {
-            return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
+            throw new ApiException($e->getMessage(), 500);
         }
     }
 }
