@@ -7,8 +7,6 @@
  */
 namespace app\common\model;
 
-use think\Model;
-
 /**
  * 用户点赞模型
  */
