@@ -129,6 +129,11 @@ Route::get('api/:ver/feedback/type', 'api/:ver.feedback/getFeedbackType');
 Route::post('api/:ver/feedback/submit', 'api/:ver.feedback/submitFeedback');
 
 /**********************
+ * 举报相关
+ **********************/
+Route::post('api/:ver/report', 'api/:ver.report/save');
+
+/**********************
  * 收藏相关
  **********************/
 // 用户收藏动态
