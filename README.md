@@ -1405,6 +1405,39 @@ www  WEB部署目录（或者子目录）
   }
   ```
 
+### 举报相关
+
+#### 提交举报
+
+> POST:www.example.com/bbq/public/api/v1/report
+
+- HEADER
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- post数据
+
+  | 参数        | 值                           |
+  | ----------- | ---------------------------- |
+  | content     | 举报内容（不超过50字）       |
+  | reported_id | 举报内容的id，由type字段决定 |
+  | type        | 1-用户2-动态3-主题           |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "ok",
+      "data": []
+  }
+  ```
 
 ### 搜索
 
