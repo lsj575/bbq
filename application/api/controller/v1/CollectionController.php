@@ -8,6 +8,8 @@
 namespace app\api\controller\v1;
 
 
+use app\common\lib\exception\ApiException;
+
 class CollectionController extends AuthBaseController
 {
     /**
@@ -50,7 +52,7 @@ class CollectionController extends AuthBaseController
                     return apiReturn(config('code.app_show_error'), '内部错误，收藏失败', [], 500);
                 }
             } catch (\Exception $e) {
-                return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
+                throw new ApiException($e->getMessage(), 500);
             }
         } else {
             return apiReturn(config('code.app_show_error'), '不存在该动态', [], 403);
@@ -96,7 +98,7 @@ class CollectionController extends AuthBaseController
                     return apiReturn(config('code.app_show_error'), '内部错误，取消收藏失败', [], 500);
                 }
             } catch (\Exception $e) {
-                return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
+                throw new ApiException($e->getMessage(), 500);
             }
         } else {
             return apiReturn(config('code.app_show_error'), '不存在该动态', [], 403);
@@ -137,7 +139,7 @@ class CollectionController extends AuthBaseController
                     return apiReturn(config('code.app_show_success'), 'OK', ['isCollection' => 0], 200);
                 }
             } catch (\Exception $e) {
-                return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
+                throw new ApiException($e->getMessage(), 500);
             }
         } else {
             return apiReturn(config('code.app_show_error'), '不存在该主题', [], 403);
