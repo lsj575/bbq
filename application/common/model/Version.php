@@ -12,6 +12,7 @@ class Version extends Base
      * 查询版本 后台自动分页
      * @param array $data
      * @return \think\Paginator
+     * @throws \think\exception\DbException
      */
     public function getVersion($data = [])
     {
@@ -33,6 +34,9 @@ class Version extends Base
      * 通过app_type获取最后一条状态正常的版本内容
      * @param string $appType
      * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function getLastNormalVersionByAppType($appType = '')
     {
