@@ -57,10 +57,10 @@ class AttentionController extends AuthBaseController
                     Db::commit();
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
-                    Db::rollback();
                     return apiReturn(config('code.app_show_error'), '内部错误，关注失败', [], 500);
                 }
             } catch (\Exception $e) {
+                Db::rollback();
                 return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
             }
         } else {
@@ -231,7 +231,7 @@ class AttentionController extends AuthBaseController
             try {
                 // 查询数据库中是否存在关注
                 $userAttentionUser = model('UserAttentionUser')->get($data);
-                if ($userAttentionUser) {
+                if (!$userAttentionUser) {
                     return apiReturn(config('code.app_show_error'), '没有被关注过，无法取消', [], 401);
                 }
                 $userAttentionUserId = model('UserAttentionUser')->where($data)->delete();
