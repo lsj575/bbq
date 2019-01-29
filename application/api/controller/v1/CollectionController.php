@@ -9,7 +9,7 @@ namespace app\api\controller\v1;
 
 
 use app\common\lib\exception\ApiException;
-
+use think\Db;
 class CollectionController extends AuthBaseController
 {
     /**
@@ -37,21 +37,22 @@ class CollectionController extends AuthBaseController
                 'user_id'       => $this->user->id,
                 'article_id'    => $id,
             ];
-
+            Db::startTrans();
             try {
                 // 查询数据库中是否存在该关注
-                $userCollection = model('UserCollection')->get($data);
+                $userCollection = Db::table('user_collection')->where($data)->find();
                 if ($userCollection) {
                     return apiReturn(config('code.app_show_error'), '已收藏,请勿重复收藏', [], 401);
                 }
                 // 未被关注
-                $userCollectionId = model('UserCollection')->add($data);
+                $userCollectionId = Db::table('user_collection')->insert($data);
                 if ($userCollectionId) {
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '内部错误，收藏失败', [], 500);
                 }
             } catch (\Exception $e) {
+                Db::rollback();
                 throw new ApiException($e->getMessage(), 500);
             }
         } else {
@@ -84,20 +85,21 @@ class CollectionController extends AuthBaseController
                 'user_id' => $this->user->id,
                 'article_id' => $id,
             ];
-
+            Db::startTrans();
             try {
                 // 查询数据库中是否存在关注
-                $userCollection = model('UserCollection')->get($data);
+                $userCollection = Db::table('user_collection')->where($data)->find();
                 if (empty($userCollection)) {
                     return apiReturn(config('code.app_show_error'), '没有被收藏过，无法取消', [], 401);
                 }
-                $userCollectionId = model('UserCollection')->where($data)->delete();
+                $userCollectionId = Db::table('user_collection')->where($data)->delete();
                 if ($userCollectionId) {
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '内部错误，取消收藏失败', [], 500);
                 }
             } catch (\Exception $e) {
+                Db::rollback();
                 throw new ApiException($e->getMessage(), 500);
             }
         } else {
