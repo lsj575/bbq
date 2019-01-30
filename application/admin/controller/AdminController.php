@@ -33,7 +33,7 @@ class AdminController extends  BaseController
                 $this->error('error');
             }
         }else {
-
+            $this->assign('roles',model('AdminRole')::all());
         }
         return $this->fetch();
     }

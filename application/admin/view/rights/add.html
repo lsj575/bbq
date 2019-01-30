@@ -1,0 +1,36 @@
+<!--header-->
+{include file="public/_meta" /}
+
+<article class="page-container">
+添加一个行为：<br>
+<form action="{:url("admin/rights/add")}" method="post">
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-read">*</span>控制器：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+        <input type="text" placeholder="controller" class="input-text radius size-S" name="controller">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-read">*</span>行为：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+        <input type="text" placeholder="action" class="input-text radius size-S" name="action">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-read">*</span>行为描述：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+        <input type="text" placeholder="description" class="input-text radius size-S"name="powername">
+        </div>
+    </div>
+
+    <div clas="row cl">
+        <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+            <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+        </div>
+    </div>
+</form>
+</article>
+{include file="public/_footer" /}
+</body>
+</html>
+

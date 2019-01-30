@@ -1,0 +1,37 @@
+<!--header>
+{include file="public/_meta"}
+
+<div class='page-container'>
+
+
+选择角色<br>
+<form action='{:url("admin/rights/index")}' method='get'>
+<div class='radio-box'>
+{foreach $roles as  $r}
+<input type='radio' name='roleid' value='{$r.roleid}' {if ($r.roleid == $role.roleid)}
+checked='checked' {/if} >{$r.rolename}
+{/foreach}
+</div>
+<br>
+<input class='btn btn-primary radius' type="submit" value="确定">
+</form>
+
+编辑角色 {$role.rolename} 的权限
+
+<form action='{:url("admin/rights/edit")}' method="post">
+<div class='check-box'>
+<input type="hidden" name='roleid' value='{$role.roleid}'>
+{foreach $powers as $p}
+<input type="checkbox" name='powers[]'  value='{$p.powerid}' {$p.checked}  > {$p.powername}
+{/foreach}
+</div>
+<br>
+<input class='btn btn-primary radius' type="submit" value="提交修改">
+</form>
+
+</div>
+
+{include file="public/_footer"}
+
+</body>
+</html>
