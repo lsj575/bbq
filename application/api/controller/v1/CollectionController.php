@@ -16,6 +16,7 @@ class CollectionController extends AuthBaseController
      * 收藏动态
      * @return \json
      * @throws ApiException
+     * @throws \think\exception\PDOException
      */
     public function collectionArticle()
     {
@@ -46,8 +47,8 @@ class CollectionController extends AuthBaseController
                 }
                 // 未被关注
                 $userCollectionId = model('UserCollection')->add($data);
-                model('UserCollection')->commit();
                 if ($userCollectionId) {
+                    model('UserCollection')->commit();
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '内部错误，收藏失败', [], 500);
@@ -65,6 +66,7 @@ class CollectionController extends AuthBaseController
      * 取消收藏动态
      * @return \json
      * @throws ApiException
+     * @throws \think\exception\PDOException
      */
     public function deleteCollection()
     {
@@ -94,8 +96,8 @@ class CollectionController extends AuthBaseController
                     return apiReturn(config('code.app_show_error'), '没有被收藏过，无法取消', [], 401);
                 }
                 $userCollectionId = model('UserCollection')->where($data)->delete();
-                model('UserCollection')->commit();
                 if ($userCollectionId) {
+                    model('UserCollection')->commit();
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '内部错误，取消收藏失败', [], 500);
