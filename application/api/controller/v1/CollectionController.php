@@ -37,7 +37,7 @@ class CollectionController extends AuthBaseController
                 'user_id'       => $this->user->id,
                 'article_id'    => $id,
             ];
-
+            model('UserCollection')->startTrans();
             try {
                 // 查询数据库中是否存在该关注
                 $userCollection = model('UserCollection')->get($data);
@@ -46,12 +46,14 @@ class CollectionController extends AuthBaseController
                 }
                 // 未被关注
                 $userCollectionId = model('UserCollection')->add($data);
+                model('UserCollection')->commit();
                 if ($userCollectionId) {
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '内部错误，收藏失败', [], 500);
                 }
             } catch (\Exception $e) {
+                model('UserCollection')->rollback();
                 throw new ApiException($e->getMessage(), 500);
             }
         } else {
@@ -84,7 +86,7 @@ class CollectionController extends AuthBaseController
                 'user_id' => $this->user->id,
                 'article_id' => $id,
             ];
-
+            model('UserCollection')->startTrans();
             try {
                 // 查询数据库中是否存在关注
                 $userCollection = model('UserCollection')->get($data);
@@ -92,12 +94,14 @@ class CollectionController extends AuthBaseController
                     return apiReturn(config('code.app_show_error'), '没有被收藏过，无法取消', [], 401);
                 }
                 $userCollectionId = model('UserCollection')->where($data)->delete();
+                model('UserCollection')->commit();
                 if ($userCollectionId) {
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '内部错误，取消收藏失败', [], 500);
                 }
             } catch (\Exception $e) {
+                model('UserCollection')->rollback();
                 throw new ApiException($e->getMessage(), 500);
             }
         } else {

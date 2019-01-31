@@ -8,7 +8,7 @@
 namespace app\api\controller\v1;
 
 use app\common\lib\exception\ApiException;
-
+use think\Db;
 /**
  * 点赞相关
  * Class UpvoteController
@@ -39,21 +39,23 @@ class UpvoteController extends AuthBaseController
                 'user_id' => $this->user->id,
                 'article_id' => $id,
             ];
-
+            Db::startTrans();
             try {
                 // 查询数据库中是否存在点赞
-                $userArticle = model('UserArticles')->get($data);
+                $userArticle = Db::table('user_articles')->where($data)->find();
                 if ($userArticle) {
                     return apiReturn(config('code.app_show_error'), '已点赞,请勿重复点赞', [], 401);
                 }
-                $userArticleId = model('UserArticles')->add($data);
+                $userArticleId = Db::table('user_articles')->insert($data);
                 if ($userArticleId) {
-                    model('Article')->where(['id' => $id])->setInc('likes');
+                    Db::table('article')->where(['id' => $id])->setInc('likes');
+                    Db::commit();
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '内部错误，点赞失败', [], 500);
                 }
             } catch (\Exception $e) {
+                Db::rollback();
                 throw new ApiException($e->getMessage(), 500);
             }
         } else {
@@ -85,21 +87,22 @@ class UpvoteController extends AuthBaseController
                 'user_id' => $this->user->id,
                 'article_id' => $id,
             ];
-
+            Db::startTrans();
             try {
                 // 查询数据库中是否存在点赞
-                $userArticle = model('UserArticles')->get($data);
+                $userArticle = Db::table('user_articles')->where($data)->find();
                 if (!$userArticle) {
                     return apiReturn(config('code.app_show_error'), '没有被点赞过，无法取消', [], 401);
                 }
-                $userArticleId = model('UserArticles')->where($data)->delete();
+                $userArticleId = Db::table('user_articles')->where($data)->delete();
                 if ($userArticleId) {
-                    model('Article')->where(['id' => $id])->setDec('likes');
+                    Db::table('article')->where(['id' => $id])->setDec('likes');
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '内部错误，取消点赞失败', [], 500);
                 }
             } catch (\Exception $e) {
+                Db::rollback();
                 throw new ApiException($e->getMessage(), 500);
             }
         } else {
