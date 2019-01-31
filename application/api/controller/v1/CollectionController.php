@@ -46,6 +46,7 @@ class CollectionController extends AuthBaseController
                 }
                 // 未被关注
                 $userCollectionId = model('UserCollection')->add($data);
+                model('UserCollection')->commit();
                 if ($userCollectionId) {
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
@@ -93,6 +94,7 @@ class CollectionController extends AuthBaseController
                     return apiReturn(config('code.app_show_error'), '没有被收藏过，无法取消', [], 401);
                 }
                 $userCollectionId = model('UserCollection')->where($data)->delete();
+                model('UserCollection')->commit();
                 if ($userCollectionId) {
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
