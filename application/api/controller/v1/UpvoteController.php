@@ -97,6 +97,7 @@ class UpvoteController extends AuthBaseController
                 $userArticleId = Db::table('user_articles')->where($data)->delete();
                 if ($userArticleId) {
                     Db::table('article')->where(['id' => $id])->setDec('likes');
+                    Db::commit();
                     return apiReturn(config('code.app_show_success'), 'OK', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '内部错误，取消点赞失败', [], 500);
