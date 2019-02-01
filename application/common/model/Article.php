@@ -186,31 +186,36 @@ class Article extends Base
     public function getArticlesOfUserAttention($id, $offset)
     {
         $whereData = [
-            'u.id'      => $id,
             'a.status'  => config('code.status_normal'),
             'u.status'  => config('code.status_normal'),
         ];
 
         // 关注的用户的动态
-        $user_article = $this->table('user')
-            ->alias('u')
+        $be_attention_user_id_arr = $this->table('user_attention_user')
+            ->where(['attention_user_id' => $id])
+            ->column('be_attention_user_id');
+        $user_article = $this->table('article')
+            ->alias('a')
             ->field($this->_getListField())
-            ->join('user_attention_user uau', 'uau.attention_user_id = u.id')
-            ->join('article a', 'a.user_id = uau.be_attention_user_id')
+            ->join('user u', 'u.id = a.user_id')
             ->join('theme t', 't.id = a.theme_id')
             ->where($whereData)
+            ->where('a.user_id', 'in', $be_attention_user_id_arr)
             ->limit($offset, $offset+30)
             ->order('a.create_time desc')
             ->select();
 
         // 关注的主题的动态
-        $theme_article = $this->table('user')
-            ->alias('u')
+        $be_attention_theme_id_arr = $this->table('user_attention_theme')
+            ->where('user_id', $id)
+            ->column('theme_id');
+        $theme_article = $this->table('article')
+            ->alias('a')
             ->field($this->_getListField())
-            ->join('user_attention_theme uat', 'uat.user_id = u.id')
-            ->join('article a', 'a.theme_id = uat.theme_id')
+            ->join('user u', 'u.id = a.user_id')
             ->join('theme t', 't.id = a.theme_id')
             ->where($whereData)
+            ->where('a.theme_id', 'in', $be_attention_theme_id_arr)
             ->limit($offset, $offset+30)
             ->order('a.create_time desc')
             ->select();
