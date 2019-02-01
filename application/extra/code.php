@@ -22,4 +22,7 @@ return [
     'user_ban'              => 0,  //用户被禁止
     'is_position'           => 1, // 推荐状态
     'APP_CODE'              => 'Yf6u0XI8yVOx5OxSM7iyfXckGmtYNfuxI8CxmcE1ghHOcyGMrp5SCdouoQmV51qq', //静态资源文件的bbq专属code
+
+    'STATUS_PENDING'        => 0, //未处理
+    'STATUS_PROCESSED'      => 1, //已处理
 ];
