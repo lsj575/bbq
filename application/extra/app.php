@@ -9,8 +9,13 @@ return [
         'ios',
         'android',
     ],
-    'sign_time'                 => 10, //sign失效时间
-    'sign_cache_time'           => 20, //sign缓存失效时间
-    'login_time_out_day'        => 180, //登录token失效时间
-    'access_user_token_time'    => 10, //access_user_token失效时间
+    'sign_time'                 => 10,  // sign失效时间
+    'sign_cache_time'           => 20,  // sign缓存失效时间
+    'login_time_out_day'        => 180, // 登录token失效时间
+    'access_user_token_time'    => 10,  // access_user_token失效时间
+    'report_type'               => [    // 举报的类型
+        '1' => 'User',
+        '2' => 'Article',
+        '3' => 'Theme',
+    ],
 ];
