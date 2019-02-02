@@ -1,7 +1,8 @@
 <!--header-->
 {include file="public/_meta" /}
 <article class="page-container">
-  <form class="form form-horizontal" id="form-admin-add" method="post" action="{:url('admin/add')}">
+  <form class="form form-horizontal" id="form-bbq" url="{:url('admin/add')}"
+      action="">
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>管理员名：</label>
       <div class="formControls col-xs-8 col-sm-9">
@@ -28,12 +29,55 @@
 
     <div class="row cl">
       <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+          <button class="btn btn-secondary radius" type="submit"><i
+                                                class="Hui-iconfont">&#xe632;</i>保存</button>
+	<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
       </div>
     </div>
   </form>
 </article>
 {include file="public/_footer" /}
 
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<!-- <script type="text/javascript" src="__STATIC__/admin/uploadify/jquery.uploadify.min.js"></script> -->
+<script type="text/javascript" src="__STATIC__/admin/js/dropzone.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/js/image.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/js/common.js"></script>
+
+<script type="text/javascript">
+$(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+        //表单验证
+        $("#form-bbq").validate({
+            rules:{
+                username:{
+                    required:true,
+                    maxlength:20
+                },
+                password: {
+                    required: true,
+                    maxlength:20
+                }
+            },
+            onkeyup:false,
+            focusCleanup:true,
+            success:"valid",
+            submitHandler:function(form){
+                //singwaapp_save(form);// 需要小伙伴自定义一个singwaapp_save方法 用来处理抛送请求的哦
+                bbq_save(form);
+            }
+        });
+
+
+    });
+
+</script>
 </body>
 </html>
