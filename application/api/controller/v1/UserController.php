@@ -90,8 +90,9 @@ class UserController extends AuthBaseController
     public function getUserAttentionUserCount()
     {
         if (request()->isGet()) {
+            $id = input('get.id') ? input('get.id') : $this->user->id;
             try {
-                $count = model('UserAttentionUser')->where(['attention_user_id' => $this->user->id])
+                $count = model('UserAttentionUser')->where(['attention_user_id' => $id])
                     ->count();
             } catch (\Exception $e) {
                 return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
@@ -109,8 +110,9 @@ class UserController extends AuthBaseController
     public function getUserBeAttentionCount()
     {
         if (request()->isGet()) {
+            $id = input('get.id') ? input('get.id') : $this->user->id;
             try {
-                $count = model('UserAttentionUser')->where(['be_attention_user_id' => $this->user->id])
+                $count = model('UserAttentionUser')->where(['be_attention_user_id' => $id])
                     ->count();
             } catch (\Exception $e) {
                 return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
