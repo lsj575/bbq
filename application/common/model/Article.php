@@ -81,7 +81,7 @@ class Article extends Base
         return $this->table($this->table)
             ->alias('a')
             ->join('user u', 'a.user_id = u.id')
-            ->field('a.*, u.nickname, u.avatar')
+            ->field('a.*, u.nickname, u.avatar, u.signature')
             ->where($whereData)
             ->order($order)
             ->select();
@@ -261,6 +261,7 @@ class Article extends Base
             'a.is_position as is_position',
             'u.avatar as user_avatar',
             'u.nickname as user_nickname',
+            'u.signature as signature',
             'a.create_time',
             'theme_introduction',
             'likes',

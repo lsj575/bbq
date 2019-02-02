@@ -44,13 +44,14 @@ class ArticleController extends CommonController
             $result = [];
             foreach ($articles as $key => $article) {
                 $result[] = [
-                    'article_id'    => $article['id'],
-                    'content'       => $article['content'],
-                    'img'           => $article['img'] == "" ? "" : explode($article['img'], ','),
-                    'likes'         => $article['likes'],
-                    'user_nickname' => $article['nickname'],
-                    'user_avatar'   => $article['avatar'],
-                    'create_time'   => $article['create_time'],
+                    'article_id'        => $article['id'],
+                    'content'           => $article['content'],
+                    'img'               => $article['img'] == "" ? "" : explode($article['img'], ','),
+                    'likes'             => $article['likes'],
+                    'user_nickname'     => $article['nickname'],
+                    'user_avatar'       => $article['avatar'],
+                    'user_signature'    => $article['signature'],
+                    'create_time'       => $article['create_time'],
                 ];
             }
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
@@ -263,6 +264,7 @@ class ArticleController extends CommonController
                     'comments'              => $article['comments'],
                     'user_nickname'         => $article['user_nickname'],
                     'user_avatar'           => $article['user_avatar'],
+                    'user_signature'        => $article['user_signature'],
                     'is_position'           => $article['is_position'],
                     'create_time'           => $article['create_time'],
                 ];
@@ -313,6 +315,7 @@ class ArticleController extends CommonController
             'comments'              => $article['comments'],
             'user_nickname'         => $article['user_nickname'],
             'user_avatar'           => $article['user_avatar'],
+            'user_signature'        => $article['user_signature'],
             'is_position'           => $article['is_position'],
             'create_time'           => $article['create_time'],
         ];
