@@ -604,6 +604,8 @@ www  WEB部署目录（或者子目录）
 
 - version为bbq版本，例如v1
 
+- 不传id则返回发起查询的用户自己的动态
+
 - 返回数据
 
   ```json
@@ -613,42 +615,37 @@ www  WEB部署目录（或者子目录）
       "data": [
           {
               "user_id": 2,
-              "article_id": 3,
-              "theme_id": 1,
-              "theme_name": "BBQ开发交流",
-              "content": "bbq发布动态测试2",
-              "img": "",
-              "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-              "likes": 0,
-              "user_nickname": "BBQ首席烧烤师",
-              "user_avatar": null,
-              "create_time": "1970-01-01 08:00:00"
-          },
-          {
-              "user_id": 2,
               "article_id": 2,
               "theme_id": 1,
               "theme_name": "BBQ开发交流",
+              "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
               "content": "bbq发布动态测试1",
               "img": "",
               "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-              "likes": 0,
+              "likes": 1,
+              "comments": 0,
               "user_nickname": "BBQ首席烧烤师",
               "user_avatar": null,
-              "create_time": "1970-01-01 08:00:00"
+              "user_signature": "123",
+              "is_position": 1,
+              "create_time": "2018-11-29 10:21:44"
           },
           {
               "user_id": 2,
               "article_id": 1,
               "theme_id": 1,
               "theme_name": "BBQ开发交流",
+              "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
               "content": "更新动态测试",
               "img": "",
               "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
               "likes": 0,
+              "comments": 0,
               "user_nickname": "BBQ首席烧烤师",
               "user_avatar": null,
-              "create_time": "1970-01-01 08:00:00"
+              "user_signature": "123",
+              "is_position": 0,
+              "create_time": "2018-11-24 20:29:58"
           }
       ]
   }
