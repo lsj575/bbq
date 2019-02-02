@@ -13,8 +13,11 @@
 			<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="picture-list.html" data-title="图片管理" href="javascript:void(0)">图片管理</a></li>
-				</ul>
+                    <li><a data-href="{:url('admin/slideImg/index')}" data-title="图片管理" href="javascript:void(0)">图片管理</a></li>
+				    <li><a data-href="{:url('admin/slideImg/add')}"
+				            data-title="添加图片"
+                href="javascript:void(0)">添加图片</a></li>
+                </ul>
 			</dd>
 		</dl>
 		<dl id="menu-product">
@@ -25,8 +28,8 @@
 				</ul>
 			</dd>
 		</dl>
-		<dl id="menu-comments">
-			<dt><i class="Hui-iconfont">&#xe622;</i> 反馈管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+		<dl id="menu-feedback">
+			<dt><i class="Hui-iconfont">&#xe691;</i> 反馈管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
 					<li><a data-href="{:url('feedback/index')}" data-title="反馈列表" href="javascript:void(0)">反馈列表</a></li>
@@ -34,6 +37,32 @@
 				</ul>
 			</dd>
 		</dl>
+        
+        <dl id="menu-comment">
+            <dt><i class="Hui-iconfont">&#xe622;</i>评论管理<i
+                   class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a data-href="{:url('admin/comment/index')}"
+                            data-title="评论管理"
+                            href="javascript:void(0)">评论管理</a></li>
+                </ul>
+            </dd>
+        </dl>
+
+        <dl id="menu-report">
+            <dt>
+            <i class="Hui-iconfont">&#xe622;</i>举报管理
+            <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+            </dt>
+
+            <ul>
+                <li><a data-href="{:url('admin/report/index')}"
+                        data-title="举报管理"
+                        href="javascript:void(0)">举报管理</a></li>
+            </ul>
+        </dl>
+
 		<dl id="menu-member">
 			<dt><i class="Hui-iconfont">&#xe60d;</i> 版本管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
@@ -49,6 +78,12 @@
 				<ul>
 
 					<li><a data-href="{:url('admin/add')}" data-title="添加后台用户" href="javascript:void(0)">添加后台用户</a></li>
+                    <li><a data-href="{:url('admin/rights/index')}"
+                            data-title="管理员权限管理"
+                            href="javascript:void(0)">管理员权限管理</a></li>
+                    <li><a data-href="{:url('admin/rights/add')}"
+                            data-title="添加权限"
+                            href="javascript:void(0)">添加权限</a></li>
 				</ul>
 			</dd>
 		</dl>
