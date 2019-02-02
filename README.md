@@ -590,7 +590,7 @@ www  WEB部署目录（或者子目录）
   }
   ```
 #### 获取某用户的动态
-> GET:www.example.com/bbq/public/api/v1/articles/user
+> GET:www.example.com/bbq/public/api/v1/articles/user?id=
 
 - HEADER:
 
