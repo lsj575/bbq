@@ -264,7 +264,7 @@ class ArticleController extends CommonController
                     'comments'              => $article['comments'],
                     'user_nickname'         => $article['user_nickname'],
                     'user_avatar'           => $article['user_avatar'],
-                    'user_signature'        => $article['user_signature'],
+                    'user_signature'        => $article['signature'],
                     'is_position'           => $article['is_position'],
                     'create_time'           => $article['create_time'],
                 ];
@@ -315,7 +315,7 @@ class ArticleController extends CommonController
             'comments'              => $article['comments'],
             'user_nickname'         => $article['user_nickname'],
             'user_avatar'           => $article['user_avatar'],
-            'user_signature'        => $article['user_signature'],
+            'user_signature'        => $article['signature'],
             'is_position'           => $article['is_position'],
             'create_time'           => $article['create_time'],
         ];
