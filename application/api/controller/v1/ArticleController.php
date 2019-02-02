@@ -209,9 +209,9 @@ class ArticleController extends CommonController
         if (request()->isGet()) {
             // 提升权限要求
             $auth = new AuthBaseController();
-
+            $id = input('get.id') ? input('get.id') : $auth->user->id;
             try {
-                $articles = model('Article')->getArticleOfUser($auth->user->id);
+                $articles = model('Article')->getArticleOfUser($id);
             } catch (\Exception $e) {
                 return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
             }
