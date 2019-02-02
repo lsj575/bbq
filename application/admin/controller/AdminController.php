@@ -6,30 +6,43 @@ use app\common\lib\IAuth;
 
 class AdminController extends  BaseController
 {
+    public $model = 'AdminUser';
+
+    public function index(){
+        if(request()->isGet()){
+            $data = input('get.');
+
+            $results = model('AdminUser')->getUser($data);
+
+            $this->assign('results',$results);
+        }
+
+        return $this->fetch();
+    }
     public function add()
     {
         //判断是否是post提交
         if (request()->isPost()) {
             $data = input('post.');
-            // validate
+            // validate 。 其实前端已经判断过一次了
             $validate = validate('AdminUser');
             if (!$validate->check($data)) {
-                $this->error($validate->getError());
+                return $this->result('',config('code.FAILURE'),$validate->getError());
             }
 
             //加密、加盐
             $data['password'] = IAuth::setPassword($data['password']);
             $data['status'] = 1;
-
             try {
                 $id = model('AdminUser')->add($data);
             }catch (\Exception $e) {
-                $this->error($e->getMessage());
+                return $this->result('',config('code.FAILURE'),'保存失败');
             }
 
             if ($id) {
-                $this->success('id=' . $id . '的用户新增成功');
+                return $this->result(['jump_url' => url('admin/admin/index')],config('code.SUCCESS'),'OK');
             }else {
+                return $this->result('',config('code.FAILURE'),'保存失败');
                 $this->error('error');
             }
         }else {

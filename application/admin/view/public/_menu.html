@@ -9,8 +9,22 @@
 				</ul>
 			</dd>
 		</dl>
-		<dl id="menu-picture">
-			<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+        <dl id="menu-picture">
+            <dt>
+                <i class="Hui-iconfont">&#xe613;</i>图片管理<i
+                   class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+            </dt>
+            <dd>
+                <ul>
+                    <li><a data-href="{:url('admin/image/index')}"
+                            data-title="图片管理"
+                            href="javascript:void(0)">图片管理</a>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+		<dl id="menu-slide_img">
+			<dt><i class="Hui-iconfont">&#xe613;</i> 轮播图管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
                     <li><a data-href="{:url('admin/slideImg/index')}" data-title="图片管理" href="javascript:void(0)">图片管理</a></li>
@@ -76,7 +90,9 @@
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-
+                    <li><a data-href="{:url('admin/admin/index')}"
+                           data-title="管理后台用户"
+                           href="javascript:void(0)">管理后台用户</a></li>
 					<li><a data-href="{:url('admin/add')}" data-title="添加后台用户" href="javascript:void(0)">添加后台用户</a></li>
                     <li><a data-href="{:url('admin/rights/index')}"
                             data-title="管理员权限管理"
