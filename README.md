@@ -274,7 +274,7 @@ www  WEB部署目录（或者子目录）
 
 #### 获取用户关注用户的数量
 
-> GET:www.example.com/bbq/public/api/version/user/attention/count
+> GET:www.example.com/bbq/public/api/version/user/attention/count?id=
 
 - HEADER
 
@@ -286,6 +286,8 @@ www  WEB部署目录（或者子目录）
   | access_user_token | 手机登陆后获取的token                                        |
 
 - version为bbq版本，例如v1
+
+- 不传id则查询发起请求的用户关注用户的数量
 
 - 返回数据
 
@@ -301,7 +303,7 @@ www  WEB部署目录（或者子目录）
 
 #### 获取用户被用户关注的数量
 
-> GET:www.example.com/bbq/public/api/version/user/beattention/count
+> GET:www.example.com/bbq/public/api/version/user/beattention/count?id=
 
 - HEADER
 
@@ -313,6 +315,8 @@ www  WEB部署目录（或者子目录）
   | access_user_token | 手机登陆后获取的token                                        |
 
 - version为bbq版本，例如v1
+
+- 不传id则查询发起请求的用户被用户关注的数量
 
 - 返回数据
 
