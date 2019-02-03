@@ -25,7 +25,6 @@ class ThemeController extends BaseController
                 ['egt', strtotime($data['start_time'])],
                 ['elt', strtotime($data['end_time'])],
             ];
-            //halt($data['start_time']);
         }
         if (!empty($data['title'])) {
             $whereData['theme_name'] = ['like', '%'.$data['title'].'%'];
@@ -59,7 +58,6 @@ class ThemeController extends BaseController
             $user = session(config('admin.session_user'), '', config('admin.session_user_scope'));
             // form表单key名转换
             (!isset($data['is_position'])) ? $data['is_position'] = 0 : $data['is_position'] = 1;
-            (!isset($data['is_head_figure']))? $data['is_head_figure'] = 0 : $data['is_head_figure'] = 1;
             //TODO 将图片路径改为http：//的格式
             $data = array(
                 'user_id'             => $user->id,
@@ -67,7 +65,6 @@ class ThemeController extends BaseController
                 'img'                 => $data['image'],
                 'theme_introduction'  => $data['description'],
                 'is_position'         => $data['is_position'],
-                'is_head_figure'      => $data['is_head_figure'],
             );
 
             //入库操作
@@ -105,15 +102,13 @@ class ThemeController extends BaseController
                 $this->error($validate->getError());
             }
 
-            //若表单未对推荐进行勾选，is_position， is_head_figure未被set，需要主动赋值
+            // 若表单未对推荐进行勾选，is_position需要主动赋值
             (!isset($data['is_position'])) ? $data['is_position'] = 0 : $data['is_position'] = 1;
-            (!isset($data['is_head_figure']))? $data['is_head_figure'] = 0 : $data['is_head_figure'] = 1;
             $data = array(
                 'theme_name'          => $data['title'],
                 'img'                 => $data['image'],
                 'theme_introduction'  => $data['description'],
                 'is_position'         => $data['is_position'],
-                'is_head_figure'      => $data['is_head_figure'],
             );
             //入库操作
             try {
