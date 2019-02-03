@@ -8,7 +8,7 @@
       <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜反馈类型</button>
     </form>
     <br/>
-    <form action="{:url('feedbackType/addType')}" method="post">
+    <form id='form-bbq' url="{:url('feedbackType/addType')}" method="post">
       <input type="text" name="type_name" id="" value="" placeholder="" style="width:250px" class="input-text">
       <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe600;</i> 添加</button>
     </form>
@@ -47,10 +47,39 @@
 {include file="public/_footer" /}
 
 <!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/hadmin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<!-- <script type="text/javascript" src="__STATIC__/admin/uploadify/jquery.uploadify.min.js"></script> -->
+<script type="text/javascript" src="__STATIC__/admin/js/dropzone.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/js/image.js"></script>
+
 <script type="text/javascript" src="__STATIC__/hadmin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="__STATIC__/hadmin/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="__STATIC__/admin/js/common.js"></script>
 <script type="text/javascript">
+  $(function(){
+    $('.skin-minimal input').iCheck({
+      checkboxClass: 'icheckbox-blue',
+      radioClass: 'iradio-blue',
+      increaseArea: '20%'
+    });
+
+    //表单验证
+    $("#form-bbq").validate({
+        rules:{
+        },
+        onkeyup:false,
+        focusCleanup:true,
+        success:"valid",
+        submitHandler:function(form){
+            //singwaapp_save(form);// 需要小伙伴自定义一个singwaapp_save方法 用来处理抛送请求的哦
+            bbq_save(form);
+        }
+    });
+
+
+  });
 
 </script>
 <style>

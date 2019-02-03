@@ -40,8 +40,7 @@ class BaseController extends Controller
         //获取session
         $user = session(config('admin.session_user'), '',config('admin.session_user_scope'));
         if ($user && $user->id) {
-            $admin_role_name = model('AdminRole')::get($user->roleid)->rolename;
-            $this->assign('admin_role_name',$admin_role_name);
+            $this->assign('admin_role_name',session('admin_role_name','',config('admin.session_user_scope')));
             return true;
         }
         return false;
