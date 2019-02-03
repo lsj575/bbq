@@ -58,7 +58,7 @@ return [
     // 禁止访问模块
     'deny_module_list'       => ['common'],
     // 默认控制器名
-    'default_controller'     => 'BaseController',
+    'default_controller'     => 'Base',
     // 默认操作名
     'default_action'         => 'index',
     // 默认验证器
@@ -139,7 +139,9 @@ return [
     ],
 
     // 视图输出字符串内容替换
-    'view_replace_str'       => [],
+    'view_replace_str'       => [
+        '__STATIC__'    => SCRIPT_DIR . '/static',
+    ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
     'dispatch_error_tmpl'    => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
@@ -185,13 +187,19 @@ return [
 
     'cache'                  => [
         // 驱动方式
-        'type'   => 'File',
+        'type'   => 'Redis',
         // 缓存保存目录
-        'path'   => CACHE_PATH,
+        //'path'   => CACHE_PATH,
+        // 缓存有效期 0表示永久缓存
+        'expire'    => 0,
+        // redis主机
+        'host'  => '120.79.159.186',
+        // redis端口
+        'port'  => 6379,
+        // redis密码
+        'password'  => '',
         // 缓存前缀
         'prefix' => '',
-        // 缓存有效期 0表示永久缓存
-        'expire' => 0,
     ],
 
     // +----------------------------------------------------------------------
