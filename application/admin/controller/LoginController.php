@@ -73,6 +73,8 @@ class LoginController extends BaseController
             //session
             session(config('admin.session_user'), $user, config('admin.session_user_scope'));
             session('admin_role_name',model('AdminRole')->get($user->roleid)->rolename,config('admin.session_user_scope'));
+
+            session('powerid',"|" . model('AdminRole')::get($user->roleid)->powerid . "|" ,config('admin.session_user_scope'));
             $this->redirect('admin/index/index');
         }else {
             return view('index',['tip'=>'Illegal request!']);
