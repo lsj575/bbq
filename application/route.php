@@ -64,6 +64,9 @@ Route::get('api/:ver/user/beattention/count', 'api/:ver.user/getUserBeAttentionC
 Route::get('api/:ver/user/attention/user', 'api/:ver.user/getUserOfUserAttention');
 // 检查用户昵称是否合法
 Route::get('api/:ver/user/checknickname/:id', 'api/:ver.user/checkUserNicknamePass');
+// 获取用户关注主题的数量
+Route::get('api/:ver/user/attentiontheme/count', 'api/:ver.user/getUserAttentionThemeCount');
+
 /**
  * 图片相关路由
  */
