@@ -13,28 +13,62 @@
         <tr>
             <th colspan="7" scope="col">信息统计</th>
         </tr>
+        <tr class="text-c">
+            <th>统计</th>
+            <th>文章</th>
+            <th>反馈</th>
+            <th>主题</th>
+            <th>举报</th>
+            <th>用户</th>
+            <th>管理员</th>
+        </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>文章</td>
-                <td>{$info.article}</td>
-            </tr>
-            <tr>
-                <td>反馈</td>
-                <td>{$info.feedback}</td>
-            </tr>
-            <tr>
-                <td>主题</td>
-                <td>{$info.theme}</td>
-            </tr>
-            <tr>
-                <td>用户</td>
-                <td>{$info.user}</td>
-            </tr>
-            <tr>
-                <td>管理员</td>
-                <td>{$info.admin}</td>
-            </tr>
+        <tr class="text-c">
+            <td>总数</td>
+            <td>{$total.article}</td>
+            <td>{$total.feedback}</td>
+            <td>{$total.theme}</td>
+            <td>{$total.report}</td>
+            <td>{$total.user}</td>
+            <td>{$total.admin}</td>
+        </tr>
+        <tr class="text-c">
+            <td>今日</td>
+            <td>{$today.article}</td>
+            <td>{$today.feedback}</td>
+            <td>{$today.theme}</td>
+            <td>{$today.report}</td>
+            <td>{$today.user}</td>
+            <td>{$today.admin}</td>
+        </tr>
+        <tr class="text-c">
+            <td>昨日</td>
+            <td>{$yesterday.article}</td>
+            <td>{$yesterday.feedback}</td>
+            <td>{$yesterday.theme}</td>
+            <td>{$yesterday.report}</td>
+            <td>{$yesterday.user}</td>
+            <td>{$yesterday.admin}</td>
+        </tr>
+        <tr class="text-c">
+            <td>本周</td>
+            <td>{$week.article}</td>
+            <td>{$week.feedback}</td>
+            <td>{$week.theme}</td>
+            <td>{$week.report}</td>
+            <td>{$week.user}</td>
+            <td>{$week.admin}</td>
+        </tr>
+        <tr class="text-c">
+            <td>本月</td>
+            <td>{$month.article}</td>
+            <td>{$month.feedback}</td>
+            <td>{$month.theme}</td>
+            <td>{$month.report}</td>
+            <td>{$month.user}</td>
+            <td>{$month.admin}</td>
+        </tr>
         </tbody>
     </table>
 
