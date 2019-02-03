@@ -56,7 +56,7 @@ class SlideImgController extends BaseController
             $data = array(
                 'user_id'        => $user->id,
                 'description'    => $data['description'],
-                'img'            => $data['img'],
+                'img'            => $data['image'],
                 'img_type'       => $data['img_type'],
             );
             //入库
@@ -76,6 +76,7 @@ class SlideImgController extends BaseController
             return $this->fetch();
         }
     }
+
     public function edit($id = 0)
     {
         if (request()->isPost()) {
@@ -92,7 +93,7 @@ class SlideImgController extends BaseController
             $data = array(
                 'user_id'        => $user->id,
                 'description'    => $data['description'],
-                'img'            => $data['img'],
+                'img'            => $data['image'],
                 'img_type'       => $data['img_type'],
             );
             //入库
