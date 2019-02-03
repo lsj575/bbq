@@ -26,7 +26,7 @@ class BaseController extends Controller
         }
 
         $user = session(config('admin.session_user'), '',config('admin.session_user_scope'));
-        if( ! model("AdminRole")->havePermission($user->id, request()->controller(), request()->action())){
+        if( ! model("AdminRole")->havePermission(request()->controller(), request()->action())){
             exit('您没有此操作权限');
         }
     }
