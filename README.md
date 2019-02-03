@@ -330,6 +330,36 @@ www  WEB部署目录（或者子目录）
   }
   ```
 
+#### 获取用户关注的主题的数量
+
+> GET:www.example.com/bbq/public/api/version/user/attentiontheme/count?id=
+
+- HEADER
+
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- version为bbq版本，例如v1
+
+- 不传id则查询发起请求的用户关注主题的数量
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": {
+          "count": 2
+      }
+  }
+  ```
+
+#### 
 
 ####获取用户关注的用户
 
