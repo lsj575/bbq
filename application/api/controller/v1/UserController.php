@@ -182,6 +182,25 @@ class UserController extends AuthBaseController
         } else {
             return apiReturn(config('code.app_show_error'), '昵称已存在', [], 200);
         }
+    }
 
+    /**
+     * 获取用户的主题数量
+     * @return \json
+     */
+    public function getUserAttentionThemeCount()
+    {
+        if (request()->isGet()) {
+            $id = input('get.id') ? input('get.id') : $this->user->id;
+            try {
+                $count = model('UserAttentionTheme')->where(['user_id' => $id])
+                    ->count();
+            } catch (\Exception $e) {
+                return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
+            }
+            return apiReturn(config('code.app_show_success'), 'OK', ['count' => $count], 200);
+        } else {
+            return apiReturn(config('code.app_show_error'), 'error', [], 403);
+        }
     }
 }
