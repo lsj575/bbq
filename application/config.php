@@ -208,7 +208,7 @@ return [
 
     'session'                => [
         //'id'             => '',
-        'expire'         => 864000,
+        'expire'         => 86400,
 //        // SESSION_ID的提交变量,解决flash上传跨域
 //        'var_session_id' => 'ses',
 //        // SESSION 前缀
