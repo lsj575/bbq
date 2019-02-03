@@ -207,14 +207,20 @@ return [
     // +----------------------------------------------------------------------
 
     'session'                => [
-        'id'             => '',
+        //'id'             => '',
         'expire'         => 864000,
-        // SESSION_ID的提交变量,解决flash上传跨域
-        'var_session_id' => 'ses',
-        // SESSION 前缀
-        'prefix'         => 'think',
+//        // SESSION_ID的提交变量,解决flash上传跨域
+//        'var_session_id' => 'ses',
+//        // SESSION 前缀
+//        'prefix'         => 'think',
         // 驱动方式 支持redis memcache memcached
-        'type'           => '',
+        'type'           => 'redis',
+        // redis主机
+        'host'       => '120.79.159.186',
+        // redis端口
+        'port'       => 6379,
+        // 密码
+        'password'   => '',
         // 是否自动开启 SESSION
         'auto_start'     => true,
     ],
