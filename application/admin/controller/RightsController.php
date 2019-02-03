@@ -18,7 +18,12 @@ class RightsController extends BaseController{
         $data['roles']=$roles;
 
         //获取特定角色的权限列表
-        $role = model('AdminRole')::get($roleid);
+        foreach ($roles as $r){
+            if($r->roleid == $roleid){
+                $role = $r;
+                break;
+            }
+        }
         $data['role'] = $role;
 
         //遍历每个行为 ，检查特定角色是否有权限

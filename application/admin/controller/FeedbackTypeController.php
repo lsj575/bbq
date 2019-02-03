@@ -68,7 +68,7 @@ class FeedbackTypeController extends BaseController
             }
 
             if ($id) {
-                return json(['data' => ['jump_url' => url('feedback/type_index')], 'code' => config('code.SUCCESS'), 'msg' => '新增成功']);
+                return json(['data' => ['jump_url' => url('admin/feedbackType/index')], 'code' => config('code.SUCCESS'), 'msg' => '新增成功']);
             }else {
                 return json(['data' => '', 'code' => config('code.FAILURE'), 'msg' => '新增失败']);
             }
