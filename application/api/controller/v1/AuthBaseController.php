@@ -6,6 +6,7 @@ use app\common\lib\Aes;
 use app\common\lib\exception\ApiException;
 use app\common\lib\IAuth;
 use app\common\model\User;
+use think\Cache;
 
 /**
  * 客户端Auth登录基础类库
@@ -56,8 +57,11 @@ class AuthBaseController extends CommonController
         }
 
         list($token, $id) = explode("||", $access_user_token);
-        // TODO 将用户数据存入Redis缓存，减少MySQL的访问频率
-        $user = User::get(['token' => $token]);
+        // 启用redis缓存，若缓存中不存在则查询MySQL
+        if (!$user = Cache::get("user:{$id}")) {
+            $user = User::get(['token' => $token]);
+            Cache::set("user:{$id}", $user);
+        }
 
         if (!$user || config('code.user_normal') != $user->status) {
             return false;
