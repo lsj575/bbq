@@ -1307,7 +1307,7 @@ www  WEB部署目录（或者子目录）
     }
     ```
 
-#### 获取主题是否被某用户关注
+#### 获取动态是否被某用户收藏
 > GET:www.example.com/bbq/public/api/v1/collection/article?id=动态id
 
 - HEADER
