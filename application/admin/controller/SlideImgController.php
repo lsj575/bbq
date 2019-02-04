@@ -58,7 +58,8 @@ class SlideImgController extends BaseController
                 'description'    => $data['description'],
                 'img'            => $data['image'],
                 'img_type'       => $data['img_type'],
-                'type_id'        => $data['type_id']
+                'type_id'        => $data['type_id'],
+                'order'          => $data['order']
             );
             //入库
             try {
@@ -96,7 +97,8 @@ class SlideImgController extends BaseController
                 'description'    => $data['description'],
                 'img'            => $data['image'],
                 'img_type'       => $data['img_type'],
-                'type_id'        => $data['type_id']
+                'type_id'        => $data['type_id'],
+                'order'          => $data['order']
             );
             //入库
             try {
