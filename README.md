@@ -634,7 +634,48 @@ www  WEB部署目录（或者子目录）
       ]
   }
   ```
+#### 删除动态
+> DELETE:www.example.com/bbq/public/api/v1/article/:id
+
+- HEADER
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- delete参数（x-www-form-urlecode）
+
+  | 参数 | 值     |
+  | ---- | ------ |
+  | id   | 动态id |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  - 成功
+
+    ```json
+    {
+        "status": 1,
+        "message": "ok",
+        "data": []
+    }
+    ```
+  - 失败
+
+    ```json
+    {
+        "status": 0,
+        "message": "动态不存在或已被删除",
+        "data": []
+    }
+    ```
+
 #### 获取某用户的动态
+
 > GET:www.example.com/bbq/public/api/v1/articles/user?id=
 
 - HEADER:
