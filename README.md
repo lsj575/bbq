@@ -359,8 +359,6 @@ www  WEB部署目录（或者子目录）
   }
   ```
 
-#### 
-
 ####获取用户关注的用户
 
 > GET:www.example.com/bbq/public/api/v1/user/attention/user
@@ -382,12 +380,20 @@ www  WEB部署目录（或者子目录）
   {
       "status": 1,
       "message": "OK",
-      "data": {
-          "user_id": 3,
-          "user_avatar": null,
-          "user_nickname": "小Q15717515314",
-          "user_signature": null
-      }
+      "data": [
+          {
+              "user_id": 3,
+              "user_avatar": null,
+              "user_nickname": "小Q15717515314",
+              "user_signature": null
+          },
+          {
+              "user_id": 4,
+              "user_avatar": null,
+              "user_nickname": "codeplay",
+              "user_signature": "hello world."
+          }
+      ]
   }
   ```
 ####检查用户昵称是否已经被占用
