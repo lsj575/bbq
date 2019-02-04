@@ -5,6 +5,47 @@ class Article extends Base
 {
     protected $table = 'article';
 
+    //管理员获取动态列表
+    public function getArticleForAdmin($data){
+        $whereData = [];
+
+        //按动态内容搜索
+        if (!empty($data['content'])) {
+            $whereData['content'] = ['like',"%".$data['content']."%"];
+        } 
+
+        //按用户名搜索
+        if (!empty($data['nickname'])) {
+            $whereData['nickname'] = ['like',"%".$data['nickname']."%"];
+        }
+
+        //按发布时间搜索
+        if (!empty($data['start_time']) || !empty($data['end_time'])) {
+            $whereData['a.create_time'] = [
+                ['egt',empty($data['start_time']) ? 946699200 : strtotime($data['start_time'])],
+                ['elt',empty($data['end_time'])   ? strtotime('now') : strtotime($data['end_time'])],
+            ];
+        }
+
+        //不要被删除的动态
+        $whereData['a.status'] = ['neq', config('code.status_delete')];
+
+         
+        $listField = $this->_getListField();
+        $listField[] = 'a.status' ;
+        $listField[] = 'a.update_time';
+
+        $results = $this->table($this->table)
+            ->alias('a')
+            ->field($listField)
+            ->join('theme t','a.theme_id = t.id')
+            ->join('user u','a.user_id = u.id')
+            ->where($whereData)
+            ->paginate(5);
+
+        return $results;    
+    }
+
     /**
      * 获取被推荐的文章
      * @param int $num
