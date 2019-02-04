@@ -54,10 +54,13 @@ class ThemeController extends BaseController
                 $this->error($validate->getError());
             }
 
+            // 获取session
+            $user = session(config('admin.session_user'), '', config('admin.session_user_scope'));
             // form表单key名转换
             (!isset($data['is_position'])) ? $data['is_position'] = 0 : $data['is_position'] = 1;
             //TODO 将图片路径改为http：//的格式
             $data = array(
+                'user_id'             => $user->id,
                 'theme_name'          => $data['title'],
                 'img'                 => $data['image'],
                 'theme_introduction'  => $data['description'],
@@ -98,12 +101,9 @@ class ThemeController extends BaseController
             if (!$validate->check($data)) {
                 $this->error($validate->getError());
             }
-            // 获取session
-            $user = session(config('admin.session_user'), '', config('admin.session_user_scope'));
             // 若表单未对推荐进行勾选，is_position需要主动赋值
             (!isset($data['is_position'])) ? $data['is_position'] = 0 : $data['is_position'] = 1;
             $data = array(
-                'user_id'             => $user->id,
                 'theme_name'          => $data['title'],
                 'img'                 => $data['image'],
                 'theme_introduction'  => $data['description'],
