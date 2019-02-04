@@ -1,34 +1,21 @@
 <!--header-->
-{include file="public/_meta" title="举报列表"/}
+{include file="public/_meta" title="动态列表"/}
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span
-        class="c-gray en">&gt;</span> 举报管理 <span class="c-gray
-        en">&gt;</span> 举报列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+        class="c-gray en">&gt;</span> 动态管理 <span class="c-gray
+        en">&gt;</span> <a href="{:url('admin/article/index')}">动态列表 </a><a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
   <div class="text-c">
-    <form action="{:url('admin/report/index')}" method="get">
+    <form action="{:url('admin/article/index')}" method="get">
     日期范围：
       <input type="text" name="start_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="{$start_time}" style="width:140px;" >
       -
       <input type="text" name="end_time" class="input-text" id="countTimeend" onfocus="selecttime(2)" value="{$end_time}"  style="width:140px;">
 
-      <input type="text" name="content" id="" value="" placeholder="举报理由" style="width:250px" class="input-text">
-        
-      <div class="radio-box">
-      <br>举报状态:<br>
-      <input type="radio" name="status" value="" checked="checked">所有
-      <input type="radio" name="status" id="" value="{$STATUS_PENDING}" >待审核
-      <input type="radio" name="status" id="" value="{$STATUS_PROCESSED}">
-      已发布
-      </div>
-      <div class="radio-box">
-            <br>被举报类型:<br>
-            <input type="radio" name="type" value="" checked="checked">所有
-            <input type="radio" name="type" value="{$report_type['User']}">用户
-            <input type="radio" name="type" value="{$report_type['Article']}" >动态
-            <input type="radio" name="type" value="{$report_type['Theme']}">主题
-      </div>
+      <input type="text" name="content" id="" value="" placeholder="动态内容" style="width:250px" class="input-text">
+      <input type="text" name="nickname" placeholder="用户名" style="width:80px"
+      class="input-text">
       <button name="" id="" class="btn btn-success" type="submit"><i
-              class="Hui-iconfont">&#xe665;</i> 搜举报</button>
+              class="Hui-iconfont">&#xe665;</i> 搜动态</button>
     </form>
   </div>
 
@@ -36,27 +23,23 @@
     <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive" >
       <thead>
       <tr class="text-c">
-        <th width="40">ID</th>
-        <th width="50">举报者</th>
-        <th width="40">举报者ID</th>
-        <th width="40">被举报类型</th>
-        <th width="40">被举报的id</th>
-        <th width="100">被举报内容</th>
-        <th width="200">举报理由</th>
-        <th width="40">创建时间</th>
-        <th width="40">更新时间</th>
-        <th width="40">状态</th>
+        <th width="20">ID</th>
+        <th width="50">昵称</th>
+        <th width="20">用户ID</th>
+        <th width="40">所属主题</th>
+        <th width="100">内容</th>
+        <th width="30">创建时间</th>
+        <th width="30">更新时间</th>
+        <th width="30">状态</th>
       </tr>
       </thead>
       <tbody>
-      {volist name = "report" id = "vo"}
+      {volist name = "results" id = "vo"}
       <tr class="text-c">
         <td>{$vo.id}</td>
-        <td class="text-l">{$vo.user_name}</td>
+        <td class="text-l">{$vo.user_nickname}</td>
         <td widht="40">{$vo.user_id}</td>
-        <td>{$vo.type}</td>
-        <td >{$vo.reported_id}</td>
-        <td>{$vo.reported_content}</td>
+        <td>{$vo.theme_name}</td>
         <td>{$vo.content}</td>
         <td>{$vo.create_time}</td>
         <td>{$vo.update_time}</td>
@@ -69,7 +52,7 @@
     </table>
     <div id="laypage"></div>
   </div>
-  {:pagination($report)}
+  {:pagination($results)}
 </div>
 <!--header-->
 {include file="public/_footer" /}
