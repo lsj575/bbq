@@ -1643,8 +1643,8 @@ www  WEB部署目录（或者子目录）
 
 - 获取所有slide_img
 
-  > GET: www.example.com/admin/slideimg/getimgs
-
+  > GET: www.example.com/bbq/public/api/v1/slideimg/getimgs
+  > img_order为轮播图优先级，（1——10）优先级越高，在首页将被越早被显示
   - 返回样例
 
     ```json  
@@ -1653,22 +1653,25 @@ www  WEB部署目录（或者子目录）
         "message": "OK",
         "data": [
             {
-                "img_id": 3,
-                "img_description": "111",
-                "img_url": "3633c653-f775-4e4d-9532-ef55834251d1",
-                "img_type": "1"
-            },
-            {
-                "img_id": 4,
-                "img_description": "ll",
-                "img_url": "04c927a9-5d63-414f-b23a-cfea6d9bd70e",
-                "img_type": "1"
+                "img_id": 2,
+                "img_description": "test",
+                "img_url": "28961892-ce47-4b3c-b5bd-f2168cf45025",
+                "img_type": "2"
+                "img_order": 1
             },
             {
                 "img_id": 5,
                 "img_description": "kmmp",
                 "img_url": "63e6051e-c3c0-4169-afbe-f1a6fe934009",
                 "img_type": "0"
+                "img_order": 2
+            },
+            {
+                "img_id": 6,
+                "img_description": "test111",
+                "img_url": "8675690f-d972-439f-a6da-91205823e1d5",
+                "img_type": "2"
+                "img_order": 3
             }
         ]
     }
@@ -1694,23 +1697,7 @@ www  WEB部署目录（或者子目录）
         "msg": "OK"
     }
     ```
-### 轮播图
-- 获取所有slide_img
-  > GET: www.example.com/admin/slideimg/getimgs
-  - 返回样例
-  
-    ```json  
-    {
-        "data": {
-            "img_id": 1,
-            "img_description": "test",
-            "img_url": "022c009d-2956-4c67-9c77-dc9e353c865e",
-            "img_type": 0
-        },
-        "code": 1,
-        "msg": "OK"
-    }
-    ```
+
     
 
 ##加密

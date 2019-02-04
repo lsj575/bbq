@@ -9,7 +9,7 @@ class SlideImg extends Base
         $data['status'] = [
             'neq', config('code.status_delete')
         ];
-        $order = ['id' => 'description'];
+        $order = array('status' => 'desc', 'order' => 'desc');
         $result = $this->where($data)
             ->order($order)
             ->paginate();
