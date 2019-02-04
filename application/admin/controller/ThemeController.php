@@ -101,7 +101,6 @@ class ThemeController extends BaseController
             if (!$validate->check($data)) {
                 $this->error($validate->getError());
             }
-
             // 若表单未对推荐进行勾选，is_position需要主动赋值
             (!isset($data['is_position'])) ? $data['is_position'] = 0 : $data['is_position'] = 1;
             $data = array(
