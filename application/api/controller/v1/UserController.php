@@ -139,8 +139,8 @@ class UserController extends AuthBaseController
             // 整理数据
             $result = [];
             foreach ($users as $key => $user) {
-                $result = [
-                    'user_id'           => $user['id'],
+                $result[] = [
+                    'user_id'           => $user['be_attention_user_id'],
                     'user_avatar'       => $user['avatar'],
                     'user_nickname'     => $user['nickname'],
                     'user_signature'    => $user['signature'],
