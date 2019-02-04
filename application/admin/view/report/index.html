@@ -16,9 +16,9 @@
       <div class="radio-box">
       <br>举报状态:<br>
       <input type="radio" name="status" value="" checked="checked">所有
-      <input type="radio" name="status" id="" value="{$STATUS_PENDING}" >未处理
+      <input type="radio" name="status" id="" value="{$STATUS_PENDING}" >待审核
       <input type="radio" name="status" id="" value="{$STATUS_PROCESSED}">
-      已处理
+      已发布
       </div>
       <div class="radio-box">
             <br>被举报类型:<br>
@@ -38,7 +38,9 @@
       <tr class="text-c">
         <th width="40">ID</th>
         <th width="50">举报者</th>
+        <th width="40">举报者ID</th>
         <th width="40">被举报类型</th>
+        <th width="40">被举报的id</th>
         <th width="100">被举报内容</th>
         <th width="200">举报理由</th>
         <th width="40">创建时间</th>
@@ -50,9 +52,11 @@
       {volist name = "report" id = "vo"}
       <tr class="text-c">
         <td>{$vo.id}</td>
-        <td class="text-l">{$vo.user_id}</td>
+        <td class="text-l">{$vo.user_name}</td>
+        <td widht="40">{$vo.user_id}</td>
         <td>{$vo.type}</td>
-        <td>{$vo.reported_id}</td>
+        <td >{$vo.reported_id}</td>
+        <td>{$vo.reported_content}</td>
         <td>{$vo.content}</td>
         <td>{$vo.create_time}</td>
         <td>{$vo.update_time}</td>
