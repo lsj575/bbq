@@ -925,7 +925,57 @@ www  WEB部署目录（或者子目录）
   }
   ```
 
+### 评论相关
 
+#### 提交评论
+
+> POST:www.example.com/bbq/public/api/v1/comment/save
+
+- HEADER
+
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- post参数
+
+  | 参数       | 值                     |
+  | ---------- | ---------------------- |
+  | article_id | 动态id                 |
+  | parent_id  | 该评论的父评论id       |
+  | content    | 文字评论内容（可选）   |
+  | img        | 图片评论（只能一张图） |
+
+- version为bbq版本，例如v1
+
+- content和img不能同时为空
+
+- 当没有父评论时，parent_id填0
+
+- 返回数据
+
+  - 成功
+
+    ```json
+    {
+        "status": 1,
+        "message": "ok",
+        "data": []
+    }
+    ```
+
+  - 失败
+
+    ```json
+    {
+        "status": 0,
+        "message": "评论失败",
+        "data": []
+    }
+    ```
 
 ### 图片
 
