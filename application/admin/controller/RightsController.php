@@ -76,6 +76,14 @@ class RightsController extends BaseController{
             
             try {
                 model('AdminRole')->where('roleid',$roleid)->update(['powerid'=>$powerid]);
+
+
+                //修改当前管理员的权限则需要更新sessoin中记录的当前管理员的权限
+                $user = session(config('admin.session_user'),'',config('admin.session_user_scope'));
+
+                if ($user->roleid == $roleid) {
+                    session('powerid',"|".model('AdminRole')->get($roleid)->powerid."|",config('admin.session_user_scope'));
+                }
             }catch (\Exception $e){
                 $this->error($e->getMessage());
             }
