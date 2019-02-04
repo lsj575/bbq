@@ -84,6 +84,9 @@ class ArticleController extends CommonController
 
             // 整理返回值
             $result = [];
+            // 以下两行保证在admin_recommend或most_like没数据时，仍然可以返回数组类型数据（空数组），而不是不显示
+            $result['admin_recommend'] = [];
+            $result['most_like'] = [];
             foreach ($adminRecommendArticles as $key => $article) {
                 $result['admin_recommend'][] = $this->organizeDataOfArticle($article);
             }
