@@ -1644,7 +1644,7 @@ www  WEB部署目录（或者子目录）
 - 获取所有slide_img
 
   > GET: www.example.com/bbq/public/api/v1/slideimg/getimgs
-
+  > img_order为轮播图优先级，（1——10）优先级越高，在首页将被越早被显示
   - 返回样例
 
     ```json  
