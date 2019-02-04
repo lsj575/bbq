@@ -9,6 +9,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\CommonController;
 use app\common\lib\exception\ApiException;
+use think\Db;
 
 class ArticleController extends CommonController
 {
@@ -292,6 +293,60 @@ class ArticleController extends CommonController
             return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * 删除动态
+     * @return \json
+     * @throws ApiException
+     */
+    public function delete()
+    {
+        if (request()->isDelete()) {
+            // 提升权限为手机登陆用户权限
+            $auth = new AuthBaseController();
+
+            $article_id = input('delete.id', 0, 'intval');
+            if (!$article_id) {
+                return apiReturn(config('code.app_show_error'), '非法参数', [], 200);
+            }
+
+            // 查库
+            try {
+                $whereData = [
+                    'id'        => $article_id,
+                    'user_id'   => $auth->user->id,
+                    'status'    => config('code.status_normal')
+                ];
+                $article = model('Article')->where($whereData)->select();
+            }catch (\Exception $e) {
+                throw new ApiException($e->getMessage(), 500);
+            }
+
+            // 如果动态没查到
+            if (!$article) {
+                return apiReturn(config('code.app_show_error'), '动态不存在或已被删除', [], 200);
+            }
+
+            // 开始执行删除操作
+            Db::startTrans();
+            try {
+                // 1. 将动态状态置为删除态
+                $count = Db::table('article')->where(['id' => $article_id])
+                    ->update(['status' => config('code.status_delete')]);
+                // 成功的话，影响的数据条数为1
+                if ($count == 1) {
+                    // 2. 将该动态的所有评论置为删除态
+                    Db::table('article_comment')->where(['article_id' => $article_id])
+                        ->update(['status' => config('code.status_delete')]);
+                }
+                Db::commit();
+                return apiReturn(config('code.app_show_success'), 'OK', [], 200);
+            } catch (\Exception $e) {
+                Db::rollback();
+                throw new ApiException($e->getMessage(), 500);
+            }
         }
     }
 
