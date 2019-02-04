@@ -150,7 +150,7 @@ Route::get('api/:ver/collection/article', 'api/:ver.collection/getBoolOfCollecti
  * 评论相关
  ***************/
 //评论
-Route::post('api/:ver/comment', 'api/:ver.comment/save');
+Route::post('api/:ver/article_comment/save', 'api/:ver.articleComment/save');
 /**
  * 测试相关
  */
