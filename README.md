@@ -464,7 +464,7 @@ www  WEB部署目录（或者子目录）
 
 ####获取用户关注的主题
 
-> GET:www.example.com/bbq/public/api/v1/theme/attention/user
+> GET:www.example.com/bbq/public/api/v1/theme/attention/user?id=
 
 - HEADER
 
@@ -477,17 +477,28 @@ www  WEB部署目录（或者子目录）
 
 - version为bbq版本，例如v1
 
+- 若不传id则默认查询用户本人关注的主题
+
 - 返回数据
 
   ```json
   {
       "status": 1,
       "message": "OK",
-      "data": {
-          "theme_id": 1,
-          "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-          "theme_name": "BBQ开发交流"
-      }
+      "data": [
+          {
+              "theme_id": 1,
+              "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
+              "theme_name": "BBQ开发交流",
+              "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流"
+          },
+          {
+              "theme_id": 13,
+              "theme_img": "20180713\\503a6560989c81c0996b89b08c9be559.PNG",
+              "theme_name": "test3",
+              "theme_introduction": "123"
+          }
+      ]
   }
   ```
 #### 获取主题被关注的数量
