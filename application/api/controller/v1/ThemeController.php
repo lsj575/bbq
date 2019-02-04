@@ -43,8 +43,9 @@ class ThemeController extends CommonController
     {
         if (request()->isGet()) {
             $auth = new AuthBaseController();
+            $id = input('get.id') ? input('get.id') : $auth->user->id;
             try {
-                $themes = model('UserAttentionTheme')->getThemeOfUserAttention($auth->user->id);
+                $themes = model('UserAttentionTheme')->getThemeOfUserAttention($id);
             } catch (\Exception $e) {
                 return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
             }
