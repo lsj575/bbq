@@ -62,6 +62,8 @@ Route::get('api/:ver/user/attention/count', 'api/:ver.user/getUserAttentionUserC
 Route::get('api/:ver/user/beattention/count', 'api/:ver.user/getUserBeAttentionCount');
 // 获取用户关注的用户
 Route::get('api/:ver/user/attention/user', 'api/:ver.user/getUserOfUserAttention');
+// 获取用户粉丝（关注他的人）
+Route::get('api/:ver/user/beattention/user', 'api/:ver.user/getUserOfUserBeAttention');
 // 检查用户昵称是否合法
 Route::get('api/:ver/user/checknickname/:id', 'api/:ver.user/checkUserNicknamePass');
 // 获取用户关注主题的数量
