@@ -361,7 +361,7 @@ www  WEB部署目录（或者子目录）
 
 ####获取用户关注的用户
 
-> GET:www.example.com/bbq/public/api/v1/user/attention/user
+> GET:www.example.com/bbq/public/api/v1/user/attention/user?id=
 
 - HEADER
 
@@ -373,6 +373,8 @@ www  WEB部署目录（或者子目录）
   | access_user_token | 手机登陆后获取的token                                        |
 
 - version为bbq版本，例如v1
+
+- 若不传id则默认返回发起请求的用户的信息
 
 - 返回数据
 
@@ -396,6 +398,40 @@ www  WEB部署目录（或者子目录）
       ]
   }
   ```
+#### 获取用户的粉丝（他关注的人）
+
+> GET:www.example.com/bbq/public/api/v1/user/beattention/user?id=
+
+- HEADER
+
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- version为bbq版本，例如v1
+
+- 若不传id则默认返回发起请求的用户的信息
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": [
+          {
+              "user_id": 4,
+              "user_avatar": null,
+              "user_nickname": "codeplay",
+              "user_signature": "hello world."
+          }
+      ]
+  }
+  ```
+
 ####检查用户昵称是否已经被占用
 
 > GET:www.example.com/bbq/public/api/v1/user/checknickname/:id?nickname=小Q15717515314
