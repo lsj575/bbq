@@ -130,8 +130,9 @@ class UserController extends AuthBaseController
     public function getUserOfUserAttention()
     {
         if (request()->isGet()) {
+            $id = input('get.id') ? input('get.id') : $this->user->id;
             try {
-                $users = model('UserAttentionUser')->getUserOfUserAttention($this->user->id);
+                $users = model('UserAttentionUser')->getUserOfUserAttention($id);
             } catch (\Exception $e) {
                 return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
             }
@@ -185,7 +186,7 @@ class UserController extends AuthBaseController
     }
 
     /**
-     * 获取用户的主题数量
+     * 获取用户关注的主题数量
      * @return \json
      */
     public function getUserAttentionThemeCount()
