@@ -166,8 +166,9 @@ class AttentionController extends AuthBaseController
     public function attentionUser()
     {
         $id = input('post.id', 0, 'intval');
-        if (!$id) {
-            return apiReturn(config('code.app_show_error'), 'id不存在', [], 404);
+        // id不为0且不是自己的id
+        if (!$id || $id == $this->user->id) {
+            return apiReturn(config('code.app_show_error'), 'id不合法', [], 404);
         }
         // 判断此id的用户是否存在，且状态是否正常
         try {
