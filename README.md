@@ -1482,7 +1482,7 @@ www  WEB部署目录（或者子目录）
     ```
 
 #### 获取动态是否被某用户收藏
-> GET:www.example.com/bbq/public/api/v1/collection/article?id=动态id
+> GET:www.example.com/bbq/public/api/v1/collection/article/bool?id=动态id
 
 - HEADER
   | 参数              | 值                                                           |
@@ -1519,6 +1519,50 @@ www  WEB部署目录（或者子目录）
     }
     ```
 
+#### 获取用户收藏的动态
+
+> GET:www.example.com/bbq/public/api/v1/collection/article
+
+- HEADER
+
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": [
+          {
+              "user_id": 3,
+              "article_id": 3,
+              "theme_id": 1,
+              "theme_name": "BBQ开发交流",
+              "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
+              "content": "bbq发布动态测试2",
+              "img": "",
+              "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
+              "likes": 2,
+              "comments": 0,
+              "user_nickname": "小Q15717515314",
+              "user_avatar": null,
+              "user_signature": null,
+              "is_position": 0,
+              "create_time": "2018-11-29 10:21:49"
+          }
+      ]
+  }
+  ```
+
+  
 
 ### 反馈相关
 
