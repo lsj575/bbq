@@ -139,14 +139,17 @@ class UserController extends AuthBaseController
 
             // 整理数据
             $result = [];
-            foreach ($users as $key => $user) {
-                $result[] = [
-                    'user_id'           => $user['be_attention_user_id'],
-                    'user_avatar'       => $user['avatar'],
-                    'user_nickname'     => $user['nickname'],
-                    'user_signature'    => $user['signature'],
-                ];
+            if ($users) {
+                foreach ($users as $key => $user) {
+                    $result[] = [
+                        'user_id'           => $user['be_attention_user_id'],
+                        'user_avatar'       => $user['avatar'],
+                        'user_nickname'     => $user['nickname'],
+                        'user_signature'    => $user['signature'],
+                    ];
+                }
             }
+
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
         } else {
             return apiReturn(config('code.app_show_error'), 'error', [], 403);
@@ -169,14 +172,17 @@ class UserController extends AuthBaseController
 
             // 整理数据
             $result = [];
-            foreach ($users as $key => $user) {
-                $result[] = [
-                    'user_id'           => $user['attention_user_id'],
-                    'user_avatar'       => $user['avatar'],
-                    'user_nickname'     => $user['nickname'],
-                    'user_signature'    => $user['signature'],
-                ];
+            if ($users) {
+                foreach ($users as $key => $user) {
+                    $result[] = [
+                        'user_id'           => $user['attention_user_id'],
+                        'user_avatar'       => $user['avatar'],
+                        'user_nickname'     => $user['nickname'],
+                        'user_signature'    => $user['signature'],
+                    ];
+                }
             }
+
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
         } else {
             return apiReturn(config('code.app_show_error'), 'error', [], 403);

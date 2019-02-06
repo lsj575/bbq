@@ -23,14 +23,17 @@ class ThemeController extends CommonController
         }
 
         $result = [];
-        foreach ($themes as $key => $theme) {
-            $result[] = [
-                'theme_id'              => $theme['id'],
-                'theme_name'            => $theme['theme_name'],
-                'theme_introduction'    => $theme['theme_introduction'],
-                'img_url'               => $theme['img'],
-            ];
+        if ($result) {
+            foreach ($themes as $key => $theme) {
+                $result[] = [
+                    'theme_id'              => $theme['id'],
+                    'theme_name'            => $theme['theme_name'],
+                    'theme_introduction'    => $theme['theme_introduction'],
+                    'img_url'               => $theme['img'],
+                ];
+            }
         }
+
 
         return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
     }
@@ -52,14 +55,17 @@ class ThemeController extends CommonController
 
             // 整理数据
             $result = [];
-            foreach ($themes as $key => $theme) {
-                $result[] = [
-                    'theme_id'              => $theme['id'],
-                    'theme_img'             => $theme['img'],
-                    'theme_name'            => $theme['theme_name'],
-                    'theme_introduction'    => $theme['theme_introduction'],
-                ];
+            if ($themes) {
+                foreach ($themes as $key => $theme) {
+                    $result[] = [
+                        'theme_id'              => $theme['id'],
+                        'theme_img'             => $theme['img'],
+                        'theme_name'            => $theme['theme_name'],
+                        'theme_introduction'    => $theme['theme_introduction'],
+                    ];
+                }
             }
+
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
         } else {
             return apiReturn(config('code.app_show_error'), 'error', [], 403);
@@ -83,13 +89,15 @@ class ThemeController extends CommonController
             }
 
             $result = [];
-            foreach ($adminRecommendThemes as $key => $adminRecommendTheme) {
-                $result = [
-                    'theme_id'              => $adminRecommendTheme['id'],
-                    'theme_img'             => $adminRecommendTheme['img'],
-                    'theme_name'            => $adminRecommendTheme['theme_name'],
-                    'theme_introduction'    => $adminRecommendTheme['theme_introduction'],
-                ];
+            if ($adminRecommendThemes) {
+                foreach ($adminRecommendThemes as $key => $adminRecommendTheme) {
+                    $result = [
+                        'theme_id'              => $adminRecommendTheme['id'],
+                        'theme_img'             => $adminRecommendTheme['img'],
+                        'theme_name'            => $adminRecommendTheme['theme_name'],
+                        'theme_introduction'    => $adminRecommendTheme['theme_introduction'],
+                    ];
+                }
             }
 
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);

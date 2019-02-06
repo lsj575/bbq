@@ -43,18 +43,21 @@ class ArticleController extends CommonController
 
             // 整理返回值
             $result = [];
-            foreach ($articles as $key => $article) {
-                $result[] = [
-                    'article_id'        => $article['id'],
-                    'content'           => $article['content'],
-                    'img'               => $article['img'] == "" ? "" : explode($article['img'], ','),
-                    'likes'             => $article['likes'],
-                    'user_nickname'     => $article['nickname'],
-                    'user_avatar'       => $article['avatar'],
-                    'user_signature'    => $article['signature'],
-                    'create_time'       => $article['create_time'],
-                ];
+            if ($articles) {
+                foreach ($articles as $key => $article) {
+                    $result[] = [
+                        'article_id'        => $article['id'],
+                        'content'           => $article['content'],
+                        'img'               => $article['img'] == "" ? "" : explode($article['img'], ','),
+                        'likes'             => $article['likes'],
+                        'user_nickname'     => $article['nickname'],
+                        'user_avatar'       => $article['avatar'],
+                        'user_signature'    => $article['signature'],
+                        'create_time'       => $article['create_time'],
+                    ];
+                }
             }
+
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
         }
     }
@@ -87,15 +90,20 @@ class ArticleController extends CommonController
             // 以下两行保证在admin_recommend或most_like没数据时，仍然可以返回数组类型数据（空数组），而不是不显示
             $result['admin_recommend'] = [];
             $result['most_like'] = [];
-            foreach ($adminRecommendArticles as $key => $article) {
-                $result['admin_recommend'][] = $this->organizeDataOfArticle($article);
-            }
-            foreach ($mostLikeArticles as $key => $article) {
-                // 排除掉在admin_recommend中的数据
-                if ($article['is_position'] == 0) {
-                    $result['most_like'][] = $this->organizeDataOfArticle($article);
+            if ($adminRecommendArticles) {
+                foreach ($adminRecommendArticles as $key => $article) {
+                    $result['admin_recommend'][] = $this->organizeDataOfArticle($article);
                 }
             }
+            if ($mostLikeArticles) {
+                foreach ($mostLikeArticles as $key => $article) {
+                    // 排除掉在admin_recommend中的数据
+                    if ($article['is_position'] == 0) {
+                        $result['most_like'][] = $this->organizeDataOfArticle($article);
+                    }
+                }
+            }
+
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
         }
     }
@@ -221,10 +229,12 @@ class ArticleController extends CommonController
             }
 
             $result = [];
-            foreach ($articles as $key => $article) {
-                $result[] = $this->organizeDataOfArticle($article);
-
+            if ($articles) {
+                foreach ($articles as $key => $article) {
+                    $result[] = $this->organizeDataOfArticle($article);
+                }
             }
+
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
         }
     }
@@ -251,27 +261,30 @@ class ArticleController extends CommonController
 
             // 整理返回值
             $result = [];
-            foreach ($articles as $key => $unknownType_article) {
-                foreach ($unknownType_article as $article)
-                $result[] = [
-                    // type标识来自于关注的用户还是关注的主题
-                    'type'                  => $key,
-                    'user_id'               => $article['user_id'],
-                    'article_id'            => $article['id'],
-                    'theme_id'              => $article['theme_id'],
-                    'theme_name'            => $article['theme_name'],
-                    'theme_introduction'    => $article['theme_introduction'],
-                    'content'               => $article['content'],
-                    'img'                   => $article['img'] == "" ? "" : explode($article['img'], ','),
-                    'theme_img'             => $article['theme_img'],
-                    'likes'                 => $article['likes'],
-                    'comments'              => $article['comments'],
-                    'user_nickname'         => $article['user_nickname'],
-                    'user_avatar'           => $article['user_avatar'],
-                    'user_signature'        => $article['signature'],
-                    'is_position'           => $article['is_position'],
-                    'create_time'           => $article['create_time'],
-                ];
+            if ($articles) {
+                foreach ($articles as $key => $unknownType_article) {
+                    foreach ($unknownType_article as $article) {
+                        $result[] = [
+                            // type标识来自于关注的用户还是关注的主题
+                            'type'                  => $key,
+                            'user_id'               => $article['user_id'],
+                            'article_id'            => $article['id'],
+                            'theme_id'              => $article['theme_id'],
+                            'theme_name'            => $article['theme_name'],
+                            'theme_introduction'    => $article['theme_introduction'],
+                            'content'               => $article['content'],
+                            'img'                   => $article['img'] == "" ? "" : explode($article['img'], ','),
+                            'theme_img'             => $article['theme_img'],
+                            'likes'                 => $article['likes'],
+                            'comments'              => $article['comments'],
+                            'user_nickname'         => $article['user_nickname'],
+                            'user_avatar'           => $article['user_avatar'],
+                            'user_signature'        => $article['signature'],
+                            'is_position'           => $article['is_position'],
+                            'create_time'           => $article['create_time'],
+                        ];
+                    }
+                }
             }
 
             return apiReturn(config('code.app_show_success'), 'OK', $result, 200);

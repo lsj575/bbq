@@ -81,12 +81,15 @@ class FeedbackController extends AuthBaseController
         }
 
         $result = [];
-        foreach ($feedbackTypes as $key => $feedbackType) {
-            $result[] = [
-                "id"   => $feedbackType['id'],
-                "name" => $feedbackType['type_name'],
-            ];
+        if ($feedbackTypes) {
+            foreach ($feedbackTypes as $key => $feedbackType) {
+                $result[] = [
+                    "id"   => $feedbackType['id'],
+                    "name" => $feedbackType['type_name'],
+                ];
+            }
         }
+
 
         return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
     }
