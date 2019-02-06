@@ -145,8 +145,11 @@ Route::post('api/:ver/report', 'api/:ver.report/save');
 Route::post('api/:ver/collection/article', 'api/:ver.collection/collectionArticle');
 // 用户取消收藏动态
 Route::delete('api/:ver/collection/article', 'api/:ver.collection/deleteCollection');
-// 获取用户是否收藏某主题
-Route::get('api/:ver/collection/article', 'api/:ver.collection/getBoolOfCollection');
+// 获取用户是否收藏某动态
+Route::get('api/:ver/collection/article/bool', 'api/:ver.collection/getBoolOfCollection');
+// 获取用户收藏的动态
+Route::get('api/:ver/collection/article', 'api/:ver.collection/getArticleOfUserCollect');
+
 
 /***************
  * 评论相关
