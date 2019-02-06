@@ -16,6 +16,7 @@ class Article extends Validate
         'id'                => 'require|number',
         'user_id'           => 'require|number',
         'theme_id'          => 'require|number',
+        'content'           => 'string|max:500',
         'allow_comment'     => 'require|number',
         'allow_watermark'   => 'require|number',
     ];
@@ -23,7 +24,7 @@ class Article extends Validate
     //应用场景
     protected $scene = [
         'getArticlesOfTheme'    => ['theme_id'],
-        'save'                  => ['user_id', 'theme_id', 'allow_comment', 'allow_watermark'],
+        'save'                  => ['user_id', 'theme_id', 'content', 'allow_comment', 'allow_watermark'],
         'update'                => ['id', 'content', 'img', 'allow_comment', 'allow_watermark'],
     ];
 }
