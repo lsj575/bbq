@@ -7,7 +7,7 @@ class User extends Validate
 {
     //提交规则，|号之间不能加多余符号，包括空格
     protected $rule = [
-        'nickname'  => 'max:30',
+        'nickname'  => 'chsDash|max:30',
         'signature' => 'max:200',
         'avatar'    => 'max:255',
         'home_img'  => 'max:255',
