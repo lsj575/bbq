@@ -21,9 +21,9 @@ class ThemeController extends CommonController
         }catch (\Exception $e) {
             throw new ApiException($e->getMessage(), 500);
         }
-
+        
         $result = [];
-        if ($result) {
+        if ($themes) {
             foreach ($themes as $key => $theme) {
                 $result[] = [
                     'theme_id'              => $theme['id'],
