@@ -16,7 +16,7 @@ class Article extends Validate
         'id'                => 'require|number',
         'user_id'           => 'require|number',
         'theme_id'          => 'require|number',
-        'content'           => 'string|max:500',
+        'content'           => 'max:500',
         'allow_comment'     => 'require|number',
         'allow_watermark'   => 'require|number',
     ];
