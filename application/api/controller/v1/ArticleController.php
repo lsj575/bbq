@@ -124,7 +124,7 @@ class ArticleController extends CommonController
             // validate
             $validate = validate('article');
             if (!$validate->check($param, [], 'save')) {
-                return apiReturn(config('code.app_show_error'), $validate->getError(), '', 400);
+                return apiReturn(config('code.app_show_error'), $validate->getError(), [], 400);
             }
 
             // 文字内容和图片不能全为空
@@ -151,9 +151,9 @@ class ArticleController extends CommonController
             }
 
             if ($id) {
-                return apiReturn(config('code.app_show_success'), 'ok', '', 200);
+                return apiReturn(config('code.app_show_success'), 'ok', [], 200);
             } else {
-                return apiReturn(config('code.app_show_error'), '发布动态失败', '', 500);
+                return apiReturn(config('code.app_show_error'), '发布动态失败', [], 500);
             }
         }
     }
@@ -171,7 +171,7 @@ class ArticleController extends CommonController
         // validate
         $validate = validate('Article');
         if (!$validate->check($putData, [], 'Article.update')) {
-            return apiReturn(config('code.app_show_error'), $validate->getError(), '', 400);
+            return apiReturn(config('code.app_show_error'), $validate->getError(), [], 400);
         }
         //严格判断要插入的数据
         $data = [];
@@ -208,7 +208,7 @@ class ArticleController extends CommonController
             }
 
         } catch (\Exception $e) {
-            return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
+            return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
         }
     }
 
