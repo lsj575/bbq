@@ -18,66 +18,85 @@ class ArticleComment extends Base
      */
     protected $table = 'article_comment';
 
-    public function getComment($data=[]) {
+    /**
+     * 后台获取评论
+     * @param array $data
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public function getComment($data = []) {
         $whereData = [];
 
-        //按评论内容搜索
+        // 按评论内容搜索
         if(!empty($data['content'])){
-            $whereData['m.content'] = ['like',"%".$data['content']."%"];
+            $whereData['ac.content'] = ['like',"%" . $data['content'] . "%"];
         }
 
-        //按评论者昵称搜搜
+        // 按评论者昵称搜搜
         if(!empty($data['nickname'])){
-            $whereData['u.nickname'] = ['like',"%".$data['nickname']."%"];
+            $whereData['u.nickname'] = ['like',"%" . $data['nickname'] . "%"];
         }
 
-        //按所属动态的id搜索
+        // 按所属动态的id搜索
         if (!empty($data['article_id'])) {
-            $whereData['m.article_id'] = ['=',$data['article_id']];
+            $whereData['ac.article_id'] = ['=', $data['article_id']];
         }
 
-        //不要已经被删除的评论
-        $data['m.status'] = [
+        // 不要已经被删除的评论
+        $data['ac.status'] = [
             'neq',config('code.status_delete')
         ];
 
         $results = $this->table($this->table)
-            ->alias('m')
+            ->alias('ac')
             ->field([
-                'm.id',
+                'ac.id',
                 'u.id as user_id',
                 'u.nickname',
-                'm.content',
-                'm.parent_id',
-                'm.article_id',
-                'm.status',
-                'm.like',
-                'm.img'
+                'u.avatar',
+                'ac.content',
+                'ac.parent_id',
+                'ac.article_id',
+                'ac.status',
+                'ac.like',
+                'ac.img'
             ])
-            ->join("user u", 'u.id= m.user_id')
+            ->join('user u', 'u.id = ac.user_id')
             ->where($whereData)
             ->paginate(5);
 
         return $results;
     }
 
-    public function getNormalCommentsCountByCondition($param = [])
+    /**
+     * @param array $param
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getNormalCommentsByCondition($param = [])
     {
-        $param['status'] = config('code.user_normal');
+        $param['ac.status'] = config('code.user_normal');
 
-        return $this->where($param)
-            ->field('id')
-            ->count();
+        return collection($this->table($this->table)
+            ->alias('ac')
+            ->where($param)
+            ->field([
+                'ac.id',
+                'u.nickname',
+                'u.avatar',
+                'ac.content',
+                'ac.parent_id',
+                'ac.article_id',
+                'ac.status',
+                'ac.like',
+                'ac.img',
+                'ac.create_time',
+            ])
+            ->join('user u', 'u.id = ac.user_id')
+            ->select())
+            ->toArray();
     }
 
-    public function getNormalCommentsByCondition($param = [], $from = 0, $size = 5)
-    {
-        $param['status'] = config('code.user_normal');
-
-        return $this->where($param)
-            ->field('*')
-            ->limit($from, $size)
-            ->order(['id' => 'desc'])
-            ->select();
-    }
 }

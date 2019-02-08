@@ -59,10 +59,13 @@ class ArticleCommentController extends AuthBaseController
         }
     }
 
-
+    /**
+     * 获取某动态下的评论
+     * @return ApiException|\json
+     * @throws ApiException
+     */
     public function read()
     {
-        //select * from aritcle_comment as a join user as b on a.user_id = b.id and a.news_id =;
         $article_id = input('param.id', 0, 'intval');
         if (!$article_id) {
             return new ApiException('id is not ', 404);
@@ -70,11 +73,37 @@ class ArticleCommentController extends AuthBaseController
 
         $param['article_id'] = $article_id;
 
-        $count = model('ArticleComment')->getNormalCommentsCountByCondition($param);
+        try {
+            $article_comments = model('ArticleComment')->getNormalCommentsByCondition($param);
+        } catch (\Exception $e) {
+            throw new ApiException($e->getMessage(), 500);
+        }
 
-        $this->getPageAndSize(input('param.'));
-        $comments = model('ArticleComment')->getNormalCommentsByCondition($param, $this->from, $this->size);
-
+        if ($article_comments) {
+            // 组织树形的返回结构
+            $result = [];
+            // 创建基于主键的数组引用
+            $refer = array();
+            foreach ($article_comments as $key => $article_comment) {
+                $refer[$article_comment['id']] = &$article_comments[$key];
+            }
+            foreach ($article_comments as $key => $article_comment) {
+                // 判断是否存在parent
+                $parentId = $article_comment['parent_id'];
+                // parent_id为0表示没有父评论
+                if (0 == $parentId) {
+                    $result[] = &$article_comments[$key];
+                } else {
+                    if (isset($refer[$parentId])) {
+                        $parent = &$refer[$parentId];
+                        $parent['son'][] = &$article_comments[$key];
+                    }
+                }
+            }
+            return apiReturn(config('code.app_show_success'), 'OK', $result, 202);
+        } else {
+            return apiReturn(config('code.app_show_success'), '暂无评论', [], 202);
+        }
     }
 
 }
