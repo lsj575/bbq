@@ -74,11 +74,13 @@ Route::get('api/:ver/user/attentiontheme/count', 'api/:ver.user/getUserAttention
  */
 //图片上传路由
 Route::get('api/:ver/image/accesstoken','api/:ver.image/getAccessToken');
+
 /**
  * 轮播图相关路由
  */
 //获取所有轮播图路由
 Route::get('api/:ver/slideimg/getimgs','api/:ver.slideImg/getImages');
+
 /**
  * app版本相关路由
  */
@@ -94,6 +96,7 @@ Route::resource('api/:ver/identify', 'api/:ver.identify');
  */
 Route::get('api/:ver/lgdindex', 'api/:ver.parsezhlgd/parseIndex');
 Route::post('api/:ver/lgdlogin', 'api/:ver.parsezhlgd/zhlgdLogin');
+
 /**
  * 点赞相关路由
  */
@@ -103,6 +106,7 @@ Route::post('api/:ver/upvote', 'api/:ver.upvote/save');
 Route::delete('api/:ver/upvote', 'api/:ver.upvote/delete');
 // 获取某动态是否被用户点赞
 Route::get('api/:ver/upvote', 'api/:ver.upvote/read');
+
 /**
  * 关注相关路由
  */
@@ -154,8 +158,11 @@ Route::get('api/:ver/collection/article', 'api/:ver.collection/getArticleOfUserC
 /***************
  * 评论相关
  ***************/
-//评论
+// 评论
 Route::post('api/:ver/article_comment/save', 'api/:ver.articleComment/save');
+// 获取某动态下的评论
+Route::get('api/:ver/article_comment/read', 'api/:ver.articleComment/read');
+
 /**
  * 测试相关
  */
