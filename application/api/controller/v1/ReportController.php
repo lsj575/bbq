@@ -61,6 +61,24 @@ class ReportController extends AuthBaseController
     }
 
     /**
+     * 此api已弃用。先留着
+     *获取当前用户提交的举报。可选参数：举报id
+     *@return json
+     */
+    public function getReport($id=0) {
+        
+        $results = getUserReport($this->user->id, $id);
+
+        if (!count($results)) {
+        
+        }
+
+        if($id) {
+            return apiReturn(config('code.app_show_success'));
+        }
+    }
+
+    /**
      * 获取类型
      * @param $type
      * @return mixed
