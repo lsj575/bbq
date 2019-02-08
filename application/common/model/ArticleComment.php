@@ -18,37 +18,46 @@ class ArticleComment extends Base
      */
     protected $table = 'article_comment';
 
-    public function getComment($identity, $data=[]) {
+    public function getComment($data=[]) {
+        $whereData = [];
+
+        //按评论内容搜索
+        if(!empty($data['content'])){
+            $whereData['m.content'] = ['like',"%".$data['content']."%"];
+        }
+
+        //按评论者昵称搜搜
+        if(!empty($data['nickname'])){
+            $whereData['u.nickname'] = ['like',"%".$data['nickname']."%"];
+        }
+
+        //按所属动态的id搜索
+        if (!empty($data['article_id'])) {
+            $whereData['m.article_id'] = ['=',$data['article_id']];
+        }
+
+        //不要已经被删除的评论
         $data['m.status'] = [
             'neq',config('code.status_delete')
         ];
-        if(isset($data['content'])) {
-            $data['m.content'] = $data['content'];
-            unset($data['content']);
-        }
-        if(isset($data['nickname'])) {
-            $data['u.nickname'] = $data['nickname'];
-            unset($data['nickname']);
-        }
 
-        if($identity=='commentator') {
-            $identity='u.id = m.user_id';
-        } else {
-            $identity='u.id = m.to_user_id';
-        }
-
-        $results = model("User")
-            ->alias('u')
-            ->join("$this->table m", $identity)
-            ->where($data)
+        $results = $this->table($this->table)
+            ->alias('m')
+            ->field([
+                'm.id',
+                'u.id as user_id',
+                'u.nickname',
+                'm.content',
+                'm.parent_id',
+                'm.article_id',
+                'm.status',
+                'm.like',
+                'm.img'
+            ])
+            ->join("user u", 'u.id= m.user_id')
+            ->where($whereData)
             ->paginate(5);
 
-        if (count($results)) {
-            foreach($results as $result) {
-                $result['user_id']= model("User")::get($result->user_id)->nickname;
-                $result['to_user_id']=model("User")::get($result->to_user_id)->nickname;
-            }
-        }
         return $results;
     }
 
