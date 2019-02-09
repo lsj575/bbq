@@ -100,13 +100,18 @@ Route::post('api/:ver/lgdlogin', 'api/:ver.parsezhlgd/zhlgdLogin');
 /**
  * 点赞相关路由
  */
-// 点赞
-Route::post('api/:ver/upvote', 'api/:ver.upvote/save');
-// 取消点赞
-Route::delete('api/:ver/upvote', 'api/:ver.upvote/delete');
+// 给动态点赞
+Route::post('api/:ver/upvote/article', 'api/:ver.upvote/saveUserArticles');
+// 取消动态点赞
+Route::delete('api/:ver/upvote/article', 'api/:ver.upvote/deleteUserArticles');
 // 获取某动态是否被用户点赞
-Route::get('api/:ver/upvote', 'api/:ver.upvote/read');
-
+Route::get('api/:ver/upvote/article', 'api/:ver.upvote/readUserArticles');
+// 给评论点赞
+Route::post('api/:ver/upvote/article_comment', 'api/:ver.upvote/saveUserArticleComments');
+// 取消评论点赞
+Route::delete('api/:ver/upvote/article_comment', 'api/:ver.upvote/deleteUserArticleComments');
+// 获取某评论是否被用户点赞
+Route::get('api/:ver/upvote/article_comment', 'api/:ver.upvote/readUserArticleComments');
 /**
  * 关注相关路由
  */
