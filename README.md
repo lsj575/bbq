@@ -1121,8 +1121,8 @@ www  WEB部署目录（或者子目录）
 
 ### 点赞相关
 
-#### 点赞
-> POST:www.example.com/bbq/public/api/v1/upvote
+#### 动态点赞
+> POST:www.example.com/bbq/public/api/v1/upvote/article
 
 - HEADER
   | 参数              | 值                                                           |
@@ -1161,8 +1161,8 @@ www  WEB部署目录（或者子目录）
     }
     ```
 
-#### 取消点赞
-> DELETE:www.example.com/bbq/public/api/v1/upvote
+#### 取消动态点赞
+> DELETE:www.example.com/bbq/public/api/v1/upvote/article
 
 - HEADER
   | 参数              | 值                                                           |
@@ -1201,8 +1201,8 @@ www  WEB部署目录（或者子目录）
     }
     ```
 
-#### 获取是否被点赞
-> GET:www.example.com/bbq/public/api/v1/upvote
+#### 获取动态是否被用户点赞
+> GET:www.example.com/bbq/public/api/v1/upvote/article
 
 - HEADER
   | 参数              | 值                                                           |
@@ -1235,6 +1235,129 @@ www  WEB部署目录（或者子目录）
     }
     ```
   - 不存在被点赞的动态
+
+    ```json
+    {
+        "status": 1,
+        "message": "OK",
+        "data": []
+    }
+    ```
+
+#### 评论点赞
+> POST:www.example.com/bbq/public/api/v1/upvote/article_comment
+
+- HEADER
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- post参数
+
+  | 参数 | 值     |
+  | ---- | ------ |
+  | id   | 评论id |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  - 成功
+
+    ```json
+    {
+        "status": 1,
+        "message": "ok",
+        "data": []
+    }
+    ```
+  - 失败
+
+    ```json
+    {
+        "status": 0,
+        "message": "已点赞,请勿重复点赞",
+        "data": []
+    }
+    ```
+
+#### 取消评论点赞
+> DELETE:www.example.com/bbq/public/api/v1/upvote/article_comment
+
+- HEADER
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- delete参数（x-www-form-urlecode）
+
+  | 参数 | 值     |
+  | ---- | ------ |
+  | id   | 评论id |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  - 成功
+
+    ```json
+    {
+        "status": 1,
+        "message": "ok",
+        "data": []
+    }
+    ```
+  - 失败
+
+    ```json
+    {
+        "status": 0,
+        "message": "没有被点赞过，无法取消",
+        "data": []
+    }
+    ```
+
+#### 获取评论是否被用户点赞
+> GET:www.example.com/bbq/public/api/v1/upvote/article
+
+- HEADER
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- get参数
+
+  | 参数 | 值           |
+  | ---- | ------------ |
+  | id[] | 评论id的数组 |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  - 存在被点赞的评论
+
+    ```json
+    {
+        "status": 1,
+        "message": "OK",
+        "data": [
+            1,
+            3
+        ]
+    }
+    ```
+  - 不存在被点赞的评论
 
     ```json
     {
