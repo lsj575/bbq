@@ -8,7 +8,7 @@
 namespace app\common\model;
 
 /**
- * 用户点赞模型
+ * 用户动态点赞模型
  */
 class UserArticles extends Base
 {
