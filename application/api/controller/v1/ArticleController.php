@@ -48,7 +48,7 @@ class ArticleController extends CommonController
                     $result[] = [
                         'article_id'        => $article['id'],
                         'content'           => $article['content'],
-                        'img'               => $article['img'] == "" ? "" : explode($article['img'], ','),
+                        'img'               => $article['img'] ? explode(',', $article['img']) : "",
                         'likes'             => $article['likes'],
                         'user_nickname'     => $article['nickname'],
                         'user_avatar'       => $article['avatar'],
@@ -128,13 +128,13 @@ class ArticleController extends CommonController
             }
 
             // 文字内容和图片不能全为空
-            if ($param['img'] || $param['content']) {
+            if (empty($param['img']) || $param['content']) {
                 // 整理入库数据
                 $data = [
                     'theme_id'          => $param['theme_id'],
                     'user_id'           => $auth->user->id,
-                    'content'           => empty($param['content']) ? '' : $param['content'],
-                    'img'               => empty($param['img']) ? '' : implode($param['img'], ','),
+                    'content'           => $param['content'] ? $param['content'] : '',
+                    'img'               => empty($param['img']) ? '' : implode(',', $param['img']),
                     'allow_watermark'   => $param['allow_watermark'],
                     'allow_comment'     => $param['allow_comment'],
                 ];
@@ -189,7 +189,7 @@ class ArticleController extends CommonController
         }
 
         // 数据不能为空或者图片和内容不能同时为空
-        if (empty($data) || (empty($data['img']) && empty($data['content']))) {
+        if (empty($data) || (empty($data['img']) && $data['content'])) {
             return apiReturn(config('code.app_show_error'), '数据不合法', [], 404);
         }
 
@@ -273,7 +273,7 @@ class ArticleController extends CommonController
                             'theme_name'            => $article['theme_name'],
                             'theme_introduction'    => $article['theme_introduction'],
                             'content'               => $article['content'],
-                            'img'                   => $article['img'] == "" ? "" : explode($article['img'], ','),
+                            'img'                   => $article['img'] ? explode(',', $article['img']) : "",
                             'theme_img'             => $article['theme_img'],
                             'likes'                 => $article['likes'],
                             'comments'              => $article['comments'],
@@ -380,7 +380,7 @@ class ArticleController extends CommonController
             'theme_name'            => $article['theme_name'],
             'theme_introduction'    => $article['theme_introduction'],
             'content'               => $article['content'],
-            'img'                   => $article['img'] == "" ? "" : explode($article['img'], ','),
+            'img'                   => $article['img'] ? explode(',', $article['img']) : "",
             'theme_img'             => $article['theme_img'],
             'likes'                 => $article['likes'],
             'comments'              => $article['comments'],
