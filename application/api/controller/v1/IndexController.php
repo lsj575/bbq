@@ -7,17 +7,6 @@ use think\Log;
 
 class IndexController extends CommonController
 {
-    public function index()
-    {
-        try {
-            $header = model('Article')->getIndexHeadNormalArticle();
-            $positions = model('Article')->getPositionNormalArticle();
-            $likes = model('Article')->getLikesNormalArticle();
-        }catch (\Exception $e) {
-            throw new ApiException($e->getMessage(), 500);
-        }
-    }
-
     /**
      * 客户端初始化接口
      * 1、检测APP是否需要升级
@@ -29,13 +18,17 @@ class IndexController extends CommonController
     {
         try {
             // app_type 去version表 查询 对比
-            $version = model('Version')->getLastNormalVersionByAppType($this->headers['app_type']);
+            if (in_array($this->headers['app_type'], config('app.app_types'))) {
+                $version = model('Version')->getLastNormalVersionByAppType($this->headers['app_type']);
+            } else {
+                return apiReturn(config('code.status_success'), 'header信息错误', [], 403);
+            }
         }catch (\Exception $e) {
             throw new ApiException($e->getMessage(), 500);
         }
 
         if (empty($version)) {
-            return new ApiException('error', 404);
+            return new ApiException('无对应app_type的版本信息', 404);
         }
 
         /**
@@ -63,6 +56,6 @@ class IndexController extends CommonController
         }catch (\Exception $e) {
             Log::write($e->getMessage());
         }
-        return apiReturn(config('code.success'), 'OK', $version, 200);
+        return apiReturn(config('code.app_show_success'), 'OK', $version, 200);
     }
 }
