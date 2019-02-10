@@ -967,7 +967,7 @@ www  WEB部署目录（或者子目录）
 
 #### 提交评论
 
-> POST:www.example.com/bbq/public/api/v1/comment/save
+> POST:www.example.com/bbq/public/api/v1/article_comment/save
 
 - HEADER
 
