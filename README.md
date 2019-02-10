@@ -92,7 +92,7 @@ www  WEB部署目录（或者子目录）
 
 #### 获取版本信息并上传基本日志信息
 
-> GET:www.example.com/bbq/public/api/version/identify
+> GET:www.example.com/bbq/public/api/index/init
 
 - HEADER:
 
