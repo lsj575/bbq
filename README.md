@@ -88,6 +88,48 @@ www  WEB部署目录（或者子目录）
 
 ## API
 
+### 客户端初始化
+
+#### 获取版本信息并上传基本日志信息
+
+> GET:www.example.com/bbq/public/api/version/identify
+
+- HEADER:
+
+  | 参数         | 值                                                           |
+  | ------------ | ------------------------------------------------------------ |
+  | sign         | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type     | android or ios                                               |
+  | did          | 当前手机的序列号                                             |
+  | model        | 手机型号                                                     |
+  | version      | 内部版本号（如 1）                                           |
+  | version_code | 外部版本号（如1.2.3）                                        |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": {
+          "id": 1,
+          "creator_id": 0,
+          "app_type": "android",
+          "version": 2,
+          "version_code": "1.2",
+          "is_force": 0,
+          "apk_url": "xxx.com/1/3.html",
+          "upgrade_point": "1、优化了网络数据\r\n2、增加了新闻内容",
+          "status": 1,
+          "create_time": "1970-01-01 08:00:00",
+          "update_time": "2018-08-21 10:13:15",
+          "is_update": 0
+      }
+  }
+  ```
+
 ### 登录
 
 #### 获取手机验证码
