@@ -53,7 +53,7 @@ class LoginController extends CommonController
                 'time_out'          => strtotime("+" . config('app.login_time_out_day') . " days"),
                 'nickname'          => config('app.default_nickname') . $param['phone'],
                 'last_login_time'   => time(),
-                'status'            => 1,
+                'status'            => config('code.status_normal'),
                 'phone'             => $param['phone'],
             ];
             try {
@@ -63,6 +63,10 @@ class LoginController extends CommonController
             }
         } else {
             //非第一次登录，更新过期时间和token
+            if ($user['status'] != config('code.status_normal')) {
+                return apiReturn(config('code.app_show_error'), '账号已被封禁', '', 500);
+            }
+
             $data = [
                 'token' => $token,
                 'time_out' => strtotime("+" . config('app.login_time_out_day') . " days"),
