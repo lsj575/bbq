@@ -58,7 +58,7 @@ class ArticleComment extends Base
                 'ac.parent_id',
                 'ac.article_id',
                 'ac.status',
-                'ac.like',
+                'ac.likes',
                 'ac.img'
             ])
             ->join('user u', 'u.id = ac.user_id')
@@ -90,7 +90,7 @@ class ArticleComment extends Base
                 'ac.parent_id',
                 'ac.article_id',
                 'ac.status',
-                'ac.like',
+                'ac.likes',
                 'ac.img',
                 'ac.create_time',
             ])
