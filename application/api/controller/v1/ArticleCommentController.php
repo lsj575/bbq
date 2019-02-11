@@ -80,12 +80,14 @@ class ArticleCommentController extends AuthBaseController
         }
 
         if ($article_comments) {
+            // 整理查询出来的数据
+            $article_comments = $this->adjustArticleCommentsData($article_comments);
             // 组织树形的返回结构
             $result = [];
             // 创建基于主键的数组引用
             $refer = array();
             foreach ($article_comments as $key => $article_comment) {
-                $refer[$article_comment['id']] = &$article_comments[$key];
+                $refer[$article_comment['article_comment_id']] = &$article_comments[$key];
             }
             foreach ($article_comments as $key => $article_comment) {
                 // 判断是否存在parent
@@ -106,4 +108,27 @@ class ArticleCommentController extends AuthBaseController
         }
     }
 
+    /**
+     * 整理动态评论数据
+     * @param $article_comments
+     * @return array
+     */
+    private function adjustArticleCommentsData($article_comments)
+    {
+        $result = [];
+        foreach ($article_comments as $key => $article_comment) {
+            $result[] = [
+                'article_comment_id'    => $article_comment['id'],
+                'user_nickname'         => $article_comment['nickname'],
+                'user_avatar'           => $article_comment['avatar'],
+                'content'               => $article_comment['content'],
+                'article_comment_img'   => $article_comment['img'],
+                'article_id'            => $article_comment['article_id'],
+                'parent_id'             => $article_comment['parent_id'],
+                'likes'                 => $article_comment['likes'],
+                'create_time'           => $article_comment['create_time'],
+            ];
+        }
+        return $result;
+    }
 }
