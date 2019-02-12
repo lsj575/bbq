@@ -20,7 +20,7 @@ class SlideImgController extends CommonController
             'eq', config('code.status_normal')
         ];
         try {
-            $images = model('slide_img')->where($data)->order('img_order desc')->select();
+            $images = model('slide_img')->where($data)->order('order desc')->select();
         }catch (\Exception $e) {
             throw new ApiException($e->getMessage(), 500);
         }
