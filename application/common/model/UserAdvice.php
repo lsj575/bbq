@@ -6,7 +6,7 @@ namespace app\common\model;
  * Class AppActive
  * @package app\common\model
  */
-class AppActive extends Base
+class UserAdvice extends Base
 {
-    protected $table = 'app_active';
+    protected $table = 'user_advice';
 }

@@ -169,6 +169,11 @@ Route::post('api/:ver/article_comment/save', 'api/:ver.articleComment/save');
 Route::get('api/:ver/article_comment/read', 'api/:ver.articleComment/read');
 
 /**
+ * 通知相关
+ */
+// 获取用户的通知
+Route::get('api/:ver/advice/read', 'api/:ver.advice/read');
+/**
  * 测试相关
  */
 Route::get('api/test/sms', 'api/test/testSend');
