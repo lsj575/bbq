@@ -53,6 +53,6 @@ class Version extends Base
         return $this->where($data)
             ->order($order)
             ->limit(1)
-            ->select();
+            ->find();
     }
 }
