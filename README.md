@@ -1842,7 +1842,8 @@ www  WEB部署目录（或者子目录）
                   "parent_id": 2,
                   "article_id": 1,
                   "comment_likes": 1,
-                  "comment_img": "6fef3167-46bc-47fa-9547-d67369c9e88f"
+                  "comment_img": "6fef3167-46bc-47fa-9547-d67369c9e88f",
+                  "create_time": "2019-02-08 19:38:03"
               },
               {
                   "comment_id": 4,
@@ -1853,7 +1854,8 @@ www  WEB部署目录（或者子目录）
                   "parent_id": 0,
                   "article_id": 20,
                   "comment_likes": 0,
-                  "comment_img": null
+                  "comment_img": null,
+                  "create_time": "2019-02-08 15:14:01"
               },
               {
                   "comment_id": 3,
@@ -1864,7 +1866,32 @@ www  WEB部署目录（或者子目录）
                   "parent_id": 1,
                   "article_id": 1,
                   "comment_likes": 1,
-                  "comment_img": "6fef3167-46bc-47fa-9547-d67369c9e88f"
+                  "comment_img": "6fef3167-46bc-47fa-9547-d67369c9e88f",
+                  "create_time": "2019-02-04 23:21:34"
+              },
+              {
+                  "comment_id": 2,
+                  "user_id": 2,
+                  "user_nickname": "BBQ首席烧烤师",
+                  "user_avatar": null,
+                  "comment_content": "我觉得不行",
+                  "parent_id": 1,
+                  "article_id": 1,
+                  "comment_likes": 1,
+                  "comment_img": "",
+                  "create_time": "2019-02-04 23:16:25"
+              },
+              {
+                  "comment_id": 1,
+                  "user_id": 2,
+                  "user_nickname": "BBQ首席烧烤师",
+                  "user_avatar": null,
+                  "comment_content": "说得好！",
+                  "parent_id": 0,
+                  "article_id": 1,
+                  "comment_likes": 1,
+                  "comment_img": "",
+                  "create_time": "2019-02-04 22:57:50"
               }
           ]
       }

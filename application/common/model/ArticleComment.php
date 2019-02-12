@@ -68,7 +68,35 @@ class ArticleComment extends Base
         return $results;
     }
 
+    public function getAdviceComment($user_id)
+    {
+        $whereData = [
+            'ac.status' => config('code.status_normal'),
+            'ac.user_id'    => $user_id,
+        ];
+
+        return $this->table($this->table)
+            ->alias('ac')
+            ->field([
+                'ac.id as comment_id',
+                'u.id as user_id',
+                'u.nickname as user_nickname',
+                'u.avatar as user_avatar',
+                'ac.content as comment_content',
+                'ac.parent_id',
+                'ac.article_id',
+                'ac.likes as comment_likes',
+                'ac.img as comment_img',
+                'ac.create_time as create_time',
+            ])
+            ->join('user u', 'u.id = ac.user_id')
+            ->where($whereData)
+            ->order('ac.create_time desc')
+            ->select();
+    }
+
     /**
+     * 按条件获取正常的评论
      * @param array $param
      * @return array
      * @throws \think\db\exception\DataNotFoundException
