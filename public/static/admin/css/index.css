@@ -21,16 +21,11 @@
   background-color: white;
 }
 
-
-.article_imgs{
-  display:inline-block;
-  height:auto;
-  margin:1rem 0rem;
-}
 .item img{
   width:50%;
   margin-bottom:10px;
 }
+
 .item img:hover{
  transfrom:scale(2);
 }
@@ -99,6 +94,3 @@
   font-size:0.8em;
 }
 
-.hideStyle{
-  background-color: green;
-}

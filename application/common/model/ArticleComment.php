@@ -63,7 +63,15 @@ class ArticleComment extends Base
             ])
             ->join('user u', 'u.id = ac.user_id')
             ->where($whereData)
-            ->paginate(5);
+            ->paginate(5)
+            ->each(function($item,$key){
+                $parent_comment = model('ArticleComment')->get($item->parent_id);
+                if ($parent_comment) {
+                    $item->to_user_name = model('User')::get($parent_comment->user_id)->nickname;
+                }else {
+                    $item->to_user_name = 0;
+                }
+            });
 
         return $results;
     }

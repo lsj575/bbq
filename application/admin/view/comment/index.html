@@ -28,7 +28,8 @@
       <thead>
       <tr class="text-c">
         <th width="25"><input type="checkbox" name="" value=""></th>
-        <th width="80">ID</th>
+        <th width="50">  </th>
+        <th width="30">ID</th>
         <th width="30">评论者id</th>
         <th>评论者昵称</th>
         <th>内容</th>
@@ -44,14 +45,21 @@
       {volist name = "comments" id = "vo"}
       <tr class="text-c">
         <td><input type="checkbox" value="" name=""></td>
+        <td>
+            {if $vo.to_user_name}
+            @{$vo.to_user_name}
+            {/if}
+        </td>
         <td>{$vo.id}</td>
         <td width="30">{$vo.user_id}</td>
         <td class="text-l">{$vo.nickname}</td>
         <td class="text-l">{$vo.content}</td>
-        <td> <img src="{$vo.img}">  </td>
+        <td>{if $vo.img} <img
+            src="https://static-img-bbq.wutnews.net/image/{$vo.img}-120-100.jpg">
+            {/if}</td>
         <td>{$vo.parent_id} </td>
         <td>{$vo.article_id}</td>
-        <td>{$vo.like}</td>
+        <td>{$vo.likes}</td>
         <!-- 此处调用app/common.php中的方法 -->
         <td class="td-status">{$vo.status|changeStatus=$vo.id, ###}</td>
         <td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5"
