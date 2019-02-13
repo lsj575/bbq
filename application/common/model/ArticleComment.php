@@ -76,6 +76,14 @@ class ArticleComment extends Base
         return $results;
     }
 
+    /**
+     * 获取我的消息部分评论相关通知
+     * @param $user_id
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function getAdviceComment($user_id)
     {
         $whereData1 = [
