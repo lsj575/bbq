@@ -70,13 +70,41 @@ class ArticleComment extends Base
 
     public function getAdviceComment($user_id)
     {
-        $whereData = [
-            'ac1.status'     => config('code.status_normal'),
-            'ac2.status'     => config('code.status_normal'),
+        $whereData1 = [
+            'ac.status' => config('code.status_normal'),
+            'a.status'  => config('code.status_normal'),
+            'a.user_id' => $user_id,
+        ];
+
+        $whereData2 = [
+            'ac1.status'    => config('code.status_normal'),
+            'ac2.status'    => config('code.status_normal'),
             'ac1.user_id'   => $user_id,
         ];
 
-        return $this->table($this->table)
+        // 用户动态的评论
+        $commentsOfArticle = $this->table('article')
+            ->alias('a')
+            ->field([
+                'ac.id as comment_id',
+                'u.id as user_id',
+                'u.nickname as user_nickname',
+                'u.avatar as user_avatar',
+                'ac.content as comment_content',
+                'ac.parent_id',
+                'ac.article_id',
+                'ac.likes as comment_likes',
+                'ac.img as comment_img',
+                'ac.create_time as create_time',
+            ])
+            ->join('article_comment ac', 'ac.article_id = a.id')
+            ->join('user u', 'u.id = ac.user_id')
+            ->where($whereData1)
+            ->order('ac.create_time desc')
+            ->select();
+
+        // 用户评论的回复
+        $commentsOfComment =  $this->table($this->table)
             ->alias('ac1')
             ->field([
                 'ac2.id as comment_id',
@@ -92,9 +120,11 @@ class ArticleComment extends Base
             ])
             ->join('article_comment ac2', 'ac2.parent_id = ac1.id')
             ->join('user u', 'u.id = ac2.user_id')
-            ->where($whereData)
+            ->where($whereData2)
             ->order('ac2.create_time desc')
             ->select();
+
+        return $commentsOfArticle + $commentsOfComment;
     }
 
     /**
