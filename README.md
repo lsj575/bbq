@@ -693,7 +693,7 @@ www  WEB部署目录（或者子目录）
 
 #### 发布动态
 
-> POST:www.example.com/bbq/public/api/v1/article
+> POST:www.example.com/bbq/public/api/v1/article/save
 
 - HEADER
   | 参数              | 值                                                           |
