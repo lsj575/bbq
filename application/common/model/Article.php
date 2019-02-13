@@ -27,13 +27,29 @@ class Article extends Base
             ];
         }
 
-        //不要被删除的动态
-        $whereData['a.status'] = ['neq', config('code.status_delete')];
+        //按主题名搜索
+        if (!empty($data['theme_name'])) {
+            $whereData['t.theme_name'] = ['like','%'.$data['theme_name'].'%'];
+        }
+
+        //按是否置顶搜索
+        if (!empty($data['is_sticky'])) {
+            $whereData['a.is_sticky'] = ['=',$data['is_sticky']];
+        }   
+
+        //按动态id搜搜
+        if (!empty($data['id'])) {
+            $whereData['a.id'] = ['=',$data['id']];
+        }
+
+        //要被隐藏的动态
+        //$whereData['a.status'] = ['neq', config('code.status_delete')];
 
          
         $listField = $this->_getListField();
         $listField[] = 'a.status' ;
         $listField[] = 'a.update_time';
+        $listField[] = 'a.is_sticky';
 
         $results = $this->table($this->table)
             ->alias('a')
@@ -42,6 +58,11 @@ class Article extends Base
             ->join('user u','a.user_id = u.id')
             ->where($whereData)
             ->paginate(5);
+        foreach ($results as $item) {
+            $item->img = explode(',',$item->img);
+            $item->img_size = count($item->img);
+
+        }
 
         return $results;    
     }

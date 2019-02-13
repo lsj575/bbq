@@ -1,74 +1,135 @@
 <!--header-->
-{include file="public/_meta" title="动态列表"/}
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" >
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="__STATIC__/hadmin/lib/html5shiv.js"></script>
+<script type="text/javascript" src="__STATIC__/hadmin/lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="__STATIC__/hadmin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+</head>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span
-        class="c-gray en">&gt;</span> 动态管理 <span class="c-gray
-        en">&gt;</span> <a href="{:url('admin/article/index')}">动态列表 </a><a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-<div class="page-container">
-  <div class="text-c">
-    <form action="{:url('admin/article/index')}" method="get">
-    日期范围：
-      <input type="text" name="start_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="{$start_time}" style="width:140px;" >
-      -
-      <input type="text" name="end_time" class="input-text" id="countTimeend" onfocus="selecttime(2)" value="{$end_time}"  style="width:140px;">
+        class="c-gray en">&gt;</span> 主题管理 <span class="c-gray
+        en">&gt;</span><a href="{:url('admin/article/index')}">  主题列表</a> <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 
-      <input type="text" name="content" id="" value="" placeholder="动态内容" style="width:250px" class="input-text">
-      <input type="text" name="nickname" placeholder="用户名" style="width:80px"
-      class="input-text">
-      <button name="" id="" class="btn btn-success" type="submit"><i
-              class="Hui-iconfont">&#xe665;</i> 搜动态</button>
-    </form>
-  </div>
 
-  <div class="mt-20">
-    <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive" >
-      <thead>
-      <tr class="text-c">
-        <th width="20">ID</th>
-        <th width="50">昵称</th>
-        <th width="20">用户ID</th>
-        <th width="40">所属主题</th>
-        <th width="100">内容</th>
-        <th width="30">创建时间</th>
-        <th width="30">更新时间</th>
-        <th width="30">状态</th>
-      </tr>
-      </thead>
-      <tbody>
-      {volist name = "results" id = "vo"}
-      <tr class="text-c">
-        <td>{$vo.id}</td>
-        <td class="text-l">{$vo.user_nickname}</td>
-        <td widht="40">{$vo.user_id}</td>
-        <td>{$vo.theme_name}</td>
-        <td>{$vo.content}</td>
-        <td>{$vo.create_time}</td>
-        <td>{$vo.update_time}</td>
-        <!-- 此处调用app/common.php中的方法 -->
-        <td class="td-status">{$vo.status|changeStatus=$vo.id, ###}</td>
-        <!-- <td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="" href="javascript:;" title="删除" del_url=""><i class="Hui-iconfont">&#xe6e2;</i></a></td> -->
-      </tr>
-      {/volist}
-      </tbody>
-    </table>
-    <div id="laypage"></div>
-  </div>
-  {:pagination($results)}
-</div>
-<!--header-->
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="\static\admin\css\index.css"/>
+
+
+
+<div class="container">
+
+    <nav class="navbar" role="navigation" id="searching"> 
+        <form class="navbar-form navbar-left" role="search" id="search"
+                                                            action="{:url("admin/article/index")}"
+                                                            method="get">
+            <div class="form-group">
+                日期范围:
+<input type="text" name="start_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="" style="width:140px;" >
+      
+	-
+      <input type="text" name="end_time" class="input-text" id="countTimeend" onfocus="selecttime(2)" value=""  style="width:140px;">
+      <br>
+            是否置顶:
+      <input type="radio" name="is_sticky" value="" checked="checked">所有
+      <input type="radio" name="is_sticky" value="1">是
+      <input type="radio" name="is_sticky" value="0">否
+      <br>
+      <input type="text" name="id" placeholder="动态id">
+      <input type="text" name="content" placeholder="动态内容">
+      <input type="text" name="theme_name" placeholder="主题名">
+      <input type="text" name="nickname" placeholder=" 用户昵称" >
+            </div><br>
+                <button type="submit" class="btn btn-default">搜索</button>
+        </form>
+    </nav>
+    {:pagination($results)}
+    <br>
+    <div class="waterfall">
+        {volist name = "results" id="vo" }
+        <div class="item">
+            <div class="icon">
+                {if $vo.user_avatar!=NULL}
+                <img src="https://static-img-bbq.wutnews.net/image/{$vo.user_avatar}-60-100.webp">
+                {else /} <img src="\static\admin\img\default.png">
+                {/if}
+            </div>
+
+            <div class="user">
+                <div class="user_name">{$vo.user_nickname}</div>
+                <span class="user_id">ID:{$vo.user_id}</span>
+            </div>
+
+            <div class="data">{$vo.create_time}</div>
+
+            <div class="text">
+                <p>{$vo.content}</p>    
+            </div>
+
+            <div class="article-imgs">
+            {for start="0" end="$vo.img_size"}
+                <img src="https://static-img-bbq.wutnews.net/image/{$vo.img[$i]}-120-100.jpg">
+            {/for}
+            </div>
+            <div class="theme">
+                <div class="theme_name">{$vo.theme_name}</div>
+                <div class="theme_id">ID:{$vo.theme_id}</div>
+            </div>
+
+            <div class="id">动态ID:{$vo.id}</div>
+            <div class="number">{$vo.likes}点赞-{$vo.comments}评论</div>
+            
+            <div class="button">
+
+                    <button type="button" class="btn btn-info" id="detail">详情</button>
+                    <button type="button" class="btn btn-info" id="hide"
+                                                               onclick="article_convert('{:url('admin/article/convert')}','hide','{$vo.id}')" >
+                        {if $vo.status==-1}
+                        展示
+                        {else /}
+                        隐藏
+                        {/if}
+                    </button>
+                    <button type="button" class="btn btn-info" id="recommend"
+                        onclick="article_convert('{:url('admin/article/convert')}','recommend','{$vo.id}')">
+                        {if $vo.is_position== 0}
+                        推荐
+                        {else /}
+                        已推荐
+                        {/if}
+                    </button>
+                    <button type="button" class="btn btn-info" id="top"
+                        onclick="article_convert('{:url('admin/article/convert')}','sticky','{$vo.id}')">
+                        {if $vo.is_sticky  == 0}
+                        置顶
+                        {else /}
+                        取消置顶
+                        {/if}
+                    </button>
+                    <button type="button" class="btn btn-danger" id="blocked">封禁</button>
+            </div>
+            <div class="blocked_time">剩余封禁时间:$vo.blocked_time(这个还没做)</div>
+        </div>
+        {/volist}
+                </div>
+    </div>    
 {include file="public/_footer" /}
 
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="__STATIC__/hadmin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="__STATIC__/hadmin/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="__STATIC__/admin/js/common.js"></script>
-<script type="text/javascript">
-
-</script>
-<style>
-  .bbq-app .pagination li{display:inline; padding-left:10px;}
-  .pagination .active{color:red}
-  .pagination .disabled{color:#888888}
-</style>
-</body>
+  </body>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="\static\admin\js\main.js"></script>
 </html>
 
