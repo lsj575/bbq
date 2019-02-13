@@ -273,6 +273,46 @@ www  WEB部署目录（或者子目录）
     {"id":2,"nickname":"小Q17396177273","password":null,"sno":null,"phone":"17396177273","avatar":null,"realname":null,"sex":2,"home_img":null,"signature":null,"college":null,"token":"2e7696f8e0426fc5d901f7557b67862a6addf298","time_out":1558403830,"is_position":0,"create_time":"2018-11-22 09:57:10","update_time":"2018-11-22 09:57:10","last_login_time":1542851830,"type":0,"status":1}
     ```
 
+#### 根据id获取用户基本信息
+
+> GET:www.example.com/bbq/public/api/version/user/basic_info?id=
+
+- HEADER
+
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- get参数
+
+  | 参数 | 值     |
+  | ---- | ------ |
+  | id   | 用户id |
+
+- version为bbq版本，例如v1
+
+- id若不填则返回本人的基本用户信息
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": [
+          {
+              "user_id": 2,
+              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
+              "user_nickname": "BBQ首席烧烤师",
+              "user_signature": "123"
+          }
+      ]
+  }
+  ```
+
 #### 修改用户信息
 
 > PUT:www.example.com/bbq/public/api/v1/user/:id
@@ -515,7 +555,7 @@ www  WEB部署目录（或者子目录）
 
 
 
-### 主题
+### 主题相关
 
 #### 获取所有主题
 
@@ -547,7 +587,38 @@ www  WEB部署目录（或者子目录）
       ]
   }
   ```
+#### 根据id获取主题的基本信息
 
+> GET:www.example.com/api/version/theme/basic_info?id=
+
+- HEADER:
+
+| 参数     | 值                                                           |
+| -------- | ------------------------------------------------------------ |
+| sign     | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+| app_type | andorid or ios                                               |
+| did      | 当前手机的序列号                                             |
+
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```json
+  {
+      "status": 1,
+      "message": "OK",
+      "data": [
+          {
+              "theme_id": 1,
+              "theme_name": "BBQ开发交流",
+              "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
+              "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
+              "theme_attention": 8
+          }
+      ]
+  }
+  ```
 ####获取用户关注的主题
 
 > GET:www.example.com/bbq/public/api/v1/theme/attention/user?id=
@@ -683,6 +754,42 @@ www  WEB部署目录（或者子目录）
       "status": 1,
       "message": "ok",
       "data": []
+  }
+  ```
+#### 根据id获取动态的基本信息
+
+> PUT:www.example.com/bbq/public/api/v1/article/info?id=
+
+- HEADER
+  | 参数              | 值                                                           |
+  | ----------------- | ------------------------------------------------------------ |
+  | sign              | 通过加密，将数据传输，每次请求sign都不同（详情参考加密一节） |
+  | app_type          | andorid or ios                                               |
+  | did               | 当前手机的序列号                                             |
+  | access_user_token | 手机登陆后获取的token                                        |
+
+- version为bbq版本，例如v1
+
+- 返回数据
+
+  ```
+  {
+      "status": 1,
+      "message": "OK",
+      "data": [
+          {
+              "article_id": "1",
+              "article_content": "更新动态测试",
+              "article_img": [
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
+              ],
+              "likes": 1,
+              "user_nickname": "BBQ首席烧烤师",
+              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
+              "user_signature": "123",
+              "create_time": "2018-11-24 20:29:58"
+          }
+      ]
   }
   ```
 
