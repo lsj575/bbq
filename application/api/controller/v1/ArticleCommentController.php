@@ -3,6 +3,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\CommonController;
 use app\common\lib\exception\ApiException;
+use think\Db;
 
 /**
  * 评论控制器
@@ -46,15 +47,21 @@ class ArticleCommentController extends AuthBaseController
         }
 
         $data['user_id'] =$this->user->id;
+        $data['create_time'] = time();
+        $data['update_time'] = time();
 
+        Db::startTrans();
         try {
-            $commentId = model('ArticleComment')->add($data);
+            $commentId = Db::table('article_comment')->insert($data);
             if ($commentId) {
+                Db::table('article')->where(['id' => $data['article_id']])->setInc('comments');
+                Db::commit();
                 return apiReturn(config('code.app_show_success'), 'OK', [], 202);
             } else {
                 return apiReturn(config('code.app_show_error'), '评论失败', [], 500);
             }
         } catch (\Exception $e) {
+            Db::rollback();
             throw new ApiException($e->getMessage(), 500);
         }
     }
