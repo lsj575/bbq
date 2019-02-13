@@ -66,7 +66,7 @@ class SearchController extends CommonController
         $result = [];
         foreach ($users as $key => $user) {
             $result[] = [
-                'user_d'            => $user['id'],
+                'user_id'            => $user['id'],
                 'user_nickname'     => $user['nickname'],
                 'user_avatar'       => $user['avatar'],
                 'user_signature'    => $user['signature'],
