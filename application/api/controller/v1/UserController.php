@@ -3,6 +3,7 @@ namespace app\api\controller\v1;
 
 use app\common\lib\Aes;
 use app\common\model\User;
+use think\Cache;
 
 ;
 
@@ -68,6 +69,8 @@ class UserController extends AuthBaseController
                 $id = $userModel->save($data, ['id' => $this->user->id]);
                 $userModel->commit();
                 if ($id) {
+                    $newInfoUser = $userModel::get(['id' => $id]);
+                    Cache::set("user:{$id}", $newInfoUser);
                     return apiReturn(config('code.app_show_success'), 'ok', [], 202);
                 } else {
                     return apiReturn(config('code.app_show_error'), '更新失败', [], 401);
@@ -79,7 +82,7 @@ class UserController extends AuthBaseController
 
         } catch (\Exception $e) {
             $userModel->rollback();
-            return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
+            return apiReturn(config('code.app_show_error'), $e->getMessage(), [], 500);
         }
     }
 
