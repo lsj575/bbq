@@ -32,22 +32,24 @@
                                                             method="get">
             <div class="form-group">
                 日期范围:
-<input type="text" name="start_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="" style="width:140px;" >
-      
+<input type="text" name="start_time" class="form-control" id="countTimestart" onfocus="selecttime(1)" value="" style="width:140px;" >
+            </div>
 	-
-      <input type="text" name="end_time" class="input-text" id="countTimeend" onfocus="selecttime(2)" value=""  style="width:140px;">
+      <input type="text" name="end_time" class="form-control" id="countTimeend"
+      onfocus="selecttime(2)" value=""  style="width:140px;">
       <br>
             是否置顶:
       <input type="radio" name="is_sticky" value="" checked="checked">所有
       <input type="radio" name="is_sticky" value="1">是
       <input type="radio" name="is_sticky" value="0">否
       <br>
-      <input type="text" name="id" placeholder="动态id">
-      <input type="text" name="content" placeholder="动态内容">
-      <input type="text" name="theme_name" placeholder="主题名">
-      <input type="text" name="nickname" placeholder=" 用户昵称" >
-            </div><br>
-                <button type="submit" class="btn btn-default">搜索</button>
+      <div class="form-group">
+      <input type="text" class="form-control" name="id" placeholder="动态id">
+      <input type="text" class="form-control" name="content" placeholder="动态内容">
+      <input type="text" class="form-control" name="themename" placeholder="主题名">
+      <input type="text" class="form-control" name="nickname" placeholder=" 用户昵称" >
+      <button type="submit" class="btn btn-default">搜索</button>
+      </div>
         </form>
     </nav>
     {:pagination($results)}
@@ -64,7 +66,8 @@
 
             <div class="user">
                 <div class="user_name">{$vo.user_nickname}</div>
-                <span class="user_id">ID:{$vo.user_id}</span>
+                <span class="user_id"><a
+                      onclick="article_copyid({$vo.user_id})">ID:{$vo.user_id}</a></span>
             </div>
 
             <div class="data">{$vo.create_time}</div>
@@ -80,37 +83,44 @@
             </div>
             <div class="theme">
                 <div class="theme_name">{$vo.theme_name}</div>
-                <div class="theme_id">ID:{$vo.theme_id}</div>
+                <div class="theme_id" onclick="article_copyid({$vo.theme_id})">ID:{$vo.theme_id}</div>
             </div>
 
-            <div class="id">动态ID:{$vo.id}</div>
+            <div class="id" onclick="article_copyid({$vo.id})">动态ID:{$vo.id}</div>
             <div class="number">{$vo.likes}点赞-{$vo.comments}评论</div>
             
             <div class="button">
 
-                    <button type="button" class="btn btn-info" id="detail">详情</button>
-                    <button type="button" class="btn btn-info" id="hide"
-                                                               onclick="article_convert('{:url('admin/article/convert')}','hide','{$vo.id}')" >
+                    <button type="button" class="btn btn-info" id="detail"
+                                                               onclick="article_comment('{$vo.id}','{:url('admin/comment/index')}')">详情</button>
+                    <button type="button" id="hide{$vo.id}"
+                                                               onclick="article_convert('{:url('admin/article/convert')}','hide','{$vo.id}')" 
                         {if $vo.status==-1}
-                        展示
+                                                              class="btn
+                                                              btn-success" >展示
                         {else /}
-                        隐藏
+                        class="btn btn-info"> 隐藏
                         {/if}
                     </button>
-                    <button type="button" class="btn btn-info" id="recommend"
-                        onclick="article_convert('{:url('admin/article/convert')}','recommend','{$vo.id}')">
+                        <button type="button" 
+                                              id="recommend{$vo.id}"
+                        onclick="article_convert('{:url('admin/article/convert')}','recommend','{$vo.id}')"
                         {if $vo.is_position== 0}
-                        推荐
+                         class="btn
+                                                              btn-info" > 推荐
                         {else /}
-                        已推荐
+                       class="btn
+                                                              btn-disabled" >   已推荐
                         {/if}
                     </button>
-                    <button type="button" class="btn btn-info" id="top"
-                        onclick="article_convert('{:url('admin/article/convert')}','sticky','{$vo.id}')">
+                    <button type="button" id="top{$vo.id}"
+                        onclick="article_convert('{:url('admin/article/convert')}','sticky','{$vo.id}')"
                         {if $vo.is_sticky  == 0}
-                        置顶
+                        class="btn
+                                                              btn-info" >  置顶
                         {else /}
-                        取消置顶
+                         class="btn
+                                                              btn-success" > 取消置顶
                         {/if}
                     </button>
                     <button type="button" class="btn btn-danger" id="blocked">封禁</button>
@@ -130,6 +140,6 @@
   <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
   <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="\static\admin\js\main.js"></script>
+  <script src="\static\admin\js\article.js"></script>
 </html>
 
