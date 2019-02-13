@@ -71,27 +71,29 @@ class ArticleComment extends Base
     public function getAdviceComment($user_id)
     {
         $whereData = [
-            'ac.status' => config('code.status_normal'),
-            'ac.user_id'    => $user_id,
+            'ac1.status'     => config('code.status_normal'),
+            'ac2.status'     => config('code.status_normal'),
+            'ac1.user_id'   => $user_id,
         ];
 
         return $this->table($this->table)
-            ->alias('ac')
+            ->alias('ac1')
             ->field([
-                'ac.id as comment_id',
+                'ac2.id as comment_id',
                 'u.id as user_id',
                 'u.nickname as user_nickname',
                 'u.avatar as user_avatar',
-                'ac.content as comment_content',
-                'ac.parent_id',
-                'ac.article_id',
-                'ac.likes as comment_likes',
-                'ac.img as comment_img',
-                'ac.create_time as create_time',
+                'ac2.content as comment_content',
+                'ac2.parent_id',
+                'ac2.article_id',
+                'ac2.likes as comment_likes',
+                'ac2.img as comment_img',
+                'ac2.create_time as create_time',
             ])
-            ->join('user u', 'u.id = ac.user_id')
+            ->join('article_comment ac2', 'ac2.parent_id = ac1.id')
+            ->join('user u', 'u.id = ac2.user_id')
             ->where($whereData)
-            ->order('ac.create_time desc')
+            ->order('ac2.create_time desc')
             ->select();
     }
 
