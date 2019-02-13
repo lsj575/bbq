@@ -133,7 +133,6 @@ class Article extends Base
     {
         $whereData = [
             'a.status'      => config('code.status_normal'),
-            'u.status'      => config('code.status_normal'),
             'a.theme_id'    => $data['theme_id'],
         ];
 
@@ -149,6 +148,32 @@ class Article extends Base
             ->select();
     }
 
+    /**
+     * 获取某主题下的所有动态
+     * @param $data
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getArticleInfoById($data)
+    {
+        $whereData = [
+            'a.status'  => config('code.status_normal'),
+            'a.id'      => $data['article_id'],
+        ];
+
+        $order = [
+            'a.create_time' => 'desc',
+        ];
+        return $this->table($this->table)
+            ->alias('a')
+            ->join('user u', 'a.user_id = u.id')
+            ->field('a.*, u.nickname, u.avatar, u.signature')
+            ->where($whereData)
+            ->order($order)
+            ->find();
+    }
     /**
      * 获取5天内获赞数最多的动态
      * @param $offset

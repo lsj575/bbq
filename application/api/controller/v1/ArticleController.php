@@ -128,7 +128,7 @@ class ArticleController extends CommonController
             }
 
             // 文字内容和图片不能全为空
-            if (empty($param['img']) || $param['content']) {
+            if ($param['img'] || $param['content']) {
                 // 整理入库数据
                 $data = [
                     'theme_id'          => $param['theme_id'],
@@ -189,7 +189,7 @@ class ArticleController extends CommonController
         }
 
         // 数据不能为空或者图片和内容不能同时为空
-        if (empty($data) || (empty($data['img']) && $data['content'])) {
+        if (empty($data) && ($data['img'] || $data['content'])) {
             return apiReturn(config('code.app_show_error'), '数据不合法', [], 404);
         }
 
@@ -366,6 +366,49 @@ class ArticleController extends CommonController
         }
     }
 
+    /**
+     * 根据id获取动态信息
+     * @return \json
+     * @throws ApiException
+     */
+    public function getArticleInfoById()
+    {
+        if (request()->isGet()) {
+            $article_id = input('get.id', 0, 'intval');
+
+            if (!$article_id) {
+                return apiReturn(config('code.app_show_error'), '参数不合法', [], 500);
+            }
+            // 整理数据
+            $data = [
+                'article_id'  => $article_id,
+            ];
+
+            // 查库
+            try {
+                $article = model('Article')->getArticleInfoById($data);
+            }catch (\Exception $e) {
+                throw new ApiException($e->getMessage(), 500);
+            }
+
+            // 整理返回值
+            $result = [];
+            if ($article) {
+                $result[] = [
+                    'article_id'        => $article_id,
+                    'article_content'   => $article['content'],
+                    'article_img'       => $article['img'] ? explode(',', $article['img']) : "",
+                    'likes'             => $article['likes'],
+                    'user_nickname'     => $article['nickname'],
+                    'user_avatar'       => $article['avatar'],
+                    'user_signature'    => $article['signature'],
+                    'create_time'       => $article['create_time'],
+                ];
+            }
+
+            return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
+        }
+    }
     /**
      * 整理动态数据
      * @param $article

@@ -15,7 +15,7 @@ use think\Cache;
 class UserController extends AuthBaseController
 {
     /**
-     * 获取用户信息
+     * 获取用户本人信息
      * user信息为其父类AuthBaseController获得
      * 用户基本信息较为隐私需要加密
      * @return \json|\think\response\Json
@@ -25,6 +25,38 @@ class UserController extends AuthBaseController
         $obj = new Aes();
 
         return apiReturn(config('code.app_show_success'), 'ok', $obj->encrypt($this->user));
+    }
+
+    /**
+     * 根据id获取用户的基本信息
+     * 基本信息：id、头像、昵称、个性签名
+     * @return \json
+     */
+    public function getUserBasicInfoById()
+    {
+        if (request()->isGet()) {
+            $id = input('get.id') ? input('get.id') : $this->user->id;
+            try {
+                $user = model('User')->get(['id' => $id, 'status' => config('code.status_normal')]);
+            } catch (\Exception $e) {
+                return apiReturn(config('code.app_show_error'), $e->getMessage(), '', 500);
+            }
+
+            // 整理数据
+            $result = [];
+            if ($user) {
+                $result[] = [
+                    'user_id'           => $user['id'],
+                    'user_avatar'       => $user['avatar'],
+                    'user_nickname'     => $user['nickname'],
+                    'user_signature'    => $user['signature'],
+                ];
+            }
+
+            return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
+        } else {
+            return apiReturn(config('code.app_show_error'), 'error', [], 403);
+        }
     }
 
     /**

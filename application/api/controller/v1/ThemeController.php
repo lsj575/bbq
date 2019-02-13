@@ -34,6 +34,39 @@ class ThemeController extends CommonController
             }
         }
 
+        return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
+    }
+
+    /**
+     * 根据id获取主题基本信息接口
+     * @return \json
+     * @throws ApiException
+     */
+    public function getThemeBasicInfoById()
+    {
+        $data['status'] = [
+            'eq', config('code.status_normal')
+        ];
+        $data['id'] = input('get.id', 0, 'intval');
+        if (!$data['id']) {
+            return apiReturn(config('code.app_show_error'), '参数错误', [], 500);
+        }
+        try {
+            $theme = model('Theme')::get($data);
+        }catch (\Exception $e) {
+            throw new ApiException($e->getMessage(), 500);
+        }
+
+        $result = [];
+        if ($theme) {
+            $result[] = [
+                'theme_id'              => $theme['id'],
+                'theme_name'            => $theme['theme_name'],
+                'theme_introduction'    => $theme['theme_introduction'],
+                'theme_img'             => $theme['img'],
+                'theme_attention'       => $theme['attention']
+            ];
+        }
 
         return apiReturn(config('code.app_show_success'), 'OK', $result, 200);
     }

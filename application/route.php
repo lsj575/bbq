@@ -24,6 +24,8 @@ Route::get('api/:ver/index/init', 'api/:ver.index/init');
  */
 //获取所有主题
 Route::get('api/:ver/theme/all', 'api/:ver.theme/getAllTheme');
+// 根据id获取主题基本信息
+Route::get('api/:ver/theme/basic_info', 'api/:ver.theme/getThemeBasicInfoById');
 // 获取用户关注的主题
 Route::get('api/:ver/theme/attention/user', 'api/:ver.theme/getThemeOfUserAttention');
 // 获取某主题的用户关注数量
@@ -32,8 +34,12 @@ Route::get('api/:ver/theme/beattention/count', 'api/:ver.theme/getUserNumOfAtten
 /**
  * 动态相关
  */
-// 动态资源路由
-Route::resource('api/:ver/article', 'api/:ver.article');
+// 添加动态
+Route::post('api/:ver/article', 'api/:ver.article/save');
+// 更新动态
+Route::put('api/:ver/article/:id', 'api/:ver.article/update');
+// 根据id获取动态信息
+Route::get('api/:ver/article/info', 'api/:ver.article/getArticleInfoById');
 // 获取某主题下的所有动态
 Route::get('api/:ver/articles/theme', 'api/:ver.article/getArticlesOfTheme');
 // 获取获赞最多的动态
@@ -52,8 +58,12 @@ Route::post('api/:ver/login', 'api/:ver.login/save');
 /**
  * 用户信息相关
  */
-// 获取用户数据 【资源路由】
-Route::resource('api/:ver/user', 'api/:ver.user');
+// 获取用户本人数据
+Route::get('api/:ver/user', 'api/:ver.user/read');
+// 更新用户信息
+Route::put('api/:ver/user/:id', 'api/:ver.user/update');
+// 根据id获取其他用户的基本信息
+Route::get('api/:ver/user/basic_info', 'api/:ver.user/getUserBasicInfoById');
 // 检查用户昵称是否唯一
 Route::get('api/:ver/user/nickname/:id', 'api/:ver.user/checkUserNicknamePass');
 // 获取用户关注其他用户的数量
