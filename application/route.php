@@ -35,7 +35,7 @@ Route::get('api/:ver/theme/beattention/count', 'api/:ver.theme/getUserNumOfAtten
  * 动态相关
  */
 // 添加动态
-Route::post('api/:ver/article', 'api/:ver.article/save');
+Route::post('api/:ver/article/save', 'api/:ver.article/save');
 // 更新动态
 Route::put('api/:ver/article/:id', 'api/:ver.article/update');
 // 根据id获取动态信息
@@ -59,7 +59,7 @@ Route::post('api/:ver/login', 'api/:ver.login/save');
  * 用户信息相关
  */
 // 获取用户本人数据
-Route::get('api/:ver/user', 'api/:ver.user/read');
+Route::get('api/:ver/user/read', 'api/:ver.user/read');
 // 更新用户信息
 Route::put('api/:ver/user/:id', 'api/:ver.user/update');
 // 根据id获取其他用户的基本信息
