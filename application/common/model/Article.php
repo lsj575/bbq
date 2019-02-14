@@ -49,7 +49,6 @@ class Article extends Base
         $listField = $this->_getListField();
         $listField[] = 'a.status' ;
         $listField[] = 'a.update_time';
-        $listField[] = 'a.is_sticky';
 
         $results = $this->table($this->table)
             ->alias('a')
@@ -355,6 +354,7 @@ class Article extends Base
             'comments',
             'theme_name',
             'content',
+            'a.is_sticky',
         ];
     }
 

@@ -787,7 +787,8 @@ www  WEB部署目录（或者子目录）
               "user_nickname": "BBQ首席烧烤师",
               "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
               "user_signature": "123",
-              "create_time": "2018-11-24 20:29:58"
+              "create_time": "2018-11-24 20:29:58",
+              "is_sticky": "1"
           }
       ]
   }
@@ -833,7 +834,8 @@ www  WEB部署目录（或者子目录）
               "user_nickname": "小Q15717515314",
               "user_avatar": "",
               "user_signature": null,
-              "create_time": "2019-02-09 19:43:48"
+              "create_time": "2019-02-09 19:43:48",
+              "is_sticky": 0
           },
           {
               "article_id": 26,
@@ -849,7 +851,8 @@ www  WEB部署目录（或者子目录）
               "user_nickname": "小Q15717515314",
               "user_avatar": "",
               "user_signature": null,
-              "create_time": "2019-02-09 19:43:48"
+              "create_time": "2019-02-09 19:43:48",
+              "is_sticky": 1
           },
           {
               "article_id": 10,
@@ -861,7 +864,8 @@ www  WEB部署目录（或者子目录）
               "user_nickname": "codeplay",
               "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
               "user_signature": "这个人很懒",
-              "create_time": "2019-02-07 21:47:39"
+              "create_time": "2019-02-07 21:47:39",
+              "is_sticky": 0
           }
       ]
   }
@@ -948,7 +952,8 @@ www  WEB部署目录（或者子目录）
               "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
               "user_signature": "123",
               "is_position": 1,
-              "create_time": "2018-11-24 20:29:58"
+              "create_time": "2018-11-24 20:29:58",
+              "is_sticky": 1
           },
           {
               "user_id": 2,
@@ -969,7 +974,8 @@ www  WEB部署目录（或者子目录）
               "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
               "user_signature": "123",
               "is_position": 0,
-              "create_time": "2015-12-06 10:16:15"
+              "create_time": "2015-12-06 10:16:15",
+              "is_sticky": 1
           }
       ]
   }
@@ -1022,7 +1028,8 @@ www  WEB部署目录（或者子目录）
                   "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
                   "user_signature": "123",
                   "is_position": 1,
-                  "create_time": "2018-11-24 20:29:58"
+                  "create_time": "2018-11-24 20:29:58",
+                  "is_sticky": 0
               },
               {
                   "user_id": 3,
@@ -1049,7 +1056,8 @@ www  WEB部署目录（或者子目录）
                   "user_avatar": "",
                   "user_signature": null,
                   "is_position": 0,
-                  "create_time": "2019-02-09 19:43:48"
+                  "create_time": "2019-02-09 19:43:48",
+                  "is_sticky": 1
               },
           ]
       }
@@ -1109,7 +1117,8 @@ www  WEB部署目录（或者子目录）
               "user_avatar": "",
               "user_signature": null,
               "is_position": 1,
-              "create_time": "2019-02-09 19:43:48"
+              "create_time": "2019-02-09 19:43:48",
+              "is_sticky": 1
           },
           {
               "type": "user",
@@ -1129,7 +1138,8 @@ www  WEB部署目录（或者子目录）
               "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
               "user_signature": "这个人很懒",
               "is_position": 0,
-              "create_time": "2019-02-07 21:47:39"
+              "create_time": "2019-02-07 21:47:39",
+              "is_sticky": 0
           }
       ]
   }
@@ -1933,7 +1943,8 @@ www  WEB部署目录（或者子目录）
               "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
               "user_signature": "123",
               "is_position": 1,
-              "create_time": "2018-11-24 20:29:58"
+              "create_time": "2018-11-24 20:29:58",
+              "is_sticky": 1
           }
       ]
   }
@@ -2188,7 +2199,8 @@ www  WEB部署目录（或者子目录）
                   "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
                   "user_signature": "123",
                   "is_position": 1,
-                  "create_time": "2018-11-29 10:21:44"
+                  "create_time": "2018-11-29 10:21:44",
+                  "is_sticky": 0
               },
               {
                   "user_id": 2,
@@ -2209,7 +2221,8 @@ www  WEB部署目录（或者子目录）
                   "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
                   "user_signature": "123",
                   "is_position": 0,
-                  "create_time": "2015-12-06 10:16:15"
+                  "create_time": "2015-12-06 10:16:15",
+                  "is_sticky": 1,
               },
               {
                   "user_id": 3,
@@ -2235,49 +2248,13 @@ www  WEB部署目录（或者子目录）
                   "user_avatar": "",
                   "user_signature": null,
                   "is_position": 1,
-                  "create_time": "2019-02-09 19:43:48"
+                  "create_time": "2019-02-09 19:43:48",
+                  "is_sticky": 0,
               }
           ]
       }
   }
   ```
-### 后台动态管理
-- 搜索
-  > GET: wwww.example.com/admin/article/index
-  * get参数
-
-    | 参数       | 值                                                                                 |
-    | ---------- | ---------------------------------------------------------------------------------- |
-    | content    | 动态内容                                                                           |
-    | nickname   | 用户名                                                                             |
-    | start_time | 指定动态发布时间在此之后                                                           |
-    | end_time   | 指定统统发布时间在此之前                                                           |
-    | theme_name | 主题名                                                                             |
-    | is_stikcy  | 是否置顶。1表示获取置顶的动态，0表示显示获取置顶的动态，此参数为空表示不管是否置顶 |
-    | id         | 动态的id
-  * get参数个数是任意的（0个、1个等等
-  - 返回数据 同 获取动态列表 。
-- 修改 隐藏、推荐、置顶 的状态
-  > POST: www.example.com/admin/article/convert
-  > 有且仅有两个参数type和id。id为待修改动态的id。
-  > type可以为"hide"、"recommend"、"sticky"。分别表示改变的 是否隐藏 、 是否推荐 、 是否置顶。
-  - 功能说明
-  > 此api将待改变动态的指定状态取反。
-  - 返回数据
-    * 成功
-    ```json
-    {
-        "status":200
-    }
-    ```
-
-    * 失败
-    ```json
-    {
-        "status":400,
-        "message":"invalid request"
-    }
-    ```
 ### 轮播图
 
 - 获取所有slide_img
