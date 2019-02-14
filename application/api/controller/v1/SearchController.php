@@ -119,6 +119,7 @@ class SearchController extends CommonController
                 'user_signature'        => $article['signature'],
                 'is_position'           => $article['is_position'],
                 'create_time'           => $article['create_time'],
+                'is_sticky'             => $article['is_sticky'],
             ];
         }
         return $result;

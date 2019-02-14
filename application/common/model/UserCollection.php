@@ -62,6 +62,7 @@ class UserCollection extends Base
             'comments',
             'theme_name',
             'content',
+            'a.is_sticky',
         ];
     }
 
