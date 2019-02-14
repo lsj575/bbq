@@ -14,15 +14,10 @@
 <link rel="stylesheet" type="text/css" href="__STATIC__/hadmin/lib/Hui-iconfont/1.0.8/iconfont.css" />
 </head>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span
-        class="c-gray en">&gt;</span> 主题管理 <span class="c-gray
-        en">&gt;</span><a href="{:url('admin/article/index')}">  主题列表</a> <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+        class="c-gray en">&gt;</span> 动态管理 <span class="c-gray
+        en">&gt;</span><a href="{:url('admin/article/index')}">  动态列表</a> <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 
-
-<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="\static\admin\css\index.css"/>
-
-
+<link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/index.css"/>
 
 <div class="container">
 
@@ -78,7 +73,9 @@
 
             <div class="article-imgs">
             {for start="0" end="$vo.img_size"}
-                <img src="https://static-img-bbq.wutnews.net/image/{$vo.img[$i]}-120-100.jpg">
+            <img class="the_img"
+            src="https://static-img-bbq.wutnews.net/image/{$vo.img[$i]}-120-100.jpg"
+            id="{$vo.img[$i]}">
             {/for}
             </div>
             <div class="theme">
@@ -129,7 +126,12 @@
         </div>
         {/volist}
                 </div>
-    </div>    
+    </div>  
+
+    <div id="dialog">
+    <img src="" style="width:800px" id="bigImg">
+    </div>
+
 {include file="public/_footer" /}
 
 <!--请在下方写此页面业务相关的脚本-->
@@ -141,5 +143,29 @@
   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
   <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="\static\admin\js\article.js"></script>
+
+<script type="text/javascript" src="
+__STATIC__/admin/jui/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="
+__STATIC__/admin/jui/jquery-ui.css">
+
+  <script>
+$(function(){
+        $("#dialog").dialog({
+            autoOpen:false,
+            title:"查看大图",
+            width:890
+        });
+
+    $(".the_img").click(function(){
+        var imgid=$(this).attr("id");
+
+        $('#bigImg').attr("src","https://static-img-bbq.wutnews.net/image/"+imgid+"-800-100.jpg")
+        $("#dialog").dialog('open');
+
+      });
+    })
+    
+  </script>
 </html>
 

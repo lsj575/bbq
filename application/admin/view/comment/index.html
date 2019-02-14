@@ -1,23 +1,43 @@
-<!--header-->
-{include file="public/_meta" title="评论列表"/}
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" >
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="__STATIC__/hadmin/lib/html5shiv.js"></script>
+<script type="text/javascript" src="__STATIC__/hadmin/lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="__STATIC__/hadmin/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/hadmin/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/hadmin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/hadmin/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<!-- <link href="https://cdn.bootcss.com/cropper/3.1.3/cropper.min.css" rel="stylesheet"> -->
+<link href="__STATIC__/admin/css/cropper.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+<!--[if IE 6]>
+<script type="text/javascript" src="__STATIC__/hadmin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]--># 
+
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span
-                           class="c-gray en">&gt;</span> <a
-                           href="{:url("comment/index")}">评论管理</a> <span class="c-gray en">&gt;</span>
-  评论列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+                           class="c-gray en">&gt;</span> 评论管理 <span class="c-gray en">&gt;</span>
+ <a
+     href="{:url("comment/index")}"> 评论列表</a> <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
   <div class="text-c">
     <form action="{:url('comment/index')}" method="get">
-        评论内容:
-        <input type="text" name="content"  placeholder="" style="width:250px" 
+        <input type="text" name="content" style="width:250px"
+                                                          placeholder="评论内容"
         class="input-text">
-        <br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论者昵称:    
-        <input type="text" name="nickname" placeholder="" style="width:250px"
+        <input type="text" name="nickname" placeholder="评论者昵称" style="width:250px"
         class="input-text">
-        <br>
-        所属动态id:
-        <input type="text" name="article_id" >
-        <br>
+        <input type="text" name="article_id" placeholder="动态id"
+        style="width:45px">
         <button name="" id="" class="btn btn-success" type="submit"><i
         class="Hui-iconfont">&#xe665;</i> 搜索</button>
     </form>
@@ -54,7 +74,7 @@
         <td width="30">{$vo.user_id}</td>
         <td class="text-l">{$vo.nickname}</td>
         <td class="text-l">{$vo.content}</td>
-        <td>{if $vo.img} <img
+        <td>{if $vo.img} <img class="the_img" id="{$vo.img}"
             src="https://static-img-bbq.wutnews.net/image/{$vo.img}-120-100.jpg">
             {/if}</td>
         <td>{$vo.parent_id} </td>
@@ -85,21 +105,113 @@
     <div id="laypage"></div>
   </div>
 </div>
-<!--header-->
+
+<div id="dialog" >
+<img src="" style="width:800px" id="bigImg">
+</div>
+
 {include file="public/_footer" /}
 
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="__STATIC__/hadmin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="__STATIC__/hadmin/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="__STATIC__/admin/js/common.js"></script>
+
+<script type="text/javascript" src="
+__STATIC__/admin/jui/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="
+__STATIC__/admin/jui/jquery-ui.css">
+
 <script type="text/javascript">
 
+    $(function(){
+        $("#dialog").dialog({
+            autoOpen:false,
+            title:"查看大图",
+            width:890
+        });
 
+    $(".the_img").click(function(){
+        var imgid=$(this).attr("id");
+
+        $('#bigImg').attr("src","https://static-img-bbq.wutnews.net/image/"+imgid+"-800-100.jpg")
+        $("#dialog").dialog('open');
+
+      });
+    })
 </script>
 <style>
   .bbq-app .pagination li{display:inline; padding-left:10px;}
   .pagination .active{color:red}
   .pagination .disabled{color:#888888}
+body{
+  background: #e5e5e5;
+}
+h2{
+  width: 100%;
+  text-align: center;
+}
+.logo{
+  width: 50px;
+  margin: 0 auto;
+}
+.navbar-logo{
+  width: 90px !important;
+}
+.loginWraper{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: white;
+}
+.footer{
+  width: 100%;
+  position: absolute;
+  bottom: 5px;
+}
+#openWrapper {
+  position: relative;
+}
+#photoInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+#user-photo {
+  width:200px;
+  height:200px;
+  margin-top: 10px;
+}
+#photo {
+  max-width:100%;
+  max-height:350px;
+}
+.img-preview-box {
+  text-align: center;
+}
+.img-preview-box > div {
+  display: inline-block;;
+  margin-right: 10px;
+}
+.img-preview {
+  overflow: hidden;
+}
+.img-preview-box .img-preview-lg {
+  width: 150px;
+  height: 150px;
+}
+.img-preview-box .img-preview-md {
+  width: 100px;
+  height: 100px;
+}
+.img-preview-box .img-preview-sm {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
 </style>
 </body>
 </html>
