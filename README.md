@@ -758,7 +758,7 @@ www  WEB部署目录（或者子目录）
   ```
 #### 根据id获取动态的基本信息
 
-> PUT:www.example.com/bbq/public/api/v1/article/info?id=
+> GET:www.example.com/bbq/public/api/v1/article/info?id=
 
 - HEADER
   | 参数              | 值                                                           |
@@ -816,13 +816,52 @@ www  WEB部署目录（或者子目录）
       "message": "OK",
       "data": [
           {
-              "article_id": 2,
-              "content": "更新动态测试",
-              "img": "",
+              "article_id": 24,
+              "content": "这是小Q在 bbq开发交流下的测试2，有 9 张图片.",
+              "img": [
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
+              ],
               "likes": 0,
-              "user_nickname": "BBQ首席烧烤师",
-              "user_avatar": null,
-              "create_time": "2018-11-22 09:57:10"
+              "user_nickname": "小Q15717515314",
+              "user_avatar": "",
+              "user_signature": null,
+              "create_time": "2019-02-09 19:43:48"
+          },
+          {
+              "article_id": 26,
+              "content": "这是小Q在 bbq开发交流下的测试4，有 6 张图片.",
+              "img": [
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
+              ],
+              "likes": 0,
+              "user_nickname": "小Q15717515314",
+              "user_avatar": "",
+              "user_signature": null,
+              "create_time": "2019-02-09 19:43:48"
+          },
+          {
+              "article_id": 10,
+              "content": "流浪地球，该片根据刘慈欣同名小说改编，讲述了在不久的将来太阳即将毁灭，太阳系已经不适合人类生存，而面对绝境，人类将开启“流浪地球”计划，试图带着地球一起逃离太阳系，寻找人类新家园的故事。在不远的将来，太阳急速衰老膨胀，地球面临被吞没的灭顶之灾。为拯救地球，人类在地球表面建造了上万座行星发动机，以逃离太阳系寻找新的家园，地球和人类就此踏上预计长达2500年的宇宙流浪之旅。在完成这一宏伟计划的进程中，无数人挺身而出上演了可歌可泣的传奇故事，九死一生的冒险和对人性的终极拷问也同时上演",
+              "img": [
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
+              ],
+              "likes": 0,
+              "user_nickname": "codeplay",
+              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
+              "user_signature": "这个人很懒",
+              "create_time": "2019-02-07 21:47:39"
           }
       ]
   }
@@ -894,37 +933,43 @@ www  WEB部署目录（或者子目录）
       "data": [
           {
               "user_id": 2,
-              "article_id": 2,
-              "theme_id": 1,
-              "theme_name": "BBQ开发交流",
-              "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
-              "content": "bbq发布动态测试1",
-              "img": "",
-              "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-              "likes": 1,
-              "comments": 0,
-              "user_nickname": "BBQ首席烧烤师",
-              "user_avatar": null,
-              "user_signature": "123",
-              "is_position": 1,
-              "create_time": "2018-11-29 10:21:44"
-          },
-          {
-              "user_id": 2,
               "article_id": 1,
               "theme_id": 1,
               "theme_name": "BBQ开发交流",
               "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
-              "content": "更新动态测试",
-              "img": "",
+              "article_content": "更新动态测试",
+              "article_img": [
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
+              ],
               "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-              "likes": 0,
+              "likes": 1,
+              "comments": 13,
+              "user_nickname": "BBQ首席烧烤师",
+              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
+              "user_signature": "123",
+              "is_position": 1,
+              "create_time": "2018-11-24 20:29:58"
+          },
+          {
+              "user_id": 2,
+              "article_id": 14,
+              "theme_id": 14,
+              "theme_name": "火影忍者",
+              "theme_introduction": "111",
+              "article_content": "这是 BBQ首席烧烤师 在火影忍者主题下的测试1,有三张图片",
+              "article_img": [
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
+              ],
+              "theme_img": "7853d7b8-6aad-4e30-a7da-587eacdfa322",
+              "likes": 3,
               "comments": 0,
               "user_nickname": "BBQ首席烧烤师",
-              "user_avatar": null,
+              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
               "user_signature": "123",
               "is_position": 0,
-              "create_time": "2018-11-24 20:29:58"
+              "create_time": "2015-12-06 10:16:15"
           }
       ]
   }
@@ -961,52 +1006,51 @@ www  WEB部署目录（或者子目录）
       "data": {
           "admin_recommend": [
               {
-                  "img": "",
-                  "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-                  "article_id": 2,
-                  "user_id": 2,
-                  "theme_id": 1,
-                  "content": "bbq发布动态测试1",
-                  "user_avatar": null,
-                  "user_nickname": "BBQ首席烧烤师",
-                  "likes": 0,
-                  "comments": 0,
-                  "theme_name": "BBQ开发交流",
-                  "is_position": 1,
-                  "create_time": "2018-11-29 10:21:44"
-              }
-          ],
-          "most_like": [
-              {
                   "user_id": 2,
                   "article_id": 1,
                   "theme_id": 1,
                   "theme_name": "BBQ开发交流",
-                  "content": "更新动态测试",
-                  "img": "",
+                  "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
+                  "article_content": "更新动态测试",
+                  "article_img": [
+                      "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
+                  ],
                   "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-                  "likes": 0,
-                  "comments": 0,
+                  "likes": 1,
+                  "comments": 13,
                   "user_nickname": "BBQ首席烧烤师",
-                  "user_avatar": null,
-                  "is_position": 0,
+                  "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
+                  "user_signature": "123",
+                  "is_position": 1,
                   "create_time": "2018-11-24 20:29:58"
               },
               {
-                  "user_id": 2,
-                  "article_id": 3,
+                  "user_id": 3,
+                  "article_id": 24,
                   "theme_id": 1,
                   "theme_name": "BBQ开发交流",
-                  "content": "bbq发布动态测试2",
-                  "img": "",
+                  "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
+                  "article_content": "这是小Q在 bbq开发交流下的测试2，有 9 张图片.",
+                  "article_img": [
+                      "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                      "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                      "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                      "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                      "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                      "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                      "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                      "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                      "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
+                  ],
                   "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
                   "likes": 0,
                   "comments": 0,
-                  "user_nickname": "BBQ首席烧烤师",
-                  "user_avatar": null,
+                  "user_nickname": "小Q15717515314",
+                  "user_avatar": "",
+                  "user_signature": null,
                   "is_position": 0,
-                  "create_time": "2018-11-29 10:21:49"
-              }
+                  "create_time": "2019-02-09 19:43:48"
+              },
           ]
       }
   }
@@ -1043,70 +1087,49 @@ www  WEB部署目录（或者子目录）
           {
               "type": "user",
               "user_id": 3,
-              "article_id": 3,
+              "article_id": 23,
               "theme_id": 1,
               "theme_name": "BBQ开发交流",
               "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
-              "content": "bbq发布动态测试2",
-              "img": "",
+              "content": "这是小Q在 bbq开发交流下的测试1，有 8 张图片.",
+              "img": [
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
+              ],
               "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-              "likes": 1,
+              "likes": 0,
               "comments": 0,
-              "user_nickname": "BBQ首席烧烤师",
-              "user_avatar": null,
-              "is_position": 0,
-              "create_time": "2018-11-29 10:21:49"
-          },
-          {
-              "type": "theme",
-              "user_id": 3,
-              "article_id": 3,
-              "theme_id": 1,
-              "theme_name": "BBQ开发交流",
-              "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
-              "content": "bbq发布动态测试2",
-              "img": "",
-              "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-              "likes": 1,
-              "comments": 0,
-              "user_nickname": "BBQ首席烧烤师",
-              "user_avatar": null,
-              "is_position": 0,
-              "create_time": "2018-11-29 10:21:49"
-          },
-          {
-              "type": "theme",
-              "user_id": 2,
-              "article_id": 2,
-              "theme_id": 1,
-              "theme_name": "BBQ开发交流",
-              "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
-              "content": "bbq发布动态测试1",
-              "img": "",
-              "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-              "likes": 1,
-              "comments": 0,
-              "user_nickname": "BBQ首席烧烤师",
-              "user_avatar": null,
+              "user_nickname": "小Q15717515314",
+              "user_avatar": "",
+              "user_signature": null,
               "is_position": 1,
-              "create_time": "2018-11-29 10:21:44"
+              "create_time": "2019-02-09 19:43:48"
           },
           {
-              "type": "theme",
-              "user_id": 2,
-              "article_id": 1,
+              "type": "user",
+              "user_id": 4,
+              "article_id": 10,
               "theme_id": 1,
               "theme_name": "BBQ开发交流",
               "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
-              "content": "更新动态测试",
-              "img": "",
+              "content": "流浪地球，该片根据刘慈欣同名小说改编，讲述了在不久的将来太阳即将毁灭，太阳系已经不适合人类生存，而面对绝境，人类将开启“流浪地球”计划，试图带着地球一起逃离太阳系，寻找人类新家园的故事。在不远的将来，太阳急速衰老膨胀，地球面临被吞没的灭顶之灾。为拯救地球，人类在地球表面建造了上万座行星发动机，以逃离太阳系寻找新的家园，地球和人类就此踏上预计长达2500年的宇宙流浪之旅。在完成这一宏伟计划的进程中，无数人挺身而出上演了可歌可泣的传奇故事，九死一生的冒险和对人性的终极拷问也同时上演",
+              "img": [
+                  "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
+              ],
               "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-              "likes": 1,
-              "comments": 0,
-              "user_nickname": "BBQ首席烧烤师",
-              "user_avatar": null,
+              "likes": 0,
+              "comments": 1,
+              "user_nickname": "codeplay",
+              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
+              "user_signature": "这个人很懒",
               "is_position": 0,
-              "create_time": "2018-11-24 20:29:58"
+              "create_time": "2019-02-07 21:47:39"
           }
       ]
   }
@@ -1193,50 +1216,82 @@ www  WEB部署目录（或者子目录）
           {
               "article_comment_id": 1,
               "user_nickname": "BBQ首席烧烤师",
-              "user_avatar": null,
+              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
               "content": "说得好！",
               "article_comment_img": "",
               "article_id": 1,
               "parent_id": 0,
-              "likes": 2,
+              "likes": 1,
               "create_time": "2019-02-04 22:57:50",
               "son": [
                   {
                       "article_comment_id": 2,
                       "user_nickname": "BBQ首席烧烤师",
-                      "user_avatar": null,
+                      "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
                       "content": "我觉得不行",
                       "article_comment_img": "",
                       "article_id": 1,
                       "parent_id": 1,
-                      "likes": 0,
+                      "likes": 1,
                       "create_time": "2019-02-04 23:16:25",
                       "son": [
                           {
                               "article_comment_id": 5,
                               "user_nickname": "BBQ首席烧烤师",
-                              "user_avatar": null,
+                              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
                               "content": "成锋贼逗",
                               "article_comment_img": "6fef3167-46bc-47fa-9547-d67369c9e88f",
                               "article_id": 1,
                               "parent_id": 2,
-                              "likes": 0,
+                              "likes": 1,
                               "create_time": "2019-02-08 19:38:03"
+                          },
+                          {
+                              "article_comment_id": 15,
+                              "user_nickname": "BBQ首席烧烤师",
+                              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
+                              "content": "成锋贼逗2",
+                              "article_comment_img": "6fef3167-46bc-47fa-9547-d67369c9e88f",
+                              "article_id": 1,
+                              "parent_id": 2,
+                              "likes": 0,
+                              "create_time": "2019-02-13 18:36:55"
                           }
                       ]
                   },
                   {
                       "article_comment_id": 3,
                       "user_nickname": "BBQ首席烧烤师",
-                      "user_avatar": null,
+                      "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
                       "content": "我觉得你说得很对",
                       "article_comment_img": "6fef3167-46bc-47fa-9547-d67369c9e88f",
                       "article_id": 1,
                       "parent_id": 1,
-                      "likes": 0,
+                      "likes": 1,
                       "create_time": "2019-02-04 23:21:34"
-                  }
-              ]
+                  },
+                  {
+                      "article_comment_id": 7,
+                      "user_nickname": "codeplay",
+                      "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
+                      "content": "阿西吧",
+                      "article_comment_img": "",
+                      "article_id": 1,
+                      "parent_id": 1,
+                      "likes": 0,
+                      "create_time": "2019-02-12 13:31:30"
+                  },
+          },
+          {
+              "article_comment_id": 6,
+              "user_nickname": "codeplay",
+              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
+              "content": "123",
+              "article_comment_img": null,
+              "article_id": 1,
+              "parent_id": 0,
+              "likes": 1,
+              "create_time": "2019-02-12 11:17:56"
           }
       ]
   }
@@ -1894,21 +1949,23 @@ www  WEB部署目录（或者子目录）
       "message": "OK",
       "data": [
           {
-              "user_id": 3,
-              "article_id": 3,
+              "user_id": 2,
+              "article_id": 1,
               "theme_id": 1,
               "theme_name": "BBQ开发交流",
               "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
-              "content": "bbq发布动态测试2",
-              "img": "",
+              "content": "更新动态测试",
+              "img": [
+                  ","
+              ],
               "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
-              "likes": 2,
-              "comments": 0,
-              "user_nickname": "小Q15717515314",
-              "user_avatar": null,
-              "user_signature": null,
-              "is_position": 0,
-              "create_time": "2018-11-29 10:21:49"
+              "likes": 1,
+              "comments": 13,
+              "user_nickname": "BBQ首席烧烤师",
+              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
+              "user_signature": "123",
+              "is_position": 1,
+              "create_time": "2018-11-24 20:29:58"
           }
       ]
   }
@@ -2125,9 +2182,9 @@ www  WEB部署目录（或者子目录）
       "data": {
           "users": [
               {
-                  "user_d": 2,
+                  "user_id": 2,
                   "user_nickname": "BBQ首席烧烤师",
-                  "user_avatar": null,
+                  "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
                   "user_signature": "123"
               }
           ],
@@ -2152,15 +2209,15 @@ www  WEB部署目录（或者子目录）
                   "theme_id": 1,
                   "theme_name": "BBQ开发交流",
                   "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
-                  "content": "bbq发布动态测试1",
-                  "img": [
+                  "article_content": "bbq发布动态测试1",
+                  "article_img": [
                       "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
                   ],
                   "theme_img": "20180509\\dc425e3b159797af24bf97a6a247cb51.jpg",
                   "likes": 1,
                   "comments": 0,
                   "user_nickname": "BBQ首席烧烤师",
-                  "user_avatar": null,
+                  "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
                   "user_signature": "123",
                   "is_position": 1,
                   "create_time": "2018-11-29 10:21:44"
@@ -2171,17 +2228,17 @@ www  WEB部署目录（或者子目录）
                   "theme_id": 14,
                   "theme_name": "火影忍者",
                   "theme_introduction": "111",
-                  "content": "这是 BBQ首席烧烤师 在火影忍者主题下的测试1,有三张图片",
-                  "img": [
+                  "article_content": "这是 BBQ首席烧烤师 在火影忍者主题下的测试1,有三张图片",
+                  "article_img": [
                       "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
                       "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
                       "da3c4bf4-1fed-4690-8f2a-8866ad70249b"
                   ],
                   "theme_img": "7853d7b8-6aad-4e30-a7da-587eacdfa322",
                   "likes": 3,
-                  "comments": 2,
+                  "comments": 0,
                   "user_nickname": "BBQ首席烧烤师",
-                  "user_avatar": null,
+                  "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
                   "user_signature": "123",
                   "is_position": 0,
                   "create_time": "2015-12-06 10:16:15"
@@ -2192,8 +2249,8 @@ www  WEB部署目录（或者子目录）
                   "theme_id": 1,
                   "theme_name": "BBQ开发交流",
                   "theme_introduction": "本主题专注于对BBQ的建议提供，欢迎和BBQ开发人员交流",
-                  "content": "这是小Q在 bbq开发交流下的测试1，有 8 张图片.",
-                  "img": [
+                  "article_content": "这是小Q在 bbq开发交流下的测试1，有 8 张图片.",
+                  "article_img": [
                       "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
                       "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
                       "da3c4bf4-1fed-4690-8f2a-8866ad70249b",
@@ -2209,7 +2266,7 @@ www  WEB部署目录（或者子目录）
                   "user_nickname": "小Q15717515314",
                   "user_avatar": "",
                   "user_signature": null,
-                  "is_position": 0,
+                  "is_position": 1,
                   "create_time": "2019-02-09 19:43:48"
               }
           ]

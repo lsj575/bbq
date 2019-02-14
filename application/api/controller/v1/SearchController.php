@@ -44,7 +44,7 @@ class SearchController extends CommonController
                 $data = [
                     'users'     => $users ? $this->adjustUsersData($users) : [],
                     'themes'    => $themes ? $this->adjustThemesData($themes) : [],
-                    'articles'  => $articles ? $this->adjustArticlessData($articles) : [],
+                    'articles'  => $articles ? $this->adjustArticlesData($articles) : [],
                 ];
 
                 return apiReturn(config('code.app_show_success'), 'OK', $data, 200);
@@ -99,7 +99,7 @@ class SearchController extends CommonController
      * @param $articles
      * @return array
      */
-    private function adjustArticlessData($articles)
+    private function adjustArticlesData($articles)
     {
         $result = [];
         foreach ($articles as $key => $article) {
@@ -109,8 +109,8 @@ class SearchController extends CommonController
                 'theme_id'              => $article['theme_id'],
                 'theme_name'            => $article['theme_name'],
                 'theme_introduction'    => $article['theme_introduction'],
-                'content'               => $article['content'],
-                'img'                   => $article['img'] ? explode(',', $article['img']) : "",
+                'article_content'               => $article['content'],
+                'article_img'                   => $article['img'] ? explode(',', $article['img']) : "",
                 'theme_img'             => $article['theme_img'],
                 'likes'                 => $article['likes'],
                 'comments'              => $article['comments'],
@@ -123,6 +123,4 @@ class SearchController extends CommonController
         }
         return $result;
     }
-
-
 }

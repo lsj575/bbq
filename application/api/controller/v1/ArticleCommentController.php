@@ -125,15 +125,15 @@ class ArticleCommentController extends AuthBaseController
         $result = [];
         foreach ($article_comments as $key => $article_comment) {
             $result[] = [
-                'article_comment_id'    => $article_comment['id'],
-                'user_nickname'         => $article_comment['nickname'],
-                'user_avatar'           => $article_comment['avatar'],
-                'content'               => $article_comment['content'],
-                'article_comment_img'   => $article_comment['img'],
-                'article_id'            => $article_comment['article_id'],
-                'parent_id'             => $article_comment['parent_id'],
-                'likes'                 => $article_comment['likes'],
-                'create_time'           => $article_comment['create_time'],
+                'article_comment_id'        => $article_comment['id'],
+                'user_nickname'             => $article_comment['nickname'],
+                'user_avatar'               => $article_comment['avatar'],
+                'article_comment_content'   => $article_comment['content'],
+                'article_comment_img'       => $article_comment['img'],
+                'article_id'                => $article_comment['article_id'],
+                'parent_id'                 => $article_comment['parent_id'],
+                'likes'                     => $article_comment['likes'],
+                'create_time'               => $article_comment['create_time'],
             ];
         }
         return $result;
