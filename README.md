@@ -1217,7 +1217,7 @@ www  WEB部署目录（或者子目录）
               "article_comment_id": 1,
               "user_nickname": "BBQ首席烧烤师",
               "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
-              "content": "说得好！",
+              "article_comment_content": "说得好！",
               "article_comment_img": "",
               "article_id": 1,
               "parent_id": 0,
@@ -1228,7 +1228,7 @@ www  WEB部署目录（或者子目录）
                       "article_comment_id": 2,
                       "user_nickname": "BBQ首席烧烤师",
                       "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
-                      "content": "我觉得不行",
+                      "article_comment_content": "我觉得不行",
                       "article_comment_img": "",
                       "article_id": 1,
                       "parent_id": 1,
@@ -1239,7 +1239,7 @@ www  WEB部署目录（或者子目录）
                               "article_comment_id": 5,
                               "user_nickname": "BBQ首席烧烤师",
                               "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
-                              "content": "成锋贼逗",
+                              "article_comment_content": "成锋贼逗",
                               "article_comment_img": "6fef3167-46bc-47fa-9547-d67369c9e88f",
                               "article_id": 1,
                               "parent_id": 2,
@@ -1250,7 +1250,7 @@ www  WEB部署目录（或者子目录）
                               "article_comment_id": 15,
                               "user_nickname": "BBQ首席烧烤师",
                               "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
-                              "content": "成锋贼逗2",
+                              "article_comment_content": "成锋贼逗2",
                               "article_comment_img": "6fef3167-46bc-47fa-9547-d67369c9e88f",
                               "article_id": 1,
                               "parent_id": 2,
@@ -1259,40 +1259,8 @@ www  WEB部署目录（或者子目录）
                           }
                       ]
                   },
-                  {
-                      "article_comment_id": 3,
-                      "user_nickname": "BBQ首席烧烤师",
-                      "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
-                      "content": "我觉得你说得很对",
-                      "article_comment_img": "6fef3167-46bc-47fa-9547-d67369c9e88f",
-                      "article_id": 1,
-                      "parent_id": 1,
-                      "likes": 1,
-                      "create_time": "2019-02-04 23:21:34"
-                  },
-                  {
-                      "article_comment_id": 7,
-                      "user_nickname": "codeplay",
-                      "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
-                      "content": "阿西吧",
-                      "article_comment_img": "",
-                      "article_id": 1,
-                      "parent_id": 1,
-                      "likes": 0,
-                      "create_time": "2019-02-12 13:31:30"
-                  },
+              ]
           },
-          {
-              "article_comment_id": 6,
-              "user_nickname": "codeplay",
-              "user_avatar": "e8313cf5-8ca7-4030-a948-1a02c44534b9",
-              "content": "123",
-              "article_comment_img": null,
-              "article_id": 1,
-              "parent_id": 0,
-              "likes": 1,
-              "create_time": "2019-02-12 11:17:56"
-          }
       ]
   }
   ```
