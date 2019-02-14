@@ -6,6 +6,7 @@ use think\Controller;
 //暂时先不鉴权，方便前端调试
 //动态管理
 class ArticleController extends BaseController{
+
     public function index(){
         if (request()->isGet()) {
             $data = input('get.');
