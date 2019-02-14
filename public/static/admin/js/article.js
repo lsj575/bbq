@@ -1,7 +1,10 @@
 $(function(){
-  console.log("fuck");
-  var imgs=$(".article-imgs");
-  for(var i=imgs.length-1;i>=0;i--){
+  article_img_reset(); 
+})
+
+function article_img_reset(){
+    var imgs=$(".article-imgs");
+for(var i=imgs.length-1;i>=0;i--){
     var img=$(imgs[i]).find('img');
     var length=img.length;
     var row=Math.ceil(length/3);
@@ -15,7 +18,8 @@ $(function(){
       margin:margin
     });
   };
-})
+}
+
 
 function article_copyid(id) {
     CopyToClipboard(id);
@@ -26,6 +30,27 @@ function article_comment(id,url) {
 }
 
 function article_convert(url,type,id) {
+                if (type=='hide') {
+                    if ($.trim($('#hide'+id).text())=='展示') {
+                        $('#hide'+id).html("隐藏").removeClass("btn-success").addClass("btn-info");
+                    }else {
+                        $('#hide'+id).html("展示").removeClass("btn-info").addClass("btn-success");
+                    }
+                }else if (type=='recommend'){
+                    if ($.trim($('#recommend'+id).text())=='推荐') {
+                        $('#recommend'+id).html("已推荐").removeClass("btn-info").addClass("btn-disabled");
+                    }else {
+                        $('#recommend'+id).html("推荐").removeClass("btn-success").addClass("btn-info");
+                    }
+                }else {
+                    if ($.trim($('#top'+id).text())=='置顶') {
+                        $('#top'+id).html("取消置顶").removeClass("btn-info").addClass("btn-success");
+                    }else {
+                        $('#top'+id).html("置顶").removeClass("btn-success").addClass("btn-info");
+                    }
+                }
+
+
     var data = {
         'type' : type,
         'id'   : id
@@ -38,26 +63,7 @@ function article_convert(url,type,id) {
             data = JSON.parse(data);
 
             if (data['status'] == 200 ) {
-                if (type=='hide') {
-                    if ($.trim($('#hide'+id).text())=='展示') {
-                        $('#hide'+id).html("隐藏").addClass("btn-info");
-                    }else {
-                        $('#hide'+id).html("展示").removeClass("btn-info").addClass("btn-success");
-                    }
-                }else if (type=='recommend'){
-                    if ($.trim($('#recommend'+id).text())=='推荐') {
-                        $('#recommend'+id).html("已推荐").removeClass("btn-info").addClass("btn-disabled");
-                    }else {
-                        $('#recommend'+id).html("推荐");
-                    }
-                }else {
-                    if ($.trim($('#top'+id).text())=='置顶') {
-                        $('#top'+id).html("取消置顶").removeClass("btn-info").addClass("btn-success");
-                    }else {
-                        $('#top'+id).html("置顶").addClass("btn-info");
-                    }
-                }
-            
+                            
             }
             else {
                 alert("错误: " + data['message']);
@@ -103,10 +109,10 @@ else {
 }
 
 if (success) {
-    layer.alert ("ID复制成功!");
+    alert ("ID复制成功!");
 }
 else {
-    layer.alert ("游览器不支持复制!");
+    alert ("您的游览器不支持复制!");
 }
 }
 
