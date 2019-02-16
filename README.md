@@ -116,9 +116,9 @@ www  WEB部署目录（或者子目录）
       "data": {
           "id": 1,
           "creator_id": 0,
-          "app_type": "android",
+          "app-type": "android",
           "version": 2,
-          "version_code": "1.2",
+          "version-code": "1.2",
           "is_force": 0,
           "apk_url": "xxx.com/1/3.html",
           "upgrade_point": "1、优化了网络数据\r\n2、增加了新闻内容",
@@ -2342,9 +2342,9 @@ www  WEB部署目录（或者子目录）
 
 - 第一步
 
-  > 将手机设备号（did）、手机型号（app_type）和当前时间（time）进行字符串拼接成形如：
+  > 将手机设备号（did）、手机型号（app-type）和当前时间（time）进行字符串拼接成形如：
   >
-  > 'did=v1&app_type=v2&time=v3'的格式
+  > 'did=v1&app-type=v2&time=v3'的格式
 
 - 第二步
 
