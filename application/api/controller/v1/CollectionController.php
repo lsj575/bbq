@@ -193,7 +193,7 @@ class CollectionController extends AuthBaseController
             'theme_name'            => $article['theme_name'],
             'theme_introduction'    => $article['theme_introduction'],
             'article_content'       => $article['content'],
-            'article_img'           => $article['img'] == "" ? "" : explode($article['img'], ','),
+            'article_img'           => $article['img'] ? explode(',', $article['img']) : "",
             'theme_img'             => $article['theme_img'],
             'likes'                 => $article['likes'],
             'comments'              => $article['comments'],
