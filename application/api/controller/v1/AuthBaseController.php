@@ -44,12 +44,12 @@ class AuthBaseController extends CommonController
      */
     public function isLogin()
     {
-        if (empty($this->headers['access_user_token'])) {
+        if (empty($this->headers['access-user-token'])) {
             return false;
         }
 
         $obj = new Aes();
-        $access_user_token = $obj->decrypt($this->headers['access_user_token']);
+        $access_user_token = $obj->decrypt($this->headers['access-user-token']);
 
         $bool = IAuth::checkAccessUserTokenPass($access_user_token);
         if (!$bool) {

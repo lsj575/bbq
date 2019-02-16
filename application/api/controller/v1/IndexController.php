@@ -18,8 +18,8 @@ class IndexController extends CommonController
     {
         try {
             // app_type 去version表 查询 对比
-            if (in_array($this->headers['app_type'], config('app.app_types'))) {
-                $version = model('Version')->getLastNormalVersionByAppType($this->headers['app_type']);
+            if (in_array($this->headers['app-type'], config('app.app_types'))) {
+                $version = model('Version')->getLastNormalVersionByAppType($this->headers['app-type']);
             } else {
                 return apiReturn(config('code.status_success'), 'header信息错误', [], 403);
             }
@@ -45,10 +45,10 @@ class IndexController extends CommonController
         // 记录用户的基本信息 用于统计
         $actives = [
             'version' => $this->headers['version'],
-            'app_type' => $this->headers['app_type'],
+            'app_type' => $this->headers['app-type'],
             'did' => $this->headers['did'],
             'model' => $this->headers['model'],
-            'version_code' => $this->headers['version_code'],
+            'version_code' => $this->headers['version-code'],
         ];
 
         try {
