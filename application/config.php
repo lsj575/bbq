@@ -194,11 +194,11 @@ return [
         // 缓存有效期 0表示永久缓存
         'expire'    => 0,
         // redis主机
-        'host'  => '120.79.159.186',
+        'host'  => '',
         // redis端口
         'port'  => 6379,
         // redis密码
-        'password'  => '',
+        'password'  => 'dc',
         // 缓存前缀
         'prefix' => '',
     ],
@@ -217,7 +217,7 @@ return [
         // 驱动方式 支持redis memcache memcached
         'type'           => 'redis',
         // redis主机
-        'host'       => '120.79.159.186',
+        'host'       => '',
         // redis端口
         'port'       => 6379,
         // 密码

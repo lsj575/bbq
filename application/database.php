@@ -13,13 +13,13 @@ return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    'hostname'        => '129.204.16.25',
+    'hostname'        => '',
     // 数据库名
     'database'        => 'bbq',
     // 用户名
     'username'        => 'root',
     // 密码
-    'password'        => 'token123',
+    'password'        => '',
     // 端口
     'hostport'        => '',
     // 连接dsn
